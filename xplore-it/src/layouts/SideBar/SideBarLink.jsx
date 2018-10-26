@@ -1,21 +1,29 @@
 /* ==========================================================================
- * Index Route for Layout
- * 25/10/2018
+ * SideBar Menu Item Link
+ * Functional Component
+ * 26/10/2018
  * Alan Medina Silva
  ========================================================================== */
 
 // --------------------------------------
-// Import Routes
+// Get Dependences
 // --------------------------------------
-    import Dashboard from '../layouts/Dashboard/Dashboard.jsx';
-
-// --------------------------------------
-// Set Main Layout Component for all App
-// --------------------------------------
-    const systemRoutes = [{path:'/', component:Dashboard}]
+    import React, {Component, Fragment} from 'react';
+    import {NavLink} from 'react-router-dom';
 
 
 // --------------------------------------
-// Export Routes
+// Create Component
 // --------------------------------------
-    export default systemRoutes;
+    const SideBarLink =  () => {
+
+
+
+    }
+
+
+
+// --------------------------------------
+// Export Component
+// --------------------------------------
+    export default SideBarLink;

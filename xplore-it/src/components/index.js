@@ -1,21 +1,21 @@
 /* ==========================================================================
- * Index Route for Layout
+ * Get and Export All Components 
  * 25/10/2018
  * Alan Medina Silva
  ========================================================================== */
 
-// --------------------------------------
-// Import Routes
-// --------------------------------------
-    import Dashboard from '../layouts/Dashboard/Dashboard.jsx';
 
 // --------------------------------------
-// Set Main Layout Component for all App
+// Layouts
 // --------------------------------------
-    const systemRoutes = [{path:'/', component:Dashboard}]
+    import {SideBar, SideBarLink} from '../layouts/SideBar';
+
 
 
 // --------------------------------------
-// Export Routes
+// Export Components
 // --------------------------------------
-    export default systemRoutes;
+    export {
+        SideBar,
+        SideBarLink
+    }

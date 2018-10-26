@@ -8,7 +8,8 @@
 // Get Dependeces
 // --------------------------------------
   import React, { Component } from 'react';
-  import logo from './logo.svg';
+  import { BrowserRouter, Route, Switch } from 'react-router-dom';
+  import appNavigationRoutes from './routes';
   import './App.css';
 
 
@@ -20,31 +21,28 @@
 
     // --------------------------------------
     // Render Component
+    // Set Router
+    // Map Routes to determine wich one to Render
     // --------------------------------------
     render() {
       return (
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
-        </div>
+        <BrowserRouter>
+
+            <Switch>
+              {appNavigationRoutes.map((prop, key)=> {
+                console.log('key', key);
+                console.log('prop', prop);
+                return <Route path = {prop.path}  component = {prop.component}  key = {`index-${key}`}   ></Route>
+              })}
+            </Switch>
+        
+        </BrowserRouter>
       );
     }
   }
 
 
-  
+
 // --------------------------------------
 // Export Component
 // --------------------------------------
