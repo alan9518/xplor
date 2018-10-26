@@ -9,6 +9,7 @@
 // --------------------------------------
     import React, { Component, Fragment } from "react";
     import PropTypes from "prop-types";
+    import {SideBarLink} from "../../components";
 
 // --------------------------------------
 // Create Component Class
@@ -20,42 +21,44 @@
         // Render SidebarLinks
         // Map Routes
         // --------------------------------------
-        // renderLinks() {
-        //     const {routes} =  this.props;
-        //     routes && routes.length > 0
-        //         return (
-        //             routes.map((route) => {
-        //                 if(route.sidebarName)
-        //                 {
-        //                     return (
-        //                         <SideBarLink 
-        //                             key = {`link-${route.key}`}
-        //                             indexKey = {route.key} 
-        //                             title = {route.sidebarName} 
-        //                             Link = {route.path}
-        //                             icon = {route.icon}
-        //                         />
-        //                     )
-        //                 }
-        //             })
-        //         )
-        // }
+        renderLinks() {
+            const {routes} =  this.props;
+                return (
+                    routes.length > 0 &&
+                        routes.map((route) => {
+                            if(route.sidebarName)
+                            {
+                                return (
+                                    <SideBarLink 
+                                        key = {`link-${route.key}`}
+                                        indexKey = {route.key} 
+                                        title = {route.sidebarName} 
+                                        Link = {route.path}
+                                        color = {route.color}
+                                    />
+
+                                )
+                            }
+                        })
+                )
+        }
 
         // --------------------------------------
         // Render Sidebar 
         // --------------------------------------
         renderSideBar() {
+            const {logoText} = this.props;
             return (
                 <React.Fragment>
-                <div className="xpl-sidebarBody">
-                    <div className="xpl-sidebarTitleContainer">
-                        {/* <h2 className="xpl-sidebarTitle">{this.props.logoText}</h2> */}
-                        Sidebar
+                <div className="xpl-appSideBarBody">
+                    <div className="xpl-appSideBarTitleContainer">
+                        <h2 className="xpl-appSideBarTitle">{logoText}</h2>
                     </div>
                     
-                    <div className="xpl-sidebarLinksContainer">
+                    <div className="xpl-appSideBarLinksContainer">
+                        
                         <ul className = "xpl-linksList">
-                            {/* {this.renderLinks()} */}
+                            {this.renderLinks()}
                         </ul>
                     </div>
                 </div>

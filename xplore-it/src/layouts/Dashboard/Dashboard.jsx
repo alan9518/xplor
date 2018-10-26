@@ -10,8 +10,10 @@
 // --------------------------------------
     import React, { Component, Fragment } from 'react';
     import { Switch, Route, Redirect } from 'react-router-dom';
-    import dashboardRoutes from '../../routes/routes'
-    import {SideBar} from '../../components'
+    import dashboardRoutes from '../../routes/routes';
+    import {SideBar} from '../../components';
+    import 'bootstrap/dist/css/bootstrap.min.css';
+    import '../styles.css'
 
 // --------------------------------------
 // Create Component Class
@@ -26,20 +28,25 @@
             return (
                 <Fragment>
                     
-                    <div className="app xpl-mainContainer" >
+                    <div className="App xpl-mainContainer" >
 
-                        <div className="xpl-appHeader">
-                            header navBar
-                        </div>
-
-
+            
                         <div className="xpl-appSideBar">
-                            <SideBar routes = { dashboardRoutes }  />
+                            <div className="toggle-btn">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <SideBar logoText = {'XploreIT'}  routes = { dashboardRoutes }  />
                         </div>
 
 
                         {/* Iterate Routes to set the Body Content */}
                         <div className="xpl-appBody">
+
+                            <div className="xpl-appHeader">
+                                header navBar
+                            </div>
                             
                                 <Switch>
                                 {
@@ -50,7 +57,8 @@
                                                     exact = {prop.exact}
                                                     path = {prop.path}
                                                     component = {prop.component}
-                                                    key = {prop.key}  />;
+                                                    key = {prop.key}  
+                                                />;
     
                                     })
                                 }
@@ -64,6 +72,7 @@
                 </Fragment>
             )
         }
+
 
 
     // --------------------------------------

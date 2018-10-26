@@ -20,7 +20,7 @@
     // Render Body With Dummy Layout
     // --------------------------------------
     renderDummyBody() {
-        
+
     }
 
 
@@ -28,7 +28,7 @@
     // Render Component
     // --------------------------------------
         render() {
-            return <div />;
+            return <h1>  Dashboard </h1>;
         }
     }
 
