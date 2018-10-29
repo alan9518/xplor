@@ -13,6 +13,7 @@
     import dashboardRoutes from '../../routes/routes';
     import {SideBar, NavBar} from '../index';
     import 'bootstrap/dist/css/bootstrap.min.css';
+    // import 'bootstrap/dist/js/bootstrap.min.js'
     import '../styles.css';
     import logo from '../../images/logo/Flex_WHT_Med_r.png';
 

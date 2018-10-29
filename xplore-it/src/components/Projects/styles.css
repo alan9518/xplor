@@ -1,0 +1,35 @@
+/* ==========================================================================
+ * Project Card Layout Styles 
+ * 29/10/2018
+ * Alan Medina Silva
+ ========================================================================== */
+
+
+.xpl-cardContainer {
+    /* max-width: 300px; */
+    /* width: 275px; */
+    display: block;
+    border-radius: 20px;
+}
+
+
+.xpl-cardHeader {
+    background-color: #238ECC;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 16px;
+    color: #fff;
+}
+
+
+.xpl-cardHeader i {
+    font-size: 100px;
+    padding-top: 16px;
+    opacity: 0.5;
+}
+
+.xpl-cardDescription {
+    background-color: #fff;
+    padding: 8px 8px;
+}

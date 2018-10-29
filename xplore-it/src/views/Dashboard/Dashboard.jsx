@@ -10,7 +10,7 @@
 // --------------------------------------
     import React, { Component } from "react";
     import PropTypes from "prop-types";
-    import { HeaderButton } from '../../components'
+    import { HeaderButton, ProjectCard } from '../../components'
 
 // --------------------------------------
 // Create Component Class
@@ -22,7 +22,22 @@
     // Render Body With Dummy Layout
     // --------------------------------------
     renderDummyBody() {
-
+        return (
+                <div className="row">
+                    <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <ProjectCard></ProjectCard>
+                    </div>
+                    <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <ProjectCard></ProjectCard>
+                    </div>
+                    <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <ProjectCard></ProjectCard>
+                    </div>
+                    <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <ProjectCard></ProjectCard>
+                    </div>
+                </div>
+        )
     }
 
 
@@ -34,6 +49,9 @@
                 <div className="container-fluid">
                     <HeaderButton/>
                     {/* <h1>Catalogue</h1> */}
+
+                    {this.renderDummyBody()}
+
                 </div>
             );
         }

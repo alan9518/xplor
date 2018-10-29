@@ -18,6 +18,7 @@
     import ProfileImage from './Users/ProfileImage';
     import Search from './Search/Search';
     import HeaderButton from './Header/HeaderButton';
+    import ProjectCard from './Projects/ProjectCard';
 
 // --------------------------------------
 // Export Components
@@ -28,5 +29,6 @@
         NavBar,
         ProfileImage,
         Search,
-        HeaderButton
+        HeaderButton,
+        ProjectCard
     }
