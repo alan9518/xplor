@@ -30,18 +30,13 @@
                 <Fragment>
 
                     <header>
-                    <NavBar logo = {logo}/>
+                        <NavBar logo = {logo}/>
                     </header>
                     
                     <div className="App xpl-mainContainer" >
 
             
                         <div className="xpl-appSideBar">
-                            {/* <div className="toggle-btn">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div> */}
                             <SideBar logoText = {'XploreIT'}  routes = { dashboardRoutes }  />
                         </div>
 

@@ -8,8 +8,14 @@
 // --------------------------------------
 // Layouts
 // --------------------------------------
-    import {SideBar, SideBarLink} from '../layouts';
+    import {SideBar, SideBarLink, NavBar} from '../layouts';
 
+
+
+// --------------------------------------
+// Components
+// --------------------------------------
+    import ProfileImage from './Users/ProfileImage';
 
 
 // --------------------------------------
@@ -17,5 +23,7 @@
 // --------------------------------------
     export {
         SideBar,
-        SideBarLink
+        SideBarLink,
+        NavBar,
+        ProfileImage
     }

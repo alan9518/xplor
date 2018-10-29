@@ -10,7 +10,7 @@
 // --------------------------------------
     import React, { Component, Fragment }  from 'react'
     import PropTypes from 'prop-types';
-
+    import {ProfileImage} from '../../components'
 
 
 // --------------------------------------
@@ -18,18 +18,40 @@
 // --------------------------------------
     class NavBar extends Component {
 
+
+
+
         // --------------------------------------
         // Render NavBar
         // --------------------------------------
         renderNavBar(logo) {
             return (
-                <div className="xpl-appHeader">
-                    <nav className="navbar navbar-dark ">
+                <div className="xpl-appHeaderContainer">
+                    <nav className="navbar navbar-expand-md navbar-dark fixed-top xpl-appHeader">
                         <a className="navbar-brand" href="#">
                             <img src={logo}  className="xpl-appLogo d-inline-block align-top" alt=""/>
                         </a>
+                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                            aria-controls="navbarsExampleDefault" aria-expanded="true" aria-label="Toggle navigation">
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div className="navbar-collapse collapse show" id="navbarsExampleDefault" >
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item active">
+                                    <a className="nav-link xpl-userName" href="#">Welcome Alan Medina <span className="sr-only">(current)</span></a>
+                                </li>
+
+                                <li>
+                                    <div className="xpl-userImage">
+                                        <ProfileImage resourceMail = {"alan.medina@flex.com"}/>
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                        </div>
                     </nav>
-                </div>
+                 </div>
             )
         }
 
