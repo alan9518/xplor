@@ -11,9 +11,10 @@
     import React, { Component, Fragment } from 'react';
     import { Switch, Route, Redirect } from 'react-router-dom';
     import dashboardRoutes from '../../routes/routes';
-    import {SideBar} from '../../components';
+    import {SideBar, NavBar} from '../index';
     import 'bootstrap/dist/css/bootstrap.min.css';
-    import '../styles.css'
+    import '../styles.css';
+    import logo from '../../images/logo/Flex_WHT_Med_r.png';
 
 // --------------------------------------
 // Create Component Class
@@ -29,9 +30,7 @@
                 <Fragment>
 
                     <header>
-                        <div className="xpl-appHeader">
-                            header navBar
-                        </div>
+                    <NavBar logo = {logo}/>
                     </header>
                     
                     <div className="App xpl-mainContainer" >
@@ -50,8 +49,6 @@
                         {/* Iterate Routes to set the Body Content */}
                         <div className="xpl-appBody">
 
-                         
-                            
                                 <Switch>
                                 {
                                     dashboardRoutes.map((prop)=> {

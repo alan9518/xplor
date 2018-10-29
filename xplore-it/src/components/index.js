@@ -8,7 +8,7 @@
 // --------------------------------------
 // Layouts
 // --------------------------------------
-    import {SideBar, SideBarLink} from '../layouts/SideBar';
+    import {SideBar, SideBarLink} from '../layouts';
 
 
 

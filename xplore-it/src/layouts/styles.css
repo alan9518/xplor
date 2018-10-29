@@ -7,7 +7,8 @@
 
 /* ==================== CSS Structure ==================== 
      * 1.0 GENERAL STYLES	
-     * 2.0 SIDEBAR STYLES
+     * 2.0 NAVBAR STYLES
+     * 3.0 SIDEBAR STYLES
 ========================================================== */
 
 
@@ -67,9 +68,27 @@
     }
 
 
+/* ---------------------------------------------------
+    2.0 NAVBAR STYLES
+----------------------------------------------------- */
+
+
+    .xpl-appHeader {
+        background-color: #000;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .xpl-appLogo {
+        width: 80px;
+        height: auto;
+    }
+
+
 
 /* ---------------------------------------------------
-    2.0 SIDEBAR STYLES
+    3.0 SIDEBAR STYLES
 ----------------------------------------------------- */
     .xpl-appSideBar {
         flex-shrink: 0;
@@ -157,10 +176,4 @@
 
 
 
-    .xpl-appHeader {
-        background-color: #000;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        padding: 15px 0px;
-    }
+ 
