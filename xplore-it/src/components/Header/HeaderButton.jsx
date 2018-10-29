@@ -14,20 +14,25 @@
 // Create and Export Component
 // --------------------------------------
     const HeaderButton = resourceMail => {
-        let userMail = encodeURIComponent(resourceMail.resourceMail);
-        let HeaderButton = `https://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=${userMail}&UA=0&size=HR64x64&sc=1535401630498`;
-
-        return <img src={HeaderButton} className="xpl-userImageMin xpl-rounded" />;
+    
+        return  (
+            <div className="xpl-buttonContainer">
+                <button className="xpl-button xpl-addNewAppButton">  
+                    Add New Item 
+                    <i class="fas fa-plus-circle"></i> 
+                </button>
+            </div>
+        )
     };
 
 // --------------------------------------
 // Prop Types
 // --------------------------------------
-HeaderButton.propTypes = {
-  resourceMail: PropTypes.object
-};
+// HeaderButton.propTypes = {
+//   resourceMail: PropTypes.object
+// };
 
 // --------------------------------------
 // Export Component
 // --------------------------------------
-export default HeaderButton;
+    export default HeaderButton;

@@ -10,7 +10,6 @@
   import React, { Component } from 'react';
   import { BrowserRouter, Route, Switch } from 'react-router-dom';
   import appNavigationRoutes from './routes';
-  import './App.css';
 
 
 

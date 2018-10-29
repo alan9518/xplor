@@ -9,6 +9,8 @@
      * 1.0 GENERAL STYLES	
      * 2.0 NAVBAR STYLES
      * 3.0 SIDEBAR STYLES
+     * 4.0 CONTENT STYLES
+     * IE HACKS
 ========================================================== */
 
 
@@ -196,12 +198,38 @@
     } */
 
 
+/* ---------------------------------------------------
+    4.0 CONTENT STYLES
+----------------------------------------------------- */
+
+    .xpl-buttonContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding: 15px 0px;
+    }
+
+
+
+    button.xpl-button.xpl-addNewAppButton {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 20px 7px;
+        font-size: 1.2em;
+    }
+
+    button.xpl-button.xpl-addNewAppButton i {
+        margin-left: 8px;
+    }
+
+    
 
 
 
 /* ---------------------------------------------------
     IE Hacks
-    ----------------------------------------------------- */
+----------------------------------------------------- */
     .xpl-contentIE {
         background-color: #edf1f5;
         width: 87% !important;

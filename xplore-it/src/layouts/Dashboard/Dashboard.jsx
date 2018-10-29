@@ -51,24 +51,6 @@
 
                         {/* Iterate Routes to set the Body Content */}
                         <div className="xpl-content">
-
-                                {/* <Switch>
-                                {
-                                    dashboardRoutes.map((prop)=> {
-                                        if(prop.redirect)
-                                            return <Redirect from={prop.path} to={prop.to} key={`red-${prop.key}`} />;
-                                        return <Route 
-                                                    exact = {prop.exact}
-                                                    path = {prop.path}
-                                                    component = {prop.component}
-                                                    key = {prop.key}  
-                                                />;
-    
-                                    })
-                                }
-                                </Switch> */}
-
-
                                 <div className = {bodyClasses}>
                                 {
                                     // Set Routes and Connect it with the Views

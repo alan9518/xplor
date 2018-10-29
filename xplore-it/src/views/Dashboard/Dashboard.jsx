@@ -1,5 +1,6 @@
 /* ==========================================================================
- * Dashboard Template
+ * Main Dashboard Template View
+ * Add Here all the Components that will show on the main Panel
  * 25/10/2018
  * Alan Medina Silva
  ========================================================================== */
@@ -9,6 +10,7 @@
 // --------------------------------------
     import React, { Component } from "react";
     import PropTypes from "prop-types";
+    import { HeaderButton } from '../../components'
 
 // --------------------------------------
 // Create Component Class
@@ -29,8 +31,9 @@
     // --------------------------------------
         render() {
             return (
-                <div className="container">
-                    <h1>Catalogue</h1>
+                <div className="container-fluid">
+                    <HeaderButton/>
+                    {/* <h1>Catalogue</h1> */}
                 </div>
             );
         }
