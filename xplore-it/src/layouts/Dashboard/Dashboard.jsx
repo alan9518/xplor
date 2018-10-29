@@ -27,16 +27,22 @@
         renderApp() {
             return (
                 <Fragment>
+
+                    <header>
+                        <div className="xpl-appHeader">
+                            header navBar
+                        </div>
+                    </header>
                     
                     <div className="App xpl-mainContainer" >
 
             
                         <div className="xpl-appSideBar">
-                            <div className="toggle-btn">
+                            {/* <div className="toggle-btn">
                                 <span></span>
                                 <span></span>
                                 <span></span>
-                            </div>
+                            </div> */}
                             <SideBar logoText = {'XploreIT'}  routes = { dashboardRoutes }  />
                         </div>
 
@@ -44,9 +50,7 @@
                         {/* Iterate Routes to set the Body Content */}
                         <div className="xpl-appBody">
 
-                            <div className="xpl-appHeader">
-                                header navBar
-                            </div>
+                         
                             
                                 <Switch>
                                 {
