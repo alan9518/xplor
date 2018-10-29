@@ -16,7 +16,7 @@
 // Components
 // --------------------------------------
     import ProfileImage from './Users/ProfileImage';
-
+    import Search from './Search/Search';
 
 // --------------------------------------
 // Export Components
@@ -25,5 +25,6 @@
         SideBar,
         SideBarLink,
         NavBar,
-        ProfileImage
+        ProfileImage,
+        Search
     }

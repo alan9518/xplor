@@ -28,7 +28,11 @@
     // Render Component
     // --------------------------------------
         render() {
-            return <h1>  Dashboard </h1>;
+            return (
+                <div className="container">
+                    <h1>Catalogue</h1>
+                </div>
+            );
         }
     }
 

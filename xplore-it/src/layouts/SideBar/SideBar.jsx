@@ -9,7 +9,7 @@
 // --------------------------------------
     import React, { Component, Fragment } from "react";
     import PropTypes from "prop-types";
-    import {SideBarLink} from "../../components";
+    import { SideBarLink, Search } from "../../components";
 
 // --------------------------------------
 // Create Component Class
@@ -51,9 +51,8 @@
             return (
                 <React.Fragment>
                 <div className="xpl-appSideBarBody">
-                    <div className="xpl-appSideBarTitleContainer">
-                        <h2 className="xpl-appSideBarTitle">{logoText}</h2>
-                    </div>
+                    
+                    <Search/>
                     
                     <div className="xpl-appSideBarLinksContainer">
                         

@@ -12,7 +12,6 @@
     import PropTypes from 'prop-types';
     import {ProfileImage} from '../../components'
 
-
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
