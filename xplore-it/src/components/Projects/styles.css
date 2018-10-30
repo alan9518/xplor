@@ -6,8 +6,8 @@
 
 
 .xpl-cardContainer {
-    /* max-width: 300px; */
-    /* width: 275px; */
+    max-width: 350px;
+    width: 100%;
     display: block;
     border-radius: 20px;
 }
@@ -20,6 +20,7 @@
     justify-content: space-between;
     padding: 16px;
     color: #fff;
+    border-radius: 3px 3px 0 0;
 }
 
 
@@ -31,5 +32,6 @@
 
 .xpl-cardDescription {
     background-color: #fff;
-    padding: 8px 8px;
+    padding: 12px 8px;
+    border-radius: 3px;
 }

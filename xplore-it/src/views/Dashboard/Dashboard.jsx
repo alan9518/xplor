@@ -8,9 +8,9 @@
 // --------------------------------------
 // Import Dependences
 // --------------------------------------
-    import React, { Component } from "react";
+    import React, { Component, Fragment } from "react";
     import PropTypes from "prop-types";
-    import { HeaderButton, ProjectCard } from '../../components'
+    import { HeaderButton, ProjectCard, Carrousel } from '../../components'
 
 // --------------------------------------
 // Create Component Class
@@ -23,20 +23,38 @@
     // --------------------------------------
     renderDummyBody() {
         return (
-                <div className="row">
-                    <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <ProjectCard></ProjectCard>
+                <Fragment>
+                    
+                    <div className="row ">
+
+                        <div className="col-lg-12">
+                            <h2 className="xpl-row"> What's New?   </h2>
+                                 <Carrousel/>
+                        </div>
                     </div>
-                    <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <ProjectCard></ProjectCard>
+
+
+
+                    <div className="row xpl-row">
+
+                        <div className="col-lg-12">
+                            <h2> All Apps  </h2>
+                        </div>
+
+                        <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <ProjectCard></ProjectCard>
+                            </div>
+                            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <ProjectCard></ProjectCard>
+                            </div>
+                            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <ProjectCard></ProjectCard>
+                            </div>
+                            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <ProjectCard></ProjectCard>
+                        </div>
                     </div>
-                    <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <ProjectCard></ProjectCard>
-                    </div>
-                    <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <ProjectCard></ProjectCard>
-                    </div>
-                </div>
+                </Fragment>
         )
     }
 

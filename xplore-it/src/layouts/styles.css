@@ -168,9 +168,10 @@
     .xpl-iconContainer {
         width: 100%;
         display: flex;
-        padding: 8px 10px 8px 0;
+        padding: 10px 10px 10px 0;
         flex-direction: row;
         justify-content: flex-start;
+        align-items: center;
     }
 
     .xpl-iconHolder {
@@ -227,6 +228,11 @@
         margin-left: 8px;
     }
 
+
+    .xpl-row {
+        padding-left: 16px;
+        padding-right:16px; 
+    }
     
 
 

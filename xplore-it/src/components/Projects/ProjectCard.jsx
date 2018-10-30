@@ -27,7 +27,7 @@
                     <div className="xpl-cardHeader">
                         <div className="xpl-cardName"> <h5>App Name </h5></div>
                         <div className="xpl-cardImage">
-                            <i class="fas fa-basketball-ball"></i>
+                            <i className="fas fa-basketball-ball"></i>
                         </div>
                     </div>
                     <div className="xpl-cardDescription">

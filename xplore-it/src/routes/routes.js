@@ -59,7 +59,7 @@
             path : `${path}/education`,
             exact: true,
             sidebarName : 'Education',
-            key:'home-route',
+            key:'education-route',
             component : CatalogueView,
             color : education,
             categories : []
@@ -68,7 +68,7 @@
             path : `${path}/enviroment`,
             exact: true,
             sidebarName : 'Enviroment',
-            key:'home-route',
+            key:'enviroment-route',
             component : CatalogueView,
             color : enviroment,
             categories : []
@@ -77,7 +77,7 @@
             path : `${path}/finance`,
             exact: true,
             sidebarName : 'Finance',
-            key:'home-route',
+            key:'finance-route',
             component : CatalogueView,
             color : finance,
             categories : []
@@ -86,7 +86,7 @@
             path : `${path}/human-resources`,
             exact: true,
             sidebarName : 'Human Resources',
-            key:'home-route',
+            key:'humanResources-route',
             component : CatalogueView,
             color : hr,
             categories : []
@@ -95,7 +95,7 @@
             path : `${path}/information-technology`,
             exact: true,
             sidebarName : 'Information Technology',
-            key:'home-route',
+            key:'informationTechnology-route',
             component : CatalogueView,
             color : it,
             categories : []
@@ -104,7 +104,7 @@
             path : `${path}/legal`,
             exact: true,
             sidebarName : 'Legal',
-            key:'home-route',
+            key:'legal-route',
             component : CatalogueView,
             color : legal,
             categories : []
@@ -113,7 +113,7 @@
             path : `${path}/marketing`,
             exact: true,
             sidebarName : 'Marketing',
-            key:'home-route',
+            key:'marketing-route',
             component : CatalogueView,
             color : marketing,
             categories : []
@@ -122,7 +122,7 @@
             path : `${path}/quality`,
             exact: true,
             sidebarName : 'Quality',
-            key:'home-route',
+            key:'quality-route',
             component : CatalogueView,
             color : operations,
             categories : []
@@ -131,7 +131,7 @@
             path : `${path}/sales`,
             exact: true,
             sidebarName : 'Sales',
-            key:'home-route',
+            key:'sales-route',
             component : CatalogueView,
             color : sales,
             categories : []

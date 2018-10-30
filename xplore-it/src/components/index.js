@@ -19,6 +19,7 @@
     import Search from './Search/Search';
     import HeaderButton from './Header/HeaderButton';
     import ProjectCard from './Projects/ProjectCard';
+    import Carrousel from './Carrousel/Carrousel';
 
 // --------------------------------------
 // Export Components
@@ -30,5 +31,6 @@
         ProfileImage,
         Search,
         HeaderButton,
-        ProjectCard
+        ProjectCard,
+        Carrousel
     }

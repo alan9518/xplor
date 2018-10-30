@@ -19,7 +19,7 @@
             <div className="xpl-buttonContainer">
                 <button className="xpl-button xpl-addNewAppButton">  
                     Add New Item 
-                    <i class="fas fa-plus-circle"></i> 
+                    <i className="fas fa-plus-circle"></i> 
                 </button>
             </div>
         )

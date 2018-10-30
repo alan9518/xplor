@@ -33,7 +33,7 @@
 // Prop Types
 // --------------------------------------
     ProfileImage.propTypes = {
-        resourceMail : PropTypes.object
+        resourceMail : PropTypes.string
     }
 
 

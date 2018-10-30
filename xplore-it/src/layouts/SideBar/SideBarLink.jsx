@@ -8,7 +8,7 @@
 // --------------------------------------
 // Get Dependences
 // --------------------------------------
-    import React, {Component, Fragment} from 'react';
+    import React  from 'react';
     import {NavLink} from 'react-router-dom';
 
 
@@ -30,7 +30,7 @@
                     <NavLink to={Link} key={indexKey}>
                         <div className="xpl-iconContainer">
                             <div className="xpl-iconHolder" style={iconHolderStyle}>
-                                <i class="fas fa-chevron-right"></i>
+                                <i className="fas fa-chevron-right"></i>
                             </div>
                             <span className="xpl-linkText">{title}</span>
                         </div>

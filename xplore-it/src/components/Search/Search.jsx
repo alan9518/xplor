@@ -25,11 +25,11 @@
             return (
                 <Fragment>
                     <div className="xpl-searchContainer">
-                        <div class="input-group">
-                            <input class="form-control py-2 border-right-0 border" type="search" placeholder="Search By Keywords" id="xpl-searchInput"/>
-                            <span class="input-group-append">
-                                <div class="input-group-text bg-transparent">
-                                    <i class="fa fa-search"></i>
+                        <div className="input-group">
+                            <input className="form-control py-2 border-right-0 border" type="search" placeholder="Search By Keywords" id="xpl-searchInput"/>
+                            <span className="input-group-append">
+                                <div className="input-group-text bg-transparent">
+                                    <i className="fa fa-search"></i>
                                 </div>
                             </span>
                         </div>
