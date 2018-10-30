@@ -10,7 +10,7 @@
 // --------------------------------------
     import React, { Component, Fragment } from "react";
     import PropTypes from "prop-types";
-    import { HeaderButton, ProjectCard, Carrousel } from '../../components'
+    import { HeaderButton, ToggleButton,  ProjectCard, Carrousel } from '../../components'
 
 // --------------------------------------
 // Create Component Class
@@ -65,7 +65,11 @@
         render() {
             return (
                 <div className="container-fluid">
+                    <ToggleButton/>
                     <HeaderButton/>
+
+
+
                     {/* <h1>Catalogue</h1> */}
 
                     {this.renderDummyBody()}

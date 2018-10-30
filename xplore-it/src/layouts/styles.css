@@ -10,6 +10,7 @@
      * 2.0 NAVBAR STYLES
      * 3.0 SIDEBAR STYLES
      * 4.0 CONTENT STYLES
+     * 5.0 RESPONSIVE STYLES
      * IE HACKS
 ========================================================== */
 
@@ -55,7 +56,15 @@
         height: 100%;
         overflow: hidden;
         box-sizing: border-box;
+        transition: all .3s ease-out;
     }
+
+
+    .xpl-content .xpl-fullWidth {
+        margin-left: -270px;
+    }
+
+
 
     .xpl-shadow {
         box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);
@@ -83,6 +92,12 @@
         height: auto;
     }
 
+    li.nav-item.active.xpl-userProfileLink {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
     .xpl-userName {
         font-size: 1.1em;
         font-weight: 100;
@@ -107,11 +122,30 @@
     3.0 SIDEBAR STYLES
 ----------------------------------------------------- */
     .xpl-appSideBar {
+        flex: 1 0 270px;
         flex-shrink: 0;
         overflow-x: hidden;
         background-color: #fff;
-        width: 270px;
         box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+        transition: all .3s ease-out;
+    }
+
+
+    .xpl-toggleButton {
+        position: absolute;
+        top: 98px;
+        left: 28px;
+        display: none;
+        transition: all .3s ease-out;
+    }
+
+    .xpl-toggleButton i {
+        font-size: 1.4em;
+    }
+
+    .xpl-appSideBar .xpl-isCollapsed {
+        -webkit-transform: translateX(-100%);
+                transform: translateX(-100%);
     }
 
     .xpl-appSideBarBody {
@@ -216,15 +250,17 @@
 
 
 
-    button.xpl-button.xpl-addNewAppButton {
+    .xpl-button {
         background-color: transparent;
         border: none;
         cursor: pointer;
+    }
+    .xpl-addNewAppButton {
         padding: 20px 7px;
         font-size: 1.2em;
     }
 
-    button.xpl-button.xpl-addNewAppButton i {
+    .xpl-button.xpl-addNewAppButton i {
         margin-left: 8px;
     }
 
@@ -234,6 +270,32 @@
         padding-right:16px; 
     }
     
+
+
+
+
+/* ---------------------------------------------------
+    5.0 RESPONSIVE STYLES	
+        Hide The SideBar and Displace Body
+----------------------------------------------------- */
+    
+    @media only screen and (max-width:768px) {
+        .xpl-appSideBar {
+            -webkit-transform: translateX(-100%);
+                    transform: translateX(-100%);
+        }
+
+        .xpl-content  {
+            margin-left: -230px;
+        }
+
+        .xpl-toggleButton {
+            display: block;
+            transition: all .3s ease-out;
+        }
+    
+    }
+
 
 
 

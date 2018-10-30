@@ -18,6 +18,7 @@
     import ProfileImage from './Users/ProfileImage';
     import Search from './Search/Search';
     import HeaderButton from './Header/HeaderButton';
+    import ToggleButton from './Header/ToggleButton';
     import ProjectCard from './Projects/ProjectCard';
     import Carrousel from './Carrousel/Carrousel';
 
@@ -31,6 +32,7 @@
         ProfileImage,
         Search,
         HeaderButton,
+        ToggleButton,
         ProjectCard,
         Carrousel
     }

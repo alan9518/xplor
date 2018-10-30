@@ -45,13 +45,12 @@
 
             
                         <div className="xpl-appSideBar">
-                            <SideBar logoText = {'XploreIT'}  routes = { dashboardRoutes }  />
+                            <SideBar routes = { dashboardRoutes }  />
                         </div>
 
 
                         {/* Iterate Routes to set the Body Content */}
-                        <div className="xpl-content">
-                                <div className = {bodyClasses}>
+                        <div className={bodyClasses}>
                                 {
                                     // Set Routes and Connect it with the Views
                                         <Switch>
@@ -67,7 +66,6 @@
                                             })}
                                         </Switch>
                                 }
-                            </div>
                         </div>
 
 

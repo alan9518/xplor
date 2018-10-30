@@ -30,22 +30,25 @@
                         <a className="navbar-brand" href="#">
                             <img src={logo}  className="xpl-appLogo d-inline-block align-top" alt=""/>
                         </a>
-                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-                            aria-controls="navbarsExampleDefault" aria-expanded="true" aria-label="Toggle navigation">
+                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#xpl-appNavBar"
+                            aria-controls="xpl-appNavBar" aria-expanded="true" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
 
-                        <div className="navbar-collapse collapse show" id="navbarsExampleDefault" >
+                        <div className="navbar-collapse collapse " id="xpl-appNavBar" >
                             <ul className="navbar-nav ml-auto">
-                                <li className="nav-item active">
+                                <li className="nav-item active xpl-userProfileLink" >
                                     <a className="nav-link xpl-userName" href="#">Welcome Alan Medina <span className="sr-only">(current)</span></a>
-                                </li>
-
-                                <li>
                                     <div className="xpl-userImage">
                                         <ProfileImage resourceMail = {"alan.medina@flex.com"}/>
                                     </div>
                                 </li>
+
+                                {/* <li>
+                                    <div className="xpl-userImage">
+                                        <ProfileImage resourceMail = {"alan.medina@flex.com"}/>
+                                    </div>
+                                </li> */}
                                 
                             </ul>
                         </div>

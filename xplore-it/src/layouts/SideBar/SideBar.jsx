@@ -47,9 +47,10 @@
         // Render Sidebar 
         // --------------------------------------
         renderSideBar() {
-            const {logoText} = this.props;
             return (
                 <React.Fragment>
+                
+
                 <div className="xpl-appSideBarBody">
                     
                     <Search/>
