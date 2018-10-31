@@ -232,9 +232,34 @@
         text-decoration: none;
     }
 
-    /* .xpl-appSideBarLinksContainer {
-        border-left: 21px solid #000;
-    } */
+    /* Details List */
+    .xpl-appSidebarTitleContainer, .xpl-appSideBarSubCat  {
+        padding: 8px 15px;
+    }
+
+    button.xpl-button.xpl-backButton {
+        width: 100%;
+        text-align: left;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        vertical-align: middle;
+        align-items: baseline;
+    }
+
+    button.xpl-button.xpl-backButton i{
+        font-size: 24px;
+        color: #fff;
+        position: absolute;
+        left: 12px;
+        top: 93px;
+    }
+
+
+    .xpl-appSidebarTitleContainer span {
+        padding-left: 4px;
+    }
+
 
 
 /* ---------------------------------------------------

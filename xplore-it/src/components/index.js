@@ -8,7 +8,7 @@
 // --------------------------------------
 // Layouts
 // --------------------------------------
-    import {SideBar, SideBarLink, NavBar} from '../layouts';
+    import {SideBar, SideBarLink, NavBar, SingleList, DetailsList} from '../layouts';
 
 
 
@@ -34,5 +34,7 @@
         HeaderButton,
         ToggleButton,
         ProjectCard,
-        Carrousel
+        Carrousel,
+        SingleList,
+        DetailsList
     }

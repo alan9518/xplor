@@ -20,23 +20,47 @@
 // --------------------------------------
 // Create Component
 // --------------------------------------
-    const SideBarLink = ({key,indexKey,title,Link,color}) => {
+    const SideBarLink = ({key,indexKey,title,link,color, hasIcon, onClick}) => {
     
         const iconHolderStyle = {
             backgroundColor: color
         }
 
-        return (<li className="xpl-sidebarLink"  >
-                    <NavLink to={Link} key={indexKey}>
+            if(link !== null) 
+            {
+                return (
+                    <li className="xpl-sidebarLink"  >
+                    <NavLink to={link} key={indexKey}>
                         <div className="xpl-iconContainer">
-                            <div className="xpl-iconHolder" style={iconHolderStyle}>
-                                <i className="fas fa-chevron-right"></i>
-                            </div>
+                            {hasIcon && 
+                                <div className="xpl-iconHolder" style={iconHolderStyle}>
+                                    <i className="fas fa-chevron-right"></i>
+                                </div>
+                            }
                             <span className="xpl-linkText">{title}</span>
                         </div>
                     </NavLink>
-            </li>
-        )
+                </li>
+                )
+            }
+                
+            else 
+            {
+                return (
+                    <li className="xpl-sidebarLink"  onClick = {onClick}>
+                        <div className="xpl-iconContainer">
+                            {hasIcon && 
+                                <div className="xpl-iconHolder" style={iconHolderStyle}>
+                                    <i className="fas fa-chevron-right"></i>
+                                </div>
+                            }
+                            <span className="xpl-linkText">{title}</span>
+                        </div>
+                </li>
+                )
+            }
+            
+            
 
     }
 

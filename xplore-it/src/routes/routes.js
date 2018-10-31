@@ -53,7 +53,24 @@
             key:'communication-route',
             component : CatalogueView,
             color : communication,
-            categories : []
+            subCategories : [
+                {
+                    path : `${path}/communication/children1`,
+                    exact: true,
+                    sidebarName : 'children 1',
+                    key:'communication-route-children1',
+                    component : CatalogueView,
+                    color : communication,
+                },
+                {
+                    path : `${path}/communication/children2`,
+                    exact: true,
+                    sidebarName : 'children 2',
+                    key:'communication-route-children2',
+                    component : CatalogueView,
+                    color : communication,
+                }
+            ]
         },
         {
             path : `${path}/education`,
@@ -62,7 +79,7 @@
             key:'education-route',
             component : CatalogueView,
             color : education,
-            categories : []
+            subCategories : []
         },
         {
             path : `${path}/enviroment`,
@@ -71,7 +88,7 @@
             key:'enviroment-route',
             component : CatalogueView,
             color : enviroment,
-            categories : []
+            subCategories : []
         },
         {
             path : `${path}/finance`,
@@ -80,7 +97,7 @@
             key:'finance-route',
             component : CatalogueView,
             color : finance,
-            categories : []
+            subCategories : []
         },
         {
             path : `${path}/human-resources`,
@@ -89,7 +106,7 @@
             key:'humanResources-route',
             component : CatalogueView,
             color : hr,
-            categories : []
+            subCategories : []
         },
         {
             path : `${path}/information-technology`,
@@ -98,7 +115,7 @@
             key:'informationTechnology-route',
             component : CatalogueView,
             color : it,
-            categories : []
+            subCategories : []
         },
         {
             path : `${path}/legal`,
@@ -107,7 +124,7 @@
             key:'legal-route',
             component : CatalogueView,
             color : legal,
-            categories : []
+            subCategories : []
         },
         {
             path : `${path}/marketing`,
@@ -116,7 +133,7 @@
             key:'marketing-route',
             component : CatalogueView,
             color : marketing,
-            categories : []
+            subCategories : []
         },
         {
             path : `${path}/quality`,
@@ -125,7 +142,7 @@
             key:'quality-route',
             component : CatalogueView,
             color : operations,
-            categories : []
+            subCategories : []
         },
         {
             path : `${path}/sales`,
@@ -134,7 +151,7 @@
             key:'sales-route',
             component : CatalogueView,
             color : sales,
-            categories : []
+            subCategories : []
         },
     
         {redirect:true, path:'/', to : `${path}/catalogue`, navbarName: 'Redirect' }

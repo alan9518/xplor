@@ -10,6 +10,8 @@
 // --------------------------------------
     import SideBar from './SideBar/SideBar';
     import SideBarLink from './SideBar/SideBarLink';
+    import SingleList from './SideBar/SingleList';
+    import DetailsList from './SideBar/DetailsList'
     import NavBar from './NavBar/NavBar';
 
 
@@ -21,5 +23,7 @@
     export {
         SideBar,
         SideBarLink,
-        NavBar
+        NavBar,
+        SingleList,
+        DetailsList,
     }

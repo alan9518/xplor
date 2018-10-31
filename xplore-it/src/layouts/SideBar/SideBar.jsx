@@ -9,7 +9,7 @@
 // --------------------------------------
     import React, { Component, Fragment } from "react";
     import PropTypes from "prop-types";
-    import { SideBarLink, Search } from "../../components";
+    import { SingleList, DetailsList, Search } from "../../components";
 
 // --------------------------------------
 // Create Component Class
@@ -18,52 +18,71 @@
 
 
         // --------------------------------------
-        // Render SidebarLinks
-        // Map Routes
+        // Init Component
         // --------------------------------------
-        renderLinks() {
-            const {routes} =  this.props;
-                return (
-                    routes.length > 0 &&
-                        routes.map((route) => {
-                            if(route.sidebarName)
-                            {
-                                return (
-                                    <SideBarLink 
-                                        key = {`link-${route.key}`}
-                                        indexKey = {route.key} 
-                                        title = {route.sidebarName} 
-                                        Link = {route.path}
-                                        color = {route.color}
-                                    />
-
-                                )
-                            }
-                        })
-                )
+        constructor(props) {
+            super(props);
+            this.routes =  this.props.routes;
+            this.state = {
+                currentMenu : props.routes,
+                menuComponent : 'singleList',
+                currentCategory : ''
+            }
         }
+
+
+        // --------------------------------------
+        // Change To Single List Menu
+        // --------------------------------------
+        onListItemBackClick = (e) => {
+            this.setState({
+                currentMenu: this.routes,
+                menuComponent : 'singleList'
+            })
+        }
+
+        onListItemClick = (e) => {
+            // const value = e;
+            // console.log('value', value);
+            this.setState({
+                currentMenu: this.routes,
+                menuComponent : 'detailsList'
+            })
+        }
+
 
         // --------------------------------------
         // Render Sidebar 
         // --------------------------------------
         renderSideBar() {
+            const {currentMenu, menuComponent, currentCategory} = this.state;
             return (
                 <React.Fragment>
-                
-
-                <div className="xpl-appSideBarBody">
-                    
-                    <Search/>
-                    
-                    <div className="xpl-appSideBarLinksContainer">
+                    <div className="xpl-appSideBarBody">
                         
-                        <ul className = "xpl-linksList">
-                            {this.renderLinks()}
-                        </ul>
-                    </div>
-                </div>
-            
+                        <Search/>
+                        
+                        <div className="xpl-appSideBarLinksContainer">
 
+                            { 
+                                menuComponent === 'singleList' && 
+                                <SingleList currentMenu = {currentMenu} 
+                                            currentCategory = {currentCategory}
+                                            onClick = {this.onListItemClick}
+                                /> 
+                            }
+                            { 
+                                menuComponent === 'detailsList' && 
+                                            <DetailsList  
+                                                currentMenu = {currentMenu} 
+                                                currentCategory = {currentCategory} 
+                                                currentCategoryColor = {'000'} 
+                                                onClick = {this.onListItemBackClick}
+                                /> 
+                            }
+                            
+                        </div>
+                    </div>
             </React.Fragment>
             )
         }
