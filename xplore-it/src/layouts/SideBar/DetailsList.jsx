@@ -19,13 +19,27 @@
     class DetailsList extends Component {
         
         // --------------------------------------
+        // Constructor
+        // --------------------------------------
+        constructor(props) {
+            super(props);
+            // const currentCategory =  this.props.currentMenu.filter((item)=>{return item.sidebarName});
+
+
+            // this.currentCategory =  this.props.currentMenu[0].sidebarName;
+            // this.currentCategoryColor =  this.props.currentMenu[0].color;
+        }
+
+
+        // --------------------------------------
         // Render Menu Structure
         // --------------------------------------
         renderMenuList() {
-            const {currentMenu, currentCategory,currentCategoryColor, onClick} = this.props;
+            const {currentMenu, onClick, currentCategory, currentCategoryColor} = this.props;
             const borderStyle = {
-                borderLeft: `24px solid #${currentCategoryColor}`
+                borderLeft: `24px solid ${currentCategoryColor}`
             }
+
 
             return (
                 <div>
@@ -34,7 +48,7 @@
                         <button className="xpl-button xpl-backButton" onClick = {onClick}>
                             <i className="fas fa-chevron-left"></i>  
                         </button>
-                            <h4>Department</h4>
+                            <h4>{currentCategory}</h4>
                             <span> Category Description </span>
                         </div>
 

@@ -26,7 +26,8 @@
             this.state = {
                 currentMenu : props.routes,
                 menuComponent : 'singleList',
-                currentCategory : ''
+                currentCategory : null,
+                currentCategoryColor : null,
             }
         }
 
@@ -41,13 +42,20 @@
             })
         }
 
-        onListItemClick = (e) => {
-            // const value = e;
-            // console.log('value', value);
-            this.setState({
-                currentMenu: this.routes,
-                menuComponent : 'detailsList'
+        onListItemClick = (menu) =>  {
+            const {subCategories, sidebarName, color } = menu;
+            
+            this.setState((prevState) => {
+                return {
+                    currentCategory: sidebarName,
+                    menuComponent : 'detailsList',
+                    currentCategoryColor : color,
+                    currentMenu: subCategories,
+                    
+                };
             })
+            
+            
         }
 
 
@@ -55,7 +63,7 @@
         // Render Sidebar 
         // --------------------------------------
         renderSideBar() {
-            const {currentMenu, menuComponent, currentCategory} = this.state;
+            const {currentMenu, menuComponent, currentCategory, currentCategoryColor} = this.state;
             return (
                 <React.Fragment>
                     <div className="xpl-appSideBarBody">
@@ -67,7 +75,7 @@
                             { 
                                 menuComponent === 'singleList' && 
                                 <SingleList currentMenu = {currentMenu} 
-                                            currentCategory = {currentCategory}
+                                            // currentCategory = {currentCategory}
                                             onClick = {this.onListItemClick}
                                 /> 
                             }
@@ -76,7 +84,7 @@
                                             <DetailsList  
                                                 currentMenu = {currentMenu} 
                                                 currentCategory = {currentCategory} 
-                                                currentCategoryColor = {'000'} 
+                                                currentCategoryColor = {currentCategoryColor} 
                                                 onClick = {this.onListItemBackClick}
                                 /> 
                             }

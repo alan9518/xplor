@@ -57,7 +57,7 @@
                 {
                     path : `${path}/communication/children1`,
                     exact: true,
-                    sidebarName : 'children 1',
+                    sidebarName : 'communication 1',
                     key:'communication-route-children1',
                     component : CatalogueView,
                     color : communication,
@@ -65,7 +65,7 @@
                 {
                     path : `${path}/communication/children2`,
                     exact: true,
-                    sidebarName : 'children 2',
+                    sidebarName : 'communication 2',
                     key:'communication-route-children2',
                     component : CatalogueView,
                     color : communication,
@@ -79,7 +79,24 @@
             key:'education-route',
             component : CatalogueView,
             color : education,
-            subCategories : []
+            subCategories : [
+                {
+                    path : `${path}/education/children1`,
+                    exact: true,
+                    sidebarName : 'education 1',
+                    key:'education-route-children1',
+                    component : CatalogueView,
+                    color : education,
+                },
+                {
+                    path : `${path}/education/children2`,
+                    exact: true,
+                    sidebarName : 'education 2',
+                    key:'education-route-children2',
+                    component : CatalogueView,
+                    color : communication,
+                }
+            ]
         },
         {
             path : `${path}/enviroment`,

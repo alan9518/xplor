@@ -24,9 +24,8 @@
         // Check if the Item Has Subcat and change
         // Parent State
         // --------------------------------------
-        onItemClick = (e) => {
-            console.log('clickkk')
-            this.props.onClick();
+        onItemClick = (menu) => (e)=> {
+            this.props.onClick(menu);
         }
 
         // --------------------------------------
@@ -36,14 +35,14 @@
             const {currentMenu}  = this.props;
             let menuItemPath = null;
             return (
-                currentMenu.map((menuItem)=> {
+                currentMenu.map((menuItem, key)=> {
                     menuItemPath = menuItem.subCategories && menuItem.subCategories.length > 0 ? null : menuItem.path;
                     console.log('menuItemPath', menuItemPath);
                     if(menuItemPath!== null) {
                         return ( 
                             <SideBarLink 
                                 key = { menuItem.key } 
-                                indexKey = { menuItem.key } 
+                                indexKey = {`link-${key}`} 
                                 title = { menuItem.sidebarName } 
                                 link = { menuItemPath } 
                                 color = { menuItem.color } 
@@ -57,12 +56,12 @@
                         return ( 
                             <SideBarLink 
                                 key = { menuItem.key } 
-                                indexKey = { menuItem.key } 
+                                indexKey = {`link-${key}`} 
                                 title = { menuItem.sidebarName } 
                                 link = { menuItemPath } 
                                 color = { menuItem.color } 
                                 hasIcon =  {true}
-                                onClick =  {this.onItemClick}
+                                onClick =  {this.onItemClick(menuItem)}
                             />
                         )
                     }
