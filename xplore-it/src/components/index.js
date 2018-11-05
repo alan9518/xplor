@@ -17,9 +17,7 @@
 // --------------------------------------
     import ProfileImage from './Users/ProfileImage';
     import Search from './Search/Search';
-    import HeaderButton from './Header/HeaderButton';
-    import ToggleButton from './Header/ToggleButton';
-    import CloseButton from './Header/CloseButton';
+    import AppButton from './Button/AppButton';
     import ProjectCard from './Projects/ProjectCard';
     import Carrousel from './Carrousel/Carrousel';
 
@@ -32,9 +30,7 @@
         NavBar,
         ProfileImage,
         Search,
-        HeaderButton,
-        ToggleButton,
-        CloseButton,
+        AppButton,
         ProjectCard,
         Carrousel,
         SingleList,

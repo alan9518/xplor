@@ -9,7 +9,8 @@
 // --------------------------------------
     import React, { Component, Fragment } from "react";
     import PropTypes from "prop-types";
-    import { SingleList, DetailsList, Search, CloseButton,  } from "../../components";
+    import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+    import { SingleList, DetailsList, Search, AppButton } from "../../components";
 
 // --------------------------------------
 // Create Component Class
@@ -84,26 +85,27 @@
             const {currentMenu, menuComponent, currentCategory, currentCategoryColor} = this.state;
             const {showMobileMenu,onClick} = this.props;
             console.log('this.props', this.props);
-            const sidebarClass = showMobileMenu === true?  'showMobileMenu' : null;
+            const sidebarClass = showMobileMenu === true?  'showMobileMenu' : '';
             return (
-                <React.Fragment>
+                <Fragment>
 
                     <div className = {`xpl-appSideBar ${sidebarClass}`}>
                         
                         <div className="xpl-appSideBarBody">
                             <div className="xpl-appSideBarHeader">
                                 <div className="xpl-buttonCloseContainer">
-                                    <CloseButton onClick = {onClick}/>
+                                    <AppButton buttonClass = {'xpl-closeButton'} iconClass = {'fas fa-times'} onClick = {onClick}/>
                                 </div>
                                 <Search/>
                             </div>
                             
                             <div className="xpl-appSideBarLinksContainer">
-
+                                <ReactCSSTransitionGroup  transitionName="example"  transitionEnterTimeout={500} transitionLeaveTimeout={300}>
                                 { 
                                     menuComponent === 'singleList' && 
                                     <SingleList currentMenu = {currentMenu} 
                                                 onClick = {this.onListItemClick}
+                                                key = {'Single-List'}
                                     /> 
                                 }
                                 { 
@@ -113,13 +115,15 @@
                                                     currentCategory = {currentCategory} 
                                                     currentCategoryColor = {currentCategoryColor} 
                                                     onClick = {this.onListItemBackClick}
+                                                    key = {'Details-List'}
                                     /> 
                                 }
+                                </ReactCSSTransitionGroup>
                                 
                             </div>
                         </div>
                     </div>
-            </React.Fragment>
+            </Fragment>
             )
         }
 
@@ -128,7 +132,15 @@
         // Render Component
         // --------------------------------------
         render() {
-            return this.renderSideBar();
+            return (
+                // <ReactCSSTransitionGroup
+                //     transitionName="example"
+                //     transitionEnterTimeout={500}
+                //     transitionLeaveTimeout={300}>
+                // {  this.renderSideBar()}
+                // </ReactCSSTransitionGroup>
+                this.renderSideBar()
+                );
         }
     }
 

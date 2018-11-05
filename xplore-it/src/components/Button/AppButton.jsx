@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Add New App Button on Content Header Component 
+ * Button Layout Component
  * 29/10/2018
  * Alan Medina Silva
  ========================================================================== */
@@ -12,26 +12,33 @@
 
 // --------------------------------------
 // Create and Export Component
+// xpl-toggleButton
 // --------------------------------------
-    const CloseButton = (props) => {
+    const AppButton = (props) => {
         console.log('props', props);
         return (
-            <button className="xpl-button xpl-closeButton" onClick = {props.onClick}>
-                <i className="fas fa-times" />
-            </button>
+            <div className="xpl-sidebarButton" onClick = {props.onClick}>
+                <button className={`xpl-button ${props.buttonClass}`}>
+                    {props.buttonText}
+                    <i className = {`${props.iconClass}`} />
+                </button>
+            </div>
         );
     };
 
 // --------------------------------------
 // Prop Types
 // --------------------------------------
-    // CloseButton.propTypes = {
-    //   resourceMail: PropTypes.object
-    // };
+    AppButton.propTypes = {
+        onClick: PropTypes.func,
+        buttonClass : PropTypes.string,
+        buttonText : PropTypes.string,
+        iconClass : PropTypes.string
+    };
 
 // --------------------------------------
 // Export Component
 // --------------------------------------
-    export default CloseButton;
+    export default AppButton;
 
 

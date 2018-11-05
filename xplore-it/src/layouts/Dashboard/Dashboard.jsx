@@ -11,7 +11,7 @@
     import React, { Component, Fragment } from 'react';
     import { Switch, Route, Redirect } from 'react-router-dom';
     import dashboardRoutes from '../../routes/routes';
-    import { HeaderButton, ToggleButton,  SideBar, NavBar} from '../../components'
+    import { HeaderButton, ToggleButton, AppButton,  SideBar, NavBar} from '../../components'
     import 'bootstrap/dist/css/bootstrap.min.css';
     import '../styles.css';
     import logo from '../../images/logo/Flex_WHT_Med_r.png';
@@ -71,8 +71,10 @@
                             
                                 <div className="container-fluid">
                                     <div className="xpl-buttonContainer">
-                                        <ToggleButton onClick = {this.toggleMobileMenu } />
-                                        <HeaderButton/>
+                                        {/* <ToggleButton onClick = {this.toggleMobileMenu } /> */}
+                                        <AppButton buttonClass = {'xpl-toggleButton'} onClick = {this.toggleMobileMenu } iconClass = {'fas fa-bars'}/>
+                                        {/* <HeaderButton/> */}
+                                        <AppButton buttonClass = {'xpl-addNewAppButton'} buttonText = {'Add New Item'} iconClass = {'fas fa-plus-circle'} />
                                     </div>
 
 

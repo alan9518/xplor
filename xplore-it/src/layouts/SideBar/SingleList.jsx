@@ -37,11 +37,8 @@
             const {currentMenu}  = this.props;
             let menuItemPath = null;
             return (
-                <ReactCSSTransitionGroup
-                transitionName="xpl-listItemsAnimation"
-                transitionEnterTimeout = { 500 }
-                transitionLeaveTimeout = { 300 }
-            >
+                <ReactCSSTransitionGroup  transitionName="example"  transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+
                 {
                     currentMenu.map((menuItem, key)=> {
                         menuItemPath = menuItem.subCategories && menuItem.subCategories.length > 0 ? null : menuItem.path;
@@ -83,8 +80,7 @@
         // Render Component
         // --------------------------------------
         render() {
-            return  (
-               
+            return  ( 
                     <ul className = "xpl-linksList">{this.renderMenuList()}</ul>
                 
             ) 
