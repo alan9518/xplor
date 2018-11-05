@@ -10,7 +10,8 @@
      * 2.0 NAVBAR STYLES
      * 3.0 SIDEBAR STYLES
      * 4.0 CONTENT STYLES
-     * 5.0 RESPONSIVE STYLES
+     * 5.0 CONTENT STYLES
+     * 6.0 RESPONSIVE STYLES
      * IE HACKS
 ========================================================== */
 
@@ -71,6 +72,9 @@
     }
 
 
+    .xpl-appCategory {
+        font-family: 'ITC Avant Garde';
+    }
 
 
 
@@ -131,12 +135,21 @@
     }
 
 
+    .xpl-appSideBarHeader {
+        display: flex;
+        flex-direction: column;       
+    }
+
+    .xpl-buttonCloseContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+
     .xpl-toggleButton {
-        position: absolute;
-        top: 98px;
-        left: 28px;
         display: none;
-        transition: all .3s ease-out;
+        transition: all .3s ease-out; 
     }
 
     .xpl-toggleButton i {
@@ -157,6 +170,13 @@
     .xpl-searchContainer {
         width: 100%;
         margin-bottom: 15px;
+    }
+
+    button.xpl-button.xpl-closeButton {
+        padding: 10px;
+        padding-right: 12px;
+        font-size: 1.3em;
+        display: none;
     }
 
     .xpl-appSideBarTitleContainer {
@@ -180,6 +200,7 @@
         flex-direction: row;
         font-weight: 200;
         font-family: 'ITC Avant Garde';
+        cursor: pointer;
     }
 
     .xpl-sidebarLinksContainer {
@@ -194,10 +215,14 @@
 
 
     /* Links Animation */
-    .xpl-sidebarLink a:hover {
+    .xpl-sidebarLink:hover {
         text-decoration : none;
+        background-color: #f2f2f2;
     }
 
+    .xpl-sidebarLink a:hover {
+        text-decoration: none;
+    }
 
     .xpl-iconContainer {
         width: 100%;
@@ -226,6 +251,7 @@
         color: #000;
         padding: 0px 6px;
         text-decoration: none;
+        text-transform : capitalize;
     }
 
     span .xpl-linksList:hover {
@@ -234,7 +260,7 @@
 
     /* Details List */
     .xpl-appSidebarTitleContainer, .xpl-appSideBarSubCat  {
-        padding: 8px 15px;
+        padding: 8px 12px;
     }
 
     button.xpl-button.xpl-backButton {
@@ -251,13 +277,14 @@
         font-size: 24px;
         color: #fff;
         position: absolute;
-        left: 12px;
+        left: 14px;
         top: 93px;
     }
 
 
     .xpl-appSidebarTitleContainer span {
-        padding-left: 4px;
+        color: #6c757d;
+        font-size: 13px;
     }
 
 
@@ -266,10 +293,14 @@
     4.0 CONTENT STYLES
 ----------------------------------------------------- */
 
+    .xpl-carrouselRow {
+        margin-bottom: 24px;
+    }
+
     .xpl-buttonContainer {
         display: flex;
         flex-direction: row;
-        justify-content: flex-end;
+        justify-content: space-between;
         padding: 15px 0px;
     }
 
@@ -280,7 +311,7 @@
         border: none;
         cursor: pointer;
     }
-    .xpl-addNewAppButton {
+    .xpl-addNewAppButton, .xpl-toggleButton {
         padding: 20px 7px;
         font-size: 1.2em;
     }
@@ -294,13 +325,30 @@
         padding-left: 16px;
         padding-right:16px; 
     }
+
+    .xpl-allAppTitle {
+        margin-bottom: 16px;
+        margin-top: 16px;
+    }
     
+
+
+/* ---------------------------------------------------
+    5.0 ANIMATIONS STYLES	
+----------------------------------------------------- */
+
+    .xpl-appSideBar.showMobileMenu {
+        -webkit-transform: translateX(0%);
+                    transform: translateX(0%);
+        z-index: 100;
+        flex: 1 0 100%;
+    }
 
 
 
 
 /* ---------------------------------------------------
-    5.0 RESPONSIVE STYLES	
+    6.0 RESPONSIVE STYLES	
         Hide The SideBar and Displace Body
 ----------------------------------------------------- */
     
@@ -310,16 +358,45 @@
                     transform: translateX(-100%);
         }
 
+        .xpl-appSideBarBody {
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+        }
+
+        
+        button.xpl-button.xpl-closeButton {
+            display: block;
+        }
+
+        .xpl-appSideBarLinksContainer {
+            padding: 10px 0px 0 10px;
+        }
+
         .xpl-content  {
-            margin-left: -230px;
+            margin-left: -250px;
         }
 
         .xpl-toggleButton {
             display: block;
             transition: all .3s ease-out;
         }
+
+        .xpl-cardContainer {
+            margin-bottom: 16px;
+        }
+
+        button.xpl-button.xpl-backButton i {
+            left: 24px;
+            top: 132px;
+        }
     
     }
+
+
+
+
+
 
 
 

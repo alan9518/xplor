@@ -12,26 +12,30 @@
 
 // --------------------------------------
 // Create and Export Component
+// xpl-toggleButton
 // --------------------------------------
-    const HeaderButton = resourceMail => {
-    
-        return  (
-            <button className="xpl-button xpl-addNewAppButton">  
-                Add New Item 
-                <i className="fas fa-plus-circle"></i> 
-            </button>
-          
-        )
+    const AppButton = (props) => {
+        console.log('props', props);
+        return (
+            <div className="xpl-sidebarButton" onClick = {props.onClick}>
+                <button className={`xpl-button ${props.buttonClass}`}>
+                    {/* <i className="fas fa-bars" /> */}
+                    {props.children } 
+                </button>
+            </div>
+        );
     };
 
 // --------------------------------------
 // Prop Types
 // --------------------------------------
-// HeaderButton.propTypes = {
-//   resourceMail: PropTypes.object
-// };
+    // AppButton.propTypes = {
+    //     resourceMail: PropTypes.object
+    // };
 
 // --------------------------------------
 // Export Component
 // --------------------------------------
-    export default HeaderButton;
+    export default AppButton;
+
+

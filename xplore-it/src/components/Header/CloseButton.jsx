@@ -13,25 +13,25 @@
 // --------------------------------------
 // Create and Export Component
 // --------------------------------------
-    const HeaderButton = resourceMail => {
-    
-        return  (
-            <button className="xpl-button xpl-addNewAppButton">  
-                Add New Item 
-                <i className="fas fa-plus-circle"></i> 
+    const CloseButton = (props) => {
+        console.log('props', props);
+        return (
+            <button className="xpl-button xpl-closeButton" onClick = {props.onClick}>
+                <i className="fas fa-times" />
             </button>
-          
-        )
+        );
     };
 
 // --------------------------------------
 // Prop Types
 // --------------------------------------
-// HeaderButton.propTypes = {
-//   resourceMail: PropTypes.object
-// };
+    // CloseButton.propTypes = {
+    //   resourceMail: PropTypes.object
+    // };
 
 // --------------------------------------
 // Export Component
 // --------------------------------------
-    export default HeaderButton;
+    export default CloseButton;
+
+

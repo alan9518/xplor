@@ -10,7 +10,9 @@
 // --------------------------------------
     import React, { Component } from "react";
     import PropTypes from "prop-types";
+    import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
     import { SideBarLink } from "../../components";
+
 
 
 // --------------------------------------
@@ -35,37 +37,45 @@
             const {currentMenu}  = this.props;
             let menuItemPath = null;
             return (
-                currentMenu.map((menuItem, key)=> {
-                    menuItemPath = menuItem.subCategories && menuItem.subCategories.length > 0 ? null : menuItem.path;
-                    console.log('menuItemPath', menuItemPath);
-                    if(menuItemPath!== null) {
-                        return ( 
-                            <SideBarLink 
-                                key = { menuItem.key } 
-                                indexKey = {`link-${key}`} 
-                                title = { menuItem.sidebarName } 
-                                link = { menuItemPath } 
-                                color = { menuItem.color } 
-                                hasIcon =  {true}
-                                
-                            />
-                        )
-                    }
-                    else
-                    {
-                        return ( 
-                            <SideBarLink 
-                                key = { menuItem.key } 
-                                indexKey = {`link-${key}`} 
-                                title = { menuItem.sidebarName } 
-                                link = { menuItemPath } 
-                                color = { menuItem.color } 
-                                hasIcon =  {true}
-                                onClick =  {this.onItemClick(menuItem)}
-                            />
-                        )
-                    }
-                })
+                <ReactCSSTransitionGroup
+                transitionName="xpl-listItemsAnimation"
+                transitionEnterTimeout = { 500 }
+                transitionLeaveTimeout = { 300 }
+            >
+                {
+                    currentMenu.map((menuItem, key)=> {
+                        menuItemPath = menuItem.subCategories && menuItem.subCategories.length > 0 ? null : menuItem.path;
+
+                        if(menuItemPath!== null) {
+                            return ( 
+                                <SideBarLink 
+                                    key = { menuItem.key } 
+                                    indexKey = {`link-${key}`} 
+                                    title = { menuItem.sidebarName } 
+                                    link = { menuItemPath } 
+                                    color = { menuItem.color } 
+                                    hasIcon =  {true}
+                                    
+                                />
+                            )
+                        }
+                        else
+                        {
+                            return ( 
+                                <SideBarLink 
+                                    key = { menuItem.key } 
+                                    indexKey = {`link-${key}`} 
+                                    title = { menuItem.sidebarName } 
+                                    link = { menuItemPath } 
+                                    color = { menuItem.color } 
+                                    hasIcon =  {true}
+                                    onClick =  {this.onItemClick(menuItem)}
+                                />
+                            )
+                        }
+                    })
+                }
+                </ReactCSSTransitionGroup>
             )
         }
 
@@ -73,7 +83,11 @@
         // Render Component
         // --------------------------------------
         render() {
-            return  <ul className = "xpl-linksList">{this.renderMenuList()}</ul> 
+            return  (
+               
+                    <ul className = "xpl-linksList">{this.renderMenuList()}</ul>
+                
+            ) 
         }
     }
 

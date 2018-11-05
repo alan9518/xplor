@@ -12,10 +12,6 @@
     import {NavLink} from 'react-router-dom';
 
 
-// --------------------------------------
-// 
-// --------------------------------------
-
 
 // --------------------------------------
 // Create Component
@@ -25,6 +21,7 @@
         const iconHolderStyle = {
             backgroundColor: color
         }
+
 
             if(link !== null) 
             {

@@ -13,13 +13,14 @@
 // --------------------------------------
 // Create and Export Component
 // --------------------------------------
-    const ToggleButton = () => {
+    const ToggleButton = (props) => {
+        console.log('props', props);
         return (
-            <div className="xpl-sidebarButton">
+            <div className="xpl-sidebarButton" onClick = {props.onClick}>
                 <button className="xpl-button xpl-toggleButton">
                     <i className="fas fa-bars" />
                 </button>
-        </div>
+            </div>
         );
     };
 

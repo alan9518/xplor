@@ -35,7 +35,7 @@
 // --------------------------------------
 // Create JSON Routes Array
 // Last Item is the Defualt Redirect
-// From Home or /
+// From Home or / to Catalogue View
 // --------------------------------------
     const appNavigationRoutes = [
         {
@@ -48,7 +48,7 @@
         },
         {
             path : `${path}/communication`,
-            exact: true,
+            exact: false,
             sidebarName : 'Communication',
             key:'communication-route',
             component : CatalogueView,
@@ -56,7 +56,7 @@
             subCategories : [
                 {
                     path : `${path}/communication/children1`,
-                    exact: true,
+                    exact: false,
                     sidebarName : 'communication 1',
                     key:'communication-route-children1',
                     component : CatalogueView,
@@ -64,7 +64,7 @@
                 },
                 {
                     path : `${path}/communication/children2`,
-                    exact: true,
+                    exact: false,
                     sidebarName : 'communication 2',
                     key:'communication-route-children2',
                     component : CatalogueView,
@@ -74,7 +74,7 @@
         },
         {
             path : `${path}/education`,
-            exact: true,
+            exact: false,
             sidebarName : 'Education',
             key:'education-route',
             component : CatalogueView,
@@ -82,7 +82,7 @@
             subCategories : [
                 {
                     path : `${path}/education/children1`,
-                    exact: true,
+                    exact: false,
                     sidebarName : 'education 1',
                     key:'education-route-children1',
                     component : CatalogueView,
@@ -90,7 +90,7 @@
                 },
                 {
                     path : `${path}/education/children2`,
-                    exact: true,
+                    exact: false,
                     sidebarName : 'education 2',
                     key:'education-route-children2',
                     component : CatalogueView,

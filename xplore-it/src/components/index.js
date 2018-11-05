@@ -19,6 +19,7 @@
     import Search from './Search/Search';
     import HeaderButton from './Header/HeaderButton';
     import ToggleButton from './Header/ToggleButton';
+    import CloseButton from './Header/CloseButton';
     import ProjectCard from './Projects/ProjectCard';
     import Carrousel from './Carrousel/Carrousel';
 
@@ -33,6 +34,7 @@
         Search,
         HeaderButton,
         ToggleButton,
+        CloseButton,
         ProjectCard,
         Carrousel,
         SingleList,

@@ -37,7 +37,8 @@
         renderMenuList() {
             const {currentMenu, onClick, currentCategory, currentCategoryColor} = this.props;
             const borderStyle = {
-                borderLeft: `24px solid ${currentCategoryColor}`
+                borderLeft: `26px solid ${currentCategoryColor}`,
+                height:'544px'
             }
 
 
@@ -48,8 +49,8 @@
                         <button className="xpl-button xpl-backButton" onClick = {onClick}>
                             <i className="fas fa-chevron-left"></i>  
                         </button>
-                            <h4>{currentCategory}</h4>
-                            <span> Category Description </span>
+                            <h4 className="xpl-appCategory">{currentCategory}</h4>
+                            <span> Recommended for your business department </span>
                         </div>
 
                         <div className="xpl-appSideBarSubCat">
