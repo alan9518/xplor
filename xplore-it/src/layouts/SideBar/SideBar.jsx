@@ -10,6 +10,7 @@
     import React, { Component, Fragment } from "react";
     import PropTypes from "prop-types";
     import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
     import { SingleList, DetailsList, Search, AppButton } from "../../components";
 
 // --------------------------------------
@@ -75,8 +76,6 @@
             
         }
 
-        // 52 33 3669 7000
-
 
         // --------------------------------------
         // Render Sidebar 
@@ -84,7 +83,6 @@
         renderSideBar() {
             const {currentMenu, menuComponent, currentCategory, currentCategoryColor} = this.state;
             const {showMobileMenu,onClick} = this.props;
-            console.log('this.props', this.props);
             const sidebarClass = showMobileMenu === true?  'showMobileMenu' : '';
             return (
                 <Fragment>
@@ -100,7 +98,7 @@
                             </div>
                             
                             <div className="xpl-appSideBarLinksContainer">
-                                <ReactCSSTransitionGroup  transitionName="example"  transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                                <ReactCSSTransitionGroup  transitionName="example"  transitionEnterTimeout={200} transitionLeaveTimeout={300}>
                                 { 
                                     menuComponent === 'singleList' && 
                                     <SingleList currentMenu = {currentMenu} 
@@ -133,12 +131,7 @@
         // --------------------------------------
         render() {
             return (
-                // <ReactCSSTransitionGroup
-                //     transitionName="example"
-                //     transitionEnterTimeout={500}
-                //     transitionLeaveTimeout={300}>
-                // {  this.renderSideBar()}
-                // </ReactCSSTransitionGroup>
+                
                 this.renderSideBar()
                 );
         }
