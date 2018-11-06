@@ -18,8 +18,12 @@
     import ProfileImage from './Users/ProfileImage';
     import Search from './Search/Search';
     import AppButton from './Button/AppButton';
-    import ProjectCard from './Projects/ProjectCard';
+    import ProjectCard from './Cards/ProjectCard';
+    import CardImage from './Cards/CardImage';
     import Carrousel from './Carrousel/Carrousel';
+    import Breadcumbs from './Breadcumbs/BreadCumbs';
+    import WideCard from './Cards/WideCard';
+
 
 // --------------------------------------
 // Export Components
@@ -34,5 +38,8 @@
         ProjectCard,
         Carrousel,
         SingleList,
-        DetailsList
+        DetailsList,
+        Breadcumbs,
+        WideCard,
+        CardImage,
     }

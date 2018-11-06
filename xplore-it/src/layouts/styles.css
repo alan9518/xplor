@@ -326,9 +326,22 @@
         padding-right:16px; 
     }
 
+
     .xpl-allAppTitle {
         margin-bottom: 16px;
         margin-top: 16px;
+    }
+
+    .xpl-breadcumbsContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+    }
+
+    h4.xpl-breadChild {
+        display: flex;
+        flex-direction: column;
+        padding: 0 8px 8px 8px;
     }
     
 

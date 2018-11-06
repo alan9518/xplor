@@ -8,7 +8,7 @@
 // Import Components
 // --------------------------------------
     import CatalogueView from '../views/Dashboard/Dashboard';
-
+    import DetailsView from '../views/Details/DetailsView';
 
 // --------------------------------------
 // Define App Path
@@ -169,6 +169,12 @@
             component : CatalogueView,
             color : sales,
             subCategories : []
+        },
+        {
+            path : `${path}/app/details/:AppID`,
+            exact: false,
+            key:'app-route',
+            component : DetailsView,
         },
     
         {redirect:true, path:'/', to : `${path}/catalogue`, navbarName: 'Redirect' }

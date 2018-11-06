@@ -1,0 +1,120 @@
+/* ==========================================================================
+ * Project Card Layout Styles 
+ * 29/10/2018
+ * Alan Medina Silva
+ ========================================================================== */
+
+
+/* ==================== CSS Structure ==================== 
+     * 1.0 Normal Card Projects List	
+     * 2.0 Wide Card For Details View
+========================================================== */
+
+
+
+/* ---------------------------------------------------
+    1.0 Normal Card Projects List
+----------------------------------------------------- */
+
+
+    .xpl-cardContainer {
+        width: 100%;
+        display: block;
+        border-radius: 20px;
+    }
+
+    .xpl-mediumCard {
+        max-width: 350px;
+    }
+
+
+
+    .xpl-cardHeader {
+        background-color: #238ECC;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 16px;
+        color: #fff;
+        border-radius: 3px 3px 0 0;
+    }
+
+
+    .xpl-cardHeader i {
+        font-size: 100px;
+        padding-top: 16px;
+        opacity: 0.5;
+    }
+
+    .xpl-cardDescription {
+        background-color: #fff;
+        padding: 12px 8px;
+        border-radius: 3px;
+    }
+
+
+
+/* ---------------------------------------------------
+    2.0 Wide Card For Details View
+----------------------------------------------------- */
+    .xpl-wideCard {
+        /* max-width: 800px; */
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 16px;
+        background-color: #fff;
+        border-radius: 3px 3px 0 0;
+    }
+
+    .xpl-cardWideHeader {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .xpl-cardWideHeader .xpl-cardHeader {
+        min-width: 250px;
+    }
+
+    .xpl-cardProjectInfo {
+        display: flex;
+        flex-direction: column;
+        margin-left: 16px;
+        align-items: baseline;
+        justify-content: center;
+        padding: 8px;
+    }
+
+    .xpl-cardProjectInfo p {
+        font-size: 1.2em;
+    }
+
+    .xpl-cardOverviewContainer {
+        margin-top: 16px;
+    }
+
+    .xpl-cardOverviewContainer h5{
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+    
+
+    p.xpl-cardProjectCardOverview {
+        text-align: justify;
+        color: #6c757d;
+        padding-left: 16px;
+    }
+
+    .xpl-relatedListApps {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .xpl-relatedListApps .xpl-cardContainer.xpl-mediumCard.xpl-shadow {
+        margin-bottom: 16px;
+    }
+

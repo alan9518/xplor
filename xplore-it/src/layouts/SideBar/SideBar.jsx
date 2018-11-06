@@ -98,7 +98,7 @@
                             </div>
                             
                             <div className="xpl-appSideBarLinksContainer">
-                                <ReactCSSTransitionGroup  transitionName="example"  transitionEnterTimeout={200} transitionLeaveTimeout={300}>
+                                <ReactCSSTransitionGroup  transitionName="example"  transitionEnterTimeout={100} transitionLeaveTimeout={200}>
                                 { 
                                     menuComponent === 'singleList' && 
                                     <SingleList currentMenu = {currentMenu} 

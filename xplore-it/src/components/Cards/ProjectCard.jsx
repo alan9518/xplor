@@ -10,7 +10,9 @@
     import React, { Component } from "react";
     import PropTypes from "prop-types";
     import './styles.css';
+    import { CardImage } from '..';
 
+    
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
@@ -22,13 +24,11 @@
         // --------------------------------------
         renderCard() {
             return (
-                <div className="xpl-cardContainer xpl-shadow">
+                <div className="xpl-cardContainer xpl-mediumCard xpl-shadow">
 
                     <div className="xpl-cardHeader">
                         <div className="xpl-cardName"> <h5>App Name </h5></div>
-                        <div className="xpl-cardImage">
-                            <i className="fas fa-basketball-ball"></i>
-                        </div>
+                        <CardImage/>
                     </div>
                     <div className="xpl-cardDescription">
                         <p> lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>

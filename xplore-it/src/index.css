@@ -4,6 +4,9 @@
  * Alan Medina Silva
  ========================================================================== */
 
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600');
+
+
 @font-face {
   font-family: 'ITC Avant Garde';
   src: url('http://localhost:3000//fonts/ITCAvantGardeStd-Md.otf'),
@@ -24,3 +27,4 @@
   font-weight: 200;
 
 }
+
