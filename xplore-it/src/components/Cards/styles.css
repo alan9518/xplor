@@ -58,7 +58,6 @@
     2.0 Wide Card For Details View
 ----------------------------------------------------- */
     .xpl-wideCard {
-        /* max-width: 800px; */
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -96,11 +95,7 @@
         margin-top: 16px;
     }
 
-    .xpl-cardOverviewContainer h5{
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 600;
-    }
-    
+
 
     p.xpl-cardProjectCardOverview {
         text-align: justify;
@@ -111,8 +106,8 @@
     .xpl-relatedListApps {
         display: flex;
         flex-direction: column;
-        align-items: center;
     }
+
 
     .xpl-relatedListApps .xpl-cardContainer.xpl-mediumCard.xpl-shadow {
         margin-bottom: 16px;

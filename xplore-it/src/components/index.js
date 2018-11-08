@@ -19,6 +19,7 @@
     import Search from './Search/Search';
     import AppButton from './Button/AppButton';
     import ProjectCard from './Cards/ProjectCard';
+    import CardHeaderWide from './Cards/CardHeaderWide';
     import CardImage from './Cards/CardImage';
     import Carrousel from './Carrousel/Carrousel';
     import Breadcumbs from './Breadcumbs/BreadCumbs';
@@ -42,4 +43,5 @@
         Breadcumbs,
         WideCard,
         CardImage,
+        CardHeaderWide,
     }

@@ -32,7 +32,7 @@
         height: 100%;
         min-height: 100vh;
         background-color: #F2F3F8;
-        font-family: 'Lato', sans-serif;
+        /* font-family: 'Lato', sans-serif; */
     }
 
     .App {
@@ -73,6 +73,15 @@
 
 
     .xpl-appCategory {
+        font-family: 'ITC Avant Garde';
+    }
+
+    p {
+        font-family: 'Arimo', sans-serif;
+        color: #6c757d;
+    }
+
+    h2, h3, h4, h5 {
         font-family: 'ITC Avant Garde';
     }
 

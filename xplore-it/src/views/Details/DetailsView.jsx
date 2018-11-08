@@ -35,6 +35,16 @@
                     return <Breadcumbs/>
                 }
 
+            // --------------------------------------
+            // Render Details Body
+            // --------------------------------------
+            renderDetailsBody() {
+                return (
+                    <div className="xpl-appDescriptionContainer">
+                        <WideCard/>
+                    </div>
+                )
+            }
 
             // --------------------------------------
             // Render View
@@ -43,25 +53,21 @@
                     return (
                         <Fragment>
                             {this.renderBreadcumbs()}
+                            <div className="container-fluid">
+                                <div className="row">
+                                    <div className="col-lg-9 col-sm-12">
+                                        {this.renderDetailsBody()}
+                                    </div>
 
-                           <div className="container-fluid">
-                            <div className="row">
-                                <div className="col-lg-9">
-                                    <div className="xpl-appDescriptionContainer">
-                                        <WideCard/>
+                                    <div className="col-lg-3 col-sm-12">
+                                        <div className="xpl-relatedListApps">
+                                        <h5>Related Products</h5>
+                                            <ProjectCard/>
+                                            <ProjectCard/>
+                                            <ProjectCard/>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div className="col-lg-3">
-                                    <div className="xpl-relatedListApps">
-                                    <h3>Related Products</h3>
-                                        <ProjectCard/>
-                                        <ProjectCard/>
-                                        <ProjectCard/>
-                                    </div>
-                                </div>
-
-                            </div>
                            </div>
                         </Fragment>
                     )

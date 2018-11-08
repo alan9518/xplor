@@ -9,7 +9,7 @@
 // --------------------------------------
     import React, { Component } from "react";
     import PropTypes from "prop-types";
-    import { CardImage } from '../../components';
+    import { CardImage, CardHeaderWide } from '../../components';
     import './styles.css';
 
 // --------------------------------------
@@ -17,24 +17,14 @@
 // --------------------------------------
     
     const WideCard = (props) => {
+        
         // --------------------------------------
         // Render Card
         // --------------------------------------
             return (
                 <div className="xpl-cardContainer xpl-wideCard  xpl-shadow">
-
-                    <div className="xpl-cardWideHeader">
-                        <div className="xpl-cardHeader">
-                            <div className="xpl-cardName"> <h5>App Name </h5></div>
-                            <CardImage/>
-                        </div>
-                        <div className="xpl-cardProjectInfo">
-                            <p> Uploaded:  8/07/2018 </p>
-                            <p> Contributor: Nader </p>
-                            <p> Contact: Nader@flex.com  </p>
-                        </div>
-                    </div>
-
+                    
+                    <CardHeaderWide/>
 
                     <div className="xpl-cardOverviewContainer">
 
