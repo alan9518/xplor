@@ -48,7 +48,6 @@
         // Show Modal
         // --------------------------------------
         toggleModal = (e) => {
-            // alert('click')
             const { showModal } = this.state;
             this.setState({
                 showModal : !showModal
@@ -71,8 +70,8 @@
                             <NavBar logo = {logo}/>
                         </header>
 
-                        {/* <AppModal isOpen = {showModal} ></AppModal> */}
-                        
+                        <AppModal show={showModal} handleClose = {this.toggleModal} >  Modal oCon  </AppModal>
+
                         <div className="App xpl-mainContainer" >
 
                             <SideBar routes = { dashboardRoutes }  showMobileMenu = {showMobileMenu} onClick = {this.toggleMobileMenu }/>
@@ -119,6 +118,7 @@
                             </div>
 
                         </div>
+
 
                     </Fragment>
                 )
