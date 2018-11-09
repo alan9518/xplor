@@ -10,7 +10,7 @@
     import React, { Component } from "react";
     import PropTypes from "prop-types";
     import './styles.css';
-    import { CardImage } from '..';
+    import { CardImage, ProjectLink } from '../../components';
 
     
 // --------------------------------------
@@ -24,17 +24,17 @@
         // --------------------------------------
         renderCard() {
             return (
-                <div className="xpl-cardContainer xpl-mediumCard xpl-shadow">
-
-                    <div className="xpl-cardHeader">
-                        <div className="xpl-cardName"> <h5>App Name </h5></div>
-                        <CardImage/>
+                <ProjectLink>
+                    <div className="xpl-cardContainer xpl-mediumCard xpl-shadow">
+                        <div className="xpl-cardHeader">
+                            <div className="xpl-cardName"> <h5>App Name </h5></div>
+                            <CardImage/>
+                        </div>
+                        <div className="xpl-cardDescription">
+                            <p> lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
                     </div>
-                    <div className="xpl-cardDescription">
-                        <p> lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-
-                </div>
+                </ProjectLink>
             )
         }
         

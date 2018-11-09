@@ -15,7 +15,6 @@
 // xpl-toggleButton
 // --------------------------------------
     const AppButton = (props) => {
-        console.log('props', props);
         return (
             <div className="xpl-sidebarButton" onClick = {props.onClick}>
                 <button className={`xpl-button ${props.buttonClass}`}>

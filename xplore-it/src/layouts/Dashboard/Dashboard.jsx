@@ -11,7 +11,7 @@
     import React, { Component, Fragment } from 'react';
     import { Switch, Route, Redirect } from 'react-router-dom';
     import dashboardRoutes from '../../routes/routes';
-    import { HeaderButton, ToggleButton, AppButton,  SideBar, NavBar} from '../../components'
+    import { HeaderButton, ToggleButton, AppButton,  SideBar, NavBar, AppModal} from '../../components'
     import 'bootstrap/dist/css/bootstrap.min.css';
     import '../styles.css';
     import logo from '../../images/logo/Flex_WHT_Med_r.png';
@@ -29,6 +29,7 @@
             super(props);
             this.state = {
                 showMobileMenu : false,
+                showModal : false,
             }
         }
 
@@ -42,6 +43,17 @@
             })
         }
 
+
+        // --------------------------------------
+        // Show Modal
+        // --------------------------------------
+        toggleModal = (e) => {
+            // alert('click')
+            const { showModal } = this.state;
+            this.setState({
+                showModal : !showModal
+            })
+        }
     
 
         // --------------------------------------
@@ -49,8 +61,7 @@
         // Render the DashBoard Routes from routes.js
         // --------------------------------------    
             renderApp() {
-                const {showMobileMenu} =  this.state;
-                console.log('showMobileMenu', showMobileMenu);
+                const {showMobileMenu, showModal} =  this.state;
                 const currentNavigator = window.navigator.appName;
                 const bodyClasses = currentNavigator === "Microsoft Internet Explorer" ? "xpl-content main xpl-contentIE" : "xpl-content main";
                 return (
@@ -59,6 +70,8 @@
                         <header>
                             <NavBar logo = {logo}/>
                         </header>
+
+                        {/* <AppModal isOpen = {showModal} ></AppModal> */}
                         
                         <div className="App xpl-mainContainer" >
 
@@ -71,10 +84,18 @@
                             
                                 <div className="container-fluid">
                                     <div className="xpl-buttonContainer">
-                                        {/* <ToggleButton onClick = {this.toggleMobileMenu } /> */}
-                                        <AppButton buttonClass = {'xpl-toggleButton'} onClick = {this.toggleMobileMenu } iconClass = {'fas fa-bars'}/>
-                                        {/* <HeaderButton/> */}
-                                        <AppButton buttonClass = {'xpl-addNewAppButton'} buttonText = {'Add New Item'} iconClass = {'fas fa-plus-circle'} />
+                                        <AppButton 
+                                                buttonClass = {'xpl-toggleButton'} 
+                                                onClick = {this.toggleMobileMenu } 
+                                                iconClass = {'fas fa-bars'}
+                                        />
+
+                                        <AppButton 
+                                            buttonClass = {'xpl-addNewAppButton'} 
+                                            onClick =  {this.toggleModal}
+                                            buttonText = {'Add New Item'} 
+                                            iconClass = {'fas fa-plus-circle'} 
+                                        />
                                     </div>
 
 
@@ -96,8 +117,6 @@
 
                                     </div>
                             </div>
-
-
 
                         </div>
 

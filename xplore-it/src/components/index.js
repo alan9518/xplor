@@ -24,7 +24,8 @@
     import Carrousel from './Carrousel/Carrousel';
     import Breadcumbs from './Breadcumbs/BreadCumbs';
     import WideCard from './Cards/WideCard';
-
+    import AppModal from './Modal/Modal';
+    import ProjectLink from './Links/ProjectLink';
 
 // --------------------------------------
 // Export Components
@@ -44,4 +45,6 @@
         WideCard,
         CardImage,
         CardHeaderWide,
+        ProjectLink,
+        AppModal,
     }

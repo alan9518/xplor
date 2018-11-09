@@ -9,7 +9,7 @@
 // --------------------------------------
     import React, { Component } from "react";
     import PropTypes from "prop-types";
-    import { CardImage, CardHeaderWide } from '../../components';
+    import { CardHeaderWide } from '../../components';
     import './styles.css';
 
 // --------------------------------------
