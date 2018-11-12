@@ -17,7 +17,7 @@
 // --------------------------------------
     import ProfileImage from './Users/ProfileImage';
     import Search from './Search/Search';
-    import AppButton from './Button/AppButton';
+    import AppButton from './Buttons/AppButton';
     import ProjectCard from './Cards/ProjectCard';
     import CardHeaderWide from './Cards/CardHeaderWide';
     import CardImage from './Cards/CardImage';
@@ -26,6 +26,7 @@
     import WideCard from './Cards/WideCard';
     import AppModal from './Modal/Modal';
     import ProjectLink from './Links/ProjectLink';
+    import MaterialButton from './Buttons/MaterialButton';
 
 // --------------------------------------
 // Export Components
@@ -47,4 +48,5 @@
         CardHeaderWide,
         ProjectLink,
         AppModal,
+        MaterialButton,
     }

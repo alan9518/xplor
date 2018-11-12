@@ -7,8 +7,9 @@
 // --------------------------------------
 // Import Dependences
 // --------------------------------------
-import React from "react";
-import PropTypes from "prop-types";
+    import React from "react";
+    import PropTypes from "prop-types";
+    import './styles.css';
 
     // --------------------------------------
     // Create and Export Component
@@ -16,13 +17,13 @@ import PropTypes from "prop-types";
     // --------------------------------------
     const MaterialButton = (props) => {
         return (
-            <div className="xpl-sidebarButton" onClick = {props.onClick}>
-                <button className={`xpl-button ${props.buttonClass}`}>
+            <div className = 'xpl-materialButton'>
+                <button className='pure-material-button-contained'>
                     {props.buttonText}
-                    <i className = {`${props.iconClass}`} />
                 </button>
             </div>
-        );
+                
+        )
     };
 
 // --------------------------------------
