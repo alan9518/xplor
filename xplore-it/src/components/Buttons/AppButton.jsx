@@ -18,8 +18,9 @@
         return (
             <div className="xpl-sidebarButton" onClick = {props.onClick}>
                 <button className={`xpl-button ${props.buttonClass}`}>
+                    {props.iconLeftClass && <i className = {` xpl-iconLeft ${props.iconLeftClass}`} /> }
                     {props.buttonText}
-                    <i className = {`${props.iconClass}`} />
+                    {props.iconClass && <i className = {`${props.iconClass}`} /> }
                 </button>
             </div>
         );

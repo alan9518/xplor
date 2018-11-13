@@ -22,7 +22,7 @@
         // Render Form
         // --------------------------------------   
             renderForm() {
-                return <NewProjectForm></NewProjectForm>
+                return <NewProjectForm/>
             }
 
 

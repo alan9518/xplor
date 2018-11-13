@@ -20,6 +20,7 @@ section.xpl-appModal-main{
     background: white;
     width: 80%;
     height: auto;
+    min-height: 600px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -35,12 +36,17 @@ i.fas.fa-times-circle {
     border-radius: 100%;
 }
 
-section.xpl-closButtonContainer {
+.xpl-appModal.display-block .xpl-sidebarButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+button.xpl-button.xpl-closeModalButton {
     display: block;
     position: absolute;
-    left: 89%;
-    top: 36%;
-    z-index: 2500;
+    top: -13px;
+    right: -13px;
 }
 
 .xpl-modalHeader {
@@ -49,8 +55,25 @@ section.xpl-closButtonContainer {
     margin-bottom: 15px;
 }
 
+
+.xpl-modalBodyScroll {
+    /* cover the modal */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* spacing as needed */
+    padding: 20px 50px 20px 20px;
+
+    /* let it scroll */
+    overflow: auto;
+}
+
 .xpl-modalFooter {
     padding: 10px;
     border-top: 1px solid #eee;
     margin-top: 12px;
 }
+

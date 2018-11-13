@@ -11,14 +11,18 @@
     import PropTypes from "prop-types";
     import './styles.css';
 
+
     // --------------------------------------
     // Create and Export Component
     // xpl-toggleButton
     // --------------------------------------
     const MaterialButton = (props) => {
+
+        const classNames = `pure-material-button-contained xpl-${props.buttonColor}`
+
         return (
             <div className = 'xpl-materialButton'>
-                <button className='pure-material-button-contained'>
+                <button className={classNames}>
                     {props.buttonText}
                 </button>
             </div>
@@ -33,7 +37,8 @@
         onClick: PropTypes.func,
         buttonClass : PropTypes.string,
         buttonText : PropTypes.string,
-        iconClass : PropTypes.string
+        iconClass : PropTypes.string,
+        buttonColor : PropTypes.string
     };
 
 // --------------------------------------

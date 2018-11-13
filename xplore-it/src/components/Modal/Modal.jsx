@@ -21,28 +21,33 @@
 
             // --------------------------------------
             // Render Modal
+            // Iterate the Modal Child Components
+            // To determine the body and Footer
             // --------------------------------------
             return (
                 <div className={showHideClassName}>
-                    <section className="xpl-closButtonContainer">
-                        <AppButton
-                            buttonClass={"xpl-closeModalButton"}
-                            onClick={handleClose}
-                            iconClass={"fas fa-times-circle"}
-                        />
-                    </section>
 
                     <section className="xpl-appModal-main xpl-shadow">
+                        <AppButton
+                                buttonClass={"xpl-closeModalButton"}
+                                onClick={handleClose}
+                                iconClass={"fas fa-times-circle"}
+                            />
+                        <div className="xpl-modalBodyScroll">
                         <div className="xpl-modalHeader">
                             <h4> {modalTitle} </h4>
                         </div>
 
+                        
                         {React.Children.map(children, child => {
                             if (child.key === "ModalBody") 
-                                return child;
+                                return (child);
                             else if (child.key === "ModalFooter")
                                 return <div className="xpl-modalFooter">{child}</div>;
                         })}
+                        </div>
+
+                        
                     </section>
                 </div>
             );

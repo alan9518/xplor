@@ -59,12 +59,14 @@
                                         {this.renderDetailsBody()}
                                     </div>
 
-                                    <div className="col-lg-3 col-sm-12">
+                                    <div className="col-lg-3 col-md-12 col-sm-12">
                                         <div className="xpl-relatedListApps">
                                         <h5>Related Products</h5>
-                                            <ProjectCard/>
-                                            <ProjectCard/>
-                                            <ProjectCard/>
+                                           <div className="xpl-relatedContainer">
+                                                <ProjectCard/>
+                                                <ProjectCard/>
+                                                <ProjectCard/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

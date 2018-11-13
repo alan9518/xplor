@@ -9,6 +9,7 @@
 // --------------------------------------
     import React, { Component , Fragment} from "react";
     import PropTypes from "prop-types";
+    import { AppButton } from '../../components';
 
 
 
@@ -24,7 +25,13 @@
         renderHistoryList() {
             return (
                 <Fragment>
-                    <h4> Items you have added to to library </h4>
+                    <h4> Items you have added to library </h4>
+
+                    {/* <div className="xpl-listHistoryContainer">
+                        <ul>
+                            <li> <AppButton iconClass = {'far fa-edit'}  buttonText = {"Communication"} /> </li>
+                        </ul>
+                    </div> */}
 
                 </Fragment>
             )

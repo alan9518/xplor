@@ -34,11 +34,11 @@
         // --------------------------------------
             renderFormBody() {
                 return (
-                    <div className="xpl-newProjectContainer container">
+                    <div className="xpl-newProjectContainer container-fluid">
 
                     <form method = "POST" action = "#">
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-lg-6 col-md-12 col-sm-12">
                                 <div className="form-group">
                                     <label htmlFor="newProjectName"> Product Name </label>
                                     <input type="text" class="form-control" id="newProjectName" name="newProjectName" aria-describedby="newProjectName"
@@ -63,7 +63,7 @@
                             </div>
                 
                 
-                            <div className="col-md-6">
+                            <div className="col-lg-6 col-md-12 col-sm-12">
                                 <label htmlFor="newProjectDesc"> What Category should it be listed under? </label>
                 
                                 <div className="row">
@@ -80,9 +80,12 @@
                 
                                     </div>
                 
-                                    <div className="col-md-7">
-                                        <AppButton buttonText = {"Add Another (optional) Category"}/>
-                                        {/* <label htmlFor=""> Add Another (optional) Category</label> */}
+                                    <div className="col-md-7 xpl-newCatButton">
+                                        <AppButton 
+                                            buttonText = {"Add Another (optional) Category"} 
+                                            iconLeftClass = {'fas fa-plus-circle'} 
+                                            />
+                                        <input type="text" class = "form-control" placeholder />
                                     </div>
                                 </div>
                 
@@ -105,7 +108,6 @@
                 
                                 </div>
                 
-                               
                                 <div className="radios-group">
 
                                  <label htmlFor=""> Does this product require a special permission?</label>
@@ -158,9 +160,11 @@
                 return (
                     <div className="xpl-formSubmitContainer">
                         <MaterialButton 
-                            buttonText = {"Add"}/>
+                            buttonText = {"Add"}
+                            buttonColor= {"primary"} />
                         <MaterialButton
-                            buttonText = {"Cancel"}/>
+                            buttonText = {"Cancel"}
+                            buttonColor = {"secondary"}/>
                     </div>
                 )
             }
