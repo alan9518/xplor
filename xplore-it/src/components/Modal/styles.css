@@ -27,6 +27,22 @@ section.xpl-appModal-main{
     padding: 20px;
 }
 
+
+i.fas.fa-times-circle {
+    font-size: 2.2em;
+    background-color: #fff;
+    border: transparent;
+    border-radius: 100%;
+}
+
+section.xpl-closButtonContainer {
+    display: block;
+    position: absolute;
+    left: 89%;
+    top: 36%;
+    z-index: 2500;
+}
+
 .xpl-modalHeader {
     padding: 10px;
     border-bottom: 1px solid #eee;

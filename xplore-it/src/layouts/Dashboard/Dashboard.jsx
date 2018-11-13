@@ -11,7 +11,7 @@
     import React, { Component, Fragment } from 'react';
     import { Switch, Route, Redirect } from 'react-router-dom';
     import dashboardRoutes from '../../routes/routes';
-    import { HeaderButton, MaterialButton, AppButton,  SideBar, NavBar, AppModal} from '../../components'
+    import { HeaderButton, MaterialButton, AppButton,  SideBar, NavBar, AppModal, NewProject} from '../../components'
     import 'bootstrap/dist/css/bootstrap.min.css';
     import '../styles.css';
     import logo from '../../images/logo/Flex_WHT_Med_r.png';
@@ -70,15 +70,10 @@
                             <NavBar logo = {logo}/>
                         </header>
 
-                        <AppModal show={showModal} handleClose = {this.toggleModal} >  
-                            Modal oCon  
-                            <MaterialButton 
-                                    buttonClass = {'xpl-toggleButton'} 
-                                    onClick = {this.toggleMobileMenu } 
-                                    iconClass = {'fas fa-bars'}
-                                    buttonText = {"Text"}
-                            />
+                        <AppModal show={showModal} handleClose = {this.toggleModal} modalTitle = {"Add New or Refreshed Items to the Library"} >  
 
+                            <NewProject></NewProject>
+                            
                         </AppModal>
 
                         <div className="App xpl-mainContainer" >

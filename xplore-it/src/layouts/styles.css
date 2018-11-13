@@ -10,8 +10,9 @@
      * 2.0 NAVBAR STYLES
      * 3.0 SIDEBAR STYLES
      * 4.0 CONTENT STYLES
-     * 5.0 CONTENT STYLES
-     * 6.0 RESPONSIVE STYLES
+        * 4.1 HOME STYLES
+        * 4.2 FORM STYLES
+     * 5.0 RESPONSIVE STYLES
      * IE HACKS
 ========================================================== */
 
@@ -310,6 +311,10 @@
     4.0 CONTENT STYLES
 ----------------------------------------------------- */
 
+    /* ==========================================================================
+     *  HOME STYLES
+     ========================================================================== */
+
     .xpl-carrouselRow {
         margin-bottom: 24px;
     }
@@ -360,6 +365,23 @@
         flex-direction: column;
         padding: 0 8px 8px 8px;
     }
+
+
+
+    /* ==========================================================================
+     *  FORM STYLES
+     ========================================================================== */
+
+        .xpl-formSubmitContainer {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+
+
+        .xpl-formSubmitContainer .xpl-materialButton {
+            margin: 9px 0px 9px 9px;
+        }
 
 
 /* ---------------------------------------------------

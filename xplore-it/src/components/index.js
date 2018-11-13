@@ -11,6 +11,11 @@
     import {SideBar, SideBarLink, NavBar, SingleList, DetailsList} from '../layouts';
 
 
+// --------------------------------------
+// Views
+// --------------------------------------
+    import NewProject from '../views/NewProject/NewProject'
+
 
 // --------------------------------------
 // Components
@@ -27,6 +32,12 @@
     import AppModal from './Modal/Modal';
     import ProjectLink from './Links/ProjectLink';
     import MaterialButton from './Buttons/MaterialButton';
+
+
+// --------------------------------------
+// Forms
+// --------------------------------------
+    import NewProjectForm from './Forms/Projects/NewProjectForm';
 
 // --------------------------------------
 // Export Components
@@ -49,4 +60,6 @@
         ProjectLink,
         AppModal,
         MaterialButton,
+        NewProject,
+        NewProjectForm,
     }
