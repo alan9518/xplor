@@ -32,6 +32,7 @@
     import AppModal from './Modal/Modal';
     import ProjectLink from './Links/ProjectLink';
     import MaterialButton from './Buttons/MaterialButton';
+    import HistoryList from './LibraryHistory/HistoryList';
 
 
 // --------------------------------------
@@ -62,4 +63,5 @@
         MaterialButton,
         NewProject,
         NewProjectForm,
+        HistoryList,
     }
