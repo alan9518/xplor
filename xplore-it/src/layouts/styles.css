@@ -619,6 +619,12 @@
             padding: 8px;
         }
 
+        .xpl-relatedListApps {
+            margin-top: 20px;
+        }
+
+
+
         p.xpl-cardProjectCardOverview {
             padding-left: 0;
         }
@@ -631,7 +637,7 @@
         }
 
         .xpl-mediumCard {
-            max-width: 330px;
+            max-width: 258px;
         }
 
 
@@ -657,6 +663,16 @@
     
     }
 
+
+    @media only screen and (min-width:768px) and (max-width : 1024px) {
+        .xpl-relatedListApps {
+            margin-top: 20px;
+        }
+
+        .xpl-mediumCard {
+            max-width: 600px;
+        }
+    }   
 
 
 
