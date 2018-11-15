@@ -33,6 +33,8 @@
     import ProjectLink from './Links/ProjectLink';
     import MaterialButton from './Buttons/MaterialButton';
     import HistoryList from './LibraryHistory/HistoryList';
+    import SingleSelect from './Select/SingleSelect';
+    import MultipleSelect from './Select/MultipleSelect';
 
 
 // --------------------------------------
@@ -64,4 +66,6 @@
         NewProject,
         NewProjectForm,
         HistoryList,
+        SingleSelect,
+        MultipleSelect,
     }

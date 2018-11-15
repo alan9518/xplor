@@ -17,14 +17,19 @@
     // xpl-toggleButton
     // --------------------------------------
     const MaterialButton = (props) => {
-
+        // const {isSubmit, buttonText} =  this.props;
         const classNames = `pure-material-button-contained xpl-${props.buttonColor}`
 
         return (
             <div className = 'xpl-materialButton'>
-                <button className={classNames}>
-                    {props.buttonText}
-                </button>
+
+                {
+                    props.isSubmit === true 
+                    ? <input  type="submit" value = {props.buttonText} className={classNames} />
+                    : <button type = "button" className={classNames}>{props.buttonText}</button>  
+                }
+
+                
             </div>
                 
         )

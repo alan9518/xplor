@@ -7,9 +7,10 @@
 // --------------------------------------
 // Import Dependences
 // --------------------------------------
-    import React, { Component }  from 'react'
+    import React, { Component, Fragment }  from 'react'
     import PropTypes from 'prop-types';
-    import {MaterialButton, AppButton} from '../../../components';
+    import {MaterialButton, AppButton, SingleSelect, MultipleSelect} from '../../../components';
+
 
 
 
@@ -32,10 +33,20 @@
                 productSubCategory : [],
                 specialPermission : '',
                 newCategoryAdded : false,
-                specialPermissionAdded : false
+                specialPermissionAdded : false,
+                options : [
+                    { value: 'chocolate', label: 'Chocolate' },
+                    { value: 'strawberry', label: 'Strawberry' },
+                    { value: 'vanilla', label: 'Vanilla' }
+                ],
             }
             
         }
+
+
+     /* ==========================================================================
+      * State and Logic Functions
+        ========================================================================== */    
 
         // --------------------------------------
         // Add new Category
@@ -53,10 +64,7 @@
         // Add new Category
         // --------------------------------------
             toggleSpecialPermission = (e) => {
-                // e.preventDefault();
-                const {specialPermissionAdded} = this.state;
                 const value = e.target.value;
-                console.log('value', value);
 
                 this.setState((prevstate) => {
                     return {
@@ -66,17 +74,64 @@
             }
 
 
+        // --------------------------------------
+        // Add New Category to State
+        // --------------------------------------
+        addNewCategoryToState = (e) => {
+            e.preventDefault();
+            console.log('state', this.state);
+        }
+
+
+    /* ==========================================================================
+     *  DB Functions
+     ========================================================================== */  
+         submitNewProduct = (e) => {
+             e.preventDefault();
+             console.log('Submiting Form');
+         }
+        
+
+
+
+    /* ==========================================================================
+     *  Render Functions
+     ========================================================================== */        
+
+        // --------------------------------------
+        // Render New Category Form
+        // --------------------------------------
+        renderNewCategoryInput() {
+            return (
+                <Fragment>
+                        <div className="col-md-10">
+                            <div className="form-group">
+                                <input type="text" className = "form-control" placeholder = "Add New Category" />
+                            </div>
+                        </div>
+
+                        <div className="col-md-2">
+                            <MaterialButton 
+                                buttonText = {"Add"}
+                                buttonColor= {"primary"} 
+                                isSubmit = {true}
+                                onClick = {this.addNewCategoryToState}
+                            />
+                        </div>
+                </Fragment>
+            )
+        }
+
 
         // --------------------------------------
         // Render Form
         // --------------------------------------
             renderFormBody() {
                 const {newCategoryAdded , specialPermissionAdded } = this.state;
-                console.log('specialPermissionAdded', specialPermissionAdded);
                 return (
                     <div className="xpl-newProjectContainer container-fluid">
 
-                    <form method = "POST" action = "#">
+                    <form method = "POST" action = "#" onSubmit = {this.submitNewProduct}>
                         <div className="row">
                             <div className="col-lg-6 col-md-12 col-sm-12">
                                 <div className="form-group">
@@ -109,13 +164,15 @@
                                 <div className="row">
                                     <div className="col-md-5">
                                         <div className="form-group">
-                                            <select className="form-control" id="exampleFormControlSelect1">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
+
+                                            <SingleSelect
+                                                isDisabled={false}
+                                                isLoading={false}
+                                                isClearable={false}
+                                                isRtl={false}
+                                                isSearchable={true}
+                                                options={this.state.options}
+                                            />
                                         </div>
                 
                                     </div>
@@ -125,29 +182,26 @@
                                                 iconLeftClass = {'fas fa-plus-circle'} 
                                                 onClick = {this.toggleNewCategoryInput}
                                             />
-                                    {
-                                        newCategoryAdded &&  <input type="text" class = "form-control" placeholder />
-                                    }
+                                    
                                     </div>
-                                
+                                        {newCategoryAdded &&  this.renderNewCategoryInput()}
                                 </div>
                 
                 
                                 <div className="row">
-                                    <div className="col-md-6">
+                                    <div className="col-md-12">
                                         <div className="form-group">
                                             <label htmlFor="exampleFormControlSelect2">Select SubCategory</label>
-                                            <select multiple className="form-control" id="exampleFormControlSelect2">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
+
+                                            <MultipleSelect
+                                                isClearable={true}
+                                                isSearchable={true}
+                                                options={this.state.options}
+                                            />
+
                                         </div>
                                     </div>
-                
-                                    <div className="col-md-6"></div>
+                            
                 
                                 </div>
                 
@@ -222,6 +276,7 @@
                     <div className="xpl-formSubmitContainer">
                         <MaterialButton 
                             buttonText = {"Add"}
+                            isSubmit =  {true}
                             buttonColor= {"primary"} />
                         <MaterialButton
                             buttonText = {"Cancel"}

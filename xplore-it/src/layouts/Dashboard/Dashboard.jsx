@@ -11,7 +11,7 @@
     import React, { Component, Fragment } from 'react';
     import { Switch, Route, Redirect } from 'react-router-dom';
     import dashboardRoutes from '../../routes/routes';
-    import { HeaderButton, MaterialButton, AppButton,  SideBar, NavBar, AppModal, NewProject, HistoryList} from '../../components'
+    import { HeaderButton, MaterialButton, AppButton,  SideBar, NavBar, AppModal, NewProject, HistoryList} from '../../components';
     import 'bootstrap/dist/css/bootstrap.min.css';
     import '../styles.css';
     import logo from '../../images/logo/Flex_WHT_Med_r.png';

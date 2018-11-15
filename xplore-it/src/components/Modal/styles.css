@@ -47,6 +47,7 @@ button.xpl-button.xpl-closeModalButton {
     position: absolute;
     top: -13px;
     right: -13px;
+    z-index: 2001;
 }
 
 .xpl-modalHeader {
