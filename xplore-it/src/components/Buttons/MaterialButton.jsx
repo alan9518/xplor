@@ -25,8 +25,8 @@
 
                 {
                     props.isSubmit === true 
-                    ? <input  type="submit" value = {props.buttonText} className={classNames} />
-                    : <button type = "button" className={classNames}>{props.buttonText}</button>  
+                    ? <input  type="submit" value = {props.buttonText} className={classNames}  />
+                    : <button type = "button" className={classNames} onClick = {props.onClick}>{props.buttonText}</button>  
                 }
 
                 

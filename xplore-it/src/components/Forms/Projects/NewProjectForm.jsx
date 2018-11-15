@@ -27,14 +27,18 @@
             super(props);
             this.state = {
                 produtName : '',
-                productKeywords : [],
+                productKeywords : [
+                    { value: 'chocolate', label: 'Chocolate' },
+                    { value: 'strawberry', label: 'Strawberry' },
+                    { value: 'vanilla', label: 'Vanilla' }
+                ],
                 productDescription : '',
                 productCategory : '',
                 productSubCategory : [],
                 specialPermission : '',
                 newCategoryAdded : false,
                 specialPermissionAdded : false,
-                options : [
+                categories : [
                     { value: 'chocolate', label: 'Chocolate' },
                     { value: 'strawberry', label: 'Strawberry' },
                     { value: 'vanilla', label: 'Vanilla' }
@@ -77,19 +81,59 @@
         // --------------------------------------
         // Add New Category to State
         // --------------------------------------
-        addNewCategoryToState = (e) => {
-            e.preventDefault();
-            console.log('state', this.state);
-        }
+            addNewCategoryToState = (e) => {
+                e.preventDefault();
+                const newCategory = document.querySelector('#newCategoryInput').value;
+                this.setState({
+                    productCategory : newCategory
+                })
+                
+            }
+
+
+        // --------------------------------------
+        // Reset Form
+        // --------------------------------------
+            resetForm = (e) => {
+                e.preventDefault();
+                this.setState({
+                    produtName : '',
+                    productKeywords : [],
+                    productDescription : '',
+                    productCategory : '',
+                    productSubCategory : [],
+                    specialPermission : '',
+                    newCategoryAdded : false,
+                    specialPermissionAdded : false,
+                })
+            }
+
+
+        // --------------------------------------
+        // Handle Form Text Input Changes
+        // --------------------------------------
+            handleTextChange = (e)=> {
+                
+                this.setState({
+                    [e.target.name] : e.target.value
+                });
+
+                
+            }
 
 
     /* ==========================================================================
      *  DB Functions
      ========================================================================== */  
-         submitNewProduct = (e) => {
-             e.preventDefault();
-             console.log('Submiting Form');
-         }
+        
+    
+        // --------------------------------------
+        // Submit form Data To API
+        // --------------------------------------
+            submitNewProduct = (e) => {
+                e.preventDefault();
+                console.log('Submiting Form', this.state);
+            }
         
 
 
@@ -106,7 +150,7 @@
                 <Fragment>
                         <div className="col-md-10">
                             <div className="form-group">
-                                <input type="text" className = "form-control" placeholder = "Add New Category" />
+                                <input type="text"  id = "newCategoryInput" className = "form-control" placeholder = "Add New Category" />
                             </div>
                         </div>
 
@@ -114,11 +158,28 @@
                             <MaterialButton 
                                 buttonText = {"Add"}
                                 buttonColor= {"primary"} 
-                                isSubmit = {true}
                                 onClick = {this.addNewCategoryToState}
                             />
                         </div>
                 </Fragment>
+            )
+        }
+
+        // --------------------------------------
+        // Render Special Persmission User Mail
+        // --------------------------------------
+        renderSpecialPermissionsInputs() {
+            return (
+                <div className="col-md-11">
+                    <input 
+                        type="text" 
+                        className="form-control" 
+                        id="permissionContact" 
+                        name="permissionContact"
+                        aria-describedby="permissionContact" 
+                        placeholder="email or url of contact to get accesss permissions" 
+                    />
+                </div>
             )
         }
 
@@ -131,26 +192,46 @@
                 return (
                     <div className="xpl-newProjectContainer container-fluid">
 
-                    <form method = "POST" action = "#" onSubmit = {this.submitNewProduct}>
+                    <form method = "POST" onSubmit = {this.submitNewProduct}>
                         <div className="row">
                             <div className="col-lg-6 col-md-12 col-sm-12">
                                 <div className="form-group">
-                                    <label htmlFor="newProjectName"> Product Name </label>
-                                    <input type="text" className="form-control" id="newProjectName" name="newProjectName" aria-describedby="newProjectName"
-                                        placeholder="Enter Name " />
+                                    <label htmlFor="produtName"> Product Name </label>
+                                    <input 
+                                        type="text" 
+                                        className="form-control" 
+                                        id="produtName" 
+                                        name="produtName" 
+                                        aria-describedby="produtName"
+                                        placeholder="Enter Name " 
+                                        onChange = {this.handleTextChange}
+                                    />
                 
                                 </div>
                 
                                 <div className="form-group">
                                     <label htmlFor="newProjectKeyWords"> Product Keywords </label>
-                                    <textarea className="form-control" rows="3" id="newProjectKeyWords" name="newProjectKeyWords "
-                                        placeholder="This help search your product"></textarea>
+                                
+
+                                    <MultipleSelect
+                                            isClearable={true}
+                                            key = {'keywordsSelect'}
+                                            isSearchable={true}
+                                            options={this.state.productKeywords}
+                                    />
                 
                                 </div>
                 
                                 <div className="form-group">
-                                    <label htmlFor="newProjectDesc"> Product Description </label>
-                                    <textarea className="form-control" rows="4" id="newProjectDesc" name="newProjectDesc " placeholder="Max 300 Characters"></textarea>
+                                    <label htmlFor="productDescription"> Product Description </label>
+                                    <textarea 
+                                        className="form-control" 
+                                        rows="4" 
+                                        id="productDescription" 
+                                        name="productDescription" 
+                                        placeholder="Max 300 Characters"
+                                        onChange = {this.handleTextChange}>
+                                    </textarea>
                 
                                 </div>
                 
@@ -159,19 +240,16 @@
                 
                 
                             <div className="col-lg-6 col-md-12 col-sm-12">
-                                <label htmlFor="newProjectDesc"> What Category should it be listed under? </label>
+                                <label> What Category should it be listed under? </label>
                 
                                 <div className="row">
                                     <div className="col-md-5">
                                         <div className="form-group">
 
                                             <SingleSelect
-                                                isDisabled={false}
-                                                isLoading={false}
                                                 isClearable={false}
-                                                isRtl={false}
                                                 isSearchable={true}
-                                                options={this.state.options}
+                                                options={this.state.categories}
                                             />
                                         </div>
                 
@@ -195,8 +273,10 @@
 
                                             <MultipleSelect
                                                 isClearable={true}
+                                                key = {'subCategoriesSelect'}
                                                 isSearchable={true}
-                                                options={this.state.options}
+                                                options={this.state.categories}
+                                                defaultValue={this.state.categories[1]}
                                             />
 
                                         </div>
@@ -242,13 +322,7 @@
                                                 </label>
                                             </div>
                     
-                                            {
-                                                specialPermissionAdded && 
-                                                <div className="col-md-11">
-                                                    <input type="text" className="form-control" id="permissionContact" name="permissionContact"
-                                                    aria-describedby="permissionContact" placeholder="email or url of contact to get accesss permissions" />
-                                                </div>
-                                            }
+                                            {specialPermissionAdded && this.renderSpecialPermissionsInputs()}
                                         </div>
                                     </div>
                                 </div>
@@ -280,7 +354,8 @@
                             buttonColor= {"primary"} />
                         <MaterialButton
                             buttonText = {"Cancel"}
-                            buttonColor = {"secondary"}/>
+                            buttonColor = {"secondary"} 
+                            onClick = {this.resetForm}/>
                     </div>
                 )
             }

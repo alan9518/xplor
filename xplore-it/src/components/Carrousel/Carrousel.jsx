@@ -28,7 +28,7 @@
             const settings = {
                 dots: true,
                 infinite: true,
-                arrows : false,
+                arrows : true,
                 speed: 500,
                 slidesToShow: 4,
                 slidesToScroll: 1,

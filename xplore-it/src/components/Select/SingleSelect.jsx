@@ -37,11 +37,11 @@
 // --------------------------------------
     SingleSelect.propTypes = {
         options: PropTypes.array,
-        isClearable: PropTypes.boolean,
-        isDisabled: PropTypes.boolean,
-        isLoading: PropTypes.boolean,
-        isRtl: PropTypes.boolean,
-        isSearchable: PropTypes.boolean,
+        isClearable: PropTypes.bool,
+        isDisabled: PropTypes.bool,
+        isLoading: PropTypes.bool,
+        isRtl: PropTypes.bool,
+        isSearchable: PropTypes.bool,
     };
 
 // --------------------------------------
