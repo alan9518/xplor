@@ -25,7 +25,7 @@
                 <div className="xpl-cardWideHeader">
                     <div className="xpl-cardHeader">
                         <div className="xpl-cardName"> 
-                            <h5>App Name </h5>
+                            <h5>App {props.tabIndex} </h5>
                         </div>
                         <CardImage/>
                     </div>

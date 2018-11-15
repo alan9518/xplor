@@ -1,0 +1,46 @@
+/* ==========================================================================
+ * Custom Tab Styles
+ * Following Material Design 
+ * 15/11/2018
+ * Alan Medina Silva
+ ========================================================================== */
+
+ul.react-tabs__tab-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    /* border-bottom: 1px solid #e0e0e0; */
+}
+
+.react-tabs__tab {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    padding: 22px;
+    font-weight: 600;
+    color: #424f5a;
+    text-align: center;
+    width: 100%;
+    transition: left .2s ease;
+    -webkit-transition: left .2s ease;
+    cursor: pointer;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.react-tabs__tab:hover {
+    background-color: inherit;
+    color: #7c848a;
+}
+
+
+.react-tabs__tab--selected > a{
+    font-weight: 700;
+    outline:none;
+}
+
+.react-tabs__tab--selected {
+    border-bottom: 3px solid #458CFF;
+    transition: left .2s ease;
+    -webkit-transition: left .2s ease;
+}

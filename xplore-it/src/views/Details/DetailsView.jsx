@@ -9,17 +9,35 @@
 // --------------------------------------
     import React, { Component, Fragment } from "react";
     import PropTypes from "prop-types";
-    import { Breadcumbs, WideCard, ProjectCard } from '../../components';
+    import { Breadcumbs, WideCard, ProjectCard, TabsLayout } from '../../components';
 
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
     class DetailsView extends Component {
 
+        // --------------------------------------
+        // Constructor
+        // --------------------------------------
+            constructor(props) {
+                super(props);
+                this.state = {
+                    tabIndex : 0,
+                    productDetails: [
+                        { id : '1', title : 'Tab 1', content: {} },
+                        { id : '2', title : 'Tab 2', content: {} },
+                        { id : '3', title : 'Tab 3', content: {} },
+                        { id : '4', title : 'Tab 4', content: {} },
+                      
+                    ]
+                }
+            }
+
 
         /* ==========================================================================
-         * Logic Methods
+         * State & Logic Functions
         ========================================================================== */
+
 
 
 
@@ -39,9 +57,18 @@
             // Render Details Body
             // --------------------------------------
             renderDetailsBody() {
+                const {productDetails, tabIndex}  = this.state;
                 return (
-                    <div className="xpl-appDescriptionContainer">
-                        <WideCard/>
+                    
+                    <div className="xpl-appDescriptionContainer xpl-wideCard xpl-shadow">
+                        <TabsLayout 
+                            tabsData = {productDetails} 
+                            defaultIndex = {tabIndex} 
+                            onSelect={tabIndex => this.setState({ tabIndex })}
+                        >
+                            <WideCard  tabIndex = {tabIndex}/>
+                            {/* {tabIndex} */}
+                        </TabsLayout>
                     </div>
                 )
             }

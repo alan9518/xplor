@@ -35,7 +35,7 @@
     import HistoryList from './LibraryHistory/HistoryList';
     import SingleSelect from './Select/SingleSelect';
     import MultipleSelect from './Select/MultipleSelect';
-
+    import TabsLayout from './Tabs/TabsLayout';
 
 // --------------------------------------
 // Forms
@@ -68,4 +68,5 @@
         HistoryList,
         SingleSelect,
         MultipleSelect,
+        TabsLayout,
     }

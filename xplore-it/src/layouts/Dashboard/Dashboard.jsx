@@ -70,12 +70,12 @@
                             <NavBar logo = {logo}/>
                         </header>
 
-                        <AppModal show={showModal} handleClose = {this.toggleModal} modalTitle = {"Add New or Refreshed Items to the Library"} >  
+                        {/* <AppModal show={showModal} handleClose = {this.toggleModal} modalTitle = {"Add New or Refreshed Items to the Library"} >  
 
                             <NewProject key = {'ModalBody'}/>
                             <HistoryList key = {'ModalFooter'} />
                             
-                        </AppModal>
+                        </AppModal> */}
 
                         <div className="App xpl-mainContainer" >
 
@@ -94,12 +94,12 @@
                                                 iconClass = {'fas fa-bars'}
                                         />
 
-                                        <AppButton 
+                                        {/* <AppButton 
                                             buttonClass = {'xpl-addNewAppButton'} 
                                             onClick =  {this.toggleModal}
                                             buttonText = {'Add New Item'} 
                                             iconClass = {'fas fa-plus-circle'} 
-                                        />
+                                        /> */}
                                     </div>
 
 

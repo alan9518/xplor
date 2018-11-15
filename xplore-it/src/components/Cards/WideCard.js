@@ -13,7 +13,7 @@
     import './styles.css';
 
 // --------------------------------------
-// Create Component Class
+// Create Component 
 // --------------------------------------
     
     const WideCard = (props) => {
@@ -22,9 +22,9 @@
         // Render Card
         // --------------------------------------
             return (
-                <div className="xpl-cardContainer xpl-wideCard  xpl-shadow">
+                <div className="xpl-cardContainer xpl-wideCard ">
                     
-                    <CardHeaderWide/>
+                    <CardHeaderWide tabIndex = {props.tabIndex}/>
 
                     <div className="xpl-cardOverviewContainer">
 
