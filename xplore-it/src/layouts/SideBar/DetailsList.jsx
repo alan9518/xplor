@@ -32,6 +32,17 @@
 
 
         // --------------------------------------
+        // Hide SidebarMenu from then Parent
+        // --------------------------------------
+        hideMobileMenu = (e) => {
+            const {hideMobileMenu} = this.props;
+            console.log('e', hideMobileMenu);
+
+            hideMobileMenu();
+            // this.props.hideMobileMenu();
+        }
+
+        // --------------------------------------
         // Render Menu Structure
         // --------------------------------------
         renderMenuList() {
@@ -81,6 +92,7 @@
                             link = { menuItem.path } 
                             color = { menuItem.color } 
                             hasIcon =  {false}
+                            hideMobileMenu = {this.hideMobileMenu}
                         />
                     )
                 })

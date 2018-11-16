@@ -13,21 +13,23 @@
 
 
 
+    
+   
+
 // --------------------------------------
 // Create Component
 // --------------------------------------
-    const SideBarLink = ({key,indexKey,title,link,color, hasIcon, onClick}) => {
+    const SideBarLink = ({key,indexKey,title,link,color, hasIcon, onClick, hideMobileMenu}) => {
     
-        const iconHolderStyle = {
-            backgroundColor: color
-        }
+            const iconHolderStyle = {backgroundColor: color}
 
 
             if(link !== null) 
             {
+                // Link With React Router
                 return (
-                    <li className="xpl-sidebarLink"  >
-                    <NavLink to={link} key={indexKey}>
+                    <li className="xpl-sidebarLink"   onClick = {hideMobileMenu}>
+                    <NavLink to={link} key={indexKey} >
                         <div className="xpl-iconContainer">
                             {hasIcon && 
                                 <div className="xpl-iconHolder" style={iconHolderStyle}>
@@ -44,6 +46,7 @@
             else 
             {
                 return (
+                    // Link Without React Router
                     <li className="xpl-sidebarLink"  onClick = {onClick}>
                         <div className="xpl-iconContainer">
                             {hasIcon && 

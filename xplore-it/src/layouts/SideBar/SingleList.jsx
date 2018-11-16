@@ -28,13 +28,29 @@
         // --------------------------------------
         onItemClick = (menu) => (e)=> {
             this.props.onClick(menu);
+            // this.props.hideMobileMenu();
+        }
+
+
+        // --------------------------------------
+        // Hide SidebarMenu from then Parent
+        // --------------------------------------
+        hideMobileMenu = (e) => {
+            const {hideMobileMenu} = this.props;
+            console.log('e', hideMobileMenu);
+
+            hideMobileMenu();
+            // this.props.hideMobileMenu();
         }
 
         // --------------------------------------
         // Iterate Routes and Render
+        // menuItemPath : if the link has a path
+        // return a React Router Link
+        // else a button to open Details
         // --------------------------------------
         renderMenuList() {
-            const {currentMenu}  = this.props;
+            const {currentMenu,hideMobileMenu}  = this.props;
             let menuItemPath = null;
             return (
                 <ReactCSSTransitionGroup  transitionName="example"  transitionEnterTimeout={500} transitionLeaveTimeout={300}>
@@ -52,7 +68,7 @@
                                     link = { menuItemPath } 
                                     color = { menuItem.color } 
                                     hasIcon =  {true}
-                                    
+                                    hideMobileMenu = {this.hideMobileMenu}  
                                 />
                             )
                         }

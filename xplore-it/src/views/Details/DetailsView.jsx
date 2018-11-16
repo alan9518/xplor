@@ -28,7 +28,9 @@
                         { id : '2', title : 'Tab 2', content: {} },
                         { id : '3', title : 'Tab 3', content: {} },
                         { id : '4', title : 'Tab 4', content: {} },
-                      
+                        { id : '5', title : 'Tab 5', content: {} },
+                        { id : '6', title : 'Tab 6', content: {} },
+                    
                     ]
                 }
             }
@@ -67,7 +69,6 @@
                             onSelect={tabIndex => this.setState({ tabIndex })}
                         >
                             <WideCard  tabIndex = {tabIndex}/>
-                            {/* {tabIndex} */}
                         </TabsLayout>
                     </div>
                 )

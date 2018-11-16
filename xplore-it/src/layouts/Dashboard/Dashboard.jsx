@@ -79,7 +79,11 @@
 
                         <div className="App xpl-mainContainer" >
 
-                            <SideBar routes = { dashboardRoutes }  showMobileMenu = {showMobileMenu} onClick = {this.toggleMobileMenu }/>
+                            <SideBar 
+                                routes = { dashboardRoutes }  
+                                showMobileMenu = {showMobileMenu} 
+                                onClick = {this.toggleMobileMenu }
+                            />
 
 
                             {/* Iterate Routes to set the Body Content */}

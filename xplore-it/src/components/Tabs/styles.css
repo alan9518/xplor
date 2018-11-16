@@ -5,17 +5,32 @@
  * Alan Medina Silva
  ========================================================================== */
 
+.react-tabs {
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.xpl-scrolling-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+
+
 ul.react-tabs__tab-list {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    /* border-bottom: 1px solid #e0e0e0; */
+    width: 100%;
 }
 
 .react-tabs__tab {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
     text-decoration: none;
     padding: 22px;
     font-weight: 600;

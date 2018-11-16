@@ -23,14 +23,16 @@
         const defaultIndex = props.defaultIndex
         const onSelect = props.onSelect;
         return (
-            <Fragment>
+            <Fragment>                           
                 <Tabs defaultIndex={defaultIndex} onSelect={onSelect} >
                     <TabList>
+                        <div className="xpl-scrolling-wrapper">
                         {
                             tabsData.length > 0 && tabsData.map((tabItem) => {
                                 return (<Tab > {tabItem.title} </Tab>)
                             })
                         }
+                         </div>
                     </TabList>
 
                     {

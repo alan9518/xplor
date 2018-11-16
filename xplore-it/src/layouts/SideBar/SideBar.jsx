@@ -97,13 +97,13 @@
                                 <Search/>
                             </div>
                             
-                            <div className="xpl-appSideBarLinksContainer">
-                                <ReactCSSTransitionGroup  transitionName="example"  transitionEnterTimeout={100} transitionLeaveTimeout={200}>
+                            <div className="xpl-appSideBarLinksContainer" >
                                 { 
                                     menuComponent === 'singleList' && 
                                     <SingleList currentMenu = {currentMenu} 
                                                 onClick = {this.onListItemClick}
                                                 key = {'Single-List'}
+                                                hideMobileMenu = {() => showMobileMenu === true && this.props.onClick()}
                                     /> 
                                 }
                                 { 
@@ -114,9 +114,9 @@
                                                     currentCategoryColor = {currentCategoryColor} 
                                                     onClick = {this.onListItemBackClick}
                                                     key = {'Details-List'}
+                                                    hideMobileMenu = {() => showMobileMenu === true && this.props.onClick()}
                                     /> 
                                 }
-                                </ReactCSSTransitionGroup>
                                 
                             </div>
                         </div>
