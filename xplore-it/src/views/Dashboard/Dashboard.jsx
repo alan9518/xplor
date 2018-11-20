@@ -28,7 +28,7 @@
                     <div className="row xpl-carrouselRow">
 
                         <div className="col-lg-12">
-                            <h2 className="xpl-row xpl-allAppTitle"> What's New?   </h2>
+                            <h3 className="xpl-row xpl-allAppTitle"> What's New?   </h3>
                                  <Carrousel/>
                         </div>
                     </div>
@@ -38,20 +38,20 @@
                     <div className="row xpl-row">
 
                         <div className="col-lg-12">
-                            <h2 className="xpl-allAppTitle"> All Apps  </h2>
+                            <h3 className="xpl-allAppTitle"> All Apps  </h3>
                         </div>
 
-                        <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                <ProjectCard></ProjectCard>
+                            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <ProjectCard hasSmallDescription = {true}></ProjectCard>
                             </div>
                             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                <ProjectCard></ProjectCard>
+                                <ProjectCard hasSmallDescription = {true}></ProjectCard>
                             </div>
                             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                <ProjectCard></ProjectCard>
+                                <ProjectCard hasSmallDescription = {true}></ProjectCard>
                             </div>
                             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                <ProjectCard></ProjectCard>
+                                <ProjectCard hasSmallDescription = {true}></ProjectCard>
                         </div>
                     </div>
                 </Fragment>

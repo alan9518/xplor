@@ -10,6 +10,10 @@
   import React, { Component } from 'react';
   import { BrowserRouter, Route, Switch } from 'react-router-dom';
   import appNavigationRoutes from './routes';
+  // import Perf from 'react-addons-perf';
+  // const Perf = require('react-addons-perf'); // ES5 with npm
+
+
 
 
 
@@ -29,8 +33,6 @@
 
             <Switch>
               {appNavigationRoutes.map((prop, key)=> {
-                console.log('key', key);
-                console.log('prop', prop);
                 return <Route path = {prop.path}  component = {prop.component}  key = {`index-${key}`}   ></Route>
               })}
             </Switch>

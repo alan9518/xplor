@@ -18,25 +18,44 @@
 // --------------------------------------
     class ProjectCard extends Component {
 
+        // --------------------------------------
+        // Constructor
+        // --------------------------------------
+            constructor(props) {
+                super(props);
+                
+            }
+
+
+
+        // --------------------------------------
+        // Render Small Description
+        // --------------------------------------
+            renderSmallDesc() {
+                return (
+                    <div className="xpl-cardDescription">
+                        <p> lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                )
+            }
+
 
         // --------------------------------------
         // Render Card
         // --------------------------------------
-        renderCard() {
-            return (
-                <ProjectLink>
-                    <div className="xpl-cardContainer xpl-mediumCard xpl-shadow">
-                        <div className="xpl-cardHeader">
-                            <div className="xpl-cardName"> <h5>App Name </h5></div>
-                            <CardImage/>
+            renderCard() {
+                return (
+                    <ProjectLink>
+                        <div className="xpl-cardContainer xpl-mediumCard xpl-shadow">
+                            <div className="xpl-cardHeader">
+                                <div className="xpl-cardName"> <h5>App Name </h5></div>
+                                <CardImage/>
+                            </div>
+                            {this.props.hasSmallDescription && this.renderSmallDesc()}
                         </div>
-                        <div className="xpl-cardDescription">
-                            <p> lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                    </div>
-                </ProjectLink>
-            )
-        }
+                    </ProjectLink>
+                )
+            }
         
 
         // --------------------------------------
