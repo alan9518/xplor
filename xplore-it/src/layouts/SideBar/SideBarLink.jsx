@@ -9,17 +9,15 @@
 // Get Dependences
 // --------------------------------------
     import React  from 'react';
-    import {NavLink} from 'react-router-dom';
+    // import {NavLink} from 'react-router-dom';
+    import {ProjectLink} from '../../components';
 
 
-
-    
-   
 
 // --------------------------------------
 // Create Component
 // --------------------------------------
-    const SideBarLink = ({key,indexKey,title,link,color, hasIcon, onClick, hideMobileMenu}) => {
+    const SideBarLink = ({indexKey,title,link,color, hasIcon, onClick, hideMobileMenu}) => {
     
             const iconHolderStyle = {backgroundColor: color}
 
@@ -29,17 +27,17 @@
                 // Link With React Router
                 return (
                     <li className="xpl-sidebarLink"   onClick = {hideMobileMenu}>
-                    <NavLink to={link} key={indexKey} >
-                        <div className="xpl-iconContainer">
-                            {hasIcon && 
-                                <div className="xpl-iconHolder" style={iconHolderStyle}>
-                                    <i className="fas fa-chevron-right"></i>
-                                </div>
-                            }
-                            <span className="xpl-linkText">{title}</span>
-                        </div>
-                    </NavLink>
-                </li>
+                        <ProjectLink route = {link} itemKey = {indexKey}>
+                            <div className="xpl-iconContainer">
+                                {hasIcon && 
+                                    <div className="xpl-iconHolder" style={iconHolderStyle}>
+                                        <i className="fas fa-chevron-right"></i>
+                                    </div>
+                                }
+                                <span className="xpl-linkText">{title}</span>
+                            </div>
+                        </ProjectLink>
+                    </li>
                 )
             }
                 

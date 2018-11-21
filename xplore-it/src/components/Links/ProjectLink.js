@@ -18,9 +18,11 @@
     const ProjectLink = (props) => {
 
         const {path,projectPath} =  Config
+        const {route, itemKey} = props;
+
 
         return (
-            <NavLink to = { `/${projectPath}/2` }>
+            <NavLink to= {route} key = {itemKey} >
                 {props.children}
             </NavLink>
         )
@@ -31,7 +33,9 @@
 // Declare Project Props
 // --------------------------------------
     ProjectLink.propTypes = {
-        route: PropTypes.object,
+        route: PropTypes.string,
+        itemKey : PropTypes.string,
+        projectPath : PropTypes.string,
         projectId : PropTypes.number,
         encryptedID : PropTypes.string 
     }

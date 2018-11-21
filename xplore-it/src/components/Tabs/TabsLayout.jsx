@@ -29,14 +29,14 @@
                         <div className="xpl-scrolling-wrapper">
                         {
                             tabsData.length > 0 && tabsData.map((tabItem) => {
-                                return (<Tab > {tabItem.title} </Tab>)
+                                return (<Tab key = {tabItem.title}> {tabItem.title} </Tab>)
                             })
                         }
                          </div>
                     </TabList>
 
                     {
-                        tabsData.map(() => { return (<TabPanel>{props.children}</TabPanel>) } )
+                        tabsData.map((tabItem) => { return (<TabPanel key = {tabItem.id}>{props.children}</TabPanel>) } )
                     }
                 </Tabs>
             </Fragment>
@@ -49,7 +49,7 @@
 // --------------------------------------
     TabsLayout.propTypes = {
         tabsData: PropTypes.array,
-        defaultIndex : PropTypes.string,
+        defaultIndex : PropTypes.number,
         onSelect : PropTypes.func
     };
 

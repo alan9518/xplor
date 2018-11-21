@@ -52,6 +52,27 @@
         border-radius: 3px;
     }
 
+    .xpl-cardContainer:hover a{
+        text-decoration: none;       
+    }
+
+    .xpl-cardHeader:hover {
+        box-shadow: 0 0 30px 3px rgba(33,33,33,.2);
+        transition: all 0.4s ease;
+    }
+
+
+    .xpl-cardHeader:hover i {
+        text-decoration: none;
+        animation: bounce 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+
+
+    @keyframes bounce {
+        from {transform: translate3d(0,0,0);}
+        to {transform: translate3d(0,-20px,0);}
+    }
 
 
 /* ---------------------------------------------------

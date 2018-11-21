@@ -11,8 +11,8 @@
     import PropTypes from "prop-types";
     import './styles.css';
     import { CardImage, ProjectLink } from '../../components';
+    import {Config} from '../../Config'
 
-    
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
@@ -44,16 +44,20 @@
         // Render Card
         // --------------------------------------
             renderCard() {
+                const {path,projectPath} =  Config
+                console.log('projectPath', projectPath);
                 return (
-                    <ProjectLink>
+                    
                         <div className="xpl-cardContainer xpl-mediumCard xpl-shadow">
-                            <div className="xpl-cardHeader">
-                                <div className="xpl-cardName"> <h5>App Name </h5></div>
-                                <CardImage/>
-                            </div>
-                            {this.props.hasSmallDescription && this.renderSmallDesc()}
+                            <ProjectLink route = {`${projectPath}/2`} >
+                                <div className="xpl-cardHeader">
+                                    <div className="xpl-cardName"> <h5>App Name </h5> </div>
+                                    <CardImage/>
+                                </div>
+                                {this.props.hasSmallDescription && this.renderSmallDesc()}
+                            </ProjectLink>
+
                         </div>
-                    </ProjectLink>
                 )
             }
         

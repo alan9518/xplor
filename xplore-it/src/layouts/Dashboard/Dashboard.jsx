@@ -15,7 +15,10 @@
     import 'bootstrap/dist/css/bootstrap.min.css';
     import '../styles.css';
     import logo from '../../images/logo/Flex_WHT_Med_r.png';
+    import {TransitionGroup,CSSTransition} from 'react-transition-group';
+    // import CSSTransition from 'react-transition-group'
 
+    
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
@@ -28,9 +31,21 @@
         constructor(props) {
             super(props);
             this.state = {
+                isLoaded : false,
                 showMobileMenu : false,
                 showModal : false,
             }
+
+        }
+
+
+        // --------------------------------------
+        // Hide Loading 
+        // --------------------------------------
+        componentDidMount() {
+            this.setState({
+                isLoaded : true,
+            })
         }
 
         // --------------------------------------
@@ -53,7 +68,19 @@
                 showModal : !showModal
             })
         }
-    
+
+
+        // --------------------------------------
+        // Render Routes
+        // --------------------------------------
+
+        renderRoutes(dashboardRoutes) {
+            return (
+                dashboardRoutes.map((prop,key)=> 
+                    prop.redirect ? <Redirect from={prop.path} to={prop.to} key={key} /> : <Route  exact={prop.exact} path={prop.path} component={prop.component} key={prop.key} />                  
+                )
+            )
+        }
 
         // --------------------------------------
         // Render App
@@ -61,6 +88,7 @@
         // --------------------------------------    
             renderApp() {
                 const {showMobileMenu, showModal} =  this.state;
+                const {location} = this.props;
                 const currentNavigator = window.navigator.appName;
                 const bodyClasses = currentNavigator === "Microsoft Internet Explorer" ? "xpl-content main xpl-contentIE" : "xpl-content main";
                 return (
@@ -70,12 +98,22 @@
                             <NavBar logo = {logo}/>
                         </header>
 
-                        {/* <AppModal show={showModal} handleClose = {this.toggleModal} modalTitle = {"Add New or Refreshed Items to the Library"} >  
+                        {/* 
+                            // --------------------------------------
+                            // Modal Window
+                            // --------------------------------------    
 
-                            <NewProject key = {'ModalBody'}/>
-                            <HistoryList key = {'ModalFooter'} />
+                                <AppModal 
+                                    show={showModal} 
+                                    handleClose = {this.toggleModal} 
+                                    modalTitle = {"Add New or Refreshed Items to the Library"} 
+                                >  
+
+                                    <NewProject key = {'ModalBody'}/>
+                                    <HistoryList key = {'ModalFooter'}/>
                             
-                        </AppModal> */}
+                                </AppModal> 
+                        */}
 
                         <div className="App xpl-mainContainer" >
 
@@ -88,44 +126,42 @@
 
                             {/* Iterate Routes to set the Body Content */}
                             <div className={bodyClasses}>
-
-                            
                                 <div className="container-fluid">
                                     <div className="xpl-buttonContainer">
                                         <AppButton 
                                                 buttonClass = {'xpl-toggleButton'} 
                                                 onClick = {this.toggleMobileMenu } 
-                                                iconClass = {'fas fa-bars'}
+                                                iconClass = {'fas fa-bars'} 
                                         />
 
-                                        {/* <AppButton 
-                                            buttonClass = {'xpl-addNewAppButton'} 
-                                            onClick =  {this.toggleModal}
-                                            buttonText = {'Add New Item'} 
-                                            iconClass = {'fas fa-plus-circle'} 
-                                        /> */}
+                                        {/* 
+                                            // --------------------------------------
+                                            // Modal Window Button
+                                            // -------------------------------------- 
+                                            <AppButton 
+                                                buttonClass = {'xpl-addNewAppButton'} 
+                                                onClick =  {this.toggleModal}
+                                                buttonText = {'Add New Item'} 
+                                                iconClass = {'fas fa-plus-circle'} 
+                                            /> 
+                                        */}
                                     </div>
-
-
-                                        {
-                                            // Set Routes and Connect it with the Views
-                                                <Switch>
-                                                    {dashboardRoutes.map((prop,key) => {
-                                                        if (prop.redirect)
-                                                            return <Redirect from={prop.path} to={prop.to} key={key} />;
-                                                        
-                                                        return <Route 
-                                                                    exact={prop.exact} 
-                                                                    path={prop.path} 
-                                                                    component={prop.component} 
-                                                                    key={prop.key} />;
-                                                    })}
-                                                </Switch>
-                                        }
-
-                                    </div>
+                                        
+                                        
+                                        
+                                    <TransitionGroup className="transition-group">
+                                        <CSSTransition 
+                                                    key={location.key} 
+                                                    timeout={{ enter: 300, exit: 300 }} 
+                                                    classNames="fade">
+                                            <Switch location = {location} >
+                                                {this.renderRoutes(dashboardRoutes)}
+                                            </Switch>
+                                        </CSSTransition>
+                                    </TransitionGroup>
+                                
+                                </div>
                             </div>
-
                         </div>
 
 
@@ -139,7 +175,8 @@
         // Render Component
         // --------------------------------------
             render() {
-                return this.renderApp()
+                const {isLoaded} = this.state;
+                return isLoaded ? this.renderApp() : null
             }
     }
 

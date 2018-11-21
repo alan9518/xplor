@@ -9,7 +9,6 @@
 // --------------------------------------
     import React, { Component, Fragment } from "react";
     import PropTypes from "prop-types";
-    import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
     import { SingleList, DetailsList, Search, AppButton } from "../../components";
 

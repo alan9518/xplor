@@ -9,9 +9,22 @@
 } */
 
 .slick-prev {
-    left: -10px;
+    left: -5px;
+    z-index: 2;
 }
 
 .slick-next {
-    right: -5px;
+    right: 5px;
+    z-index: 2;
+}
+
+.slick-prev:before, .slick-next:before {
+    font-family: 'slick';
+    font-size: 32px;
+    line-height: 1;
+    opacity: .75;
+    color: #000;
+    /* background: #fff; */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }

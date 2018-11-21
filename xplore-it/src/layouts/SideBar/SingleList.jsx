@@ -10,7 +10,7 @@
 // --------------------------------------
     import React, { Component } from "react";
     import PropTypes from "prop-types";
-    import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
+    // import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
     import { SideBarLink } from "../../components";
 
 
@@ -53,42 +53,45 @@
             const {currentMenu,hideMobileMenu}  = this.props;
             let menuItemPath = null;
             return (
-                <ReactCSSTransitionGroup  transitionName="example"  transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-
-                {
+                
                     currentMenu.map((menuItem, key)=> {
-                        menuItemPath = menuItem.subCategories && menuItem.subCategories.length > 0 ? null : menuItem.path;
 
-                        if(menuItemPath!== null) {
-                            return ( 
-                                <SideBarLink 
-                                    key = { menuItem.key } 
-                                    indexKey = {`link-${key}`} 
-                                    title = { menuItem.sidebarName } 
-                                    link = { menuItemPath } 
-                                    color = { menuItem.color } 
-                                    hasIcon =  {true}
-                                    hideMobileMenu = {this.hideMobileMenu}  
-                                />
-                            )
+                        if(menuItem.sidebarName ) 
+                        {   
+                            menuItemPath = menuItem.subCategories && menuItem.subCategories.length > 0 ? null : menuItem.path;
+                
+                            if(menuItemPath!== null) {
+                                // console.log('link', link);
+                                return ( 
+                                    <SideBarLink 
+                                        key = { menuItem.key } 
+                                        indexKey = {`link-${key}`} 
+                                        title = { menuItem.sidebarName } 
+                                        link = { menuItemPath } 
+                                        color = { menuItem.color } 
+                                        hasIcon =  {true}
+                                        hideMobileMenu = {this.hideMobileMenu}  
+                                    />
+                                )
+                            }
+                            else
+                            {
+                                return ( 
+                                    <SideBarLink 
+                                        key = { menuItem.key } 
+                                        indexKey = {`link-${key}`} 
+                                        title = { menuItem.sidebarName } 
+                                        link = { menuItemPath } 
+                                        color = { menuItem.color } 
+                                        hasIcon =  {true}
+                                        onClick =  {this.onItemClick(menuItem)}
+                                    />
+                                )
+                            }
                         }
-                        else
-                        {
-                            return ( 
-                                <SideBarLink 
-                                    key = { menuItem.key } 
-                                    indexKey = {`link-${key}`} 
-                                    title = { menuItem.sidebarName } 
-                                    link = { menuItemPath } 
-                                    color = { menuItem.color } 
-                                    hasIcon =  {true}
-                                    onClick =  {this.onItemClick(menuItem)}
-                                />
-                            )
-                        }
+                        
                     })
-                }
-                </ReactCSSTransitionGroup>
+                
             )
         }
 

@@ -173,11 +173,11 @@
         {
             path : `${path}/app/details/:AppID`,
             exact: false,
-            key:'app-route',
+            key:`app-route-:AppID`,
             component : DetailsView,
         },
     
-        {redirect:true, path:'/', to : `${path}/catalogue`, navbarName: 'Redirect' }
+        {redirect:true, path:'/', to : `${path}/catalogue`, navbarName: 'Redirect', key : 'index-route' }
     ]
 
 
