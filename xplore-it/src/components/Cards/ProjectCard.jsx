@@ -26,15 +26,24 @@
                 
             }
 
+        // --------------------------------------
+        // Avoid Rerender of Cards each time 
+        // a filter is activated
+        // --------------------------------------
+            shouldComponentUpdate() {
+                return false;
+            }
+
 
 
         // --------------------------------------
         // Render Small Description
         // --------------------------------------
-            renderSmallDesc() {
+            renderSmallDesc(projectDescription) {
+                
                 return (
                     <div className="xpl-cardDescription">
-                        <p> lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p> {projectDescription} </p>
                     </div>
                 )
             }
@@ -44,19 +53,20 @@
         // Render Card
         // --------------------------------------
             renderCard() {
-                const {path,projectPath} =  Config
-                console.log('projectPath', projectPath);
+                const {projectPath} =  Config;
+                const {projectID,projectTitle, projectCategory, projectLink, projectDescription } = this.props;
                 return (
                     
                         <div className="xpl-cardContainer xpl-mediumCard xpl-shadow">
-                            <ProjectLink route = {`${projectPath}/2`} >
+                            <ProjectLink route = {`${projectPath}/${projectID}`} >
                                 <div className="xpl-cardHeader">
-                                    <div className="xpl-cardName"> <h5>App Name </h5> </div>
+                                    <div className="xpl-cardName"> 
+                                        <h5> {projectTitle} </h5> 
+                                    </div>
                                     <CardImage/>
                                 </div>
-                                {this.props.hasSmallDescription && this.renderSmallDesc()}
+                                {this.props.hasSmallDescription && this.renderSmallDesc(projectDescription)}
                             </ProjectLink>
-
                         </div>
                 )
             }

@@ -22,69 +22,63 @@
         
 
         // --------------------------------------
+        // Constructor
+        // --------------------------------------
+            constructor(props) {
+                super(props);
+                this.settings = {
+                    dots: true,
+                    infinite: true,
+                    arrows : true,
+                    speed: 500,
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    initialSlide: 0,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 2,
+                                slidesToScroll: 2,
+                                infinite: true,
+                                dots: true
+                            }
+                        },
+                        {
+                            breakpoint: 600,
+                            settings: {
+                                slidesToShow: 2,
+                                slidesToScroll: 2,
+                                initialSlide: 2
+                            }
+                        },
+                        {
+                            breakpoint: 480,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1
+                            }
+                        }
+                    ]
+                    
+                }
+            }
+
+        // --------------------------------------
         // Render Carrousel 
         // --------------------------------------
         renderCarrousel() {
-            const settings = {
-                dots: true,
-                infinite: true,
-                arrows : true,
-                speed: 500,
-                slidesToShow: 4,
-                slidesToScroll: 1,
-                initialSlide: 0,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 2,
-                            infinite: true,
-                            dots: true
-                        }
-                    },
-                    {
-                        breakpoint: 600,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 2,
-                            initialSlide: 2
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1
-                        }
-                    }
-                ]
-                
-            }
-
+            const {carrouselData} = this.props;
             return (
-                <Slider {...settings}>
-                    <div  className="col-lg-12 col-md-12 col-sm-12">
-                        <ProjectCard></ProjectCard>
-                    </div>
-                    <div  className="col-lg-12 col-md-12 col-sm-12">
-                        <ProjectCard></ProjectCard>
-                    </div>
-                    <div  className="col-lg-12 col-md-12 col-sm-12">
-                        <ProjectCard></ProjectCard>
-                    </div>
-                    <div  className="col-lg-12 col-md-12 col-sm-12">
-                        <ProjectCard></ProjectCard>
-                    </div>
-                    <div  className="col-lg-12 col-md-12 col-sm-12">
-                        <ProjectCard></ProjectCard>
-                    </div>
-                    <div  className="col-lg-12 col-md-12 col-sm-12">
-                        <ProjectCard></ProjectCard>
-                    </div>
-                    <div  className="col-lg-12 col-md-12 col-sm-12">
-                        <ProjectCard></ProjectCard>
-                    </div>
+                <Slider {...this.settings}>
+                {
+                    carrouselData.map((carrouselItem,index) => {
+                        return  <div  className="col-lg-12 col-md-12 col-sm-12">
+                           <ProjectCard key = {`car-${index}.${carrouselItem.projectID}`} {...carrouselItem}/>
+                        </div>
+                    })
+
+                }
                 </Slider>
             )
         }

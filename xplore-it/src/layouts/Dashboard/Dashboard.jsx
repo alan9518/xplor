@@ -89,6 +89,7 @@
             renderApp() {
                 const {showMobileMenu, showModal} =  this.state;
                 const {location} = this.props;
+                console.log('location', location);
                 const currentNavigator = window.navigator.appName;
                 const bodyClasses = currentNavigator === "Microsoft Internet Explorer" ? "xpl-content main xpl-contentIE" : "xpl-content main";
                 return (

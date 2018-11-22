@@ -17,11 +17,11 @@
 // Create and Export Component
 // --------------------------------------
     const ProfileImage = (resourceMail) => {
-        let userMail = encodeURIComponent(resourceMail.resourceMail);
-        let profileImage = `https://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=${userMail}&UA=0&size=HR64x64&sc=1535401630498`;
+        const userMail = encodeURIComponent(resourceMail.resourceMail);
+        const profileImage = `https://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=${userMail}&UA=0&size=HR64x64&sc=1535401630498`;
 
         return (
-            <img src={profileImage} className="xpl-userImageMin xpl-rounded" />
+            <img src={profileImage} className="xpl-userImageMin xpl-rounded" alt = "Profile Image"/>
         )
     }
 
