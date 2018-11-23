@@ -31,6 +31,33 @@
                         { id : '5', title : 'Tab 5', content: {} },
                         { id : '6', title : 'Tab 6', content: {} },
                     
+                    ],
+                    projects : [
+                        {
+                            projectID : 1, 
+                            projectTitle : 'Project 1',
+                            projectCategory : 'Enviroment',
+                            projectLink : '/app/details/',
+                            projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
+                        },
+                        {
+                            projectID : 2, 
+                            projectTitle : 'Project 2',
+                            projectCategory : 'Sales',
+                            projectLink : '/app/details/',
+                            projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
+                        },
+                        {
+                            projectID : 3, 
+                            projectTitle : 'Project 3',
+                            projectCategory : 'Quality',
+                            projectLink : '/app/details/',
+                            projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
+                        },
+                      
+                     
+    
+    
                     ]
                 }
             }
@@ -74,6 +101,24 @@
                 )
             }
 
+
+            // --------------------------------------
+            // Render Related Projects
+            // --------------------------------------
+            renderRelatedProjects() {
+                return (
+                    <Fragment>
+                        <div className="xpl-relatedContainer">
+                        {
+                            this.state.projects.map(project => (
+                                <ProjectCard key = {project.projectID} hasSmallDescription={true} {...project}/>
+                            ))
+                        }
+                        </div>
+                    </Fragment>
+                )
+            }
+
             // --------------------------------------
             // Render View
             // --------------------------------------
@@ -90,11 +135,7 @@
                                     <div className="col-lg-3 col-md-12 col-sm-12">
                                         <div className="xpl-relatedListApps">
                                         <h5>Related Products</h5>
-                                           <div className="xpl-relatedContainer">
-                                                <ProjectCard/>
-                                                <ProjectCard/>
-                                                <ProjectCard/>
-                                            </div>
+                                            {this.renderRelatedProjects()}
                                         </div>
                                     </div>
                                 </div>

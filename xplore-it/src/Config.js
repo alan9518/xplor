@@ -6,5 +6,5 @@
 
     export const Config = {
         path : 'http://localhost:3000',
-        projectPath : 'app/details'
+        projectPath : '/app/details'
     }
