@@ -1,0 +1,60 @@
+{
+    "Status": "success",
+    "ResponseCode": 200,
+    "data" : {
+        "Project": {
+            "ProjectID": "string",
+            "ProjectTitle": "string",
+            "ProjectShortDescription": "string",
+            "ProjectLongDescription": "string",
+            "ProjectIcon": "string",
+            "ProjectCreatedDate": "date",
+            "ProjectCreatedBy": [{
+                "UserID" : "string",
+                "UserName" : "string",
+                "UserEmail" : "string",
+                "UserPermissions" : [{
+                    "PermissionID": "string",
+                    "Permision": "string"
+                }]
+            }],
+            "ProjectCategory": [{
+                "CategoryID": 1,
+                "CategoryName": "String"
+            }],
+            "ProjectKeywords": ["word1", "word2", "word3"],
+            "ProjectFields": {
+                "FieldsCount": 10,
+                "fields ": [{
+                    "FieldID": "string",
+                    "FieldName": "string",
+                    "FieldPermissions": [{
+                        "PermissionID": "string",
+                        "Permision": "string"
+                    }],
+                    "FieldAttributes": {
+                        "AttributesCount": 5,
+                        "Attributes": [{
+                            "AttributeID": "string",
+                            "AttrinuteName": "string",
+                            "AttributeValue": "value"
+                        }]
+                    }
+                }]
+            }
+        },
+        "RelatedProjects": [{
+                "ProjectID" : "string",
+                "ProjectTitle" : "string",
+                "ProjectShortDescription" : "string",
+                "ProjectIcon" : "string",
+                "ProjectCategory" : [{
+                    "CategoryID" : 1,
+                    "CategoryName" : "String"
+                }],
+                "ProjectDetails" : "/projects/{ProjectID}"
+        }]
+    }
+}
+
+

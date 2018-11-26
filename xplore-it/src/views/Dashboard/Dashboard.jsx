@@ -33,6 +33,7 @@
         constructor(props) {
             super(props);
             this.state = {
+                currentCategory : 'All Apps',
                 projects : [
                     {
                         projectID : 1, 
@@ -100,6 +101,11 @@
                 ]
             }
         }
+
+
+        /* ==========================================================================
+         *  Render Logic and State Handle
+         ========================================================================== */
         
 
         
@@ -122,123 +128,125 @@
 
 
 
-
-        // --------------------------------------
-        // Render Dashboard
-        // --------------------------------------
-        renderDashboard() {
-            return (
-                <Fragment>
-                    {this.renderCarrousel()}
-                    {this.renderFlipperBody()}
-                </Fragment>
-            )
-
-        }
+        /* ==========================================================================
+         *  Render Methods
+         ========================================================================== */
 
 
-        // --------------------------------------
-        // Render Slick Carrousel
-        // --------------------------------------
+            // --------------------------------------
+            // Render Dashboard
+            // --------------------------------------
+            renderDashboard() {
+                return (
+                    <Fragment>
+                        {this.renderCarrousel()}
+                        {this.renderFlipperBody()}
+                    </Fragment>
+                )
 
-        renderCarrousel() {
-            const {projects} = this.state;
-            const carrouselProjects = projects.filter((project)=> project.projectCarrousel ) ;
+            }
 
 
-            return (
-                <div className="row xpl-carrouselRow">
-                    <div className="col-lg-12">
-                        <h3 className="xpl-row xpl-allAppTitle"> What's New? </h3>
-                        <Carrousel carrouselData = {carrouselProjects} />
+            // --------------------------------------
+            // Render Slick Carrousel
+            // --------------------------------------
+
+            renderCarrousel() {
+                const {projects} = this.state;
+                const carrouselProjects = projects.filter((project)=> project.projectCarrousel ) ;
+
+
+                return (
+                    <div className="row xpl-carrouselRow">
+                        <div className="col-lg-12">
+                            <h3 className="xpl-row xpl-allAppTitle"> What's New? </h3>
+                            <Carrousel carrouselData = {carrouselProjects} />
+                        </div>
                     </div>
-                </div>
-            )
-        }
+                )
+            }
 
 
-        // --------------------------------------
-        // Render Cards use React Flip
-        // For Cards Sorting
-        // --------------------------------------
-        renderFlipperBody() {
-            
-            const data = this.state.projects.map((project)=> {
-                return project.projectID 
-            }) 
-            
-            return (
+            // --------------------------------------
+            // Render Cards use React Flip
+            // For Cards Sorting
+            // --------------------------------------
+            renderFlipperBody() {
+                
+                const data = this.state.projects.map((project) => {return project.projectID })
+                const {currentCategory} = this.state;
+                return (
+                    <Fragment>
+                        
+                        <div className="row xpl-row">
+                            {/* <button onClick={this.shuffle}> shuffle</button> */}
+
+                            <div className="col-lg-12">
+                                <h3 className="xpl-allAppTitle">{currentCategory}</h3>
+                            </div>
+
+                        </div>
+
+                            <Flipper flipKey={data.join("")} className = "row xpl-row">
+                            
+                                {this.state.projects.map(project => (
+                                <Flipped key={project.projectID} flipId={`${project.projectID}`}>
+                                        <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <ProjectCard key = {project.projectID} hasSmallDescription={true} {...project}/>
+                                        </div>
+                                </Flipped>
+                                ))}
+                            </Flipper>
+
+                    </Fragment>
+                );
+            }
+
+            // --------------------------------------
+            // Render Body With Dummy Layout
+            // --------------------------------------
+            renderDummyBody() {
+                return (
                 <Fragment>
-                    
-                    <div className="row xpl-row">
-                        <button onClick={this.shuffle}> shuffle</button>
+                    <div className="row xpl-carrouselRow">
+                        <div className="col-lg-12">
+                            <h3 className="xpl-row xpl-allAppTitle"> What's New? </h3>
+                            <Carrousel />
+                        </div>
+                    </div>
 
+                    <div className="row xpl-row">
                         <div className="col-lg-12">
                             <h3 className="xpl-allAppTitle"> All Apps </h3>
                         </div>
 
-                    </div>
-
-                        <Flipper flipKey={data.join("")} className = "row xpl-row">
+                    
                         
-                            {this.state.projects.map(project => (
-                            <Flipped key={project.projectID} flipId={`${project.projectID}`}>
-                                    <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                        <ProjectCard key = {project.projectID} hasSmallDescription={true} {...project}/>
-                                    </div>
-                            </Flipped>
-                            ))}
-                        </Flipper>
-
+                            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <ProjectCard key = {1} hasSmallDescription={true} />
+                            </div>
+                            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <ProjectCard key = {2} hasSmallDescription={true} />
+                            </div>
+                            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <ProjectCard key = {4} hasSmallDescription={true} />
+                            </div>
+                            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <ProjectCard key = {4} hasSmallDescription={true} />
+                            </div>
+                        
+                    </div>
                 </Fragment>
-            );
-        }
+                );
+            }
 
-        // --------------------------------------
-        // Render Body With Dummy Layout
-        // --------------------------------------
-        renderDummyBody() {
-            return (
-            <Fragment>
-                <div className="row xpl-carrouselRow">
-                    <div className="col-lg-12">
-                        <h3 className="xpl-row xpl-allAppTitle"> What's New? </h3>
-                        <Carrousel />
-                    </div>
-                </div>
-
-                <div className="row xpl-row">
-                    <div className="col-lg-12">
-                        <h3 className="xpl-allAppTitle"> All Apps </h3>
-                    </div>
-
-                
-                    
-                        <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                            <ProjectCard key = {1} hasSmallDescription={true} />
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                            <ProjectCard key = {2} hasSmallDescription={true} />
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                            <ProjectCard key = {4} hasSmallDescription={true} />
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                            <ProjectCard key = {4} hasSmallDescription={true} />
-                        </div>
-                    
-                </div>
-            </Fragment>
-            );
-        }
-
-        // --------------------------------------
-        // Render Component
-        // --------------------------------------
-        render() {
-            // return this.renderDummyBody();
-            return this.renderDashboard();
-        }
+            // --------------------------------------
+            // Render Component
+            // --------------------------------------
+            render() {
+                // return this.renderDummyBody();
+                return this.renderDashboard();
+            }
     }
 
 // --------------------------------------

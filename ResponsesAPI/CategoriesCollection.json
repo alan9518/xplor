@@ -1,0 +1,23 @@
+
+    {
+        "Status" : "success",
+        "ResponseCode" : 200,
+        "Categories" : [{
+            "CategoryID" : "string",
+            "CategoryName" : "string",
+            "SubCategories" : [
+                {
+                    "SubCategoryID" : "string",
+                    "SubCategoryName" : "string",
+                    "SubCategoryLink" : "string"
+                }
+            ]
+            
+        }],
+        "meta" : {
+            "CategoriesCount" : 100
+
+        }
+    }
+
+

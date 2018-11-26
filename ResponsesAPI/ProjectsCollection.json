@@ -1,0 +1,28 @@
+
+    {
+        "Status" : "success",
+        "ResponseCode" : 200,
+        "Projects" : [{
+            "ProjectID" : "string",
+            "ProjectTitle" : "string",
+            "ProjectShortDescription" : "string",
+            "ProjectIcon" : "string",
+            "ProjectCategory" : [{
+                "CategoryID" : 1,
+                "CategoryName" : "String"
+            }],
+            "ProjectDetails" : "/projects/{ProjectID}"
+            
+        }],
+        "links" : {
+            "self" : "/api/projects",
+            "next" : "/api/projects?page[offset]=2",
+            "last" : "/api/projects?page[offset]=10"
+        },
+        "meta" : {
+            "ProjectsCount" : 100
+
+        }
+    }
+
+

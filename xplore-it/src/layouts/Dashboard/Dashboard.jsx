@@ -16,7 +16,6 @@
     import '../styles.css';
     import logo from '../../images/logo/Flex_WHT_Med_r.png';
     import {TransitionGroup,CSSTransition} from 'react-transition-group';
-    // import CSSTransition from 'react-transition-group'
 
     
 // --------------------------------------
@@ -77,7 +76,9 @@
         renderRoutes(dashboardRoutes) {
             return (
                 dashboardRoutes.map((prop,key)=> 
-                    prop.redirect ? <Redirect from={prop.path} to={prop.to} key={key} /> : <Route  exact={prop.exact} path={prop.path} component={prop.component} key={prop.key} />                  
+                    prop.redirect 
+                    ? <Redirect from={prop.path} to={prop.to} key={key} /> 
+                    : <Route  exact={prop.exact} path={prop.path} component={prop.component} key={prop.key} />                  
                 )
             )
         }
