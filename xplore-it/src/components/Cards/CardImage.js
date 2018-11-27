@@ -17,7 +17,7 @@
     const CardImage = (props) => {
         return( 
                 <div className="xpl-cardImage">
-                    <i className="fas fa-basketball-ball"></i>
+                    <i className={`${props.projectIcon}`}></i>
                 </div>
         )
     } 

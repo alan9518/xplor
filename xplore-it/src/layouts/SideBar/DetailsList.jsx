@@ -36,10 +36,7 @@
         // --------------------------------------
         hideMobileMenu = (e) => {
             const {hideMobileMenu} = this.props;
-            console.log('e', hideMobileMenu);
-
             hideMobileMenu();
-            // this.props.hideMobileMenu();
         }
 
         // --------------------------------------

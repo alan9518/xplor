@@ -11,6 +11,7 @@
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-flip-toolkit": "^6.2.2",
+    "react-infinite-scroller": "^1.2.2",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
     "react-select": "^2.1.1",

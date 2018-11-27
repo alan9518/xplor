@@ -78,7 +78,7 @@
                 dashboardRoutes.map((prop,key)=> 
                     prop.redirect 
                     ? <Redirect from={prop.path} to={prop.to} key={key} /> 
-                    : <Route  exact={prop.exact} path={prop.path} component={prop.component} key={prop.key} />                  
+                    : <Route  exact={prop.exact} path={prop.path} component={prop.component} key={prop.key}/>                  
                 )
             )
         }
@@ -88,11 +88,12 @@
         // Render the DashBoard Routes from routes.js
         // --------------------------------------    
             renderApp() {
-                const {showMobileMenu, showModal} =  this.state;
+                const {showMobileMenu, showModal, currentColor} =  this.state;
                 const {location} = this.props;
-                console.log('location', location);
                 const currentNavigator = window.navigator.appName;
-                const bodyClasses = currentNavigator === "Microsoft Internet Explorer" ? "xpl-content main xpl-contentIE" : "xpl-content main";
+                const bodyClasses = currentNavigator === "Microsoft Internet Explorer" 
+                                                        ? "xpl-content main xpl-contentIE" 
+                                                        : "xpl-content main";
                 return (
                     <Fragment>
 
@@ -118,6 +119,7 @@
                         */}
 
                         <div className="App xpl-mainContainer" >
+
 
                             <SideBar 
                                 routes = { dashboardRoutes }  

@@ -37,6 +37,9 @@
     import SingleSelect from './Select/SingleSelect';
     import MultipleSelect from './Select/MultipleSelect';
     import TabsLayout from './Tabs/TabsLayout';
+    import Scroller from './InfiniteScroll/Scroller';
+    import ProjectsHolder from './Projects/ProjectsHolder'
+
 
 // --------------------------------------
 // Forms
@@ -71,4 +74,6 @@
         MultipleSelect,
         TabsLayout,
         UserProfile,
+        Scroller,
+        ProjectsHolder,
     }

@@ -31,7 +31,7 @@
 
 
     .xpl-cardHeader {
-        background-color: #238ECC;
+        /* background-color: #238ECC; */
         display: flex;
         flex-direction: row;
         justify-content: space-between;

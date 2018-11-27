@@ -24,6 +24,7 @@
         constructor(props) {
             super(props);
             this.routes =  this.props.routes;
+            console.log('this.props', this.props);
             this.state = {
                 currentMenu : props.routes,
                 menuComponent : 'singleList',
@@ -83,6 +84,7 @@
             const {currentMenu, menuComponent, currentCategory, currentCategoryColor} = this.state;
             const {showMobileMenu,onClick} = this.props;
             const sidebarClass = showMobileMenu === true?  'showMobileMenu' : '';
+            
             return (
                 <Fragment>
 
@@ -129,10 +131,9 @@
         // Render Component
         // --------------------------------------
         render() {
-            return (
-                
+            return ( 
                 this.renderSideBar()
-                );
+            );
         }
     }
 

@@ -14,12 +14,12 @@
         HeaderButton,
         ToggleButton,
         ProjectCard,
-        Carrousel
+        Carrousel,
+        ProjectsHolder
     } from "../../components";
     
-    import { Flipper, Flipped } from "react-flip-toolkit";
-    import {shuffle} from "lodash";
-
+    import {shuffle, startCase, replace} from "lodash";
+    import InfiniteScroll from 'react-infinite-scroller';
 
 // --------------------------------------
 // Create Component Class
@@ -34,11 +34,14 @@
             super(props);
             this.state = {
                 currentCategory : 'All Apps',
+                isLoaded : true,
+                categoryColor : '',
                 projects : [
                     {
                         projectID : 1, 
                         projectTitle : 'Project 1',
                         projectCategory : 'Enviroment',
+                        projectIcon : 'fab fa-accusoft',
                         projectLink : '/app/details/',
                         projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
                         projectCarrousel : true,
@@ -47,6 +50,7 @@
                         projectID : 2, 
                         projectTitle : 'Project 2',
                         projectCategory : 'Sales',
+                        projectIcon : 'fab fa-audible ',
                         projectLink : '/app/details/',
                         projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
                         projectCarrousel : true,
@@ -55,6 +59,7 @@
                         projectID : 3, 
                         projectTitle : 'Project 3',
                         projectCategory : 'Quality',
+                        projectIcon : 'fas fa-broom ',
                         projectLink : '/app/details/',
                         projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
                         projectCarrousel : true,
@@ -63,6 +68,7 @@
                         projectID : 4, 
                         projectTitle : 'Project 4',
                         projectCategory : 'Sales',
+                        projectIcon : 'fas fa-bomb ',
                         projectLink : '/app/details/',
                         projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
                         projectCarrousel : true,
@@ -71,6 +77,7 @@
                         projectID : 5, 
                         projectTitle : 'Project 5',
                         projectCategory : 'Sales',
+                        projectIcon : 'fas fa-chalkboard ',
                         projectLink : '/app/details/',
                         projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit'
                     },
@@ -78,6 +85,7 @@
                         projectID : 6, 
                         projectTitle : 'Project 6',
                         projectCategory : 'Sales',
+                        projectIcon : 'fas fa-cloud-moon ',
                         projectLink : '/app/details/',
                         projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit'
                     },
@@ -85,6 +93,7 @@
                         projectID : 7, 
                         projectTitle : 'Project 7',
                         projectCategory : 'Sales',
+                        projectIcon : 'fas fa-circle-notch ',
                         projectLink : '/app/details/',
                         projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit'
                     },
@@ -92,30 +101,64 @@
                         projectID : 8, 
                         projectTitle : 'Project 8',
                         projectCategory : 'Sales',
+                        projectIcon : 'fab fa-codepen ',
                         projectLink : '/app/details/',
                         projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
                         projectCarrousel : true,
                     },
 
-
                 ]
             }
+        }
+
+        // --------------------------------------
+        // Get the Current Category from the URL
+        // Before the Component Renders
+        // --------------------------------------
+        componentWillMount() {
+            this.splitRouteName();
+        }
+
+        // --------------------------------------
+        // Initial Shuffle
+        // --------------------------------------
+        componentDidMount() {
+            this.setState({
+                isLoaded : true
+            })
+            this.shuffle();
         }
 
 
         /* ==========================================================================
          *  Render Logic and State Handle
          ========================================================================== */
-        
 
-        
+
+
         // --------------------------------------
-        // Initial Shuffle
+        // Get Route Params and change 
+        // Current Category from the view
         // --------------------------------------
-        componentDidMount() {
-            this.shuffle();
+        splitRouteName() {
+            const {pathname} = this.props.location;
+            const route = pathname.split('/');
+
+            this.setState({
+                currentCategory : `${this.formatTitle(route)} Products`,
+                
+            })
         }
 
+
+        // --------------------------------------
+        // Set Fist Uppercase and remove -
+        // --------------------------------------
+        formatTitle(routeName) {
+            const title = startCase( replace(routeName [routeName.length - 1]), '-' , '');
+            return title === 'Catalogue' ?  "All" :  title
+        }
+        
         
         // --------------------------------------
         // Shuffle Cards
@@ -127,7 +170,6 @@
         }
 
 
-
         /* ==========================================================================
          *  Render Methods
          ========================================================================== */
@@ -137,6 +179,7 @@
             // Render Dashboard
             // --------------------------------------
             renderDashboard() {
+                
                 return (
                     <Fragment>
                         {this.renderCarrousel()}
@@ -173,8 +216,10 @@
             // --------------------------------------
             renderFlipperBody() {
                 
-                const data = this.state.projects.map((project) => {return project.projectID })
-                const {currentCategory} = this.state;
+                const {currentCategory, projects} = this.state;
+                const {pathname} = this.props.location;
+                // console.log('categoryColor', this.state);/
+                
                 return (
                     <Fragment>
                         
@@ -187,20 +232,14 @@
 
                         </div>
 
-                            <Flipper flipKey={data.join("")} className = "row xpl-row">
-                            
-                                {this.state.projects.map(project => (
-                                <Flipped key={project.projectID} flipId={`${project.projectID}`}>
-                                        <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                            <ProjectCard key = {project.projectID} hasSmallDescription={true} {...project}/>
-                                        </div>
-                                </Flipped>
-                                ))}
-                            </Flipper>
+                        <ProjectsHolder projectsData = {projects} pathname = {this.props.location}/>
 
                     </Fragment>
                 );
             }
+
+
+    
 
             // --------------------------------------
             // Render Body With Dummy Layout
@@ -244,8 +283,7 @@
             // Render Component
             // --------------------------------------
             render() {
-                // return this.renderDummyBody();
-                return this.renderDashboard();
+                return this.state.isLoaded && this.renderDashboard();
             }
     }
 

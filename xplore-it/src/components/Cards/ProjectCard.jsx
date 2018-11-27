@@ -31,7 +31,7 @@
         // a filter is activated
         // --------------------------------------
             shouldComponentUpdate() {
-                return false;
+                return false; 
             }
 
 
@@ -40,7 +40,6 @@
         // Render Small Description
         // --------------------------------------
             renderSmallDesc(projectDescription) {
-                
                 return (
                     <div className="xpl-cardDescription">
                         <p> {projectDescription} </p>
@@ -54,18 +53,24 @@
         // --------------------------------------
             renderCard() {
                 const {projectPath} =  Config;
-                const {projectID,projectTitle, projectCategory, projectLink, projectDescription } = this.props;
+                const {projectID, projectTitle, hasSmallDescription, projectCategory, projectDescription, projectIcon } = this.props;
+                const bgColor = hasSmallDescription ? this.props.projectColor : '#238ECC';
+                const projectColorStyle = {
+                    backgroundColor : bgColor
+                }
+
+
                 return (
                     
                         <div className="xpl-cardContainer xpl-mediumCard xpl-shadow">
                             <ProjectLink route = {`${projectPath}/${projectID}`} >
-                                <div className="xpl-cardHeader">
+                                <div className="xpl-cardHeader" style = {projectColorStyle}>
                                     <div className="xpl-cardName"> 
                                         <h5> {projectTitle} </h5> 
                                     </div>
-                                    <CardImage/>
+                                    <CardImage projectIcon = {projectIcon}/>
                                 </div>
-                                {this.props.hasSmallDescription && this.renderSmallDesc(projectDescription)}
+                                {hasSmallDescription && this.renderSmallDesc(projectDescription)}
                             </ProjectLink>
                         </div>
                 )

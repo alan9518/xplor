@@ -37,10 +37,8 @@
         // --------------------------------------
         hideMobileMenu = (e) => {
             const {hideMobileMenu} = this.props;
-            console.log('e', hideMobileMenu);
 
             hideMobileMenu();
-            // this.props.hideMobileMenu();
         }
 
         // --------------------------------------
@@ -61,7 +59,6 @@
                             menuItemPath = menuItem.subCategories && menuItem.subCategories.length > 0 ? null : menuItem.path;
                 
                             if(menuItemPath!== null) {
-                                // console.log('link', link);
                                 return ( 
                                     <SideBarLink 
                                         key = { menuItem.key } 
