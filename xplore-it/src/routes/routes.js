@@ -9,6 +9,7 @@
 // --------------------------------------
     import CatalogueView from '../views/Dashboard/Dashboard';
     import DetailsView from '../views/Details/DetailsView';
+    import UserProfile from '../views/User/UserProfile';
 
 // --------------------------------------
 // Define App Path
@@ -175,6 +176,12 @@
             exact: false,
             key:`app-route-:AppID`,
             component : DetailsView,
+        },
+        {
+            path : `${path}/user/details/:UserID`,
+            exact: false,
+            key:`user-route`,
+            component : UserProfile,
         },
     
         {redirect:true, path:'/', to : `${path}/catalogue`, navbarName: 'Redirect', key : 'index-route' }

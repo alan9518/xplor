@@ -410,12 +410,21 @@
     }
 
 
+/* ---------------------------------------------------
+    6.0 USER PROFILE STYLES	
+----------------------------------------------------- */
+    .xpl-profileContainer {
+        margin-top: 60px;
+    }
     
+    .container-fluid.xpl-profileContainer h2 {
+        margin-bottom: 32px;
+    }
 
 
 
 /* ---------------------------------------------------
-    6.0 RESPONSIVE STYLES	
+    7.0 RESPONSIVE STYLES	
         Hide The SideBar and Displace Body
 ----------------------------------------------------- */
 

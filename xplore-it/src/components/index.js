@@ -14,7 +14,8 @@
 // --------------------------------------
 // Views
 // --------------------------------------
-    import NewProject from '../views/NewProject/NewProject'
+    import NewProject from '../views/NewProject/NewProject';
+    import UserProfile from '../views/User/UserProfile';
 
 
 // --------------------------------------
@@ -69,4 +70,5 @@
         SingleSelect,
         MultipleSelect,
         TabsLayout,
+        UserProfile,
     }

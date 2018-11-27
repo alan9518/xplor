@@ -10,7 +10,7 @@
 // --------------------------------------
     import React, { Component, Fragment }  from 'react'
     import PropTypes from 'prop-types';
-    import {ProfileImage} from '../../components'
+    import {ProfileImage, ProjectLink} from '../../components';
 
 // --------------------------------------
 // Create Component Class
@@ -56,54 +56,69 @@
         }
 
 
+        /* ==========================================================================
+         *  Render Methods
+         ========================================================================== */
 
 
-        // --------------------------------------
-        // Render NavBar
-        // --------------------------------------
-        renderNavBar(logo) {
-            return (
-                <div className="xpl-appHeaderContainer">
-                    <nav className="navbar navbar-expand-md navbar-dark fixed-top xpl-appHeader">
-                        {/* <a className="navbar-brand" href="#">
-                            <img src={logo}  className="xpl-appLogo d-inline-block align-top" alt=""/>
-                        </a> */}
-                         <div className="navbar-brand" >
-                            <img src={logo}  className="xpl-appLogo d-inline-block align-top" alt=""/>
-                        </div>
-                        <button onClick = {this.onMenuClick} className="navbar-toggler" type="button" data-toggle="collapse" data-target="#xpl-appNavBar"
-                            aria-controls="xpl-appNavBar" aria-expanded="true" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
+            // --------------------------------------
+            // Render NavBar
+            // --------------------------------------
+            renderNavBar(logo) {
+                return (
+                    <div className="xpl-appHeaderContainer">
+                        <nav className="navbar navbar-expand-md navbar-dark fixed-top xpl-appHeader">
+                            {/* <a className="navbar-brand" href="#">
+                                <img src={logo}  className="xpl-appLogo d-inline-block align-top" alt=""/>
+                            </a> */}
+                            <div className="navbar-brand" >
+                                <img src={logo}  className="xpl-appLogo d-inline-block align-top" alt=""/>
+                            </div>
+                            <button 
+                                    onClick = {this.onMenuClick} 
+                                    className="navbar-toggler" 
+                                    type="button" 
+                                    data-toggle="collapse" 
+                                    data-target="#xpl-appNavBar"
+                                    aria-controls="xpl-appNavBar" 
+                                    aria-expanded="true" 
+                                    aria-label="Toggle navigation">
+                                <span className="navbar-toggler-icon"></span>
+                            </button>
 
-                        <div className ={`navbar-collapse collapse ${this.showMenu()}`} id="xpl-appNavBar" >
-                            <ul className="navbar-nav ml-auto">
-                                <li className="nav-item active xpl-userProfileLink" >
-                                    <a className="nav-link xpl-userName" href="#">Welcome Alan Medina <span className="sr-only">(current)</span></a>
-                                    <div className="xpl-userImage">
-                                        <ProfileImage resourceMail = {"alan.medina@flex.com"}/>
-                                    </div>
-                                </li>
+                            <div className ={`navbar-collapse collapse ${this.showMenu()}`} id="xpl-appNavBar" >
+                                <ul className="navbar-nav ml-auto">
+                                    <li className="nav-item active xpl-userProfileLink" >
+                                        <ProjectLink route = {`/user/details/2`}>
+                                         <span className="nav-link xpl-userName">
+                                            Welcome Alan Medina <span className="sr-only">(current)</span>
+                                        </span>
 
-                                
-                            </ul>
-                        </div>
-                    </nav>
-                 </div>
-            )
-        }
+                                        </ProjectLink>
+                                        <div className="xpl-userImage">
+                                            <ProfileImage resourceMail = {"alan.medina@flex.com"}/>
+                                        </div>
+                                    </li>
 
-        // --------------------------------------
-        // Render Component
-        // --------------------------------------
-        render() {
-            const {logo} =  this.props;
-            return (
-                <Fragment>
-                    {this.renderNavBar(logo)}
-                </Fragment>
+                                    
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
                 )
             }
+
+            // --------------------------------------
+            // Render Component
+            // --------------------------------------
+            render() {
+                const {logo} =  this.props;
+                return (
+                    <Fragment>
+                        {this.renderNavBar(logo)}
+                    </Fragment>
+                    )
+                }
         }
 
 
