@@ -30,6 +30,8 @@
 
                         <h5> Overview  </h5>
 
+                        {props.tabIndex}
+
 
                         <p className="xpl-cardProjectCardOverview">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, 

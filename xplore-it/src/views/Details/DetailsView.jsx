@@ -9,7 +9,7 @@
 // --------------------------------------
     import React, { Component, Fragment } from "react";
     import PropTypes from "prop-types";
-    import { Breadcumbs, WideCard, ProjectCard, TabsLayout } from '../../components';
+    import { Breadcumbs, WideCard, ProjectCard, TabsLayout,  } from '../../components';
 
 // --------------------------------------
 // Create Component Class
@@ -24,12 +24,13 @@
                 this.state = {
                     tabIndex : 0,
                     productDetails: [
-                        { id : '1', title : 'Tab 1', content: {} },
-                        { id : '2', title : 'Tab 2', content: {} },
-                        { id : '3', title : 'Tab 3', content: {} },
-                        { id : '4', title : 'Tab 4', content: {} },
-                        { id : '5', title : 'Tab 5', content: {} },
-                        { id : '6', title : 'Tab 6', content: {} },
+                        { id : '1', title : 'Tab 1', content: <WideCard/> },
+                        { id : '2', title : 'Tab 2', content: <WideCard/> },
+                        { id : '3', title : 'Tab 3', content: <WideCard/> },
+                        { id : '4', title : 'Tab 4', content: <WideCard/> },
+                        { id : '5', title : 'Tab 5', content: <WideCard/> },
+                        { id : '6', title : 'Tab 6', content: <WideCard/> },
+                        
                     
                     ],
                     projects : [
@@ -67,7 +68,29 @@
          * State & Logic Functions
         ========================================================================== */
 
+            // --------------------------------------
+            // Change Current Tab 
+            // --------------------------------------
 
+            changePrevTab = (e) => {
+                console.log('e', e.target);
+                console.log('detils state', this.state)
+                const {tabIndex} =  this.state;
+                tabIndex <= 1 
+                    ? this.setState({tabIndex : 0 })
+                    : this.setState({tabIndex : tabIndex - 1})
+            }
+
+            changeNextTab = (e) =>{
+                console.log('e', e.target);
+                console.log('detils state', this.state)
+                const {tabIndex, productDetails} =  this.state;
+                tabIndex < productDetails.length - 1
+                    ? this.setState({tabIndex : tabIndex + 1})
+                    : this.setState({tabIndex : 0 })
+            }
+
+            
 
 
 
@@ -94,9 +117,13 @@
                             tabsData = {productDetails} 
                             defaultIndex = {tabIndex} 
                             onSelect={tabIndex => this.setState({ tabIndex })}
+                            changeNextTab = {this.changeNextTab}
+                            changePrevTab = {this.changePrevTab}
                         >
                             <WideCard  tabIndex = {tabIndex}/>
                         </TabsLayout>
+
+                       
                     </div>
                 )
             }

@@ -22,13 +22,15 @@
 
         constructor(props) {
             super(props);
-            this.cardColor = ''
             this.state = {
                 isLoaded : false
             }
         }
 
-        getColor() {
+        // --------------------------------------
+        // Get Category Name
+        // --------------------------------------
+        getCategoryName() {
             const {pathname} = this.props.pathname;
             const route = pathname.split('/');
             const categoryColor = route.length <= 2 
@@ -38,7 +40,10 @@
 
         }
 
-    
+        
+        // --------------------------------------
+        // Filter Categories by Name
+        // --------------------------------------
 
         getCategoryColor(routePath) {
             const selectedCategory =  routes.filter((route) => route.path === routePath);
@@ -51,7 +56,7 @@
         // --------------------------------------
         renderProjects () {
             const {projectsData} = this.props;
-            const projectsColor = this.getColor();
+            const projectsColor = this.getCategoryName();
 
             const data = projectsData.map((project) => {return project.projectID })
 

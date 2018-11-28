@@ -22,17 +22,25 @@
         const tabsData = props.tabsData;
         const defaultIndex = props.defaultIndex
         const onSelect = props.onSelect;
+        const changePrevTab =  props.changePrevTab;
+        const changeNextTab =  props.changeNextTab;
         return (
-            <Fragment>                           
-                <Tabs defaultIndex={defaultIndex} onSelect={onSelect} >
+            <Fragment>                     
+                <button onClick = {changePrevTab}> Prev </button>     
+                <button onClick = {changeNextTab}> Next </button>      
+                <Tabs defaultIndex={defaultIndex} onSelect={onSelect} selectedIndex = {defaultIndex}>
+
                     <TabList>
                         <div className="xpl-scrolling-wrapper">
+
                         {
                             tabsData.length > 0 && tabsData.map((tabItem) => {
                                 return (<Tab key = {tabItem.title}> {tabItem.title} </Tab>)
                             })
                         }
+
                          </div>
+
                     </TabList>
 
                     {

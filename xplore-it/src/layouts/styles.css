@@ -305,6 +305,10 @@
         font-size: 13px;
     }
 
+    .xpl-breadcumbsContainer a {
+        text-decoration: none;
+        color: #2f323e;
+    }
 
 
 /* ---------------------------------------------------
@@ -435,6 +439,10 @@
     
     @media only screen and (max-width:768px) {
 
+        .App.xpl-mainContainer {
+            margin-top: 24px;
+        }
+
         .xpl-appSideBar {
             -webkit-transform: translateX(-100%);
                     transform: translateX(-100%);
@@ -534,9 +542,19 @@
         }
 
 
-         /* ==========================================================================
+        /*  ==========================================================================
+         *  Responsive Carrousel
+            ========================================================================== */
+
+
+            button.slick-arrow {
+                z-index: 30000;
+                width: 30px;
+            }
+
+        /*  ==========================================================================
          *  Responsive Tabs
-         ========================================================================== */
+            ========================================================================== */
         /* ul.react-tabs__tab-list {
             display: flex;
             flex-direction: row;
@@ -550,6 +568,24 @@
         .react-tabs__tab {
             max-width: 70px;
             padding: 20px;
+        }
+
+
+        /* ==========================================================================
+         *  Responsive Breadcumbs
+         ========================================================================== */
+        .xpl-breadcumbsContainer {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .xpl-breadcumbsContainer a {
+            text-decoration: none;
+            color: #2f323e;
+        }
+
+        h4.xpl-breadChild {
+            font-size: 20px;
         }
     
     }

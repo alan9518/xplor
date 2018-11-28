@@ -10,12 +10,12 @@
 
 .slick-prev {
     left: -5px;
-    z-index: 2;
+    z-index: 2000;
 }
 
 .slick-next {
     right: 5px;
-    z-index: 2;
+    z-index: 2000;
 }
 
 .slick-prev:before, .slick-next:before {

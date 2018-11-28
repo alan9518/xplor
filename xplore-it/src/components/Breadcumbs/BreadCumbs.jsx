@@ -23,12 +23,10 @@
                     <h4 className = "xpl-breadChild"> All Results  </h4>
                 </ProjectLink>
                 <h4 className = "xpl-breadChild"> > </h4>
-                <ProjectLink route = {"/catalogue"}>
+                <ProjectLink route = {"/catalogue"} >
                     <h4 className = "xpl-breadChild"> Category  </h4>
                 </ProjectLink>
-                <ProjectLink route = {"/catalogue"}>
-                    <h4 className = "xpl-breadChild"> Project Name  </h4>
-                </ProjectLink>
+               
             </div>
         )
 

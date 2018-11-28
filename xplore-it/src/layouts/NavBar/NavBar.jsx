@@ -74,7 +74,7 @@
                             <div className="navbar-brand" >
                                 <img src={logo}  className="xpl-appLogo d-inline-block align-top" alt=""/>
                             </div>
-                            <button 
+                            {/* <button 
                                     onClick = {this.onMenuClick} 
                                     className="navbar-toggler" 
                                     type="button" 
@@ -84,16 +84,16 @@
                                     aria-expanded="true" 
                                     aria-label="Toggle navigation">
                                 <span className="navbar-toggler-icon"></span>
-                            </button>
+                            </button> */}
 
-                            <div className ={`navbar-collapse collapse ${this.showMenu()}`} id="xpl-appNavBar" >
+                            {/* <div className ={`navbar-collapse collapse ${this.showMenu()}`} id="xpl-appNavBar" > */}
+                            <div className ={`navbar-collapse collapse show`} id="xpl-appNavBar" >
                                 <ul className="navbar-nav ml-auto">
                                     <li className="nav-item active xpl-userProfileLink" >
                                         <ProjectLink route = {`/user/details/2`}>
-                                         <span className="nav-link xpl-userName">
-                                            Welcome Alan Medina <span className="sr-only">(current)</span>
-                                        </span>
-
+                                            <span className="nav-link xpl-userName">
+                                                Welcome Alan Medina <span className="sr-only">(current)</span>
+                                            </span>
                                         </ProjectLink>
                                         <div className="xpl-userImage">
                                             <ProfileImage resourceMail = {"alan.medina@flex.com"}/>
