@@ -13,27 +13,37 @@
     import {ProjectLink} from '../../components';
 
 
+   
+
 
 // --------------------------------------
 // Create Component
 // --------------------------------------
-    const SideBarLink = ({indexKey,title,link,color, hasIcon, onClick, hideMobileMenu}) => {
+    const SideBarLink = ({indexKey,title,link,color, hasIcon, onClick, hideMobileMenu, homeIcon}) => {
+
+            // --------------------------------------
+            // Set Styles for Home Style and Icon
+            // --------------------------------------
+            const homeStyles = {
+                borderBottom: '1px solid #eee'
+            }
     
             const iconHolderStyle = {backgroundColor: color}
-
 
             if(link !== null) 
             {
                 // Link With React Router
                 return (
-                    <li className="xpl-sidebarLink"   onClick = {hideMobileMenu}>
+                    <li className = {`xpl-sidebarLink `}  style =  {homeIcon && homeStyles}  onClick = {hideMobileMenu}>
                         <ProjectLink route = {link} itemKey = {indexKey}>
                             <div className="xpl-iconContainer">
+
                                 {hasIcon && 
                                     <div className="xpl-iconHolder" style={iconHolderStyle}>
-                                        <i className="fas fa-chevron-right"></i>
+                                        <i className={ homeIcon ? homeIcon : 'fas fa-chevron-right'}></i>
                                     </div>
-                                }
+                                } 
+
                                 <span className="xpl-linkText">{title}</span>
                             </div>
                         </ProjectLink>

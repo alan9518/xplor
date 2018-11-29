@@ -41,6 +41,10 @@
             hideMobileMenu();
         }
 
+        
+            
+
+
         // --------------------------------------
         // Iterate Routes and Render
         // menuItemPath : if the link has a path
@@ -54,22 +58,46 @@
                 
                     currentMenu.map((menuItem, key)=> {
 
+                        
+
                         if(menuItem.sidebarName ) 
                         {   
                             menuItemPath = menuItem.subCategories && menuItem.subCategories.length > 0 ? null : menuItem.path;
                 
                             if(menuItemPath!== null) {
-                                return ( 
-                                    <SideBarLink 
-                                        key = { menuItem.key } 
-                                        indexKey = {`link-${key}`} 
-                                        title = { menuItem.sidebarName } 
-                                        link = { menuItemPath } 
-                                        color = { menuItem.color } 
-                                        hasIcon =  {true}
-                                        hideMobileMenu = {this.hideMobileMenu}  
-                                    />
-                                )
+
+                                // look For Home Route
+
+                                if(menuItem.homeIcon) {
+                                    return ( 
+                                        <SideBarLink 
+                                            key = { menuItem.key } 
+                                            indexKey = {`link-${key}`} 
+                                            title = { menuItem.sidebarName } 
+                                            link = { menuItemPath } 
+                                            color = { menuItem.color } 
+                                            hasIcon =  {true}
+                                            homeIcon = {menuItem.homeIcon}
+                                            hideMobileMenu = {this.hideMobileMenu}  
+                                        />
+                                    ) 
+                                }
+                                // Other Routes
+
+                                else {
+                                    return ( 
+                                        <SideBarLink 
+                                            key = { menuItem.key } 
+                                            indexKey = {`link-${key}`} 
+                                            title = { menuItem.sidebarName } 
+                                            link = { menuItemPath } 
+                                            color = { menuItem.color } 
+                                            hasIcon =  {true}
+                                            hideMobileMenu = {this.hideMobileMenu}  
+                                        />
+                                    )
+                                }
+                                
                             }
                             else
                             {

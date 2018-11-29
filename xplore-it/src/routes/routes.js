@@ -76,7 +76,8 @@
             sidebarName : 'Home',
             key:'home-route',
             component : CatalogueView,
-            color : communication
+            color : communication,
+            homeIcon : 'fas fa-home'
         },
         {
             path : `${path}/communication`,

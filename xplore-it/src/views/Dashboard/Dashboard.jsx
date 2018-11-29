@@ -77,25 +77,17 @@
          ========================================================================== */
             loadProjects() {
                 const serviceURL = Endpoints.getAllProducts;
-                
-                
-                console.log('serviceURL', serviceURL);
-                
                 axios.get(serviceURL)
                 .then((data) => {
-                    console.log('data', data);
                     this.setState({
                         products : data.data,
                         isLoaded : true
                     })
-
                     this.shuffle();
                 })
                 .catch((error) => {
                     console.log('error', error);
-
                 })
-
             }
 
 
@@ -115,7 +107,6 @@
 
                 this.setState({
                     currentCategory : `${this.formatTitle(route)} Products`,
-                    
                 })
             }
 
@@ -151,7 +142,7 @@
                 
                 return (
                     <Fragment>
-                        {/* {this.renderCarrousel()} */}
+                        { this.props.location.pathname === '/catalogue' && this.renderCarrousel()}
                         {this.renderFlipperBody()}
 
                         
@@ -166,8 +157,9 @@
             // --------------------------------------
 
             renderCarrousel() {
-                const {projects} = this.state;
-                const carrouselProjects = projects.filter((project)=> project.projectCarrousel ) ;
+                const {products} = this.state;
+                // const carrouselProjects = products.filter((project)=> project.projectCarrousel ) ;
+                const carrouselProjects = products.map((project)=> project.projectCarrousel = true) ;
 
 
                 return (
@@ -189,13 +181,11 @@
                 
                 const {currentCategory, products} = this.state;
                 const {pathname} = this.props.location;
-                // console.log('categoryColor', this.state);/
                 
                 return (
                     <Fragment>
                         
                         <div className="row xpl-row">
-                            <button onClick={this.shuffle}> shuffle</button>
 
                             <div className="col-lg-12">
                                 <h3 className="xpl-allAppTitle">{currentCategory}</h3>
