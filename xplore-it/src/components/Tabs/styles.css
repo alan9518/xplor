@@ -19,6 +19,10 @@
     width: 100%;
 }
 
+.xpl-scrolling-wrapper::-webkit-scrollbar {
+    display: none; 
+} 
+
 
 ul.react-tabs__tab-list {
     display: flex;
@@ -59,3 +63,20 @@ ul.react-tabs__tab-list {
     transition: left .2s ease;
     -webkit-transition: left .2s ease;
 }
+
+.xpl-tabArrow {
+    position: absolute;
+    font-size: 24px;
+    z-index: 1000;
+}
+
+.xpl-tabLeftArrow{
+    top: 30px;
+    left: 25px;
+}
+
+.xpl-tabRightArrow {
+    top: 30px;
+    right: 20px;
+}
+    

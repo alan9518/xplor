@@ -39,10 +39,10 @@
         // --------------------------------------
         // Render Small Description
         // --------------------------------------
-            renderSmallDesc(projectDescription) {
+            renderSmallDesc(ShortDescription, DetailedDescription) {
                 return (
                     <div className="xpl-cardDescription">
-                        <p> {projectDescription} </p>
+                        <p> {ShortDescription !== '' ? ShortDescription : DetailedDescription } </p>
                     </div>
                 )
             }
@@ -53,7 +53,7 @@
         // --------------------------------------
             renderCard() {
                 const {projectPath} =  Config;
-                const {projectID, projectTitle, hasSmallDescription, projectCategory, projectDescription, projectIcon } = this.props;
+                const {partID, ProductName, hasSmallDescription, ProductScope, ShortDescription, productIcon, DetailedDescription } = this.props;
                 const bgColor = hasSmallDescription ? this.props.projectColor : '#238ECC';
                 const projectColorStyle = {
                     backgroundColor : bgColor
@@ -63,14 +63,14 @@
                 return (
                     
                         <div className="xpl-cardContainer xpl-mediumCard xpl-shadow">
-                            <ProjectLink route = {`${projectPath}/${projectID}`} >
+                            <ProjectLink route = {`${projectPath}/${partID}`} >
                                 <div className="xpl-cardHeader" style = {projectColorStyle}>
                                     <div className="xpl-cardName"> 
-                                        <h5> {projectTitle} </h5> 
+                                        <h5> {ProductName} </h5> 
                                     </div>
-                                    <CardImage projectIcon = {projectIcon}/>
+                                    <CardImage projectIcon = {productIcon}/>
                                 </div>
-                                {hasSmallDescription && this.renderSmallDesc(projectDescription)}
+                                {hasSmallDescription && this.renderSmallDesc(ShortDescription, DetailedDescription)}
                             </ProjectLink>
                         </div>
                 )
@@ -88,9 +88,15 @@
 // --------------------------------------
 // Define PropTypes
 // --------------------------------------
-    // ProjectCard.propTypes = {
-    // prop: PropTypes
-    // };
+    ProjectCard.propTypes = {
+        partID: PropTypes.string,
+        ProductName: PropTypes.string,
+        hasSmallDescription: PropTypes.string,
+        ProductScope: PropTypes.string,
+        ShortDescription: PropTypes.string,
+        productIcon: PropTypes.string,
+        DetailedDescription: PropTypes.string,
+    };
 
 // --------------------------------------
 // Export Component

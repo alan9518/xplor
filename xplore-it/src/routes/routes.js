@@ -10,6 +10,8 @@
     import CatalogueView from '../views/Dashboard/Dashboard';
     import DetailsView from '../views/Details/DetailsView';
     import UserProfile from '../views/User/UserProfile';
+    import axios from 'axios';
+    import {Endpoints} from '../services/endpoints';
 
 // --------------------------------------
 // Define App Path
@@ -18,11 +20,30 @@
     const path = '';
 
 
+// --------------------------------------
+// Fetch Routes
+// --------------------------------------
+    const softwareTopics = () => {
+        return (
+            axios.get(Endpoints.getAllCategories)
+                .then((data)=> {
+                    console.log('data', data.data)
+                    return data.data;
+                }) 
+                .catch(err=>{
+                    console.log('error', err);
+                })
+        )
+    }
+
+
+
+    
 
 // --------------------------------------
 // Icons Colors
 // --------------------------------------
-    let communication = '#1197D3';;
+    let communication = '#1197D3';
     let education = '#07562F';
     let enviroment = '#5F4082';
     let finance = '#84B130' ;
@@ -32,6 +53,16 @@
     let marketing = '#B60BAC';
     let operations =  '#8F1859';
     let sales = '#E18A50';
+
+
+// --------------------------------------
+// Create JSON Routes Array
+// Last Item is the Defualt Redirect
+// From Home or / to Catalogue View
+// --------------------------------------
+    // const softwareTopicsRoutes = softwareTopics().re;
+    // console.log('softwareTopicsRoutes', softwareTopicsRoutes);
+
 
 // --------------------------------------
 // Create JSON Routes Array

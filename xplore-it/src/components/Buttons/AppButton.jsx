@@ -16,13 +16,11 @@
 // --------------------------------------
     const AppButton = (props) => {
         return (
-            <div className="xpl-sidebarButton" onClick = {props.onClick}>
-                <button className={`xpl-button ${props.buttonClass}`}>
-                    {props.iconLeftClass && <i className = {` xpl-iconLeft ${props.iconLeftClass}`} /> }
+                <button className={`xpl-button ${props.buttonClass}`} onClick = {props.onClick}>
+                    {props.iconLeftClass && <i className = {` xpl-iconLeft ${props.iconLeftClass }`} /> }
                     {props.buttonText}
                     {props.iconClass && <i className = {`${props.iconClass}`} /> }
                 </button>
-            </div>
         );
     };
 
@@ -33,8 +31,18 @@
         onClick: PropTypes.func,
         buttonClass : PropTypes.string,
         buttonText : PropTypes.string,
+        iconLeftClass : PropTypes.string,
         iconClass : PropTypes.string
     };
+
+
+// --------------------------------------
+// Set Default Props
+// --------------------------------------
+    AppButton.defaultProps = {
+        iconLeftClass : '',
+        buttonClass : ''
+    }
 
 // --------------------------------------
 // Export Component

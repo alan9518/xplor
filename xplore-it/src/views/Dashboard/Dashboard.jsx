@@ -20,6 +20,12 @@
     
     import {shuffle, startCase, replace} from "lodash";
     import InfiniteScroll from 'react-infinite-scroller';
+    import API from '../../services/api';
+    import {Endpoints} from '../../services/endpoints';
+
+    import axios from 'axios';
+    import { Server } from "https";
+
 
 // --------------------------------------
 // Create Component Class
@@ -36,80 +42,19 @@
                 currentCategory : 'All Apps',
                 isLoaded : true,
                 categoryColor : '',
-                projects : [
-                    {
-                        projectID : 1, 
-                        projectTitle : 'Project 1',
-                        projectCategory : 'Enviroment',
-                        projectIcon : 'fab fa-accusoft',
-                        projectLink : '/app/details/',
-                        projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                        projectCarrousel : true,
-                    },
-                    {
-                        projectID : 2, 
-                        projectTitle : 'Project 2',
-                        projectCategory : 'Sales',
-                        projectIcon : 'fab fa-audible ',
-                        projectLink : '/app/details/',
-                        projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                        projectCarrousel : true,
-                    },
-                    {
-                        projectID : 3, 
-                        projectTitle : 'Project 3',
-                        projectCategory : 'Quality',
-                        projectIcon : 'fas fa-broom ',
-                        projectLink : '/app/details/',
-                        projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                        projectCarrousel : true,
-                    },
-                    {
-                        projectID : 4, 
-                        projectTitle : 'Project 4',
-                        projectCategory : 'Sales',
-                        projectIcon : 'fas fa-bomb ',
-                        projectLink : '/app/details/',
-                        projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                        projectCarrousel : true,
-                    },
-                    {
-                        projectID : 5, 
-                        projectTitle : 'Project 5',
-                        projectCategory : 'Sales',
-                        projectIcon : 'fas fa-chalkboard ',
-                        projectLink : '/app/details/',
-                        projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit'
-                    },
-                    {
-                        projectID : 6, 
-                        projectTitle : 'Project 6',
-                        projectCategory : 'Sales',
-                        projectIcon : 'fas fa-cloud-moon ',
-                        projectLink : '/app/details/',
-                        projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit'
-                    },
-                    {
-                        projectID : 7, 
-                        projectTitle : 'Project 7',
-                        projectCategory : 'Sales',
-                        projectIcon : 'fas fa-circle-notch ',
-                        projectLink : '/app/details/',
-                        projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit'
-                    },
-                    {
-                        projectID : 8, 
-                        projectTitle : 'Project 8',
-                        projectCategory : 'Sales',
-                        projectIcon : 'fab fa-codepen ',
-                        projectLink : '/app/details/',
-                        projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                        projectCarrousel : true,
-                    },
-
-                ]
+                products : []
             }
         }
+
+        // {
+        //     projectID : 1, 
+        //     projectTitle : 'Project 1',
+        //     projectCategory : 'Enviroment',
+        //     projectIcon : 'fab fa-accusoft',
+        //     projectLink : '/app/details/',
+        //     projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
+        //     projectCarrousel : true,
+        // },
 
         // --------------------------------------
         // Get the Current Category from the URL
@@ -123,11 +68,35 @@
         // Initial Shuffle
         // --------------------------------------
         componentDidMount() {
-            this.setState({
-                isLoaded : true
-            })
-            this.shuffle();
+            this.loadProjects()
         }
+
+
+        /* ==========================================================================
+         *  API Calls
+         ========================================================================== */
+            loadProjects() {
+                const serviceURL = Endpoints.getAllProducts;
+                
+                
+                console.log('serviceURL', serviceURL);
+                
+                axios.get(serviceURL)
+                .then((data) => {
+                    console.log('data', data);
+                    this.setState({
+                        products : data.data,
+                        isLoaded : true
+                    })
+
+                    this.shuffle();
+                })
+                .catch((error) => {
+                    console.log('error', error);
+
+                })
+
+            }
 
 
         /* ==========================================================================
@@ -136,38 +105,38 @@
 
 
 
-        // --------------------------------------
-        // Get Route Params and change 
-        // Current Category from the view
-        // --------------------------------------
-        splitRouteName() {
-            const {pathname} = this.props.location;
-            const route = pathname.split('/');
+            // --------------------------------------
+            // Get Route Params and change 
+            // Current Category from the view
+            // --------------------------------------
+            splitRouteName() {
+                const {pathname} = this.props.location;
+                const route = pathname.split('/');
 
-            this.setState({
-                currentCategory : `${this.formatTitle(route)} Products`,
-                
-            })
-        }
+                this.setState({
+                    currentCategory : `${this.formatTitle(route)} Products`,
+                    
+                })
+            }
 
 
-        // --------------------------------------
-        // Set Fist Uppercase and remove -
-        // --------------------------------------
-        formatTitle(routeName) {
-            const title = startCase( replace(routeName [routeName.length - 1]), '-' , '');
-            return title === 'Catalogue' ?  "All" :  title
-        }
-        
-        
-        // --------------------------------------
-        // Shuffle Cards
-        // --------------------------------------
-        shuffle = () => {
-            this.setState(({ projects }) => ({
-                projects: shuffle(projects)
-            }));
-        }
+            // --------------------------------------
+            // Set Fist Uppercase and remove -
+            // --------------------------------------
+            formatTitle(routeName) {
+                const title = startCase( replace(routeName [routeName.length - 1]), '-' , '');
+                return title === 'Catalogue' ?  "All" :  title
+            }
+            
+            
+            // --------------------------------------
+            // Shuffle Cards
+            // --------------------------------------
+            shuffle = () => {
+                this.setState(({ products }) => ({
+                    products: shuffle(products)
+                }));
+            }
 
 
         /* ==========================================================================
@@ -182,8 +151,10 @@
                 
                 return (
                     <Fragment>
-                        {this.renderCarrousel()}
+                        {/* {this.renderCarrousel()} */}
                         {this.renderFlipperBody()}
+
+                        
                     </Fragment>
                 )
 
@@ -216,7 +187,7 @@
             // --------------------------------------
             renderFlipperBody() {
                 
-                const {currentCategory, projects} = this.state;
+                const {currentCategory, products} = this.state;
                 const {pathname} = this.props.location;
                 // console.log('categoryColor', this.state);/
                 
@@ -224,7 +195,7 @@
                     <Fragment>
                         
                         <div className="row xpl-row">
-                            {/* <button onClick={this.shuffle}> shuffle</button> */}
+                            <button onClick={this.shuffle}> shuffle</button>
 
                             <div className="col-lg-12">
                                 <h3 className="xpl-allAppTitle">{currentCategory}</h3>
@@ -232,7 +203,7 @@
 
                         </div>
 
-                        <ProjectsHolder projectsData = {projects} pathname = {this.props.location}/>
+                        <ProjectsHolder productsData = {products} pathname = {this.props.location}/>
 
                     </Fragment>
                 );

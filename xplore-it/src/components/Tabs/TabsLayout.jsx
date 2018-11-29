@@ -10,7 +10,7 @@
     import React, { Fragment } from "react";
     import PropTypes from "prop-types";
     import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-    // import styles from "react-tabs/style/react-tabs.css";
+    import {AppButton} from '../../components'
     import "./styles.css";
 
 // --------------------------------------
@@ -25,14 +25,17 @@
         const changePrevTab =  props.changePrevTab;
         const changeNextTab =  props.changeNextTab;
         return (
-            <Fragment>                     
-                <button onClick = {changePrevTab}> Prev </button>     
-                <button onClick = {changeNextTab}> Next </button>      
-                <Tabs defaultIndex={defaultIndex} onSelect={onSelect} selectedIndex = {defaultIndex}>
+            <Fragment>           
 
+                <div className="xpl-tabArrow xpl-tabLeftArrow"> <AppButton iconLeftClass = {'fas fa-angle-left'} onClick = {changePrevTab}/> </div>
+                <div className="xpl-tabArrow xpl-tabRightArrow"> <AppButton iconLeftClass = {'fas fa-angle-right'}  onClick = {changeNextTab}/></div>
+                    
+                
+                <Tabs defaultIndex={defaultIndex} onSelect={onSelect} selectedIndex = {defaultIndex}>
+                    
                     <TabList>
                         <div className="xpl-scrolling-wrapper">
-
+                            
                         {
                             tabsData.length > 0 && tabsData.map((tabItem) => {
                                 return (<Tab key = {tabItem.title}> {tabItem.title} </Tab>)

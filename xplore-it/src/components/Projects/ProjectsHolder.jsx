@@ -55,22 +55,23 @@
         // Render Projects
         // --------------------------------------
         renderProjects () {
-            const {projectsData} = this.props;
+            const {productsData} = this.props;
+            // console.log('productsData', productsData);
             const projectsColor = this.getCategoryName();
 
-            const data = projectsData.map((project) => {return project.projectID })
+            const data = productsData.map((project) => {return project.partID })
 
             return (
                 <Flipper flipKey={data.join("")} className = "row xpl-row">
                                 
-                    {projectsData.map(project => (
-                        <Flipped key={project.projectID} flipId={`${project.projectID}`}>
+                    {productsData.map(product => (
+                        <Flipped key={product.partID} flipId={`${product.partID}`}>
                                 <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                                     <ProjectCard 
-                                            key = {project.projectID} 
+                                            key = {product.partID} 
                                             hasSmallDescription={true}  
                                             projectColor = {projectsColor}
-                                            {...project}/>
+                                            {...product}/>
                                 </div>
                         </Flipped>
                     ))}
@@ -91,7 +92,7 @@
 // Define PropTypes
 // --------------------------------------
     ProjectsHolder.propTypes = {
-        projectsData: PropTypes.array
+        productsData: PropTypes.array
     };
 
 // --------------------------------------
