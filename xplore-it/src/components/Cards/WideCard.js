@@ -17,6 +17,7 @@
 // --------------------------------------
     
     const WideCard = (props) => {
+        console.log('props widecard', props);
         
         // --------------------------------------
         // Render Card
@@ -24,7 +25,7 @@
             return (
                 <div className="xpl-cardContainer xpl-wideCard ">
                     
-                    <CardHeaderWide tabIndex = {props.tabIndex}/>
+                    <CardHeaderWide productOverview = {props.productData} />
 
                     <div className="xpl-cardOverviewContainer">
 

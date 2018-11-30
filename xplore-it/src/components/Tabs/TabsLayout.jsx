@@ -31,7 +31,7 @@
                 <div className="xpl-tabArrow xpl-tabRightArrow"> <AppButton iconLeftClass = {'fas fa-angle-right'}  onClick = {changeNextTab}/></div>
                     
                 
-                <Tabs defaultIndex={defaultIndex} onSelect={onSelect} selectedIndex = {defaultIndex}>
+                <Tabs defaultIndex={0} onSelect={onSelect} selectedIndex = {defaultIndex}>
                     
                     <TabList>
                         <div className="xpl-scrolling-wrapper">

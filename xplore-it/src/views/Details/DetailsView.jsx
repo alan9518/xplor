@@ -9,7 +9,9 @@
 // --------------------------------------
     import React, { Component, Fragment } from "react";
     import PropTypes from "prop-types";
-    import { Breadcumbs, WideCard, ProjectCard, TabsLayout,  } from '../../components';
+    import { Breadcumbs, WideCard, ProjectCard, TabsLayout, AppLoader  } from '../../components';
+    import axios from 'axios';
+    import {Endpoints} from '../../services/endpoints'
 
 // --------------------------------------
 // Create Component Class
@@ -28,37 +30,66 @@
                         { id : '2', title : 'Tab 2', content: {} },
                         { id : '3', title : 'Tab 3', content: {} },
                         { id : '4', title : 'Tab 4', content: {} },
-                        
-
-                    
                     ],
-                    projects : [
-                        {
-                            projectID : 1, 
-                            projectTitle : 'Project 1',
-                            projectCategory : 'Enviroment',
-                            projectLink : '/app/details/',
-                            projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                        },
-                        {
-                            projectID : 2, 
-                            projectTitle : 'Project 2',
-                            projectCategory : 'Sales',
-                            projectLink : '/app/details/',
-                            projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                        },
-                        {
-                            projectID : 3, 
-                            projectTitle : 'Project 3',
-                            projectCategory : 'Quality',
-                            projectLink : '/app/details/',
-                            projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                        },
-                      
-                    ]
+                    relatedProducts : [],
+                    productOverview:{},
+                    isLoaded : false,
                 }
             }
 
+
+            componentDidMount() {
+                this.loadAPI();
+            }
+
+        /* ==========================================================================
+         *  API Calls
+         ========================================================================== */
+
+            // --------------------------------------
+            // Load Web Services
+            // --------------------------------------
+            async loadAPI () {
+                let loadProjectsPromise = await this.loadProjects();
+                let projectsResponse = await loadProjectsPromise.data;
+                console.log('projectsResponse', projectsResponse);
+
+                let loadProjectOverviewPromise = await this.loadProjectDetails();
+                let projectOverviewResponse = await loadProjectOverviewPromise.data;
+                console.log('projectOverviewResponse', projectOverviewResponse);
+
+
+                this.setState( {
+                    productOverview : projectOverviewResponse[0],
+                    relatedProducts : projectsResponse,
+                    isLoaded : true
+                })
+
+
+
+            }
+
+            /** --------------------------------------
+            // Get Related Projects
+            // @param {}
+            // @returns {A Promuise Object}
+            // --------------------------------------*/
+            async loadProjects() {
+                const serviceURL = Endpoints.getAllProducts;
+                return axios.get(serviceURL)  ;
+            }
+
+
+             /** --------------------------------------
+            // Get Project Overview
+            // @param {}
+            // @returns {A Promuise Object}
+            // --------------------------------------*/
+            async loadProjectDetails( ) {
+                const {partID} =  this.props.match.params;
+                const serviceURL = `${Endpoints.getProduct}${partID}`
+                return (axios.get(serviceURL)) 
+            }
 
         /* ==========================================================================
          * State & Logic Functions
@@ -69,8 +100,6 @@
             // --------------------------------------
 
             changePrevTab = (e) => {
-                console.log('e', e.target);
-                console.log('detils state', this.state)
                 const {tabIndex} =  this.state;
                 tabIndex <= 1 
                     ? this.setState({tabIndex : 0 })
@@ -78,8 +107,6 @@
             }
 
             changeNextTab = (e) =>{
-                console.log('e', e.target);
-                console.log('detils state', this.state)
                 const {tabIndex, productDetails} =  this.state;
                 tabIndex < productDetails.length - 1
                     ? this.setState({tabIndex : tabIndex + 1})
@@ -97,7 +124,7 @@
             // --------------------------------------
             // Render BreadCumbs
             // --------------------------------------
-                renderBreadcumbs() {
+            renderBreadcumbs() {
                     return <Breadcumbs/>
                 }
 
@@ -105,21 +132,20 @@
             // Render Details Body
             // --------------------------------------
             renderDetailsBody() {
-                const {productDetails, tabIndex}  = this.state;
+                const {productDetails, tabIndex, productOverview}  = this.state;
                 return (
                     
                     <div className="xpl-appDescriptionContainer xpl-wideCard xpl-shadow">
                         <TabsLayout 
                             tabsData = {productDetails} 
-                            defaultIndex = {tabIndex} 
                             onSelect={tabIndex => this.setState({ tabIndex })}
                             changeNextTab = {this.changeNextTab}
                             changePrevTab = {this.changePrevTab}
                         >
-                            <WideCard  tabIndex = {tabIndex}/>
+                            <WideCard productData = {productOverview} isOverview = {true} tabIndex = {tabIndex}/>
                         </TabsLayout>
 
-                       
+
                     </div>
                 )
             }
@@ -128,13 +154,14 @@
             // --------------------------------------
             // Render Related Projects
             // --------------------------------------
-            renderRelatedProjects() {
+            renderRelatedProducts() {
+                const {relatedProducts}  = this.state;
                 return (
                     <Fragment>
                         <div className="xpl-relatedContainer">
                         {
-                            this.state.projects.map(project => (
-                                <ProjectCard key = {project.projectID} hasSmallDescription={true} {...project}/>
+                            relatedProducts.map(product => (
+                                <ProjectCard key = {product.partID} hasSmallDescription={true} {...product}/>
                             ))
                         }
                         </div>
@@ -142,11 +169,21 @@
                 )
             }
 
+
+            // --------------------------------------
+            // Render Loader
+            // --------------------------------------
+            renderLoader () {
+                return <div> <AppLoader/> </div>
+            }
+
+
             // --------------------------------------
             // Render View
             // --------------------------------------
                 renderAppDetailsView() {
                     return (
+
                         <Fragment>
                             {this.renderBreadcumbs()}
                             <div className="container-fluid">
@@ -158,7 +195,7 @@
                                     <div className="col-lg-3 col-md-12 col-sm-12">
                                         <div className="xpl-relatedListApps">
                                         <h5>Related Products</h5>
-                                            {this.renderRelatedProjects()}
+                                            {this.renderRelatedProducts()}
                                         </div>
                                     </div>
                                 </div>
@@ -172,7 +209,9 @@
             // Render Component
             // --------------------------------------
                 render() {
-                    return this.renderAppDetailsView();
+                    const {isLoaded} = this.state;
+                    return isLoaded ? this.renderAppDetailsView() : this.renderLoader();
+
                 }
     }
 

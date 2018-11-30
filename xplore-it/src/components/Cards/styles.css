@@ -57,13 +57,13 @@
         text-decoration: none;       
     }
 
-    .xpl-cardHeader:hover {
+    .xpl-cardHeader.cardHover:hover {
         box-shadow: 0 0 30px 3px rgba(33,33,33,.2);
         transition: all 0.4s ease;
     }
 
 
-    .xpl-cardHeader:hover i {
+    .xpl-cardHeader.cardHover:hover i {
         text-decoration: none;
         animation: bounce 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
@@ -106,7 +106,7 @@
         margin-left: 16px;
         align-items: baseline;
         justify-content: center;
-        padding: 8px;
+        padding: 8px 0;
     }
 
     .xpl-cardProjectInfo p {
@@ -135,3 +135,18 @@
         margin-bottom: 16px;
     }
 
+    .xpl-cardProjectInfo ul {
+        list-style: none;
+    }
+
+
+    .xpl-cardProjectInfo ul li {
+        padding: 5px 0;
+        text-align: justify;
+        color: #6c757d;
+    }
+    
+    span.xpl-boldText {
+        font-weight: 500;
+    }
+   

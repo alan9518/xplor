@@ -28,7 +28,10 @@
                 borderBottom: '1px solid #eee'
             }
     
-            const iconHolderStyle = {backgroundColor: color}
+            const iconHolderStyleBig = {backgroundColor: color, width : 30, padding : '7px 5px'}
+
+            const iconHolderStyleSmall = {backgroundColor: color, width: 25, padding : 5}
+
 
             if(link !== null) 
             {
@@ -39,7 +42,7 @@
                             <div className="xpl-iconContainer">
 
                                 {hasIcon && 
-                                    <div className="xpl-iconHolder" style={iconHolderStyle}>
+                                    <div className="xpl-iconHolder   " style={homeIcon ? iconHolderStyleBig : iconHolderStyleSmall}>
                                         <i className={ homeIcon ? homeIcon : 'fas fa-chevron-right'}></i>
                                     </div>
                                 } 
@@ -58,7 +61,7 @@
                     <li className="xpl-sidebarLink"  onClick = {onClick}>
                         <div className="xpl-iconContainer">
                             {hasIcon && 
-                                <div className="xpl-iconHolder" style={iconHolderStyle}>
+                                <div className="xpl-iconHolder" style={homeIcon ? iconHolderStyleBig : iconHolderStyleSmall}>
                                     <i className="fas fa-chevron-right"></i>
                                 </div>
                             }

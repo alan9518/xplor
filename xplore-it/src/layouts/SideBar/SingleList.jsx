@@ -41,10 +41,6 @@
             hideMobileMenu();
         }
 
-        
-            
-
-
         // --------------------------------------
         // Iterate Routes and Render
         // menuItemPath : if the link has a path

@@ -10,6 +10,7 @@
   import React, { Component } from 'react';
   import { BrowserRouter, Route, Switch } from 'react-router-dom';
   import appNavigationRoutes from './routes';
+  import routesAPI from './routes/routesAPI';
   // import Perf from 'react-addons-perf';
   // const Perf = require('react-addons-perf'); // ES5 with npm
 
@@ -21,6 +22,22 @@
 // Create Component
 // --------------------------------------
   class App extends Component {
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        navigationRoutes : [],
+        isLoaded : false
+      }
+      // this.getRoutes()     
+    }
+
+
+    async getRoutes () {
+      const routes =  new routesAPI();
+      let r =  await routes.getNavigationRoutesfromAPI()
+      console.log('r', r);
+    }
 
     // --------------------------------------
     // Render Component

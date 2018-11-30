@@ -39,6 +39,7 @@
     import TabsLayout from './Tabs/TabsLayout';
     import Scroller from './InfiniteScroll/Scroller';
     import ProjectsHolder from './Projects/ProjectsHolder'
+    import AppLoader from './Loader/Loader';
 
 
 // --------------------------------------
@@ -76,4 +77,5 @@
         UserProfile,
         Scroller,
         ProjectsHolder,
+        AppLoader,
     }

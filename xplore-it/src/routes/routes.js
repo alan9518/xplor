@@ -204,9 +204,9 @@
             subCategories : []
         },
         {
-            path : `${path}/app/details/:AppID`,
+            path : `${path}/app/details/:partID`,
             exact: false,
-            key:`app-route-:AppID`,
+            key:`app-route-:partID`,
             component : DetailsView,
         },
         {

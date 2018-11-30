@@ -7,7 +7,7 @@
 export const Endpoints = {
     getAllProducts : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getProducts',
     getAllCategories : 'http://sacnt2034.americas.ad.flextronics.com/wsxplorit/xploreitservices.asmx/getCategories',
-    getProdcut : 'http://sacnt2034.americas.ad.flextronics.com/wsxplorit/xploreitservices.asmx/getSingleProduct?partid={partid}',
-    getAllProductsByCategory: 'http://sacnt2034.americas.ad.flextronics.com/wsxplorit/xploreitservices.asmx/getProductsByCategory?customerid='
-    
+    getProduct : 'http://sacnt2034.americas.ad.flextronics.com/wsxplorit/xploreitservices.asmx/getSingleProduct?partid=',
+    getAllProductsByCategory: 'http://sacnt2034.americas.ad.flextronics.com/wsxplorit/xploreitservices.asmx/getProductsByCategory?customerid=',
+    getSubCapacities : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getSubCap',
 }

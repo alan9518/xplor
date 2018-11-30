@@ -27,7 +27,11 @@
 // PropTypes
 // --------------------------------------
     CardImage.propTypes = {
-        imageSrc : PropTypes.string
+        projectIcon : PropTypes.string
+    }
+
+    CardImage.defaultProps = {
+        projectIcon : 'fab fa-accusoft'
     }
 
 

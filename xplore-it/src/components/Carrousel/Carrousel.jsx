@@ -69,12 +69,13 @@
         // --------------------------------------
         renderCarrousel() {
             const {carrouselData} = this.props;
+            console.log('carrouselData',  this.props);
             return (
                 <Slider {...this.settings}>
                 {
                     carrouselData.map((carrouselItem,index) => {
                         return  <div  className="col-lg-12 col-md-12 col-sm-12">
-                           <ProjectCard key = {`car-${index}.${carrouselItem.projectID}`} {...carrouselItem}/>
+                           <ProjectCard key = {`car-${index}.${carrouselItem.partID}`} {...carrouselItem}/>
                         </div>
                     })
 

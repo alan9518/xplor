@@ -20,7 +20,6 @@
     
     import {shuffle, startCase, replace} from "lodash";
     import InfiniteScroll from 'react-infinite-scroller';
-    import API from '../../services/api';
     import {Endpoints} from '../../services/endpoints';
 
     import axios from 'axios';
@@ -166,7 +165,7 @@
                     <div className="row xpl-carrouselRow">
                         <div className="col-lg-12">
                             <h3 className="xpl-row xpl-allAppTitle"> What's New? </h3>
-                            <Carrousel carrouselData = {carrouselProjects} />
+                            <Carrousel carrouselData = {products} />
                         </div>
                     </div>
                 )

@@ -53,18 +53,15 @@
         // --------------------------------------
             renderCard() {
                 const {projectPath} =  Config;
-                const {partID, ProductName, hasSmallDescription, ProductScope, ShortDescription, productIcon, DetailedDescription } = this.props;
+                const {partID, ProductName, hasSmallDescription, ProductScope, ShortDescription, productIcon, DetailedDescription, cardHover } = this.props;
                 const bgColor = hasSmallDescription ? this.props.projectColor : '#238ECC';
-                const projectColorStyle = {
-                    backgroundColor : bgColor
-                }
-
+                const projectColorStyle = {backgroundColor : bgColor}
 
                 return (
                     
                         <div className="xpl-cardContainer xpl-mediumCard xpl-shadow">
                             <ProjectLink route = {`${projectPath}/${partID}`} >
-                                <div className="xpl-cardHeader" style = {projectColorStyle}>
+                                <div className = {`xpl-cardHeader ${cardHover && 'cardHover'}`} style = {projectColorStyle}>
                                     <div className="xpl-cardName"> 
                                         <h5> {ProductName} </h5> 
                                     </div>
@@ -86,12 +83,21 @@
     }
 
 // --------------------------------------
+// Default Props
+// --------------------------------------
+    ProjectCard.defaultProps = {
+        projectColor : '#238ECC',
+        cardHover : true,
+    }
+
+// --------------------------------------
 // Define PropTypes
 // --------------------------------------
     ProjectCard.propTypes = {
-        partID: PropTypes.string,
+        partID: PropTypes.number,
+        cardHover : PropTypes.bool,
         ProductName: PropTypes.string,
-        hasSmallDescription: PropTypes.string,
+        hasSmallDescription: PropTypes.bool,
         ProductScope: PropTypes.string,
         ShortDescription: PropTypes.string,
         productIcon: PropTypes.string,

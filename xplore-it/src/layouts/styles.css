@@ -253,9 +253,9 @@
 
     .xpl-iconHolder {
         display: block;
-        width: 30px;
+        /* width: 30px; */
         height: auto;
-        padding: 7px 5px;
+        /* padding: 7px 5px; */
         margin-right: 5px;
     }
 

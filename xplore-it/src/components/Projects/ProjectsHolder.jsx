@@ -7,11 +7,11 @@
 // --------------------------------------
 // Import Dependences
 // --------------------------------------
-    import React, { Component, Fragment } from "react";
+    import React, { Component } from "react";
     import PropTypes from "prop-types";
     import { ProjectCard,} from "../../components";
     import { Flipper, Flipped } from "react-flip-toolkit";
-    import {shuffle, concat, upperFirst} from "lodash";
+    // import {shuffle, concat, upperFirst} from "lodash";
     import routes from '../../routes/routes';
 
 
@@ -56,7 +56,6 @@
         // --------------------------------------
         renderProjects () {
             const {productsData} = this.props;
-            // console.log('productsData', productsData);
             const projectsColor = this.getCategoryName();
 
             const data = productsData.map((project) => {return project.partID })
