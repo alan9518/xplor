@@ -9,7 +9,7 @@
 // --------------------------------------
     import React, { Component } from "react";
     import PropTypes from "prop-types";
-    import { ProjectCard,} from "../../components";
+    import { ProjectCard, NoData} from "../../components";
     import { Flipper, Flipped } from "react-flip-toolkit";
     // import {shuffle, concat, upperFirst} from "lodash";
     import routes from '../../routes/routes';
@@ -27,6 +27,12 @@
             }
         }
 
+        componentDidMount() {
+            this.props.shuffle()
+            console.log('mounted')
+        }
+
+     
         // --------------------------------------
         // Get Category Name
         // --------------------------------------
@@ -47,6 +53,7 @@
 
         getCategoryColor(routePath) {
             const selectedCategory =  routes.filter((route) => route.path === routePath);
+            console.log('selectedCategory', selectedCategory);
             return selectedCategory[0];
         }
 
@@ -55,11 +62,34 @@
         // Render Projects
         // --------------------------------------
         renderProjects () {
-            const {productsData} = this.props;
-            const projectsColor = this.getCategoryName();
+            const {productsData, currentCategory} = this.props;
+            // const projectsColor = this.getCategoryColor();
+            const projectsColor = '#1197D3';
 
             const data = productsData.map((project) => {return project.partID })
 
+        
+            return (
+                productsData.length <= 0 
+                ? this.renderError()
+                : this.renderFlipperContainer(productsData, data,projectsColor)
+            )
+
+        }
+
+        // --------------------------------------
+        // Render No Data Message
+        // --------------------------------------
+        renderError() {
+            const message = 'No Data Found';
+            return <NoData message = {message}></NoData>
+        }
+
+
+        // --------------------------------------
+        // Render Flipper
+        // --------------------------------------
+        renderFlipperContainer(productsData, data, projectsColor) {
             return (
                 <Flipper flipKey={data.join("")} className = "row xpl-row">
                                 
@@ -77,7 +107,6 @@
                 </Flipper>
             )
         }
-
 
         // --------------------------------------
         // Render Component

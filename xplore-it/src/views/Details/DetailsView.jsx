@@ -11,6 +11,7 @@
     import PropTypes from "prop-types";
     import { Breadcumbs, WideCard, ProjectCard, TabsLayout, AppLoader  } from '../../components';
     import axios from 'axios';
+    import {join} from 'lodash';
     import {Endpoints} from '../../services/endpoints'
 
 // --------------------------------------
@@ -18,9 +19,13 @@
 // --------------------------------------
     class DetailsView extends Component {
 
-        // --------------------------------------
-        // Constructor
-        // --------------------------------------
+        /* ==========================================================================
+         *  Component Setup
+         ========================================================================== */
+
+            // --------------------------------------
+            // Constructor
+            // --------------------------------------
             constructor(props) {
                 super(props);
                 this.state = {
@@ -37,7 +42,9 @@
                 }
             }
 
-
+            // --------------------------------------
+            // Load API and Set State
+            // --------------------------------------
             componentDidMount() {
                 this.loadAPI();
             }
@@ -50,45 +57,53 @@
             // Load Web Services
             // --------------------------------------
             async loadAPI () {
-                let loadProjectsPromise = await this.loadProjects();
-                let projectsResponse = await loadProjectsPromise.data;
-                console.log('projectsResponse', projectsResponse);
+                const {partID} =  this.props.match.params;
+                
+                // Project Details
+                let loadProjectOverviewPromise = await this.loadProjectDetails(partID);
+                let projectOverviewResponse = await loadProjectOverviewPromise.data[0];
 
-                let loadProjectOverviewPromise = await this.loadProjectDetails();
-                let projectOverviewResponse = await loadProjectOverviewPromise.data;
-                console.log('projectOverviewResponse', projectOverviewResponse);
+                // Get Keywords
+                let productKeywords = projectOverviewResponse.SearchKeyword
+
+                // Get Related Projects
+                let loadRelatedProjectsPromise = await this.loadRelatedProjects(partID,productKeywords);
+                let relatedProjectsResponse = await loadRelatedProjectsPromise.data;
 
 
                 this.setState( {
-                    productOverview : projectOverviewResponse[0],
-                    relatedProducts : projectsResponse,
+                    productOverview : projectOverviewResponse,
+                    relatedProducts : relatedProjectsResponse,
                     isLoaded : true
                 })
-
 
 
             }
 
             /** --------------------------------------
             // Get Related Projects
-            // @param {}
-            // @returns {A Promuise Object}
+            // @param {partID <integer>}
+            // @param {Produt search keywords <string array>}
+            // @returns {A Promise Object}
             // --------------------------------------*/
-            async loadProjects() {
-                const serviceURL = Endpoints.getAllProducts;
-                return axios.get(serviceURL)  ;
+            async loadRelatedProjects(partID,productKeywords) {
+                
+                const params = {
+                    customerid : partID,
+                    keyword : join(productKeywords, ',')
+                }
+                return (axios.get(Endpoints.getRelatedProducts, {params}));
             }
 
 
-             /** --------------------------------------
+            /** --------------------------------------
             // Get Project Overview
-            // @param {}
-            // @returns {A Promuise Object}
+            // @param {partID <integer>}
+            // @returns {A Promise Object}
             // --------------------------------------*/
-            async loadProjectDetails( ) {
-                const {partID} =  this.props.match.params;
-                const serviceURL = `${Endpoints.getProduct}${partID}`
-                return (axios.get(serviceURL)) 
+            async loadProjectDetails(partID) {
+                const params = {partid : partID}
+                return (axios.get(Endpoints.getProduct, {params}));
             }
 
         /* ==========================================================================
@@ -125,7 +140,8 @@
             // Render BreadCumbs
             // --------------------------------------
             renderBreadcumbs() {
-                    return <Breadcumbs/>
+                const {SoftwareTopic, ProductScope} = this.state.productOverview;
+                    return <Breadcumbs SoftwareTopic = {SoftwareTopic}  />
                 }
 
             // --------------------------------------
@@ -211,7 +227,6 @@
                 render() {
                     const {isLoaded} = this.state;
                     return isLoaded ? this.renderAppDetailsView() : this.renderLoader();
-
                 }
     }
 

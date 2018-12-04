@@ -53,12 +53,12 @@
             return (
                 
                     currentMenu.map((menuItem, key)=> {
-
-                        
+                    // console.log('menuItem', menuItem);
 
                         if(menuItem.sidebarName ) 
                         {   
                             menuItemPath = menuItem.subCategories && menuItem.subCategories.length > 0 ? null : menuItem.path;
+                            console.log('menuItemPath', menuItemPath);
                 
                             if(menuItemPath!== null) {
 

@@ -310,6 +310,16 @@
         color: #2f323e;
     }
 
+    .xpl-errorContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 22px;
+    }
+
+    .xpl-buttonContainer {
+        padding-top: 10px;
+    }
 
 /* ---------------------------------------------------
     4.0 CONTENT STYLES

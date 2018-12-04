@@ -1,0 +1,27 @@
+/* ==========================================================================
+ * Error Message Styles 
+ * 04/12/2018
+ * Alan Medina Silva
+ ========================================================================== */
+
+.xpl-erroMessageContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+i.xpl-noDataIcon {
+    font-size: 50px;
+    color: rgba(68, 128, 219, 0.6);
+}
+
+h4.xpl-erroMessage {
+    padding-bottom: 30px;
+    font-size: 40px;
+}
+
+.xpl-errorSubMessage {
+    text-align: center;
+    padding-bottom: 30px;
+}

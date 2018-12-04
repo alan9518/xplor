@@ -15,7 +15,8 @@
         ToggleButton,
         ProjectCard,
         Carrousel,
-        ProjectsHolder
+        ProjectsHolder,
+        AppLoader, 
     } from "../../components";
     
     import {shuffle, startCase, replace} from "lodash";
@@ -34,7 +35,7 @@
 
         // --------------------------------------
         // constructor
-        // --------------------------------------
+        // --------------------------------------\
         constructor(props) {
             super(props);
             this.state = {
@@ -56,17 +57,10 @@
         // },
 
         // --------------------------------------
-        // Get the Current Category from the URL
-        // Before the Component Renders
-        // --------------------------------------
-        componentWillMount() {
-            this.splitRouteName();
-        }
-
-        // --------------------------------------
         // Initial Shuffle
         // --------------------------------------
         componentDidMount() {
+            this.setState({isLoaded : false})
             this.loadProjects()
         }
 
@@ -74,21 +68,25 @@
         /* ==========================================================================
          *  API Calls
          ========================================================================== */
-            loadProjects() {
-                const serviceURL = Endpoints.getAllProducts;
-                axios.get(serviceURL)
-                .then((data) => {
-                    this.setState({
-                        products : data.data,
-                        isLoaded : true
-                    })
-                    this.shuffle();
-                })
-                .catch((error) => {
-                    console.log('error', error);
+        
+            async loadProjects() {
+            
+                const topicName = this.splitRouteName();
+                const params = {customerid : this.props.match.params.key}
+
+                const getProductsPromise = topicName === 'all' 
+                    ? await axios.get(Endpoints.getAllProducts) 
+                    : await axios.get(Endpoints.getAllProductsByCategory,{params});
+
+                // const getProductsPromise = await axios.get(Endpoints.getAllProducts);
+                const productsData = getProductsPromise.data;
+
+                this.setState( {
+                    currentCategory : `${startCase(topicName)}  Products`,
+                    products : productsData,
+                    isLoaded : true
                 })
             }
-
 
         /* ==========================================================================
          *  Render Logic and State Handle
@@ -101,12 +99,22 @@
             // Current Category from the view
             // --------------------------------------
             splitRouteName() {
-                const {pathname} = this.props.location;
-                const route = pathname.split('/');
 
-                this.setState({
-                    currentCategory : `${this.formatTitle(route)} Products`,
-                })
+                const {topic} = this.props.match.params
+                console.log('params', this.props.match.params);
+
+
+                // const {pathname} = this.props.location;
+                // console.log('this.props.location', this.props);
+                // const route = pathname.split('/');
+
+                // this.setState({
+                //     // currentCategory : `${this.formatTitle(topic)} Products`,
+                //     currentCategory : topic
+                // })
+
+                return topic ;
+
             }
 
 
@@ -141,10 +149,9 @@
                 
                 return (
                     <Fragment>
-                        { this.props.location.pathname === '/catalogue' && this.renderCarrousel()}
+                        { this.props.location.pathname === '/catalogue/all/all' && this.renderCarrousel()}
                         {this.renderFlipperBody()}
 
-                        
                     </Fragment>
                 )
 
@@ -179,7 +186,6 @@
             renderFlipperBody() {
                 
                 const {currentCategory, products} = this.state;
-                const {pathname} = this.props.location;
                 
                 return (
                     <Fragment>
@@ -187,12 +193,12 @@
                         <div className="row xpl-row">
 
                             <div className="col-lg-12">
-                                <h3 className="xpl-allAppTitle">{currentCategory}</h3>
+                                <h3 className="xpl-allAppTitle" onClick = {this.shuffle}>{currentCategory}</h3>
                             </div>
 
                         </div>
 
-                        <ProjectsHolder productsData = {products} pathname = {this.props.location}/>
+                        <ProjectsHolder productsData = {products} currentCategory = {currentCategory} shuffle = {this.shuffle} />
 
                     </Fragment>
                 );
@@ -239,11 +245,22 @@
                 );
             }
 
+
+            // --------------------------------------
+            // Render Loader
+            // --------------------------------------
+            renderLoader () {
+                return <div> <AppLoader/> </div>
+            }
+
+
+
             // --------------------------------------
             // Render Component
             // --------------------------------------
             render() {
-                return this.state.isLoaded && this.renderDashboard();
+                const {isLoaded} = this.state
+                return isLoaded ? this.renderDashboard() : this.renderLoader()
             }
     }
 

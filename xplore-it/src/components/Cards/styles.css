@@ -51,6 +51,8 @@
         background-color: #fff;
         padding: 12px 8px;
         border-radius: 3px;
+        min-height: 80px;
+        max-height: 80px;
     }
 
     .xpl-cardContainer:hover a{

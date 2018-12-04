@@ -15,7 +15,8 @@
 // --------------------------------------
 // Create Functional Component
 // --------------------------------------
-    const BreadCumbs = (props) => {
+    const BreadCumbs = ({SoftwareTopic, ProductScope}) => {
+        console.log('props brad', SoftwareTopic);
 
         return (
             <div className="xpl-breadcumbsContainer">
@@ -23,8 +24,8 @@
                     <h4 className = "xpl-breadChild"> All Results  </h4>
                 </ProjectLink>
                 <h4 className = "xpl-breadChild"> > </h4>
-                <ProjectLink route = {"/catalogue"} >
-                    <h4 className = "xpl-breadChild"> Category  </h4>
+                <ProjectLink route = {`/catalogue/${SoftwareTopic}`} >
+                    <h4 className = "xpl-breadChild">{ SoftwareTopic} </h4>
                 </ProjectLink>
                
             </div>

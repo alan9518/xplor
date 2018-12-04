@@ -40,6 +40,7 @@
     import Scroller from './InfiniteScroll/Scroller';
     import ProjectsHolder from './Projects/ProjectsHolder'
     import AppLoader from './Loader/Loader';
+    import NoData from './NoData/NoData';
 
 
 // --------------------------------------
@@ -78,4 +79,5 @@
         Scroller,
         ProjectsHolder,
         AppLoader,
+        NoData,
     }

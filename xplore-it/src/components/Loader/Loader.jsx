@@ -21,7 +21,7 @@
             <div className="xpl-loaderContainer">
                 <div className="xpl-loaderHolder">
                     <Loader
-                        type = "Ball-Triangle"
+                        type = "Triangle"
                         color = "#1197D3"
                         height = {80}
                         width = {80}

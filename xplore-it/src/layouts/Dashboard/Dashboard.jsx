@@ -156,7 +156,7 @@
                                     <TransitionGroup className="transition-group">
                                         <CSSTransition 
                                                     key={location.key} 
-                                                    timeout={{ enter: 300, exit: 300 }} 
+                                                    timeout={{ enter: 300, exit: 100 }} 
                                                     classNames="fade">
                                             <Switch location = {location} >
                                                 {this.renderRoutes(dashboardRoutes)}
