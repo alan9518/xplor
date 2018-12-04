@@ -41,6 +41,7 @@
     import ProjectsHolder from './Projects/ProjectsHolder'
     import AppLoader from './Loader/Loader';
     import NoData from './NoData/NoData';
+    import ListItem from './Cards/CardHeaderListItem';
 
 
 // --------------------------------------
@@ -80,4 +81,5 @@
         ProjectsHolder,
         AppLoader,
         NoData,
+        ListItem,
     }

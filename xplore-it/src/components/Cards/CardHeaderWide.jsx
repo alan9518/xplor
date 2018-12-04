@@ -11,13 +11,17 @@
     import PropTypes from "prop-types";
     import { ProjectCard } from "../../components";
     import "./styles.css";
-
+    import ListItem from "./CardHeaderListItem";
+    import {shuffle, startCase, replace} from "lodash";
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
 
     const CardHeaderWide = props => {
 
+        // --------------------------------------
+        // Get Values
+        // --------------------------------------
         const {productOverview} = props;
         const { 
                 OwnerFirstName, OwnerLastName, 
@@ -25,30 +29,39 @@
                 LastUpdateDate, CoownerFirstName, 
                 CoownerLastName  
             } = productOverview;
+
+        // --------------------------------------
+        // Format Values
+        // --------------------------------------
+         const formatDate = (date)=> {
+                const productDate = new Date(date);
+                return productDate.toLocaleDateString();
+            }
+
+        const formatOwners = (ownerName) => {
+            return startCase(ownerName.toLowerCase())
+        }
         
         // --------------------------------------
         // Render Card
         // --------------------------------------
             return (
                 <div className="xpl-cardWideHeader">
-                     <div className="xpl-cardHeader">
+                    <div className="xpl-cardHeader">
                         <ProjectCard key = {productOverview.partID} {...productOverview} cardHover = {false}/>
-
                     </div> 
 
                     <div className="xpl-cardProjectInfo">
-                       <ul>
-                        <li> <span className = "xpl-boldText"> Uploaded: </span>  {CreatedDate}</li>
-                        <li> <span className = "xpl-boldText"> Owner: </span> {`${OwnerFirstName} ${OwnerLastName}`} </li>
-                         
-                        
+                        <ul>    
+                            <ListItem itemName = {"Uploaded"} content = {formatDate(CreatedDate)} />
+                            <ListItem itemName = {"Product Type"} content = {ProductType} />
                        </ul>
                     </div>
 
                     <div className="xpl-cardProjectInfo">
-                       <ul>
-                        <li> <span className = "xpl-boldText"> Co-Owner: </span> {`${CoownerFirstName} ${CoownerLastName}`} </li>
-                        <li> <span className = "xpl-boldText"> ProductType : </span> {ProductType} </li>
+                        <ul>
+                            <ListItem itemName = {"Owner"} content = {formatOwners(`${OwnerFirstName} ${OwnerLastName}`)}/>
+                            <ListItem itemName = {"Co-Owner"} content = {formatOwners(`${CoownerFirstName} ${CoownerLastName}`)} />
                        </ul>
                     </div>
                 </div>

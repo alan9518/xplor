@@ -25,7 +25,7 @@
             return (
                 <div className="xpl-cardContainer xpl-wideCard ">
                     
-                    <CardHeaderWide productOverview = {props.productData} />
+                   {props.cardHeader}
 
                     <div className="xpl-cardOverviewContainer">
 

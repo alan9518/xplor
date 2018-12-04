@@ -42,7 +42,8 @@
                 currentCategory : 'All Apps',
                 isLoaded : true,
                 categoryColor : '',
-                products : []
+                products : [],
+                carrouselproducts : []
             }
         }
 
@@ -68,22 +69,31 @@
         /* ==========================================================================
          *  API Calls
          ========================================================================== */
-        
+
+           // --------------------------------------
+           // Get Data and save it into the State
+           // --------------------------------------
             async loadProjects() {
             
                 const topicName = this.splitRouteName();
                 const params = {customerid : this.props.match.params.key}
 
+                // Get Carrousel Products. Create Promise
+                const getCarrouselProductsPromise =  await axios.get(Endpoints.getCarrouselProducts);
+
+                // Get All Products. Createn Promise 
                 const getProductsPromise = topicName === 'all' 
                     ? await axios.get(Endpoints.getAllProducts) 
                     : await axios.get(Endpoints.getAllProductsByCategory,{params});
 
-                // const getProductsPromise = await axios.get(Endpoints.getAllProducts);
+                // Resolve Promises
                 const productsData = getProductsPromise.data;
+                const carrouselData = getCarrouselProductsPromise.data;
 
                 this.setState( {
                     currentCategory : `${startCase(topicName)}  Products`,
                     products : productsData,
+                    carrouselproducts : carrouselData,
                     isLoaded : true
                 })
             }
@@ -99,22 +109,8 @@
             // Current Category from the view
             // --------------------------------------
             splitRouteName() {
-
                 const {topic} = this.props.match.params
-                console.log('params', this.props.match.params);
-
-
-                // const {pathname} = this.props.location;
-                // console.log('this.props.location', this.props);
-                // const route = pathname.split('/');
-
-                // this.setState({
-                //     // currentCategory : `${this.formatTitle(topic)} Products`,
-                //     currentCategory : topic
-                // })
-
-                return topic ;
-
+                return topic;
             }
 
 
@@ -146,12 +142,10 @@
             // Render Dashboard
             // --------------------------------------
             renderDashboard() {
-                
                 return (
                     <Fragment>
                         { this.props.location.pathname === '/catalogue/all/all' && this.renderCarrousel()}
                         {this.renderFlipperBody()}
-
                     </Fragment>
                 )
 
@@ -161,18 +155,14 @@
             // --------------------------------------
             // Render Slick Carrousel
             // --------------------------------------
-
             renderCarrousel() {
-                const {products} = this.state;
-                // const carrouselProjects = products.filter((project)=> project.projectCarrousel ) ;
-                const carrouselProjects = products.map((project)=> project.projectCarrousel = true) ;
-
-
+                const {carrouselproducts} = this.state;
+                const itemsToShow = carrouselproducts.length;
                 return (
                     <div className="row xpl-carrouselRow">
                         <div className="col-lg-12">
                             <h3 className="xpl-row xpl-allAppTitle"> What's New? </h3>
-                            <Carrousel carrouselData = {products} />
+                            <Carrousel carrouselData = {carrouselproducts} itemsToShow = {itemsToShow}  />
                         </div>
                     </div>
                 )
@@ -189,13 +179,10 @@
                 
                 return (
                     <Fragment>
-                        
                         <div className="row xpl-row">
-
                             <div className="col-lg-12">
                                 <h3 className="xpl-allAppTitle" onClick = {this.shuffle}>{currentCategory}</h3>
                             </div>
-
                         </div>
 
                         <ProjectsHolder productsData = {products} currentCategory = {currentCategory} shuffle = {this.shuffle} />

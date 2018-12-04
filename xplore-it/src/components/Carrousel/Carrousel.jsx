@@ -31,15 +31,15 @@
                     infinite: true,
                     arrows : true,
                     speed: 500,
-                    slidesToShow: 4,
+                    slidesToShow: this.props.itemsToShow - 1,
                     slidesToScroll: 1,
                     initialSlide: 0,
                     responsive: [
                         {
                             breakpoint: 1024,
                             settings: {
-                                slidesToShow: 2,
-                                slidesToScroll: 2,
+                                slidesToShow: this.props.itemsToShow,
+                                slidesToScroll: 1,
                                 infinite: true,
                                 dots: true
                             }
@@ -64,19 +64,37 @@
                 }
             }
 
+
+        // --------------------------------------
+        // Create Carrousel Item
+        // --------------------------------------
+        createCarrouselItem(carrouselItem, index) {
+            const {itemsToShow} = this.props;
+
+            return (
+                <div  className={`col-lg-12 col-md-12 col-sm-12 ${itemsToShow <= 3 && 'xpl-cardStyleCenter'}`} >
+                    <ProjectCard key = {`car-${index}.${carrouselItem.partID}`} {...carrouselItem}/>
+                </div>
+            )
+        }
+
+
         // --------------------------------------
         // Render Carrousel 
         // --------------------------------------
         renderCarrousel() {
             const {carrouselData} = this.props;
-            console.log('carrouselData',  this.props);
+
+            
+
             return (
                 <Slider {...this.settings}>
                 {
                     carrouselData.map((carrouselItem,index) => {
-                        return  <div  className="col-lg-12 col-md-12 col-sm-12">
-                           <ProjectCard key = {`car-${index}.${carrouselItem.partID}`} {...carrouselItem}/>
-                        </div>
+                        return  (
+                            this.createCarrouselItem(carrouselItem,index)
+                        )
+                        
                     })
 
                 }

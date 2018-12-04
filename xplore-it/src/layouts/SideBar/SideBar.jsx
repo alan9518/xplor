@@ -56,7 +56,7 @@
                 '#D60B33',
                 '#238ECC',
                 '#B60BAC',
-                 '#8F1859',
+                '#8F1859',
                 '#E18A50',
             ]
             let navigationRoutes = [

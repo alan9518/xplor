@@ -38,6 +38,7 @@
         padding: 16px;
         color: #fff;
         border-radius: 3px 3px 0 0;
+        flex-wrap: wrap;
     }
 
 
@@ -99,7 +100,8 @@
     }
 
     .xpl-cardWideHeader .xpl-cardHeader {
-        min-width: 250px;
+        min-width: 280px;
+        height: auto;
     }
 
     .xpl-cardProjectInfo {
@@ -107,8 +109,24 @@
         flex-direction: column;
         margin-left: 16px;
         align-items: baseline;
-        justify-content: center;
-        padding: 8px 0;
+        padding: 8px 25px;
+        width: 100%;
+        max-width: 280px;
+    }
+
+    
+    .xpl-cardProjectInfo ul {
+        list-style: none;
+    }
+
+
+    .xpl-cardProjectInfo ul li {
+        display: flex;
+        flex-direction: column;
+        padding: 15px 0;
+        text-align: justify;
+        color: #6c757d;
+        font-size: 18px;
     }
 
     .xpl-cardProjectInfo p {
@@ -137,18 +155,21 @@
         margin-bottom: 16px;
     }
 
-    .xpl-cardProjectInfo ul {
-        list-style: none;
-    }
-
-
-    .xpl-cardProjectInfo ul li {
-        padding: 5px 0;
-        text-align: justify;
-        color: #6c757d;
-    }
     
     span.xpl-boldText {
         font-weight: 500;
     }
-   
+
+
+    .xpl-cardStyleCenter {
+        display: flex !important;
+        justify-content: center !important;
+    }
+    
+    .xpl-cardStyleCenter .xpl-mediumCard {
+        max-width: 450px !important;
+    }
+
+    .xpl-cardStyleCenter .xpl-mediumCard > .xpl-cardHeader.cardHover{
+        height: 130px;
+    }   

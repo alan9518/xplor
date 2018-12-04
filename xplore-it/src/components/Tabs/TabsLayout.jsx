@@ -20,8 +20,7 @@
 
     const TabsLayout = (props) => {
         const tabsData = props.tabsData;
-        const defaultIndex = props.defaultIndex
-        const onSelect = props.onSelect;
+        const currentIndex = props.currentTab
         const changePrevTab =  props.changePrevTab;
         const changeNextTab =  props.changeNextTab;
         return (
@@ -31,7 +30,8 @@
                 <div className="xpl-tabArrow xpl-tabRightArrow"> <AppButton iconLeftClass = {'fas fa-angle-right'}  onClick = {changeNextTab}/></div>
                     
                 
-                <Tabs defaultIndex={0} onSelect={onSelect} selectedIndex = {defaultIndex}>
+                {/* <Tabs currentIndex={currentIndex} onSelect={onSelect} selectedIndex = {props.tabIndex}> */}
+                <Tabs  defaultIndex={0} selectedIndex = {currentIndex}  onSelect = {props.onSelect} >
                     
                     <TabList>
                         <div className="xpl-scrolling-wrapper">

@@ -8,8 +8,7 @@
 // Import Dependences
 // --------------------------------------
     import React, { Component, Fragment } from "react";
-    import PropTypes from "prop-types";
-    import { Breadcumbs, WideCard, ProjectCard, TabsLayout, AppLoader  } from '../../components';
+    import { Breadcumbs, WideCard, ProjectCard, TabsLayout, AppLoader, CardHeaderWide  } from '../../components';
     import axios from 'axios';
     import {join} from 'lodash';
     import {Endpoints} from '../../services/endpoints'
@@ -111,7 +110,7 @@
         ========================================================================== */
 
             // --------------------------------------
-            // Change Current Tab 
+            // Change To Previous Tab 
             // --------------------------------------
 
             changePrevTab = (e) => {
@@ -121,6 +120,9 @@
                     : this.setState({tabIndex : tabIndex - 1})
             }
 
+            // --------------------------------------
+            // Change to Next Tab 
+            // --------------------------------------
             changeNextTab = (e) =>{
                 const {tabIndex, productDetails} =  this.state;
                 tabIndex < productDetails.length - 1
@@ -152,13 +154,19 @@
                 return (
                     
                     <div className="xpl-appDescriptionContainer xpl-wideCard xpl-shadow">
-                        <TabsLayout 
+                        <TabsLayout  
                             tabsData = {productDetails} 
-                            onSelect={tabIndex => this.setState({ tabIndex })}
+                            onSelect = {tabIndex => this.setState({ tabIndex })}
                             changeNextTab = {this.changeNextTab}
                             changePrevTab = {this.changePrevTab}
+                            currentTab = {tabIndex}
                         >
-                            <WideCard productData = {productOverview} isOverview = {true} tabIndex = {tabIndex}/>
+                            <WideCard  
+                                cardHeader = {<CardHeaderWide productOverview = {productOverview} />}  
+                                productData = {productOverview} 
+                                isOverview = {true} 
+                                tabIndex = {tabIndex}
+                            />
                         </TabsLayout>
 
 
@@ -230,12 +238,6 @@
                 }
     }
 
-// --------------------------------------
-// Define PropTypes
-// --------------------------------------
-    // DetailsView.propTypes = {
-    //     prop: PropTypes
-    // };
 
 // --------------------------------------
 // Export Component
