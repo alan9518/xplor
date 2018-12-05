@@ -28,6 +28,10 @@
         // --------------------------------------
         onItemClick = (menu) => (e)=> {
             this.props.onClick(menu);
+            // console.log('this.props.onClick', this.props.onClick);
+
+
+
             // this.props.hideMobileMenu();
         }
 

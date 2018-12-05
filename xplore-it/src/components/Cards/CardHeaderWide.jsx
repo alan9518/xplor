@@ -33,11 +33,15 @@
         // --------------------------------------
         // Format Values
         // --------------------------------------
-         const formatDate = (date)=> {
-                const productDate = new Date(date);
-                return productDate.toLocaleDateString();
-            }
+        const formatDate = (date)=> {
+            const productDate = new Date(date);
+            return productDate.toLocaleDateString();
+        }
 
+
+        // --------------------------------------
+        // Set Format To Owner Name
+        // --------------------------------------
         const formatOwners = (ownerName) => {
             return startCase(ownerName.toLowerCase())
         }
@@ -46,8 +50,11 @@
         // Render Card
         // --------------------------------------
             return (
-                <div className="xpl-cardWideHeader">
-                    <div className="xpl-cardHeader">
+                    <div className="xpl-cardWideHeader ">
+
+                         
+
+                     <div className="xpl-cardHeader">
                         <ProjectCard key = {productOverview.partID} {...productOverview} cardHover = {false}/>
                     </div> 
 
@@ -63,7 +70,7 @@
                             <ListItem itemName = {"Owner"} content = {formatOwners(`${OwnerFirstName} ${OwnerLastName}`)}/>
                             <ListItem itemName = {"Co-Owner"} content = {formatOwners(`${CoownerFirstName} ${CoownerLastName}`)} />
                        </ul>
-                    </div>
+                    </div> 
                 </div>
 
                 

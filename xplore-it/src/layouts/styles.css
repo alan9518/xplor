@@ -337,7 +337,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 15px 0px;
+        padding: 20px 0px;
     }
 
 
@@ -419,7 +419,7 @@
     .xpl-appSideBar.showMobileMenu {
         -webkit-transform: translateX(0%);
                     transform: translateX(0%);
-        z-index: 100;
+        z-index: 10000;
         flex: 1 0 100%;
     }
 
@@ -445,184 +445,246 @@
     /* ==========================================================================
     *  Mobile 
        ========================================================================== */
+        @media only screen and (max-width:768px) {
 
-    
-    @media only screen and (max-width:768px) {
-
-        .App.xpl-mainContainer {
-            margin-top: 24px;
-        }
-
-        .xpl-appSideBar {
-            -webkit-transform: translateX(-100%);
-                    transform: translateX(-100%);
-        }
-
-        .xpl-appSideBarBody {
-            padding: 10px;
-            position: fixed;
-            width: 100%;
-        }
-
-        
-        button.xpl-button.xpl-closeButton {
-            display: block;
-        }
-
-        .xpl-appSideBarLinksContainer {
-            padding: 10px 0px 0 10px;
-        }
-
-        .xpl-content  {
-            margin-left: -300px;
-        }
-
-        .xpl-toggleButton {
-            display: block;
-            transition: all .3s ease-out;
-        }
-
-        .xpl-cardContainer {
-            margin-bottom: 24px;
-        }
-
-        button.xpl-button.xpl-backButton i {
-            left: 24px;
-            top: 132px;
-        }
-
-        .xpl-cardWideHeader {
-            justify-content: flex-start;
-            width: 100%;
-            flex-flow: column wrap;
-        }
-
-        .xpl-cardWideHeader .xpl-cardHeader {
-            min-width: 180px;
-            min-height: auto;
-        }
-
-        .xpl-cardProjectInfo {
-            margin-top: 12px;
-            margin-left: 0px;
-            align-items: flex-start;
-            padding: 8px;
-        }
-
-        .xpl-relatedListApps {
-            margin-top: 20px;
-        }
-
-
-
-        p.xpl-cardProjectCardOverview {
-            padding-left: 0;
-        }
-
-        .xpl-relatedContainer {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .xpl-allAppTitle {
-            text-align: center;
-        }
-
-
-
-        /* ==========================================================================
-         *  Responsive Modal
-         ========================================================================== */
-
-        section.xpl-appModal-main{
-            width: 90%;
-            max-width: 100%;
-            height: 90%;
-            max-height: 100%;
-        }
-
-        .xpl-modalBodyScroll {
-            padding: 10px;
-        }
-
-        .xpl-formSubmitContainer {
-            justify-content: center;
-        }
-
-
-        /*  ==========================================================================
-         *  Responsive Carrousel
-            ========================================================================== */
-
-
-            button.slick-arrow {
-                z-index: 30000;
-                width: 30px;
+            .App.xpl-mainContainer {
+                margin-top: 32px;
             }
 
-        /*  ==========================================================================
-         *  Responsive Tabs
+            .xpl-content.main .container-fluid {
+                padding: 0 7px;
+            }
+
+            .xpl-buttonContainer {
+                padding: 20px 4px;
+            }
+
+            .xpl-appSideBar {
+                -webkit-transform: translateX(-100%);
+                        transform: translateX(-100%);
+            }
+
+            .xpl-appSideBarBody {
+                padding: 10px;
+                position: fixed;
+                width: 100%;
+            }
+
+            
+            button.xpl-button.xpl-closeButton {
+                display: block;
+            }
+
+            .xpl-appSideBarLinksContainer {
+                padding: 10px 0px 0 5px;
+            }
+
+            .xpl-content  {
+                margin-left: -300px;
+            }
+
+            .xpl-toggleButton {
+                display: block;
+                transition: all .3s ease-out;
+            }
+
+            .xpl-cardContainer {
+                margin-bottom: 24px;
+            }
+
+            button.xpl-button.xpl-backButton i {
+                left: 24px;
+                top: 132px;
+            }
+
+            .xpl-cardWideHeader {
+                justify-content: flex-start;
+                width: 100%;
+                flex-flow: column wrap;
+            }
+
+            
+
+            .xpl-cardWideHeader .xpl-cardHeader {
+                min-width: 280px;
+                height: auto;
+                padding: 16px 0 !important;
+            }
+
+            .xpl-cardName {
+                max-width: 110px;
+                line-break: normal;
+                padding: 16px;
+            }
+
+            .xpl-cardProjectInfo {
+                /* margin-top: 12px; */
+                margin-left: 0px;
+                align-items: flex-start;
+                padding: 0;
+            }
+
+            .xpl-cardProjectInfo ul li {
+                padding: 7px 2px;
+            }
+
+            .xpl-relatedListApps {
+                margin-top: 20px;
+            }
+
+
+
+            p.xpl-cardProjectCardOverview {
+                padding-left: 0;
+            }
+
+            .xpl-relatedContainer {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+
+            .xpl-allAppTitle {
+                text-align: center;
+            }
+
+            .xpl-loaderContainer {
+                justify-content: flex-start;
+                margin-top: 12px;
+            }
+
+            .xpl-wideCard {
+                padding: 8px;
+            }
+
+            .xpl
+
+            h4.xpl-erroMessage {
+                font-size: 30px;
+            }
+
+
+            /* ==========================================================================
+            *  Responsive Modal
             ========================================================================== */
-        /* ul.react-tabs__tab-list {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            width: 100%;
-        } */
+
+            section.xpl-appModal-main{
+                width: 90%;
+                max-width: 100%;
+                height: 90%;
+                max-height: 100%;
+            }
+
+            .xpl-modalBodyScroll {
+                padding: 10px;
+            }
+
+            .xpl-formSubmitContainer {
+                justify-content: center;
+            }
+
+            .xpl-tabLeftArrow {
+                top: 30px;
+                left: 20px;
+            }
+
+            .xpl-tabRightArrow {
+                top: 30px;
+                right: 15px;
+            }
         
-        .react-tabs__tab {
-            max-width: 70px;
-            padding: 20px;
-        }
+            .xpl-tabArrow {
+                position: absolute;
+                font-size: 27px;
+                z-index: 1000;
+            }
 
 
-        /* ==========================================================================
-         *  Responsive Breadcumbs
-         ========================================================================== */
-        .xpl-breadcumbsContainer {
-            width: 100%;
-            justify-content: center;
-        }
+            /*  ==========================================================================
+            *  Responsive Carrousel
+                ========================================================================== */
 
-        .xpl-breadcumbsContainer a {
-            text-decoration: none;
-            color: #2f323e;
-        }
 
-        h4.xpl-breadChild {
-            font-size: 20px;
+                button.slick-arrow {
+                    z-index: 30000;
+                    width: 30px;
+                }
+
+                .slick-next {
+                    right: 0px;
+                    z-index: 2000;
+                }
+
+                .slick-prev, .slick-next {
+                    top: 43%;
+                }
+
+
+            /*  ==========================================================================
+            *  Responsive Tabs
+                ========================================================================== */
+            /* ul.react-tabs__tab-list {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                width: 100%;
+            } */
+            
+            .react-tabs__tab {
+                max-width: 70px;
+                padding: 20px;
+            }
+
+
+            /* ==========================================================================
+            *  Responsive Breadcumbs
+            ========================================================================== */
+            .xpl-breadcumbsContainer {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .xpl-breadcumbsContainer a {
+                text-decoration: none;
+                color: #2f323e;
+            }
+
+            h4.xpl-breadChild {
+                font-size: 17px;
+            }
+        
         }
-    
-    }
 
     /* ==========================================================================
     *  Ipad 
     ========================================================================== */
 
+        @media only screen and (min-width:768px) and (max-width : 1024px) {
+            .xpl-relatedListApps {
+                margin-top: 20px;
+            }
 
+            .xpl-mediumCard {
+                max-width: 100%;
+                width: 100%;
+            }
 
-    @media only screen and (min-width:768px) and (max-width : 1024px) {
-        .xpl-relatedListApps {
-            margin-top: 20px;
-        }
+            .xpl-cardImage {
+                padding: 8px 12px;
+            }
 
-        .xpl-mediumCard {
-            max-width: 600px;
-        }
-
-        .react-tabs__tab {
-            position: relative;
-            display: inline-flex;
-            flex: 0 0 auto;
-            max-width: 100px;
-            padding: 20px;
-        }
-    }   
+            .react-tabs__tab {
+                position: relative;
+                display: inline-flex;
+                flex: 0 0 auto;
+                max-width: 100px;
+                padding: 20px;
+            }
+        }   
 
 
 

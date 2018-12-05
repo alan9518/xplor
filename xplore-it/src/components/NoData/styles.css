@@ -17,6 +17,7 @@ i.xpl-noDataIcon {
 }
 
 h4.xpl-erroMessage {
+    text-align: center;
     padding-bottom: 30px;
     font-size: 40px;
 }

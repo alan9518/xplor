@@ -30,6 +30,7 @@ ul.react-tabs__tab-list {
     justify-content: space-around;
     align-items: center;
     width: 100%;
+    padding: 0 16px;
 }
 
 .react-tabs__tab {

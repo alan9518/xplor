@@ -56,6 +56,10 @@
         max-height: 80px;
     }
 
+    .xpl-cardDescription p {
+        text-align: center;
+    }
+
     .xpl-cardContainer:hover a{
         text-decoration: none;       
     }
@@ -102,8 +106,12 @@
     .xpl-cardWideHeader .xpl-cardHeader {
         min-width: 280px;
         height: auto;
+        padding:  16px 0;
     }
 
+    .xpl-cardWideHeader .xpl-cardHeader .xpl-cardName {
+        padding: 16px;
+    }
     .xpl-cardProjectInfo {
         display: flex;
         flex-direction: column;

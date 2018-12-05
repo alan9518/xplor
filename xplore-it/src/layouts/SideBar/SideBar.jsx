@@ -29,8 +29,8 @@
             super(props);
             this.routes =  this.props.routes;
             this.state = {
-                // currentMenu : props.routes,
                 currentMenu : [],
+                previousMenu : [],
                 menuComponent : 'singleList',
                 currentCategory : null,
                 currentCategoryColor : null,
@@ -65,7 +65,6 @@
                     exact: false,
                     sidebarName : 'Home',
                     key:'home-route',
-                    // component : CatalogueView,
                     color : '#1197D3',
                     homeIcon : 'fas fa-home'
                 },
@@ -84,15 +83,15 @@
                     exact: false,
                     sidebarName : topic.CustomerName,
                     key : topic.CustomerID,
-                    color : shuffle(colorsArray)[0]
+                    color : shuffle(colorsArray)[0],
+                    subCategories : topic.SubCap
                 }
 
                 navigationRoutes.push(route);
             }) 
 
 
-
-
+            // Set Menu To Show and Allow Render
             this.setState( {
                 currentMenu : navigationRoutes,
                 isLoaded : true
@@ -120,10 +119,12 @@
 
             // --------------------------------------
             // Change To Single List Menu
+            // Get The Previopus Menu from State
             // --------------------------------------
             onListItemBackClick = (e) => {
+                const {previousMenu} = this.state;
                 this.setState({
-                    currentMenu: this.routes,
+                    currentMenu : previousMenu,
                     menuComponent : 'singleList'
                 })
             }
@@ -132,17 +133,32 @@
             // --------------------------------------
             // Open SubMenu
             // --------------------------------------
-
             onListItemClick = (menu) =>  {
+                const {currentMenu} =  this.state;
                 const {subCategories, sidebarName, color } = menu;
-                
+                console.log('menu', menu);
+                const path = '';
+
+                // Create New Menu Based on the SubCap
+                const subMenu = subCategories.map((subCap) => {
+                    return {
+                        id : subCap.CustomerID,
+                        path :  `${path}/catalogue/${subCap.SubCapabilities}/${subCap.CustomerID}`,
+                        exact: true,
+                        sidebarName : subCap.SubCapabilities,
+                        key : `${subCap.Capabilities}-${subCap.SubCapabilities}`,
+                    }
+                })
+
+
+                // Set New Menu on the State and Save the Previous One
                 this.setState((prevState) => {
                     return {
                         currentCategory: sidebarName,
                         menuComponent : 'detailsList',
                         currentCategoryColor : color,
-                        currentMenu: subCategories,
-                        
+                        currentMenu: subMenu,
+                        previousMenu : currentMenu  
                     };
                 });
                 
