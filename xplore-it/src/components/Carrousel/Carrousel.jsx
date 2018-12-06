@@ -68,12 +68,12 @@
         // --------------------------------------
         // Create Carrousel Item
         // --------------------------------------
-        createCarrouselItem(carrouselItem, index) {
-            const {itemsToShow} = this.props;
-
+        createCarrouselItem(carrouselItem, index, itemsToShow) {
+            
+            
             return (
-                <div  className={`col-lg-12 col-md-12 col-sm-12 ${itemsToShow <= 3 && 'xpl-cardStyleCenter'}`} >
-                    <ProjectCard key = {`car-${index}.${carrouselItem.partID}`} {...carrouselItem}/>
+                <div key = {index} className={`col-lg-12 col-md-12 col-sm-12 ${itemsToShow <= 3 && 'xpl-cardStyleCenter'}`} >
+                    <ProjectCard  {...carrouselItem}/>
                 </div>
             )
         }
@@ -83,16 +83,14 @@
         // Render Carrousel 
         // --------------------------------------
         renderCarrousel() {
-            const {carrouselData} = this.props;
-
-            
+            const {carrouselData, itemsToShow} = this.props;
 
             return (
                 <Slider {...this.settings}>
                 {
                     carrouselData.map((carrouselItem,index) => {
                         return  (
-                            this.createCarrouselItem(carrouselItem,index)
+                            this.createCarrouselItem(carrouselItem, index, itemsToShow)
                         )
                         
                     })

@@ -29,7 +29,7 @@
 
         componentDidMount() {
             this.props.shuffle()
-            console.log('mounted')
+
         }
 
      
@@ -53,7 +53,6 @@
 
         getCategoryColor(routePath) {
             const selectedCategory =  routes.filter((route) => route.path === routePath);
-            console.log('selectedCategory', selectedCategory);
             return selectedCategory[0];
         }
 

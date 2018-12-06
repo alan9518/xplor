@@ -11,10 +11,10 @@
     import PropTypes from "prop-types";
 
     import { SingleList, DetailsList, Search, AppButton } from "../../components";
-    import routesAPI from '../../routes/routesAPI'
+    // import routesAPI from '../../routes/routesAPI'
     import axios from 'axios';
     import {Endpoints} from '../../services/endpoints';
-    import {find, shuffle} from 'lodash';
+    import {sortBy, shuffle} from 'lodash';
 
 // --------------------------------------
 // Create Component Class
@@ -38,6 +38,9 @@
             }
         }
 
+        // --------------------------------------
+        // Call API
+        // --------------------------------------
         componentDidMount() {
             this.getSideBarRoutes();
         }
@@ -74,9 +77,9 @@
             // Get Topic
             const getSoftwareTopicsPromise = await axios.get(Endpoints.getAllCategories);
             const softwareTopicsData =  await getSoftwareTopicsPromise.data;
-
+            const orderedSoftwareTopicsData = sortBy(softwareTopicsData,[(route)=>{return route.CustomerName}])
             // Create Routes  
-            softwareTopicsData.map((topic) => {
+            orderedSoftwareTopicsData.map((topic) => {
 
                 let route = {
                     path :  `${path}/catalogue/${topic.CustomerName}/${topic.CustomerID}`,
@@ -90,6 +93,8 @@
                 navigationRoutes.push(route);
             }) 
 
+
+            
 
             // Set Menu To Show and Allow Render
             this.setState( {
@@ -136,7 +141,6 @@
             onListItemClick = (menu) =>  {
                 const {currentMenu} =  this.state;
                 const {subCategories, sidebarName, color } = menu;
-                console.log('menu', menu);
                 const path = '';
 
                 // Create New Menu Based on the SubCap

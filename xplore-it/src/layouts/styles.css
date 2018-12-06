@@ -144,7 +144,7 @@
     3.0 SIDEBAR STYLES
 ----------------------------------------------------- */
     .xpl-appSideBar {
-        flex: 1 0 270px;
+        flex: 1 0 300px;
         flex-shrink: 0;
         overflow-x: hidden;
         background-color: #fff;
@@ -152,10 +152,10 @@
         transition: all .3s ease-out;
     }
 
-
     .xpl-appSideBarHeader {
         display: flex;
-        flex-direction: column;       
+        flex-direction: column;
+        padding: 0px 10px 5px 0;
     }
 
     .xpl-buttonCloseContainer {
@@ -182,7 +182,7 @@
     .xpl-appSideBarBody {
         padding: 30px 10px 10px 10px;
         position: fixed;
-        width: 270px;
+        width: 310px;
     }
 
     .xpl-searchContainer {
@@ -195,6 +195,12 @@
         padding-right: 12px;
         font-size: 1.3em;
         display: none;
+    }
+
+    .xpl-appSideBarLinksContainer {
+        position: relative;
+        overflow-y: scroll;
+        height: 790px;
     }
 
     .xpl-appSideBarTitleContainer {
@@ -565,9 +571,9 @@
             }
 
 
-            /* ==========================================================================
-            *  Responsive Modal
-            ========================================================================== */
+            /*  ==========================================================================
+             *  Responsive Modal
+                ========================================================================== */
 
             section.xpl-appModal-main{
                 width: 90%;
@@ -602,12 +608,12 @@
 
 
             /*  ==========================================================================
-            *  Responsive Carrousel
+             *   Responsive Carrousel
                 ========================================================================== */
 
 
                 button.slick-arrow {
-                    z-index: 30000;
+                    z-index: 2000;
                     width: 30px;
                 }
 

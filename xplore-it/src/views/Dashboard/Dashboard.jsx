@@ -142,10 +142,13 @@
             // Render Dashboard
             // --------------------------------------
             renderDashboard() {
+                const Context = React.createContext();
+                const categoryColor = '#';
+                // console.log('context', context);               
                 return (
                     <Fragment>
-                        { this.props.location.pathname === '/catalogue/all/all' && this.renderCarrousel()}
-                        {this.renderFlipperBody()}
+                            { this.props.location.pathname === '/catalogue/all/all' && this.renderCarrousel()}
+                            {this.renderFlipperBody()}
                     </Fragment>
                 )
 
@@ -162,7 +165,7 @@
                     <div className="row xpl-carrouselRow">
                         <div className="col-lg-12">
                             <h3 className="xpl-row xpl-allAppTitle"> What's New? </h3>
-                            <Carrousel carrouselData = {carrouselproducts} itemsToShow = {itemsToShow}  />
+                            <Carrousel carrouselData = {carrouselproducts} itemsToShow = {itemsToShow} />
                         </div>
                     </div>
                 )

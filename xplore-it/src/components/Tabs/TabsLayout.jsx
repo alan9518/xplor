@@ -31,7 +31,7 @@
                     
                 
                 {/* <Tabs currentIndex={currentIndex} onSelect={onSelect} selectedIndex = {props.tabIndex}> */}
-                <Tabs  defaultIndex={0} selectedIndex = {currentIndex}  onSelect = {props.onSelect} >
+                <Tabs  selectedIndex = {currentIndex}  onSelect = {props.onSelect} >
                     
                     <TabList>
                         <div className="xpl-scrolling-wrapper">
