@@ -9,21 +9,21 @@
 
 @font-face {
   font-family: 'ITC Avant Garde';
-  src: url('http://localhost:3000//fonts/ITCAvantGardeStd-Md.otf'),
-    url('http://localhost:3000//fonts/ITCAvantGardeStd-Bk.otf'),
-    url('http://localhost:3000//fonts/ITCAvantGardeStd-Bold.otf'),
-    url('http://localhost:3000//fonts/ITCAvantGardeStd-Demi.otf'),
-    url('http://localhost:3000//fonts/ITCAvantGardeStd-DemiObl.otf'),
-    url('http://localhost:3000//fonts/ITCAvantGardeStd-Md.otf'),
-    url('http://localhost:3000//fonts/ITCAvantGardeStd-MdObl.otf'),
-    url('http://localhost:3000//fonts/ITCAvantGardeStd-XLt.otf'),
-    url('http://localhost:3000//fonts/ITCAvantGardeStd-XLtObl.otf');
+  src: url('./fonts/ITCAvantGardeStd-Md.otf'),
+    url('./fonts/ITCAvantGardeStd-Bk.otf'),
+    url('./fonts/ITCAvantGardeStd-Bold.otf'),
+    url('./fonts/ITCAvantGardeStd-Demi.otf'),
+    url('./fonts/ITCAvantGardeStd-DemiObl.otf'),
+    url('./fonts/ITCAvantGardeStd-Md.otf'),
+    url('./fonts/ITCAvantGardeStd-MdObl.otf'),
+    url('./fonts/ITCAvantGardeStd-XLt.otf'),
+    url('./fonts/ITCAvantGardeStd-XLtObl.otf');
 
 }
 
 @font-face {
   font-family: 'ITC Avant Garde';
-  src: url('http://localhost:3000//fonts/ITCAvantGardeStd-Bk.otf');
+  src: url('./fonts/ITCAvantGardeStd-Bk.otf');
   font-weight: 200;
 }
 

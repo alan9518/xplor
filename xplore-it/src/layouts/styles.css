@@ -302,8 +302,8 @@
         font-size: 24px;
         color: #fff;
         position: absolute;
-        left: 14px;
-        top: 93px;
+        left: 7px;
+        top: 8px;
     }
 
 
@@ -709,14 +709,18 @@
         overflow: auto !important;
     }
 
-    .xpl-appHeaderContainer {
+    /* .xpl-appHeaderContainer {
         display: -ms-flexbox;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
         height: 60px;
-        background-color: #2f323e;
+        background-color:transparent;
+    } */
+
+    .xpl-appHeaderContainer {
+        display: none;
     }
 
 

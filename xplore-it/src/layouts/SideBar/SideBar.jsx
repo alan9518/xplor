@@ -15,6 +15,8 @@
     import axios from 'axios';
     import {Endpoints} from '../../services/endpoints';
     import {sortBy, shuffle} from 'lodash';
+    import {Config} from '../../Config';
+
 
 // --------------------------------------
 // Create Component Class
@@ -36,6 +38,8 @@
                 currentCategoryColor : null,
                 isLoaded : false
             }
+
+            this.path = Config.spPath
         }
 
         // --------------------------------------
@@ -49,7 +53,6 @@
          * API Connection 
          ========================================================================== */
         async getSideBarRoutes() {
-            const path = '';
             const colorsArray =  [
                 '#1197D3',
                 '#07562F',
@@ -64,7 +67,7 @@
             ]
             let navigationRoutes = [
                 {
-                    path : `${path}/catalogue/all/all`,
+                    path : `${this.path}/catalogue/all/all`,
                     exact: false,
                     sidebarName : 'Home',
                     key:'home-route',
@@ -82,7 +85,7 @@
             orderedSoftwareTopicsData.map((topic) => {
 
                 let route = {
-                    path :  `${path}/catalogue/${topic.CustomerName}/${topic.CustomerID}`,
+                    path :  `${this.path}/catalogue/${topic.CustomerName}/${topic.CustomerID}`,
                     exact: false,
                     sidebarName : topic.CustomerName,
                     key : topic.CustomerID,
@@ -141,13 +144,12 @@
             onListItemClick = (menu) =>  {
                 const {currentMenu} =  this.state;
                 const {subCategories, sidebarName, color } = menu;
-                const path = '';
 
                 // Create New Menu Based on the SubCap
                 const subMenu = subCategories.map((subCap) => {
                     return {
                         id : subCap.CustomerID,
-                        path :  `${path}/catalogue/${subCap.SubCapabilities}/${subCap.CustomerID}`,
+                        path :  `${this.path}/catalogue/${subCap.SubCapabilities}/${subCap.CustomerID}`,
                         exact: true,
                         sidebarName : subCap.SubCapabilities,
                         key : `${subCap.Capabilities}-${subCap.SubCapabilities}`,
