@@ -13,6 +13,9 @@
     import { Flipper, Flipped } from "react-flip-toolkit";
     // import {shuffle, concat, upperFirst} from "lodash";
     import routes from '../../routes/routes';
+    import {Endpoints} from '../../services/endpoints';
+    import {sortBy, shuffle} from 'lodash';
+    import {Config} from '../../Config';
 
 
 // --------------------------------------
@@ -23,16 +26,15 @@
         constructor(props) {
             super(props);
             this.state = {
-                isLoaded : false
+                isLoaded : false,
             }
         }
 
         componentDidMount() {
-            this.props.shuffle()
-
+            this.props.shuffle();
         }
 
-     
+    
         // --------------------------------------
         // Get Category Name
         // --------------------------------------
@@ -47,15 +49,6 @@
         }
 
         
-        // --------------------------------------
-        // Filter Categories by Name
-        // --------------------------------------
-
-        getCategoryColor(routePath) {
-            const selectedCategory =  routes.filter((route) => route.path === routePath);
-            return selectedCategory[0];
-        }
-
 
         // --------------------------------------
         // Render Projects

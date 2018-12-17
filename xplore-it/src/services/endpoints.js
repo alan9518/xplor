@@ -61,5 +61,5 @@
         // Get Sharepoint Colors
         // @param {}
         // --------------------------------------*/
-        getSidebarColorsSP : `${path}/_api/web/lists`,
+            getSideBarColorsSP : `${path}/_api/web/lists/getbyTitle('xplorIT-colors')/items`,
     }

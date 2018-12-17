@@ -101,22 +101,6 @@
                             <NavBar logo = {logo}/>
                         </header>
 
-                        {/* 
-                            // --------------------------------------
-                            // Modal Window
-                            // --------------------------------------    
-
-                                <AppModal 
-                                    show={showModal} 
-                                    handleClose = {this.toggleModal} 
-                                    modalTitle = {"Add New or Refreshed Items to the Library"} 
-                                >  
-
-                                    <NewProject key = {'ModalBody'}/>
-                                    <HistoryList key = {'ModalFooter'}/>
-                            
-                                </AppModal> 
-                        */}
 
                         <div className="App xpl-mainContainer" >
 
@@ -138,17 +122,6 @@
                                                 iconClass = {'fas fa-bars'} 
                                         />
 
-                                        {/* 
-                                            // --------------------------------------
-                                            // Modal Window Button
-                                            // -------------------------------------- 
-                                            <AppButton 
-                                                buttonClass = {'xpl-addNewAppButton'} 
-                                                onClick =  {this.toggleModal}
-                                                buttonText = {'Add New Item'} 
-                                                iconClass = {'fas fa-plus-circle'} 
-                                            /> 
-                                        */}
                                     </div>
                                         
                                         

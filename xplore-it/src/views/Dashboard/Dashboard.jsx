@@ -90,6 +90,9 @@
                 const productsData = getProductsPromise.data;
                 const carrouselData = getCarrouselProductsPromise.data;
 
+                // Get Colors
+                
+
                 this.setState( {
                     currentCategory : `${startCase(topicName)}  Products`,
                     products : productsData,
@@ -97,6 +100,32 @@
                     isLoaded : true
                 })
             }
+
+
+            /** --------------------------------------
+            // Get Colors
+            // @returns {A Promise Object}
+            // --------------------------------------*/
+            async getCategoryColor() {
+                const getColorsPromise = await axios.get(Endpoints.getSideBarColorsSP)
+                const getColorsResponse =  await getColorsPromise.data.value;
+                const colorsArray = (getColorsResponse.map((color)=> {return (color.dr4i)}));
+                return (colorsArray);
+            }
+
+
+            setCurrentColor() {
+                const categoryName =  this.getCategoryName();
+                console.log('categoryName', categoryName);
+                const colors =  this.getCategoryColor();
+                this.setState({
+                    categoryColor : colors[0]
+                })
+    
+                console.log('this.state', this.state);
+    
+            }
+    
 
         /* ==========================================================================
          *  Render Logic and State Handle
@@ -194,46 +223,6 @@
                 );
             }
 
-
-    
-
-            // --------------------------------------
-            // Render Body With Dummy Layout
-            // --------------------------------------
-            renderDummyBody() {
-                return (
-                <Fragment>
-                    <div className="row xpl-carrouselRow">
-                        <div className="col-lg-12">
-                            <h3 className="xpl-row xpl-allAppTitle"> What's New? </h3>
-                            <Carrousel />
-                        </div>
-                    </div>
-
-                    <div className="row xpl-row">
-                        <div className="col-lg-12">
-                            <h3 className="xpl-allAppTitle"> All Apps </h3>
-                        </div>
-
-                    
-                        
-                            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                <ProjectCard key = {1} hasSmallDescription={true} />
-                            </div>
-                            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                <ProjectCard key = {2} hasSmallDescription={true} />
-                            </div>
-                            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                <ProjectCard key = {4} hasSmallDescription={true} />
-                            </div>
-                            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                <ProjectCard key = {4} hasSmallDescription={true} />
-                            </div>
-                        
-                    </div>
-                </Fragment>
-                );
-            }
 
 
             // --------------------------------------

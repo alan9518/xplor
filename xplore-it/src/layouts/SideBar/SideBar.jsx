@@ -11,7 +11,6 @@
     import PropTypes from "prop-types";
 
     import { SingleList, DetailsList, Search, AppButton } from "../../components";
-    // import routesAPI from '../../routes/routesAPI'
     import axios from 'axios';
     import {Endpoints} from '../../services/endpoints';
     import {sortBy, shuffle} from 'lodash';
@@ -46,7 +45,6 @@
         // Call API
         // --------------------------------------
         componentDidMount() {
-            // this.getSidebarColors();
             this.getSideBarRoutes();
         }
 
@@ -54,22 +52,7 @@
          * API Connection 
          ========================================================================== */
 
-       
-
         async getSideBarRoutes() {
-            const colorsArray =  [
-                '#1197D3',
-                '#07562F',
-                '#5F4082',
-                '#84B130' ,
-                '#F6C760',
-                '#D60B33',
-                '#238ECC',
-                '#B60BAC',
-                '#8F1859',
-                '#E18A50',
-            ]
-
             // Create Navigation Object 
             // Add the Home Route as Static
             let navigationRoutes = [
@@ -84,6 +67,9 @@
                 
             ];
 
+            // Get Colors
+            const colorsArray = await this.getColors();
+
             // Get Topic
             const getSoftwareTopicsPromise = await axios.get(Endpoints.getAllCategories);
             const softwareTopicsData =  await getSoftwareTopicsPromise.data;
@@ -96,16 +82,19 @@
                     exact: false,
                     sidebarName : topic.CustomerName,
                     key : topic.CustomerID,
-                    color : shuffle(colorsArray)[0],
+                    // color : shuffle(colorsArray)[0],
+                    color : this.mergeRoutes(colorsArray,topic),
                     subCategories : topic.SubCap
                 }
 
+                // this.mergeRoutes(colorsArray, topic)
                 navigationRoutes.push(route);
+
             }) 
 
+            // const mergedRoutes = {}
 
             
-
             // Set Menu To Show and Allow Render
             this.setState( {
                 currentMenu : navigationRoutes,
@@ -113,6 +102,43 @@
             })
             
         }
+
+            
+            /** --------------------------------------
+            // Get Colors
+            // @returns {A Promise Object}
+            // --------------------------------------*/
+            async getColors() {
+                const getColorsPromise = await axios.get(Endpoints.getSideBarColorsSP)
+                const getColorsResponse =  await getColorsPromise.data.value;
+                const colorsArray = (getColorsResponse.map((color)=> {
+                    return {
+                        color : color.Color,
+                        name : color.Title,
+                        order: color.Order1
+                    }
+                }));
+                console.log('colorsArray', colorsArray);
+
+                return (colorsArray);
+            }
+
+
+            // --------------------------------------
+            // Merge SP Colors & API Colors
+            // To get The Color for The Route
+            // --------------------------------------
+            mergeRoutes(spColors, currentRoute) {
+                const mergedColor = spColors.filter((spColor) => {
+                    if(spColor.name === currentRoute.CustomerName)
+                        return spColor.color
+                })
+
+                
+                console.log('mergedColor', mergedColor);
+
+                return mergedColor[0].color;
+            }
 
 
         
