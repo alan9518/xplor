@@ -5,8 +5,8 @@
  ========================================================================== */
 
     export const Config = {
-        path : 'http://localhost:3000',
-        projectPath : '/sites/arturotestb/xplorit/XplorIT.aspx/app/details',
-        spPath : '/sites/arturotestb/xplorit/XplorIT.aspx',
+        path : 'https://flextronics365.sharepoint.com/sites/xplorit_portal',
+        projectPath : '/sites/xplorit_portal/xplorit/XplorIT.aspx/app/details',
+        spPath : '/sites/xplorit_portal/xplorit/XplorIT.aspx',
 
     }

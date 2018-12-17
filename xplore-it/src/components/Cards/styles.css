@@ -57,9 +57,10 @@
     }
 
     .xpl-cardName {
+        width: 70px;
         max-width: 110px;
         line-break: normal;
-        padding: 16px;
+        /* padding: 16px; */
     }
 
     .xpl-cardDescription p {

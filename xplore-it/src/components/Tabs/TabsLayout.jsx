@@ -26,8 +26,8 @@
         return (
             <Fragment>           
 
-                <div className="xpl-tabArrow xpl-tabLeftArrow"> <AppButton iconLeftClass = {'fas fa-angle-left'} onClick = {changePrevTab}/> </div>
-                <div className="xpl-tabArrow xpl-tabRightArrow"> <AppButton iconLeftClass = {'fas fa-angle-right'}  onClick = {changeNextTab}/></div>
+                {/* <div className="xpl-tabArrow xpl-tabLeftArrow"> <AppButton iconLeftClass = {'fas fa-angle-left'} onClick = {changePrevTab}/> </div>
+                <div className="xpl-tabArrow xpl-tabRightArrow"> <AppButton iconLeftClass = {'fas fa-angle-right'}  onClick = {changeNextTab}/></div> */}
                     
                 
                 {/* <Tabs currentIndex={currentIndex} onSelect={onSelect} selectedIndex = {props.tabIndex}> */}

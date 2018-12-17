@@ -48,6 +48,14 @@
                 this.loadAPI();
             }
 
+            // --------------------------------------
+            // Will cause component to never re-render
+            // --------------------------------------
+            // shouldComponentUpdate() {
+            //     return false; 
+            // }
+
+
         /* ==========================================================================
          *  API Calls
          ========================================================================== */
@@ -208,10 +216,11 @@
                     return (
 
                         <Fragment>
-                            {this.renderBreadcumbs()}
+                            
                             <div className="container-fluid">
                                 <div className="row">
                                     <div className="col-lg-9 col-sm-12">
+                                        {this.renderBreadcumbs()}
                                         {this.renderDetailsBody()}
                                     </div>
 

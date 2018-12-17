@@ -5,25 +5,27 @@
  ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css?family=Arimo:400,700');
+@import url('https://flextronics365.sharepoint.com/sites/FlexSettings/Style%20Library/flexBrand/Fonts/ITCAvantGardeStd-Bold.woff');
+
 
 
 @font-face {
   font-family: 'ITC Avant Garde';
-  src: url('./fonts/ITCAvantGardeStd-Md.otf'),
-    url('./fonts/ITCAvantGardeStd-Bk.otf'),
-    url('./fonts/ITCAvantGardeStd-Bold.otf'),
-    url('./fonts/ITCAvantGardeStd-Demi.otf'),
-    url('./fonts/ITCAvantGardeStd-DemiObl.otf'),
-    url('./fonts/ITCAvantGardeStd-Md.otf'),
-    url('./fonts/ITCAvantGardeStd-MdObl.otf'),
-    url('./fonts/ITCAvantGardeStd-XLt.otf'),
-    url('./fonts/ITCAvantGardeStd-XLtObl.otf');
+  src: url('./fonts/ITCAvantGardeStd-Md.otf') format("OpenType"),
+    url('./fonts/ITCAvantGardeStd-Bk.otf') format("OpenType"),
+    url('./fonts/ITCAvantGardeStd-Bold.otf') format("OpenType"),
+    url('./fonts/ITCAvantGardeStd-Demi.otf') format("OpenType"),
+    url('./fonts/ITCAvantGardeStd-DemiObl.otf') format("OpenType"),
+    url('./fonts/ITCAvantGardeStd-Md.otf') format("OpenType"),
+    url('./fonts/ITCAvantGardeStd-MdObl.otf') format("OpenType"),
+    url('./fonts/ITCAvantGardeStd-XLt.otf') format("OpenType"),
+    url('./fonts/ITCAvantGardeStd-XLtObl.otf') format("OpenType");
 
 }
 
 @font-face {
   font-family: 'ITC Avant Garde';
-  src: url('./fonts/ITCAvantGardeStd-Bk.otf');
+  src: url('./fonts/ITCAvantGardeStd-Bk.otf') format("OpenType");
   font-weight: 200;
 }
 

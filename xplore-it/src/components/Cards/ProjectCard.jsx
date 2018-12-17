@@ -11,6 +11,7 @@
     import PropTypes from "prop-types";
     import './styles.css';
     import { CardImage, ProjectLink } from '../../components';
+    import { startCase } from "lodash";
     import {Config} from '../../Config'
 
 // --------------------------------------

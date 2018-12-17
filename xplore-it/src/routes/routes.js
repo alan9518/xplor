@@ -17,7 +17,7 @@
 // Define App Path
 // --------------------------------------
     // const path = 'localhost:3000';
-    // const path = '/sites/arturotestb/xplorit/XplorIT.aspx';
+    // const path = '/sites/xplorit_portal/xplorit/XplorIT.aspx';
     const path = Config.spPath;
 
     

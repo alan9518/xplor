@@ -10,7 +10,7 @@
     import React from 'react';
     import PropTypes from 'prop-types';
     import {NavLink} from 'react-router-dom';
-    
+    // import {Config} from '../../'
 
 // --------------------------------------
 // Create link Component
@@ -18,7 +18,7 @@
     const ProjectLink = (props) => {
 
         const {route, itemKey} = props;
-
+        // const path = 
 
         return (
             <NavLink to= {route} key = {itemKey} >
@@ -45,3 +45,4 @@
 // --------------------------------------
     export default ProjectLink;
 
+    // List with all the Font Awesome Icons that can be used on the application

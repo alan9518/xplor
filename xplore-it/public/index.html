@@ -93,6 +93,25 @@
       <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.js"></script>
       <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-sham.js"></script>
     <![endif]-->
+
+
+
+    <!-- Use Sharepoint Functions  -->
+    <script>
+      
+      // --------------------------------------
+      // Get SP User
+      // --------------------------------------
+      function getCurrentSPUser() {
+        return SPUser = {
+          user_ID : _spPageContextInfo.userId,
+          user_email : _spPageContextInfo.userEmail,
+          user_name : _spPageContextInfo.userDisplayName
+        }
+
+      }
+    
+    </script>
 </body>
 
 </html>

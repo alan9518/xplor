@@ -65,38 +65,26 @@
             // Render NavBar
             // --------------------------------------
             renderNavBar(logo) {
+                const SP_user = window.getCurrentSPUser();
+                const {user_email, user_name} = SP_user;
                 return (
                     <div className="xpl-appHeaderContainer">
                         <nav className="navbar navbar-expand-md navbar-dark fixed-top xpl-appHeader">
-                            {/* <a className="navbar-brand" href="#">
-                                <img src={logo}  className="xpl-appLogo d-inline-block align-top" alt=""/>
-                            </a> */}
                             <div className="navbar-brand" >
                                 <img src={logo}  className="xpl-appLogo d-inline-block align-top" alt=""/>
                             </div>
-                            {/* <button 
-                                    onClick = {this.onMenuClick} 
-                                    className="navbar-toggler" 
-                                    type="button" 
-                                    data-toggle="collapse" 
-                                    data-target="#xpl-appNavBar"
-                                    aria-controls="xpl-appNavBar" 
-                                    aria-expanded="true" 
-                                    aria-label="Toggle navigation">
-                                <span className="navbar-toggler-icon"></span>
-                            </button> */}
+                    
 
-                            {/* <div className ={`navbar-collapse collapse ${this.showMenu()}`} id="xpl-appNavBar" > */}
                             <div className ={`navbar-collapse collapse show`} id="xpl-appNavBar" >
                                 <ul className="navbar-nav ml-auto">
                                     <li className="nav-item active xpl-userProfileLink" >
                                         <ProjectLink route = {`/user/details/2`}>
                                             <span className="nav-link xpl-userName">
-                                                Welcome Alan Medina <span className="sr-only">(current)</span>
+                                                Welcome {user_name} <span className="sr-only">(current)</span>
                                             </span>
                                         </ProjectLink>
                                         <div className="xpl-userImage">
-                                            <ProfileImage resourceMail = {"alan.medina@flex.com"}/>
+                                            <ProfileImage resourceMail = {user_email}/>
                                         </div>
                                     </li>
 

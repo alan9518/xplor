@@ -46,12 +46,16 @@
         // Call API
         // --------------------------------------
         componentDidMount() {
+            // this.getSidebarColors();
             this.getSideBarRoutes();
         }
 
         /* ==========================================================================
          * API Connection 
          ========================================================================== */
+
+       
+
         async getSideBarRoutes() {
             const colorsArray =  [
                 '#1197D3',
@@ -65,6 +69,9 @@
                 '#8F1859',
                 '#E18A50',
             ]
+
+            // Create Navigation Object 
+            // Add the Home Route as Static
             let navigationRoutes = [
                 {
                     path : `${this.path}/catalogue/all/all`,

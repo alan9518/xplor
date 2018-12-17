@@ -72,12 +72,16 @@ ul.react-tabs__tab-list {
 }
 
 .xpl-tabLeftArrow{
-    top: 30px;
-    left: 25px;
+    /* top: 30px;
+    left: 25px; */
+    top: 71px;
+    left: -39px;
 }
 
 .xpl-tabRightArrow {
-    top: 30px;
-    right: 20px;
+    /* top: 30px;
+    right: 20px; */
+    top: 68px;
+    right: -48px;
 }
     

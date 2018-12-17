@@ -147,7 +147,7 @@
                 // console.log('context', context);               
                 return (
                     <Fragment>
-                            { this.props.location.pathname === '/catalogue/all/all' && this.renderCarrousel()}
+                            { this.props.location.pathname.indexOf('/catalogue/all/all') >= 0 && this.renderCarrousel()}
                             {this.renderFlipperBody()}
                     </Fragment>
                 )
@@ -184,7 +184,7 @@
                     <Fragment>
                         <div className="row xpl-row">
                             <div className="col-lg-12">
-                                <h3 className="xpl-allAppTitle" onClick = {this.shuffle}>{currentCategory}</h3>
+                                <h3 className="xpl-allAppTitle">{currentCategory}</h3>
                             </div>
                         </div>
 

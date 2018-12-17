@@ -151,6 +151,7 @@
         background-color: #fff;
         box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
         transition: all .3s ease-out;
+        min-height: 100vh;
     }
 
     .xpl-appSideBarHeader {
@@ -200,8 +201,8 @@
 
     .xpl-appSideBarLinksContainer {
         position: relative;
-        overflow-y: scroll;
-        height: 790px;
+        /* overflow-y: scroll; */
+        /* height: 790px; */
     }
 
     .xpl-appSideBarTitleContainer {
@@ -227,6 +228,14 @@
         font-family: 'ITC Avant Garde';
         cursor: pointer;
     }
+
+    /* span.xpl-linkText {
+        color: #000;
+        padding: 0 6px;
+        font-weight: 400;
+        text-transform: capitalize;
+        font-family: "ITC Avant Garde Gothic Medium","Segoe UI Light","Segoe UI","Segoe",Tahoma,Helvetica,Arial,sans-serif;
+    } */
 
     .xpl-sidebarLinksContainer {
         padding-left: 0px;
@@ -383,9 +392,11 @@
 
     .xpl-breadcumbsContainer {
         display: flex;
-        flex-direction: row;
-        justify-content: start;
+        justify-content: flex-start;
         padding-left: 8px;
+        width: 100%;
+        max-width: 500px;
+        margin-bottom: 20px;
     }
 
     h4.xpl-breadChild {
@@ -518,11 +529,12 @@
                 padding: 16px 0 !important;
             }
 
-            .xpl-cardName {
+            /* .xpl-cardName {
+                width: 70px;
                 max-width: 110px;
                 line-break: normal;
                 padding: 16px;
-            }
+            } */
 
             .xpl-cardProjectInfo {
                 /* margin-top: 12px; */
@@ -709,6 +721,12 @@
         overflow: auto !important;
     }
 
+
+    /* .xpl-appSideBar {
+        height: 100vh;
+    } */
+
+
     /* .xpl-appHeaderContainer {
         display: -ms-flexbox;
         display: flex;
@@ -719,9 +737,6 @@
         background-color:transparent;
     } */
 
-    .xpl-appHeaderContainer {
-        display: none;
-    }
-
+  
 
 
