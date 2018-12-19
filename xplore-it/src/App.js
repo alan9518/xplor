@@ -9,7 +9,10 @@
 // --------------------------------------
   import React, { Component } from 'react';
   import { BrowserRouter, Router, Route, Switch } from 'react-router-dom';
+  import createBrowserHistory from 'history/createBrowserHistory'
   import appNavigationRoutes from './routes';
+  import ReactGA from 'react-ga';
+
 
 
 
@@ -18,23 +21,24 @@
 // --------------------------------------
   class App extends Component {
 
-    // renderApp() {
-    //   return (
-    //     <Router>
-
-    //         <Switch>
-    //           {appNavigationRoutes.map((prop, key)=> {
-    //             return <Route path = {prop.path}  component = {prop.component}  key = {`index-${key}`} ></Route>
-    //           })}
-    //         </Switch>
-        
-    //     </Router>
-    //   );
-    // }
-
     renderApp() {
+      const history = createBrowserHistory();
+      const CurrentSPUser = window.getCurrentSPUser();
+      ReactGA.initialize('UA-131235894-1', {
+        debug: true,
+        titleCase: false,
+        gaOptions: {
+          userId: CurrentSPUser.user_ID,
+          dimensionValue : CurrentSPUser.user_email
+        }
+      });
+      ReactGA.pageview(window.location.pathname + window.location.search);
+      console.log('ReactGA', ReactGA);
+      console.log('history', history);
+
       return (
-        <BrowserRouter>
+        <Router history = {history}>
+        
 
             <Switch>
               {appNavigationRoutes.map((prop, key)=> {
@@ -42,9 +46,23 @@
               })}
             </Switch>
         
-        </BrowserRouter>
+        </Router>
       );
     }
+
+    // renderApp() {
+    //   return (
+    //     <BrowserRouter>
+
+    //         <Switch>
+    //           {appNavigationRoutes.map((prop, key)=> {
+    //             return <Route path = {prop.path}  component = {prop.component}  key = {`index-${key}`} ></Route>
+    //           })}
+    //         </Switch>
+        
+    //     </BrowserRouter>
+    //   );
+    // }
 
     // --------------------------------------
     // Render Component
