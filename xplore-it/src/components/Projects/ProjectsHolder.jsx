@@ -50,24 +50,7 @@
 
         
 
-        // --------------------------------------
-        // Render Projects
-        // --------------------------------------
-        renderProjects () {
-            const {productsData, currentCategory} = this.props;
-            // const projectsColor = this.getCategoryColor();
-            const projectsColor = '#1197D3';
-
-            const data = productsData.map((project) => {return project.partID })
-
         
-            return (
-                productsData.length <= 0 
-                ? this.renderError()
-                : this.renderFlipperContainer(productsData, data,projectsColor)
-            )
-
-        }
 
         // --------------------------------------
         // Render No Data Message
@@ -81,7 +64,13 @@
         // --------------------------------------
         // Render Flipper
         // --------------------------------------
-        renderFlipperContainer(productsData, data, projectsColor) {
+        /** --------------------------------------
+        // Render Project Cards
+        // Use Flipper
+        // @param {products Data an array with all the products and the Colors}
+        // @param {data  an array with all the ID's of the cards to handle the Shuffle and sorting of cards }
+        // --------------------------------------*/
+        renderFlipperContainer(productsData, data) {
             return (
                 <Flipper flipKey={data.join("")} className = "row xpl-row">
                                 
@@ -91,7 +80,7 @@
                                     <ProjectCard 
                                             key = {product.partID} 
                                             hasSmallDescription={true}  
-                                            projectColor = {projectsColor}
+                                            projectColor = {product.color}
                                             {...product}/>
                                 </div>
                         </Flipped>
@@ -99,6 +88,26 @@
                 </Flipper>
             )
         }
+
+
+        // --------------------------------------
+        // Render Projects
+        // --------------------------------------
+        renderProjects () {
+            const {productsData, categoryColor} = this.props;
+            
+            const projectsColor =  categoryColor || '#1197D3';
+
+            const data = productsData.map((project) => {return project.partID })
+
+            return (
+                productsData.length <= 0 
+                ? this.renderError()
+                : this.renderFlipperContainer(productsData, data,projectsColor)
+            )
+
+        }
+
 
         // --------------------------------------
         // Render Component

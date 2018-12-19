@@ -58,8 +58,8 @@
             getRelatedProducts : `https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getRelatedPro`,
 
         /** --------------------------------------
-        // Get Sharepoint Colors
+        // Get Sharepoint Categories
         // @param {}
         // --------------------------------------*/
-            getSideBarColorsSP : `${path}/_api/web/lists/getbyTitle('xplorIT-colors')/items`,
+            getSideBarCategoriesSP : `${path}/_api/web/lists/getbyTitle('xplorIT-colors')/items`,
     }

@@ -11,9 +11,6 @@
     import PropTypes from "prop-types";
 
     import { SingleList, DetailsList, Search, AppButton } from "../../components";
-    import axios from 'axios';
-    import {Endpoints} from '../../services/endpoints';
-    import {sortBy, shuffle} from 'lodash';
     import {Config} from '../../Config';
 
 
@@ -37,8 +34,8 @@
                 currentCategoryColor : null,
                 isLoaded : false
             }
-
             this.path = Config.spPath
+
         }
 
         // --------------------------------------
@@ -48,98 +45,17 @@
             this.getSideBarRoutes();
         }
 
-        /* ==========================================================================
-         * API Connection 
-         ========================================================================== */
 
-        async getSideBarRoutes() {
-            // Create Navigation Object 
-            // Add the Home Route as Static
-            let navigationRoutes = [
-                {
-                    path : `${this.path}/catalogue/all/all`,
-                    exact: false,
-                    sidebarName : 'Home',
-                    key:'home-route',
-                    color : '#1197D3',
-                    homeIcon : 'fas fa-home'
-                },
-                
-            ];
-
-            // Get Colors
-            const colorsArray = await this.getColors();
-
-            // Get Topic
-            const getSoftwareTopicsPromise = await axios.get(Endpoints.getAllCategories);
-            const softwareTopicsData =  await getSoftwareTopicsPromise.data;
-            const orderedSoftwareTopicsData = sortBy(softwareTopicsData,[(route)=>{return route.CustomerName}])
-            // Create Routes  
-            orderedSoftwareTopicsData.map((topic) => {
-
-                let route = {
-                    path :  `${this.path}/catalogue/${topic.CustomerName}/${topic.CustomerID}`,
-                    exact: false,
-                    sidebarName : topic.CustomerName,
-                    key : topic.CustomerID,
-                    // color : shuffle(colorsArray)[0],
-                    color : this.mergeRoutes(colorsArray,topic),
-                    subCategories : topic.SubCap
-                }
-
-                // this.mergeRoutes(colorsArray, topic)
-                navigationRoutes.push(route);
-
-            }) 
-
-            // const mergedRoutes = {}
-
-            
-            // Set Menu To Show and Allow Render
-            this.setState( {
-                currentMenu : navigationRoutes,
+        getSideBarRoutes() {
+            const {categories} = this.props;
+            console.log('props categories', categories);
+            this.setState({
+                currentMenu : categories,
                 isLoaded : true
             })
-            
         }
 
-            
-            /** --------------------------------------
-            // Get Colors
-            // @returns {A Promise Object}
-            // --------------------------------------*/
-            async getColors() {
-                const getColorsPromise = await axios.get(Endpoints.getSideBarColorsSP)
-                const getColorsResponse =  await getColorsPromise.data.value;
-                const colorsArray = (getColorsResponse.map((color)=> {
-                    return {
-                        color : color.Color,
-                        name : color.Title,
-                        order: color.Order1
-                    }
-                }));
-                console.log('colorsArray', colorsArray);
-
-                return (colorsArray);
-            }
-
-
-            // --------------------------------------
-            // Merge SP Colors & API Colors
-            // To get The Color for The Route
-            // --------------------------------------
-            mergeRoutes(spColors, currentRoute) {
-                const mergedColor = spColors.filter((spColor) => {
-                    if(spColor.name === currentRoute.CustomerName)
-                        return spColor.color
-                })
-
-                
-                console.log('mergedColor', mergedColor);
-
-                return mergedColor[0].color;
-            }
-
+        
 
         
         /* ==========================================================================
@@ -176,10 +92,10 @@
             // --------------------------------------
             onListItemClick = (menu) =>  {
                 const {currentMenu} =  this.state;
-                const {subCategories, sidebarName, color } = menu;
+                const {SubCap, sidebarName, color } = menu;
 
                 // Create New Menu Based on the SubCap
-                const subMenu = subCategories.map((subCap) => {
+                const subMenu = SubCap.map((subCap) => {
                     return {
                         id : subCap.CustomerID,
                         path :  `${this.path}/catalogue/${subCap.SubCapabilities}/${subCap.CustomerID}`,
@@ -214,6 +130,7 @@
             // --------------------------------------
             renderSideBar() {
                 const {currentMenu, menuComponent, currentCategory, currentCategoryColor} = this.state;
+                console.log('currentMenu', currentMenu);
                 const {showMobileMenu,onClick} = this.props;
                 const sidebarClass = showMobileMenu === true?  'showMobileMenu' : '';
                 

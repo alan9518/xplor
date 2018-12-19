@@ -11,20 +11,15 @@
     import React, { Component, Fragment } from "react";
     import PropTypes from "prop-types";
     import {
-        HeaderButton,
-        ToggleButton,
-        ProjectCard,
         Carrousel,
         ProjectsHolder,
         AppLoader, 
     } from "../../components";
+
     
     import {shuffle, startCase, replace} from "lodash";
-    import InfiniteScroll from 'react-infinite-scroller';
     import {Endpoints} from '../../services/endpoints';
-
     import axios from 'axios';
-    import { Server } from "https";
 
 
 // --------------------------------------
@@ -47,15 +42,6 @@
             }
         }
 
-        // {
-        //     projectID : 1, 
-        //     projectTitle : 'Project 1',
-        //     projectCategory : 'Enviroment',
-        //     projectIcon : 'fab fa-accusoft',
-        //     projectLink : '/app/details/',
-        //     projectDescription : 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
-        //     projectCarrousel : true,
-        // },
 
         // --------------------------------------
         // Initial Shuffle
@@ -79,53 +65,103 @@
                 const params = {customerid : this.props.match.params.key}
 
                 // Get Carrousel Products. Create Promise
-                const getCarrouselProductsPromise =  await axios.get(Endpoints.getCarrouselProducts);
+                    const getCarrouselProductsPromise =  await axios.get(Endpoints.getCarrouselProducts);
 
-                // Get All Products. Createn Promise 
-                const getProductsPromise = topicName === 'all' 
-                    ? await axios.get(Endpoints.getAllProducts) 
-                    : await axios.get(Endpoints.getAllProductsByCategory,{params});
+                // // Get All Products. Createn Promise 
+                    const getProductsPromise = topicName === 'all' 
+                        ? await axios.get(Endpoints.getAllProducts) 
+                        : await axios.get(Endpoints.getAllProductsByCategory,{params});
+
+
+                // Get SP Colors
+                    const SPColorsCategories = await  this.loadSPCategories();
+
 
                 // Resolve Promises
-                const productsData = getProductsPromise.data;
-                const carrouselData = getCarrouselProductsPromise.data;
+                    const productsData = getProductsPromise.data;
+                    const carrouselData = getCarrouselProductsPromise.data;
 
-                // Get Colors
-                
+
+
+                // Merge Colors and Projects
+                    const productsWithColor = this.mergeProductsAndColors(productsData, SPColorsCategories);
+
+
+                // Store Results
 
                 this.setState( {
                     currentCategory : `${startCase(topicName)}  Products`,
-                    products : productsData,
-                    carrouselproducts : carrouselData,
+                    products : productsWithColor || [],
+                    carrouselproducts : carrouselData || [],
                     isLoaded : true
                 })
             }
 
 
-            /** --------------------------------------
+            // --------------------------------------
+            // Load SP Categories
+            // --------------------------------------
+            async loadSPCategories() {
+                const getSPCategoriesPromise = await axios.get(Endpoints.getSideBarCategoriesSP)
+                const getSPCategoriesResponse =  await getSPCategoriesPromise.data.value;
+                const SPCatsArray = (getSPCategoriesResponse.map((SpCat)=> {
+                    return {
+                        color : SpCat.Color,
+                        name : SpCat.Title,
+                    }
+                }));
+                
+
+                return (SPCatsArray);
+            }
+
+
+            // --------------------------------------
+            // Merge Products & Categories
+            // --------------------------------------
+            mergeProductsAndColors(productsData, SPColorsCategories)
+            {
+                const productsWithColor = productsData.map((product)=> {
+                    SPColorsCategories.map((spColor)=> {
+                        if(product.SoftwareTopic === spColor.name) {
+                            product.color = spColor.color
+                        }
+                    })
+
+                    return product;
+                })
+
+
+                return productsWithColor
+            }
+
+
+             /** --------------------------------------
             // Get Colors
             // @returns {A Promise Object}
             // --------------------------------------*/
-            async getCategoryColor() {
+            async getColors(returnArray) {
+                console.time("concatenation");
+                const baseColor = '#1197D3';
                 const getColorsPromise = await axios.get(Endpoints.getSideBarColorsSP)
                 const getColorsResponse =  await getColorsPromise.data.value;
-                const colorsArray = (getColorsResponse.map((color)=> {return (color.dr4i)}));
-                return (colorsArray);
+                const category = this.splitRouteName();
+                // console.log('category', category);
+
+            
+                const colorsArray = (getColorsResponse.filter((color)=> {
+                        return category == color.Title
+                }));
+
+                // Return all the Colors or just the Color Value
+
+                if(returnArray)
+                    return colorsArray;
+                else
+                    return ( colorsArray.length > 0 ? colorsArray[0].Color : baseColor);
+                
             }
 
-
-            setCurrentColor() {
-                const categoryName =  this.getCategoryName();
-                console.log('categoryName', categoryName);
-                const colors =  this.getCategoryColor();
-                this.setState({
-                    categoryColor : colors[0]
-                })
-    
-                console.log('this.state', this.state);
-    
-            }
-    
 
         /* ==========================================================================
          *  Render Logic and State Handle
@@ -170,10 +206,7 @@
             // --------------------------------------
             // Render Dashboard
             // --------------------------------------
-            renderDashboard() {
-                const Context = React.createContext();
-                const categoryColor = '#';
-                // console.log('context', context);               
+            renderDashboard() {        
                 return (
                     <Fragment>
                             { this.props.location.pathname.indexOf('/catalogue/all/all') >= 0 && this.renderCarrousel()}
@@ -181,6 +214,15 @@
                     </Fragment>
                 )
 
+            }
+
+
+            // --------------------------------------
+            // Render ALl Products View
+            // --------------------------------------
+            renderHomePageView() {
+                this.renderCarrousel();
+                this.renderFlipperBody();
             }
 
 
@@ -202,13 +244,33 @@
 
 
             // --------------------------------------
-            // Render Cards use React Flip
-            // For Cards Sorting
+            // Render All Products
             // --------------------------------------
+            renderAllProducts() {
+                const {currentCategory, products} = this.state;
+
+                return (
+                    <Fragment>
+                        <div className="row xpl-row">
+                            <div className="col-lg-12">
+                                <h3 className="xpl-allAppTitle">{currentCategory}</h3>
+                            </div>
+                        </div>
+
+                        <ProjectsHolder 
+                            productsData = {products} 
+                            currentCategory = {currentCategory} 
+                            shuffle = {this.shuffle} />
+                            
+                            
+                    </Fragment>
+                );
+            }
+
+
             renderFlipperBody() {
                 
                 const {currentCategory, products} = this.state;
-                
                 return (
                     <Fragment>
                         <div className="row xpl-row">
@@ -222,6 +284,7 @@
                     </Fragment>
                 );
             }
+
 
 
 

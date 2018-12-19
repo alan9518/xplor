@@ -56,6 +56,8 @@
                 const {projectPath} =  Config;
                 const {partID, ProductName, hasSmallDescription, ProductScope, ShortDescription, productIcon, DetailedDescription, cardHover } = this.props;
                 const bgColor = hasSmallDescription ? this.props.projectColor : '#238ECC';
+                console.log('bgColor', bgColor);
+                console.log('this.props.projectColor', this.props.projectColor);
                 const projectColorStyle = {backgroundColor : bgColor}
 
                 return (

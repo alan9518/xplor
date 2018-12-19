@@ -61,7 +61,7 @@
 
                         if(menuItem.sidebarName ) 
                         {   
-                            menuItemPath = menuItem.subCategories && menuItem.subCategories.length > 0 ? null : menuItem.path;
+                            menuItemPath = menuItem.SubCap && menuItem.SubCap.length > 0 ? null : menuItem.path;
                 
                             if(menuItemPath!== null) {
 

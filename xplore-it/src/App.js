@@ -8,15 +8,8 @@
 // Get Dependeces
 // --------------------------------------
   import React, { Component } from 'react';
-  import { BrowserRouter, Route, Switch } from 'react-router-dom';
+  import { BrowserRouter, Router, Route, Switch } from 'react-router-dom';
   import appNavigationRoutes from './routes';
-  // import routesAPI from './routes/routesAPI';
-  // import { AppLoader  } from './components';
-
-  // import Perf from 'react-addons-perf';
-  // const Perf = require('react-addons-perf'); // ES5 with npm
-
-
 
 
 
@@ -24,6 +17,20 @@
 // Create Component
 // --------------------------------------
   class App extends Component {
+
+    // renderApp() {
+    //   return (
+    //     <Router>
+
+    //         <Switch>
+    //           {appNavigationRoutes.map((prop, key)=> {
+    //             return <Route path = {prop.path}  component = {prop.component}  key = {`index-${key}`} ></Route>
+    //           })}
+    //         </Switch>
+        
+    //     </Router>
+    //   );
+    // }
 
     renderApp() {
       return (
