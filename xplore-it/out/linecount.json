@@ -1,0 +1,1020 @@
+{
+    "extension": "linecount",
+    "version": "0.1.7",
+    "workspace": "c:\\xampp\\htdocs\\XploreIT\\xploreIT-v1\\xplore-it",
+    "linecount": [
+        {
+            "version": "0.1.7",
+            "counttime": "2018-12-19 16:19:19",
+            "filesum": 157,
+            "codesum": 33354,
+            "commentsum": 2622,
+            "blanksum": 4668,
+            "filelist": [
+                {
+                    "blank": 5,
+                    "code": 16,
+                    "comment": 1,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "build\\asset-manifest.json"
+                },
+                {
+                    "filename": "build\\favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\fonts\\ITCAvantGardeStd-Bk.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\fonts\\ITCAvantGardeStd-BkObl.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\fonts\\ITCAvantGardeStd-Bold.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\fonts\\ITCAvantGardeStd-Bold.woff",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\fonts\\ITCAvantGardeStd-BoldObl.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\fonts\\ITCAvantGardeStd-Demi.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\fonts\\ITCAvantGardeStd-DemiObl.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\fonts\\ITCAvantGardeStd-Md.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\fonts\\ITCAvantGardeStd-MdObl.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\fonts\\ITCAvantGardeStd-XLt.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\fonts\\ITCAvantGardeStd-XLtObl.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 5,
+                    "filename": "build\\index.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "build\\manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 74,
+                    "comment": 0,
+                    "filename": "build\\precache-manifest.0732871abf7484dedbc56675e41e68ce.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 10,
+                    "comment": 17,
+                    "filename": "build\\service-worker.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 8,
+                    "filename": "build\\static\\css\\1.c008e4ae.chunk.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\static\\css\\1.c008e4ae.chunk.css.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 2,
+                    "filename": "build\\static\\css\\main.51e5ff1f.chunk.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\static\\css\\main.51e5ff1f.chunk.css.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 2,
+                    "filename": "build\\static\\js\\1.675604e7.chunk.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\static\\js\\1.675604e7.chunk.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "build\\static\\js\\main.0f0b0393.chunk.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\static\\js\\main.0f0b0393.chunk.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "build\\static\\js\\runtime~main.38dc7f66.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\static\\js\\runtime~main.38dc7f66.js.map"
+                },
+                {
+                    "filename": "build\\static\\media\\ITCAvantGardeStd-Bk.93e9d0be.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\static\\media\\ITCAvantGardeStd-Bold.4c326e45.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\static\\media\\ITCAvantGardeStd-Demi.6ce36235.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\static\\media\\ITCAvantGardeStd-DemiObl.ea82a43b.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\static\\media\\ITCAvantGardeStd-Md.82ab9393.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\static\\media\\ITCAvantGardeStd-MdObl.cdf8da74.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\static\\media\\ITCAvantGardeStd-XLt.7d143d7f.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\static\\media\\ITCAvantGardeStd-XLtObl.00723327.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\static\\media\\slick.b7c9e1e4.woff",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\static\\media\\slick.ced611da.eot",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\static\\media\\slick.d41f55a7.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 1,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "build\\static\\media\\slick.f97e3bbf.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 17639,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 1,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "filename": "public\\favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\ITCAvantGardeStd-Bk.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\ITCAvantGardeStd-BkObl.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\ITCAvantGardeStd-Bold.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\ITCAvantGardeStd-Bold.woff",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\ITCAvantGardeStd-BoldObl.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\ITCAvantGardeStd-Demi.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\ITCAvantGardeStd-DemiObl.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\ITCAvantGardeStd-Md.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\ITCAvantGardeStd-MdObl.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\ITCAvantGardeStd-XLt.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\ITCAvantGardeStd-XLtObl.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 19,
+                    "code": 66,
+                    "comment": 32,
+                    "filename": "public\\index.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "public\\manifest.json"
+                },
+                {
+                    "blank": 175,
+                    "code": 416,
+                    "comment": 1019,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 1,
+                    "filename": "src\\analytics.html"
+                },
+                {
+                    "blank": 18,
+                    "code": 35,
+                    "comment": 30,
+                    "filename": "src\\App.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "src\\App.test.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 18,
+                    "comment": 14,
+                    "filename": "src\\components\\Breadcumbs\\BreadCumbs.jsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 23,
+                    "comment": 21,
+                    "filename": "src\\components\\Buttons\\AppButton.jsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 23,
+                    "comment": 19,
+                    "filename": "src\\components\\Buttons\\MaterialButton.jsx"
+                },
+                {
+                    "blank": 21,
+                    "code": 91,
+                    "comment": 16,
+                    "filename": "src\\components\\Buttons\\styles.css"
+                },
+                {
+                    "blank": 8,
+                    "code": 17,
+                    "comment": 17,
+                    "filename": "src\\components\\Cards\\CardHeaderListItem.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 42,
+                    "comment": 32,
+                    "filename": "src\\components\\Cards\\CardHeaderWide.jsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 16,
+                    "comment": 17,
+                    "filename": "src\\components\\Cards\\CardImage.js"
+                },
+                {
+                    "blank": 17,
+                    "code": 60,
+                    "comment": 36,
+                    "filename": "src\\components\\Cards\\ProjectCard.jsx"
+                },
+                {
+                    "blank": 50,
+                    "code": 130,
+                    "comment": 17,
+                    "filename": "src\\components\\Cards\\styles.css"
+                },
+                {
+                    "blank": 18,
+                    "code": 31,
+                    "comment": 23,
+                    "filename": "src\\components\\Cards\\WideCard.js"
+                },
+                {
+                    "blank": 18,
+                    "code": 73,
+                    "comment": 32,
+                    "filename": "src\\components\\Carrousel\\Carrousel.jsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 17,
+                    "comment": 9,
+                    "filename": "src\\components\\Carrousel\\styles.css"
+                },
+                {
+                    "blank": 16,
+                    "code": 38,
+                    "comment": 31,
+                    "filename": "src\\components\\ErrorHandler\\ErrorBoundary.jsx"
+                },
+                {
+                    "blank": 79,
+                    "code": 241,
+                    "comment": 65,
+                    "filename": "src\\components\\Forms\\Projects\\NewProjectForm.jsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 58,
+                    "comment": 20,
+                    "filename": "src\\components\\index.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 8,
+                    "comment": 27,
+                    "filename": "src\\components\\InfiniteScroll\\Scroller.jsx"
+                },
+                {
+                    "blank": 12,
+                    "code": 16,
+                    "comment": 31,
+                    "filename": "src\\components\\LibraryHistory\\HistoryList.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 5,
+                    "filename": "src\\components\\LibraryHistory\\HistoryListItem.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 19,
+                    "comment": 20,
+                    "filename": "src\\components\\Links\\ProjectLink.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 19,
+                    "comment": 15,
+                    "filename": "src\\components\\Loader\\Loader.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src\\components\\Loader\\styles.css"
+                },
+                {
+                    "blank": 10,
+                    "code": 31,
+                    "comment": 25,
+                    "filename": "src\\components\\Modal\\Modal.jsx"
+                },
+                {
+                    "blank": 14,
+                    "code": 58,
+                    "comment": 8,
+                    "filename": "src\\components\\Modal\\styles.css"
+                },
+                {
+                    "blank": 5,
+                    "code": 18,
+                    "comment": 14,
+                    "filename": "src\\components\\NoData\\NoData.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 19,
+                    "comment": 5,
+                    "filename": "src\\components\\NoData\\styles.css"
+                },
+                {
+                    "blank": 5,
+                    "code": 5,
+                    "comment": 20,
+                    "filename": "src\\components\\Projects\\ProductOverview.jsx"
+                },
+                {
+                    "blank": 26,
+                    "code": 65,
+                    "comment": 39,
+                    "filename": "src\\components\\Projects\\ProjectsHolder.jsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 21,
+                    "comment": 23,
+                    "filename": "src\\components\\Search\\Search.jsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 21,
+                    "comment": 19,
+                    "filename": "src\\components\\Select\\MultipleSelect.jsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 28,
+                    "comment": 18,
+                    "filename": "src\\components\\Select\\SingleSelect.jsx"
+                },
+                {
+                    "blank": 15,
+                    "code": 62,
+                    "comment": 10,
+                    "filename": "src\\components\\Tabs\\styles.css"
+                },
+                {
+                    "blank": 16,
+                    "code": 37,
+                    "comment": 18,
+                    "filename": "src\\components\\Tabs\\TabsLayout.jsx"
+                },
+                {
+                    "blank": 13,
+                    "code": 13,
+                    "comment": 19,
+                    "filename": "src\\components\\Users\\ProfileImage.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 5,
+                    "filename": "src\\Config.js"
+                },
+                {
+                    "blank": 1371,
+                    "code": 2846,
+                    "comment": 6,
+                    "filename": "src\\css\\all.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 4,
+                    "filename": "src\\css\\all.min.css"
+                },
+                {
+                    "blank": 1,
+                    "code": 8,
+                    "comment": 4,
+                    "filename": "src\\css\\brands.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 4,
+                    "filename": "src\\css\\brands.min.css"
+                },
+                {
+                    "blank": 1368,
+                    "code": 2819,
+                    "comment": 6,
+                    "filename": "src\\css\\fontawesome.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 4,
+                    "filename": "src\\css\\fontawesome.min.css"
+                },
+                {
+                    "blank": 1,
+                    "code": 9,
+                    "comment": 4,
+                    "filename": "src\\css\\regular.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 4,
+                    "filename": "src\\css\\regular.min.css"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 4,
+                    "filename": "src\\css\\solid.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 4,
+                    "filename": "src\\css\\solid.min.css"
+                },
+                {
+                    "blank": 49,
+                    "code": 292,
+                    "comment": 4,
+                    "filename": "src\\css\\svg-with-js.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 4,
+                    "filename": "src\\css\\svg-with-js.min.css"
+                },
+                {
+                    "blank": 610,
+                    "code": 1552,
+                    "comment": 4,
+                    "filename": "src\\css\\v4-shims.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 4,
+                    "filename": "src\\css\\v4-shims.min.css"
+                },
+                {
+                    "blank": 2,
+                    "code": 1,
+                    "comment": 18,
+                    "filename": "src\\customWorker.js"
+                },
+                {
+                    "filename": "src\\fonts\\ITCAvantGardeStd-Bk.eot",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\fonts\\ITCAvantGardeStd-Bk.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\fonts\\ITCAvantGardeStd-BkObl.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\fonts\\ITCAvantGardeStd-Bold.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\fonts\\ITCAvantGardeStd-Bold.woff",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\fonts\\ITCAvantGardeStd-BoldObl.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\fonts\\ITCAvantGardeStd-Demi.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\fonts\\ITCAvantGardeStd-DemiObl.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\fonts\\ITCAvantGardeStd-Md.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\fonts\\ITCAvantGardeStd-MdObl.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\fonts\\ITCAvantGardeStd-XLt.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\fonts\\ITCAvantGardeStd-XLtObl.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\images\\logo\\Flex_WHT_Med_r.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\images\\logo\\logo.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 13,
+                    "code": 44,
+                    "comment": 5,
+                    "filename": "src\\index.css"
+                },
+                {
+                    "blank": 7,
+                    "code": 11,
+                    "comment": 21,
+                    "filename": "src\\index.js"
+                },
+                {
+                    "blank": 74,
+                    "code": 186,
+                    "comment": 72,
+                    "filename": "src\\layouts\\Dashboard\\Dashboard.jsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 12,
+                    "comment": 11,
+                    "filename": "src\\layouts\\index.js"
+                },
+                {
+                    "blank": 24,
+                    "code": 62,
+                    "comment": 38,
+                    "filename": "src\\layouts\\NavBar\\NavBar.jsx"
+                },
+                {
+                    "blank": 20,
+                    "code": 64,
+                    "comment": 36,
+                    "filename": "src\\layouts\\SideBar\\DetailsList.jsx"
+                },
+                {
+                    "blank": 36,
+                    "code": 117,
+                    "comment": 47,
+                    "filename": "src\\layouts\\SideBar\\SideBar.jsx"
+                },
+                {
+                    "blank": 20,
+                    "code": 42,
+                    "comment": 21,
+                    "filename": "src\\layouts\\SideBar\\SideBarLink.jsx"
+                },
+                {
+                    "blank": 27,
+                    "code": 76,
+                    "comment": 40,
+                    "filename": "src\\layouts\\SideBar\\SingleList.jsx"
+                },
+                {
+                    "blank": 175,
+                    "code": 460,
+                    "comment": 107,
+                    "filename": "src\\layouts\\styles.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 3,
+                    "comment": 14,
+                    "filename": "src\\routes\\index.js"
+                },
+                {
+                    "blank": 13,
+                    "code": 42,
+                    "comment": 31,
+                    "filename": "src\\routes\\routes.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 12,
+                    "comment": 44,
+                    "filename": "src\\services\\endpoints.js"
+                },
+                {
+                    "blank": 15,
+                    "code": 85,
+                    "comment": 31,
+                    "filename": "src\\serviceWorker.js"
+                },
+                {
+                    "blank": 59,
+                    "code": 112,
+                    "comment": 67,
+                    "filename": "src\\views\\Dashboard\\Dashboard.jsx"
+                },
+                {
+                    "blank": 46,
+                    "code": 128,
+                    "comment": 79,
+                    "filename": "src\\views\\Details\\DetailsView.jsx"
+                },
+                {
+                    "blank": 11,
+                    "code": 14,
+                    "comment": 26,
+                    "filename": "src\\views\\NewProject\\NewProject.jsx"
+                },
+                {
+                    "blank": 18,
+                    "code": 106,
+                    "comment": 39,
+                    "filename": "src\\views\\User\\UserProfile.jsx"
+                },
+                {
+                    "filename": "src\\webfonts\\fa-brands-400.eot",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1260,
+                    "comment": 2,
+                    "filename": "src\\webfonts\\fa-brands-400.svg"
+                },
+                {
+                    "filename": "src\\webfonts\\fa-brands-400.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\webfonts\\fa-brands-400.woff",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\webfonts\\fa-brands-400.woff2",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\webfonts\\fa-regular-400.eot",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 471,
+                    "comment": 2,
+                    "filename": "src\\webfonts\\fa-regular-400.svg"
+                },
+                {
+                    "filename": "src\\webfonts\\fa-regular-400.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\webfonts\\fa-regular-400.woff",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\webfonts\\fa-regular-400.woff2",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\webfonts\\fa-solid-900.eot",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 2760,
+                    "comment": 2,
+                    "filename": "src\\webfonts\\fa-solid-900.svg"
+                },
+                {
+                    "filename": "src\\webfonts\\fa-solid-900.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\webfonts\\fa-solid-900.woff",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\webfonts\\fa-solid-900.woff2",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 3,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "src\\XplorIT.aspx"
+                }
+            ]
+        }
+    ]
+}

@@ -15,18 +15,31 @@
 // --------------------------------------
 // Create Component 
 // --------------------------------------
-    
-    const WideCard = (props) => {
-        console.log('props widecard', props);
+
+    const CardTabContent = (props) => {
         
         // --------------------------------------
         // Render Card
         // --------------------------------------
             return (
                 <div className="xpl-cardContainer xpl-wideCard ">
+                    
+                {/* {props.cardHeader} */}
 
-                    {props.children}
-                
+                    <div className="xpl-cardOverviewContainer">
+
+                        {/* <h5> Overview  </h5> */}
+
+                        {/* {props.tabIndex} */}
+
+                        {props.children}
+
+
+                        <p className="xpl-cardProjectCardOverview">
+                            {/* props.ShortDescription */}
+                        </p>
+
+                    </div>
                 </div>
             )
         
@@ -39,11 +52,11 @@
 // --------------------------------------
 // Define PropTypes
 // --------------------------------------
-    // WideCard.propTypes = {
-    //     prop: PropTypes
-    // };
+// CardTabContent.propTypes = {
+//     prop: PropTypes
+// };
 
 // --------------------------------------
 // Export Component
 // --------------------------------------
-    export default WideCard;    
+    export default CardTabContent;    

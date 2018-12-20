@@ -30,6 +30,7 @@
     import Carrousel from './Carrousel/Carrousel';
     import Breadcumbs from './Breadcumbs/BreadCumbs';
     import WideCard from './Cards/WideCard';
+    import CardTabContent from './Cards/CardTabContent';
     import AppModal from './Modal/Modal';
     import ProjectLink from './Links/ProjectLink';
     import MaterialButton from './Buttons/MaterialButton';
@@ -66,6 +67,7 @@
         DetailsList,
         Breadcumbs,
         WideCard,
+        CardTabContent,
         CardImage,
         CardHeaderWide,
         ProjectLink,

@@ -19,6 +19,10 @@
 // Create Endpoints Object
 // --------------------------------------
     export const Endpoints = {
+
+    /* ==========================================================================
+     *  WebService EndPoints
+     ========================================================================== */
         // --------------------------------------
         // Get All Products
         // --------------------------------------
@@ -58,8 +62,24 @@
             getRelatedProducts : `https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getRelatedPro`,
 
         /** --------------------------------------
+        // Get Product Attributes Tabs
+        // @param {partid <String> }
+        // --------------------------------------*/
+            getProductTabs : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getTabs',
+
+        /** --------------------------------------
+        // Get Tab Values
+        // @param {partid <String>}
+        // @param {busstypeid <String>}
+        // --------------------------------------*/
+            getTabAttributes : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getTabAttributes',
+
+    /* ==========================================================================
+     *  Sharepoint EndPoints
+     ========================================================================== */
+        /** --------------------------------------
         // Get Sharepoint Categories
-        // @param {}
+        // @param {listName}
         // --------------------------------------*/
             getSideBarCategoriesSP : `${path}/_api/web/lists/getbyTitle('xplorIT-colors')/items`,
     }

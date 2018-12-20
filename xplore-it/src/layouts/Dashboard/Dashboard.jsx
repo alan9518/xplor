@@ -40,7 +40,7 @@
                 showModal : false,
                 showError : false
             }
-            this.path = Config.spPat;
+            this.path = Config.spPath;
 
         }
 
@@ -121,10 +121,14 @@
         }
 
         
-        // --------------------------------------
+        /** --------------------------------------
         // Combine Routes Arrays
-        // --------------------------------------
+        // @param {APIRoutes <Array>}
+        // @param {SPRoutes <Array>}
+        // --------------------------------------*/
         mergeRoutes(APIRoutes, SPRoutes) {
+            console.log('his.path', this.path);
+
             const homeRoute = {
                     path : `${this.path}/catalogue/all/all`,
                     exact: false,

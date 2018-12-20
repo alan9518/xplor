@@ -38,7 +38,8 @@
                             
                         {
                             tabsData.length > 0 && tabsData.map((tabItem) => {
-                                return (<Tab key = {tabItem.title}> {tabItem.title} </Tab>)
+                                console.log('tabItem', tabItem);
+                                return (<Tab key = {tabItem.BusinessTypeID}> {tabItem.BusinessTypeName} </Tab>)
                             })
                         }
 
@@ -47,7 +48,9 @@
                     </TabList>
 
                     {
-                        tabsData.map((tabItem) => { return (<TabPanel key = {tabItem.id}>{props.children}</TabPanel>) } )
+                        // tabsData.map((tabItem) => { return (<TabPanel key = {tabItem.id}>{props.children}</TabPanel>) } )
+
+                        <TabPanel> {props.children} </TabPanel>
                     }
                 </Tabs>
             </Fragment>

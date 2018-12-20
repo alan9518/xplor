@@ -7,7 +7,7 @@
 // --------------------------------------
 // Import Dependences
 // --------------------------------------
-    import React  from "react";
+    import React , {Component, Fragment} from "react";
     import PropTypes from "prop-types";
     import { ProjectCard } from "../../components";
     import "./styles.css";
@@ -27,7 +27,8 @@
                 OwnerFirstName, OwnerLastName, 
                 ProductType, CreatedDate, 
                 LastUpdateDate, CoownerFirstName, 
-                CoownerLastName  
+                CoownerLastName  ,
+                ShortDescription
             } = productOverview;
 
         // --------------------------------------
@@ -50,29 +51,38 @@
         // Render Card
         // --------------------------------------
             return (
+                <Fragment>
                     <div className="xpl-cardWideHeader ">
 
-                         
+                        <div className="xpl-cardHeader">
+                            <ProjectCard key = {productOverview.partID} {...productOverview} cardHover = {false}/>
+                        </div> 
 
-                     <div className="xpl-cardHeader">
-                        <ProjectCard key = {productOverview.partID} {...productOverview} cardHover = {false}/>
-                    </div> 
+                        <div className="xpl-cardProjectInfo">
+                            <ul>    
+                                <ListItem itemName = {"Uploaded"} content = {formatDate(CreatedDate)} />
+                                <ListItem itemName = {"Product Type"} content = {ProductType} />
+                        </ul>
+                        </div>
 
-                    <div className="xpl-cardProjectInfo">
-                        <ul>    
-                            <ListItem itemName = {"Uploaded"} content = {formatDate(CreatedDate)} />
-                            <ListItem itemName = {"Product Type"} content = {ProductType} />
-                       </ul>
+                        <div className="xpl-cardProjectInfo">
+                            <ul>
+                                <ListItem itemName = {"Owner"} content = {formatOwners(`${OwnerFirstName} ${OwnerLastName}`)}/>
+                                <ListItem itemName = {"Co-Owner"} content = {formatOwners(`${CoownerFirstName} ${CoownerLastName}`)} />
+                            </ul>
+                        </div> 
+
+                       
                     </div>
 
-                    <div className="xpl-cardProjectInfo">
-                        <ul>
-                            <ListItem itemName = {"Owner"} content = {formatOwners(`${OwnerFirstName} ${OwnerLastName}`)}/>
-                            <ListItem itemName = {"Co-Owner"} content = {formatOwners(`${CoownerFirstName} ${CoownerLastName}`)} />
-                       </ul>
-                    </div> 
-                </div>
 
+                    <div className="xpl-cardOverviewContainer">
+                        <h5> Description  </h5>
+                        <p className="xpl-cardProjectCardOverview">
+                            {ShortDescription}
+                        </p>
+                    </div> 
+                    </Fragment>
                 
             );
     };

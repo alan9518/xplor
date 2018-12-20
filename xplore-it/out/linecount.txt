@@ -1,0 +1,169 @@
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2018-12-19 16:19:19
+count workspace : c:\xampp\htdocs\XploreIT\xploreIT-v1\xplore-it
+total files : 157
+total code lines : 33354
+total comment lines : 2622
+total blank lines : 4668
+
+.gitignore, code is 16, comment is 1, blank is 5.
+build\asset-manifest.json, code is 17, comment is 0, blank is 0.
+build\favicon.ico, it is a binary file.
+build\fonts\ITCAvantGardeStd-Bk.otf, it is a binary file.
+build\fonts\ITCAvantGardeStd-BkObl.otf, it is a binary file.
+build\fonts\ITCAvantGardeStd-Bold.otf, it is a binary file.
+build\fonts\ITCAvantGardeStd-Bold.woff, it is a binary file.
+build\fonts\ITCAvantGardeStd-BoldObl.otf, it is a binary file.
+build\fonts\ITCAvantGardeStd-Demi.otf, it is a binary file.
+build\fonts\ITCAvantGardeStd-DemiObl.otf, it is a binary file.
+build\fonts\ITCAvantGardeStd-Md.otf, it is a binary file.
+build\fonts\ITCAvantGardeStd-MdObl.otf, it is a binary file.
+build\fonts\ITCAvantGardeStd-XLt.otf, it is a binary file.
+build\fonts\ITCAvantGardeStd-XLtObl.otf, it is a binary file.
+build\index.html, code is 2, comment is 5, blank is 0.
+build\manifest.json, code is 15, comment is 0, blank is 0.
+build\precache-manifest.0732871abf7484dedbc56675e41e68ce.js, code is 74, comment is 0, blank is 0.
+build\service-worker.js, code is 10, comment is 17, blank is 7.
+build\static\css\1.c008e4ae.chunk.css, code is 2, comment is 8, blank is 1.
+build\static\css\1.c008e4ae.chunk.css.map, code is 1, comment is 0, blank is 0.
+build\static\css\main.51e5ff1f.chunk.css, code is 1, comment is 2, blank is 0.
+build\static\css\main.51e5ff1f.chunk.css.map, code is 1, comment is 0, blank is 0.
+build\static\js\1.675604e7.chunk.js, code is 1, comment is 2, blank is 0.
+build\static\js\1.675604e7.chunk.js.map, code is 1, comment is 0, blank is 0.
+build\static\js\main.0f0b0393.chunk.js, code is 1, comment is 1, blank is 0.
+build\static\js\main.0f0b0393.chunk.js.map, code is 1, comment is 0, blank is 0.
+build\static\js\runtime~main.38dc7f66.js, code is 1, comment is 1, blank is 0.
+build\static\js\runtime~main.38dc7f66.js.map, code is 1, comment is 0, blank is 0.
+build\static\media\ITCAvantGardeStd-Bk.93e9d0be.otf, it is a binary file.
+build\static\media\ITCAvantGardeStd-Bold.4c326e45.otf, it is a binary file.
+build\static\media\ITCAvantGardeStd-Demi.6ce36235.otf, it is a binary file.
+build\static\media\ITCAvantGardeStd-DemiObl.ea82a43b.otf, it is a binary file.
+build\static\media\ITCAvantGardeStd-Md.82ab9393.otf, it is a binary file.
+build\static\media\ITCAvantGardeStd-MdObl.cdf8da74.otf, it is a binary file.
+build\static\media\ITCAvantGardeStd-XLt.7d143d7f.otf, it is a binary file.
+build\static\media\ITCAvantGardeStd-XLtObl.00723327.otf, it is a binary file.
+build\static\media\slick.b7c9e1e4.woff, it is a binary file.
+build\static\media\slick.ced611da.eot, it is a binary file.
+build\static\media\slick.d41f55a7.ttf, it is a binary file.
+build\static\media\slick.f97e3bbf.svg, code is 13, comment is 0, blank is 1.
+package-lock.json, code is 17639, comment is 0, blank is 0.
+package.json, code is 48, comment is 0, blank is 1.
+public\favicon.ico, it is a binary file.
+public\fonts\ITCAvantGardeStd-Bk.otf, it is a binary file.
+public\fonts\ITCAvantGardeStd-BkObl.otf, it is a binary file.
+public\fonts\ITCAvantGardeStd-Bold.otf, it is a binary file.
+public\fonts\ITCAvantGardeStd-Bold.woff, it is a binary file.
+public\fonts\ITCAvantGardeStd-BoldObl.otf, it is a binary file.
+public\fonts\ITCAvantGardeStd-Demi.otf, it is a binary file.
+public\fonts\ITCAvantGardeStd-DemiObl.otf, it is a binary file.
+public\fonts\ITCAvantGardeStd-Md.otf, it is a binary file.
+public\fonts\ITCAvantGardeStd-MdObl.otf, it is a binary file.
+public\fonts\ITCAvantGardeStd-XLt.otf, it is a binary file.
+public\fonts\ITCAvantGardeStd-XLtObl.otf, it is a binary file.
+public\index.html, code is 66, comment is 32, blank is 19.
+public\manifest.json, code is 15, comment is 0, blank is 0.
+README.md, code is 416, comment is 1019, blank is 175.
+src\analytics.html, code is 7, comment is 1, blank is 1.
+src\App.js, code is 35, comment is 30, blank is 18.
+src\App.test.js, code is 8, comment is 0, blank is 1.
+src\components\Breadcumbs\BreadCumbs.jsx, code is 18, comment is 14, blank is 7.
+src\components\Buttons\AppButton.jsx, code is 23, comment is 21, blank is 8.
+src\components\Buttons\MaterialButton.jsx, code is 23, comment is 19, blank is 10.
+src\components\Buttons\styles.css, code is 91, comment is 16, blank is 21.
+src\components\Cards\CardHeaderListItem.js, code is 17, comment is 17, blank is 8.
+src\components\Cards\CardHeaderWide.jsx, code is 42, comment is 32, blank is 16.
+src\components\Cards\CardImage.js, code is 16, comment is 17, blank is 8.
+src\components\Cards\ProjectCard.jsx, code is 60, comment is 36, blank is 17.
+src\components\Cards\styles.css, code is 130, comment is 17, blank is 50.
+src\components\Cards\WideCard.js, code is 31, comment is 23, blank is 18.
+src\components\Carrousel\Carrousel.jsx, code is 73, comment is 32, blank is 18.
+src\components\Carrousel\styles.css, code is 17, comment is 9, blank is 5.
+src\components\ErrorHandler\ErrorBoundary.jsx, code is 38, comment is 31, blank is 16.
+src\components\Forms\Projects\NewProjectForm.jsx, code is 241, comment is 65, blank is 79.
+src\components\index.js, code is 58, comment is 20, blank is 9.
+src\components\InfiniteScroll\Scroller.jsx, code is 8, comment is 27, blank is 7.
+src\components\LibraryHistory\HistoryList.jsx, code is 16, comment is 31, blank is 12.
+src\components\LibraryHistory\HistoryListItem.js, code is 0, comment is 5, blank is 0.
+src\components\Links\ProjectLink.js, code is 19, comment is 20, blank is 9.
+src\components\Loader\Loader.jsx, code is 19, comment is 15, blank is 4.
+src\components\Loader\styles.css, code is 10, comment is 0, blank is 1.
+src\components\Modal\Modal.jsx, code is 31, comment is 25, blank is 10.
+src\components\Modal\styles.css, code is 58, comment is 8, blank is 14.
+src\components\NoData\NoData.js, code is 18, comment is 14, blank is 5.
+src\components\NoData\styles.css, code is 19, comment is 5, blank is 4.
+src\components\Projects\ProductOverview.jsx, code is 5, comment is 20, blank is 5.
+src\components\Projects\ProjectsHolder.jsx, code is 65, comment is 39, blank is 26.
+src\components\Search\Search.jsx, code is 21, comment is 23, blank is 10.
+src\components\Select\MultipleSelect.jsx, code is 21, comment is 19, blank is 8.
+src\components\Select\SingleSelect.jsx, code is 28, comment is 18, blank is 4.
+src\components\Tabs\styles.css, code is 62, comment is 10, blank is 15.
+src\components\Tabs\TabsLayout.jsx, code is 37, comment is 18, blank is 16.
+src\components\Users\ProfileImage.jsx, code is 13, comment is 19, blank is 13.
+src\Config.js, code is 5, comment is 5, blank is 2.
+src\css\all.css, code is 2846, comment is 6, blank is 1371.
+src\css\all.min.css, code is 1, comment is 4, blank is 0.
+src\css\brands.css, code is 8, comment is 4, blank is 1.
+src\css\brands.min.css, code is 1, comment is 4, blank is 0.
+src\css\fontawesome.css, code is 2819, comment is 6, blank is 1368.
+src\css\fontawesome.min.css, code is 1, comment is 4, blank is 0.
+src\css\regular.css, code is 9, comment is 4, blank is 1.
+src\css\regular.min.css, code is 1, comment is 4, blank is 0.
+src\css\solid.css, code is 10, comment is 4, blank is 1.
+src\css\solid.min.css, code is 1, comment is 4, blank is 0.
+src\css\svg-with-js.css, code is 292, comment is 4, blank is 49.
+src\css\svg-with-js.min.css, code is 1, comment is 4, blank is 0.
+src\css\v4-shims.css, code is 1552, comment is 4, blank is 610.
+src\css\v4-shims.min.css, code is 1, comment is 4, blank is 0.
+src\customWorker.js, code is 1, comment is 18, blank is 2.
+src\fonts\ITCAvantGardeStd-Bk.eot, it is a binary file.
+src\fonts\ITCAvantGardeStd-Bk.otf, it is a binary file.
+src\fonts\ITCAvantGardeStd-BkObl.otf, it is a binary file.
+src\fonts\ITCAvantGardeStd-Bold.otf, it is a binary file.
+src\fonts\ITCAvantGardeStd-Bold.woff, it is a binary file.
+src\fonts\ITCAvantGardeStd-BoldObl.otf, it is a binary file.
+src\fonts\ITCAvantGardeStd-Demi.otf, it is a binary file.
+src\fonts\ITCAvantGardeStd-DemiObl.otf, it is a binary file.
+src\fonts\ITCAvantGardeStd-Md.otf, it is a binary file.
+src\fonts\ITCAvantGardeStd-MdObl.otf, it is a binary file.
+src\fonts\ITCAvantGardeStd-XLt.otf, it is a binary file.
+src\fonts\ITCAvantGardeStd-XLtObl.otf, it is a binary file.
+src\images\logo\Flex_WHT_Med_r.png, it is a binary file.
+src\images\logo\logo.png, it is a binary file.
+src\index.css, code is 44, comment is 5, blank is 13.
+src\index.js, code is 11, comment is 21, blank is 7.
+src\layouts\Dashboard\Dashboard.jsx, code is 186, comment is 72, blank is 74.
+src\layouts\index.js, code is 12, comment is 11, blank is 6.
+src\layouts\NavBar\NavBar.jsx, code is 62, comment is 38, blank is 24.
+src\layouts\SideBar\DetailsList.jsx, code is 64, comment is 36, blank is 20.
+src\layouts\SideBar\SideBar.jsx, code is 117, comment is 47, blank is 36.
+src\layouts\SideBar\SideBarLink.jsx, code is 42, comment is 21, blank is 20.
+src\layouts\SideBar\SingleList.jsx, code is 76, comment is 40, blank is 27.
+src\layouts\styles.css, code is 460, comment is 107, blank is 175.
+src\routes\index.js, code is 3, comment is 14, blank is 4.
+src\routes\routes.js, code is 42, comment is 31, blank is 13.
+src\services\endpoints.js, code is 12, comment is 44, blank is 10.
+src\serviceWorker.js, code is 85, comment is 31, blank is 15.
+src\views\Dashboard\Dashboard.jsx, code is 112, comment is 67, blank is 59.
+src\views\Details\DetailsView.jsx, code is 128, comment is 79, blank is 46.
+src\views\NewProject\NewProject.jsx, code is 14, comment is 26, blank is 11.
+src\views\User\UserProfile.jsx, code is 106, comment is 39, blank is 18.
+src\webfonts\fa-brands-400.eot, it is a binary file.
+src\webfonts\fa-brands-400.svg, code is 1260, comment is 2, blank is 0.
+src\webfonts\fa-brands-400.ttf, it is a binary file.
+src\webfonts\fa-brands-400.woff, it is a binary file.
+src\webfonts\fa-brands-400.woff2, it is a binary file.
+src\webfonts\fa-regular-400.eot, it is a binary file.
+src\webfonts\fa-regular-400.svg, code is 471, comment is 2, blank is 0.
+src\webfonts\fa-regular-400.ttf, it is a binary file.
+src\webfonts\fa-regular-400.woff, it is a binary file.
+src\webfonts\fa-regular-400.woff2, it is a binary file.
+src\webfonts\fa-solid-900.eot, it is a binary file.
+src\webfonts\fa-solid-900.svg, code is 2760, comment is 2, blank is 0.
+src\webfonts\fa-solid-900.ttf, it is a binary file.
+src\webfonts\fa-solid-900.woff, it is a binary file.
+src\webfonts\fa-solid-900.woff2, it is a binary file.
+src\XplorIT.aspx, code is 18, comment is 0, blank is 3.
+===============================================================================
