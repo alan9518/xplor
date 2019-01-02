@@ -53,18 +53,20 @@
         // Render Card
         // --------------------------------------
             renderCard() {
-                const {projectPath} =  Config;
-                const {partID, ProductName, hasSmallDescription,projectColor, ProductScope, ShortDescription, productIcon, DetailedDescription, cardHover } = this.props;
+                // const {projectPath} =  Config;
+                const {partID, ProductName, hasSmallDescription,projectColor, SoftwareTopic, ProductScope, ShortDescription, productIcon, DetailedDescription, cardHover } = this.props;
                 const bgColor = hasSmallDescription ? projectColor : '#238ECC';
                 const projectColorStyle = {backgroundColor : bgColor}
 
                 return (
                     
                         <div className="xpl-cardContainer xpl-mediumCard xpl-shadow">
-                            <ProjectLink route = {`${projectPath}/${partID}`} >
+                            {/* <ProjectLink route = {`${projectPath}/${partID}`} > */}
+                            <ProjectLink route = {partID} >
                                 <div className = {`xpl-cardHeader ${cardHover && 'cardHover'}`} style = {projectColorStyle}>
                                     <div className="xpl-cardName"> 
                                         <h5> {ProductName} </h5> 
+                                        <h5 className = {'xpl-productScopeCard'}> {ProductScope || SoftwareTopic} </h5>
                                     </div>
                                     <CardImage projectIcon = {productIcon}/>
                                 </div>
@@ -109,3 +111,6 @@
 // Export Component
 // --------------------------------------
     export default ProjectCard;
+
+
+    

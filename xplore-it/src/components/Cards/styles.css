@@ -56,12 +56,29 @@
         max-height: 80px;
     }
 
-    .xpl-cardName {
+    /* .xpl-cardName {
         width: 70px;
         max-width: 110px;
         line-break: normal;
-        /* padding: 16px; */
+        
+    } */
+
+    
+    .xpl-cardName {
+        width: 100px;
+        max-width: 110px;
+        line-break: normal;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: start;
     }
+
+    .xpl-cardName h5 {
+        margin-left: 0;
+    }
+    
+
 
     .xpl-cardDescription p {
         text-align: center;

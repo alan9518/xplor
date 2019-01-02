@@ -34,8 +34,6 @@
                 currentCategoryColor : null,
                 isLoaded : false
             }
-            this.path = Config.spPath
-
         }
 
         // --------------------------------------
@@ -48,7 +46,6 @@
 
         getSideBarRoutes() {
             const {categories} = this.props;
-            console.log('props categories', categories);
             this.setState({
                 currentMenu : categories,
                 isLoaded : true
@@ -98,7 +95,9 @@
                 const subMenu = SubCap.map((subCap) => {
                     return {
                         id : subCap.CustomerID,
-                        path :  `${this.path}/catalogue/${subCap.SubCapabilities}/${subCap.CustomerID}`,
+                        // path :  `${this.path}/catalogue/${subCap.SubCapabilities}/${subCap.CustomerID}`,
+                        // path :  `$catalogue/${subCap.SubCapabilities}/${subCap.CustomerID}`,
+                        path :  `$/catalogue/${subCap.SubCapabilities}/${subCap.CustomerID}`,
                         exact: true,
                         sidebarName : subCap.SubCapabilities,
                         key : `${subCap.Capabilities}-${subCap.SubCapabilities}`,
@@ -126,20 +125,30 @@
 
 
             // --------------------------------------
+            // Responsive Sidebar Style
+            // --------------------------------------
+          
+
+            // --------------------------------------
             // Render Sidebar 
             // --------------------------------------
             renderSideBar() {
                 const {currentMenu, menuComponent, currentCategory, currentCategoryColor} = this.state;
                 console.log('currentMenu', currentMenu);
-                const {showMobileMenu,onClick} = this.props;
+                const {showMobileMenu,onClick, responsiveWidth} = this.props;
                 const sidebarClass = showMobileMenu === true?  'showMobileMenu' : '';
+                const responsiveSideBarStyle = {
+                    maxWidth : `${responsiveWidth}px`
+                }
                 
                 return (
                     <Fragment>
 
-                        <div className = {`xpl-appSideBar ${sidebarClass}`}>
+                        
+                        <div className = {`xpl-appSideBar ${sidebarClass}`}   style = {responsiveSideBarStyle} >
+                        
                             
-                            <div className="xpl-appSideBarBody">
+                            <div className="xpl-appSideBarBody"  >
                                 <div className="xpl-appSideBarHeader">
                                     <div className="xpl-buttonCloseContainer">
                                         <AppButton buttonClass = {'xpl-closeButton'} iconClass = {'fas fa-times'} onClick = {onClick}/>
@@ -153,7 +162,7 @@
                                         <SingleList currentMenu = {currentMenu} 
                                                     onClick = {this.onListItemClick}
                                                     key = {'Single-List'}
-                                                    hideMobileMenu = {() => showMobileMenu === true && this.props.onClick()}
+                                                    hideMobileMenu = {(e) => showMobileMenu === true && this.props.onClick(e)}
                                         /> 
                                     }
                                     { 
@@ -164,13 +173,14 @@
                                                         currentCategoryColor = {currentCategoryColor} 
                                                         onClick = {this.onListItemBackClick}
                                                         key = {'Details-List'}
-                                                        hideMobileMenu = {() => showMobileMenu === true && this.props.onClick()}
+                                                        hideMobileMenu = {(e) => showMobileMenu === true && this.props.onClick(e)}
                                         /> 
                                     }
                                     
                                 </div>
                             </div>
                         </div>
+                        
                 </Fragment>
                 )
             }
@@ -182,7 +192,8 @@
             render() {
                 const {isLoaded} = this.state;
                 return ( 
-                    isLoaded ? this.renderSideBar() : null
+                    this.renderSideBar()
+                    // isLoaded ? this.renderSideBar() : null
                 );
             }
     }

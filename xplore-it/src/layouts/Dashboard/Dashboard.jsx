@@ -38,9 +38,11 @@
                 isLoaded : false,
                 showMobileMenu : false,
                 showModal : false,
-                showError : false
+                showError : false,
+                responsiveWidth : window.innerWidth
             }
             this.path = Config.spPath;
+            // this.updateContainerDimensions = this.updateDimensions.bind(this);
 
         }
 
@@ -49,9 +51,19 @@
         // --------------------------------------
         componentDidMount() {
             this.loadAPI();
+            window.addEventListener("resize", this.updateContainerDimensions);
         }
 
 
+        // --------------------------------------
+        // Unregister Events
+        // --------------------------------------
+        componentWillUnmount() {
+            window.removeEventListener("resize", this.updateContainerDimensions);
+        }
+
+
+      
 
     /* ==========================================================================
      *  API Connection
@@ -62,9 +74,7 @@
         // --------------------------------------
         async loadAPI() {
             const APIRoutes =  await this.loadAPICategories();
-            console.log('APIRoutes', APIRoutes);
             const SPRoutes = await  this.loadSPCategories();
-            console.log('SPRoutes', SPRoutes);
 
 
             const appRoutes = this.mergeRoutes(APIRoutes, SPRoutes);
@@ -88,7 +98,6 @@
             }
             catch (error) {
                 this.setState({isLoaded : true, showError : true})
-                console.log('error', error);
                 return [];
             }
             
@@ -114,7 +123,6 @@
                 return (SPCatsArray);
             }
             catch (error) {
-                console.log('error', error);
                 this.setState({isLoaded : true, showError : true})
                 return [];
             }
@@ -130,7 +138,8 @@
             console.log('his.path', this.path);
 
             const homeRoute = {
-                    path : `${this.path}/catalogue/all/all`,
+                    // path : `${this.path}/catalogue/all/all`,
+                    path : `catalogue/all/all`,
                     exact: false,
                     sidebarName : 'Home',
                     key:'home-route',
@@ -142,7 +151,8 @@
                 const appRoutes = APIRoutes.map((apiRoute) => {
 
                     // Add React Routes Keys
-                    apiRoute.path =  `${this.path}/catalogue/${apiRoute.CustomerName}/${apiRoute.CustomerID}`;
+                    // apiRoute.path =  `${this.path}/catalogue/${apiRoute.CustomerName}/${apiRoute.CustomerID}`;
+                    apiRoute.path =  `catalogue/${apiRoute.CustomerName}/${apiRoute.CustomerID}`;
                     apiRoute.exact = false;
                     apiRoute.sidebarName = apiRoute.CustomerName
 
@@ -159,16 +169,16 @@
 
                 });
 
-
+                // Return All Routes, On an Array Merging The HomeRoute
                 const sideBarRoutes = [homeRoute, ...appRoutes ];
                 return sideBarRoutes;
 
             }
             catch(error) {
-                console.log('error', error);
                 // const appRoutes = [];
                 this.setState({isLoaded : true, showError : true})
 
+                // Return The Array with Only the HomeRoute
                 return [...homeRoute];
             }
 
@@ -180,17 +190,24 @@
 
     /* ==========================================================================
      *  Handle State
-     ========================================================================== */
+    ========================================================================== */
 
 
         // --------------------------------------
         // Show/Hide Mobile Menu
         // --------------------------------------
         toggleMobileMenu = (e) => {
+
             const {showMobileMenu} = this.state;
-            this.setState({
-                showMobileMenu : !showMobileMenu
-            })
+            try {
+                this.setState({showMobileMenu : !showMobileMenu})
+                e.preventDefault();
+           }
+        
+            catch(error) {
+                console.log('eror', error)
+                return null;
+            }
         }
 
 
@@ -203,6 +220,15 @@
                 showModal : !showModal
             })
         }
+
+        // --------------------------------------
+        // Window Resizing
+        // --------------------------------------
+        updateContainerDimensions = () => {
+            let newWidth = window.innerWidth;
+            this.setState({responsiveWidth : newWidth});
+        }
+        
 
 
     /* ==========================================================================
@@ -241,7 +267,7 @@
         // Render the DashBoard Routes from routes.js
         // --------------------------------------    
             renderApp() {
-                const {showMobileMenu, categories, currentColor, showError} =  this.state;
+                const {showMobileMenu, categories, currentColor, showError, responsiveWidth} =  this.state;
                 const {location} = this.props;
                 const currentNavigator = window.navigator.appName;
                 const bodyClasses = currentNavigator === "Microsoft Internet Explorer" 
@@ -264,12 +290,13 @@
                                         showMobileMenu = {showMobileMenu} 
                                         categories = {categories}
                                         onClick = {this.toggleMobileMenu }
+                                        responsiveWidth = {responsiveWidth}
                                     />
 
 
                                     {/* Iterate Routes to set the Body Content */}
                                     <div className={bodyClasses}>
-                                        <div className="container-fluid">
+                                        <div className="container-fluid" style = {{maxWidth:responsiveWidth}}>
                                             <div className="xpl-buttonContainer">
                                                 <AppButton 
                                                         buttonClass = {'xpl-toggleButton'} 
@@ -310,10 +337,10 @@
 
         // --------------------------------------
         // Render Component
-        // --------------------------------------
+        // -------------------------------------- 
             render() {
                 const {isLoaded} = this.state;
-                return isLoaded ? this.renderApp() : this.renderLoader();
+                return isLoaded === true ? this.renderApp() : this.renderLoader();
             }
     }
 
@@ -325,12 +352,4 @@
     export default Dashboard;
 
 
-
-
-
-    // <add name="sqlconn" 
-    //         connectionString="Data Source=sacnte885.americas.ad.flextronics.com;Initial Catalog=EPICENTER_NIKE_UAT;Integrated Security=True" providerName="System.Data.SqlClient" />
-    // <add name="sqlconn" 
-    //         connectionString="Data Source=sacnte885.americas.ad.flextronics.com;Initial Catalog=EPICENTER_NIKE_UAT;Integrated Security=True;MultipleActiveResultSets=true" 
-    //     providerName="System.Data.SqlClient" />
 

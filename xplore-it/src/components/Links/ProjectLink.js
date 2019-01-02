@@ -10,18 +10,25 @@
     import React from 'react';
     import PropTypes from 'prop-types';
     import {NavLink} from 'react-router-dom';
-    // import {Config} from '../../'
+    import {Config} from '../../Config'
 
 // --------------------------------------
 // Create link Component
 // --------------------------------------
     const ProjectLink = (props) => {
 
-        const {route, itemKey} = props;
-        // const path = 
+        const {route, itemKey, spRoute} = props;
+        const {spPath, projectPath} =  Config;
+
+        // Check if the route comes from the NavBar or ProjectCard or Sidebar
+        // First Option : Route Comes from NavBar, ProfilePage
+        
+        const routePath = spRoute === true ? `${spPath}/${route}` : `${projectPath}/${route}`
+
+       console.log('route Path', routePath)
 
         return (
-            <NavLink to= {route} key = {itemKey} >
+            <NavLink to= {routePath} key = {itemKey} >
                 {props.children}
             </NavLink>
         )
@@ -45,4 +52,3 @@
 // --------------------------------------
     export default ProjectLink;
 
-    // List with all the Font Awesome Icons that can be used on the application

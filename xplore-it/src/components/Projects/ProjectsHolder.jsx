@@ -71,6 +71,9 @@
         // @param {data  an array with all the ID's of the cards to handle the Shuffle and sorting of cards }
         // --------------------------------------*/
         renderFlipperContainer(productsData, data) {
+
+            console.log('productsData', productsData)
+
             return (
                 <Flipper flipKey={data.join("")} className = "row xpl-row">
                                 

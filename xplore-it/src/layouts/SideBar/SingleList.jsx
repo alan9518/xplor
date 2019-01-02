@@ -42,7 +42,7 @@
         hideMobileMenu = (e) => {
             const {hideMobileMenu} = this.props;
 
-            hideMobileMenu();
+            hideMobileMenu(e);
         }
 
         // --------------------------------------
@@ -52,7 +52,7 @@
         // else a button to open Details
         // --------------------------------------
         renderMenuList() {
-            const {currentMenu,hideMobileMenu}  = this.props;
+            const {currentMenu}  = this.props;
             let menuItemPath = null;
             return (
                 
@@ -62,6 +62,9 @@
 
                         if(menuItem.sidebarName ) 
                         {   
+                            // Check if the Item has SubMenu
+                            // If it has return Null
+                            // Else the Return the Path From SideBar
                             menuItemPath = menuItem.SubCap && menuItem.SubCap.length > 0 ? null : menuItem.path;
                 
                             if(menuItemPath!== null) {
@@ -99,6 +102,7 @@
                                 }
                                 
                             }
+                            // Menu Without Children
                             else
                             {
                                 return ( 

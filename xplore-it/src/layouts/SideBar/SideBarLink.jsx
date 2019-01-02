@@ -40,7 +40,7 @@
                 // Link With React Router
                 return (
                     <li className = {`xpl-sidebarLink `}  style =  {homeIcon && homeStyles}  onClick = {hideMobileMenu}>
-                        <ProjectLink route = {link} itemKey = {indexKey}>
+                        <ProjectLink route = {link} itemKey = {indexKey} spRoute = {true} >
                             <div className="xpl-iconContainer">
 
                                 {hasIcon && 

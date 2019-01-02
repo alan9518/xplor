@@ -78,7 +78,7 @@
                             <div className ={`navbar-collapse collapse show`} id="xpl-appNavBar" >
                                 <ul className="navbar-nav ml-auto">
                                     <li className="nav-item active xpl-userProfileLink" >
-                                        <ProjectLink route = {`/user/details/2`}>
+                                        <ProjectLink route = {`user/details/2`} spRoute = {true}>
                                             <span className="nav-link xpl-userName">
                                                 Welcome {user_name} <span className="sr-only">(current)</span>
                                             </span>
