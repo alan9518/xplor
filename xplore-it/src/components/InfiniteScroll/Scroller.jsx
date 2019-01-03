@@ -23,7 +23,6 @@
     // Render Component
     // --------------------------------------
         render() {
-            // console.log('InfiniteScroll', InfiniteScroll);
 
             return <div />;
         }

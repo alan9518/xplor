@@ -17,7 +17,6 @@
 // --------------------------------------
     
     const WideCard = (props) => {
-        console.log('props widecard', props);
         
         // --------------------------------------
         // Render Card

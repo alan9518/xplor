@@ -38,7 +38,6 @@
                             
                         {
                             tabsData.length > 0 && tabsData.map((tabItem) => {
-                                console.log('tabItem', tabItem);
                                 return (<Tab key = {tabItem.BusinessTypeID}> {tabItem.BusinessTypeName} </Tab>)
                             })
                         }

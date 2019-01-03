@@ -16,7 +16,6 @@
 // Create Functional Component
 // --------------------------------------
     const BreadCumbs = ({SoftwareTopic, ProductScope}) => {
-        console.log('props brad', SoftwareTopic);
 
         return (
             <div className="xpl-breadcumbsContainer">

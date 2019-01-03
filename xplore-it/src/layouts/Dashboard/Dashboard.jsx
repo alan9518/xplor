@@ -135,7 +135,6 @@
         // @param {SPRoutes <Array>}
         // --------------------------------------*/
         mergeRoutes(APIRoutes, SPRoutes) {
-            console.log('his.path', this.path);
 
             const homeRoute = {
                     // path : `${this.path}/catalogue/all/all`,
@@ -205,7 +204,6 @@
            }
         
             catch(error) {
-                console.log('eror', error)
                 return null;
             }
         }

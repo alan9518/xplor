@@ -41,7 +41,6 @@
             // Load API and Set State
             // --------------------------------------
             componentDidMount() {
-                console.log('props', this.props)
                 this.loadAPI();
             }
 

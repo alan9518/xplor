@@ -72,7 +72,6 @@
         // --------------------------------------*/
         renderFlipperContainer(productsData, data) {
 
-            console.log('productsData', productsData)
 
             return (
                 <Flipper flipKey={data.join("")} className = "row xpl-row">

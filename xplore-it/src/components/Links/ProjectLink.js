@@ -25,7 +25,6 @@
         
         const routePath = spRoute === true ? `${spPath}/${route}` : `${projectPath}/${route}`
 
-       console.log('route Path', routePath)
 
         return (
             <NavLink to= {routePath} key = {itemKey} >

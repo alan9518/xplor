@@ -132,7 +132,6 @@
         // --------------------------------------
             submitNewProduct = (e) => {
                 e.preventDefault();
-                console.log('Submiting Form', this.state);
             }
         
 

@@ -52,7 +52,6 @@
         // Render Error
         // --------------------------------------
         render() {
-            console.log('this.props.children Error Handler', this.props.children);
 
             if (this.state.hasError) {
                 // You can render any custom fallback UI

@@ -43,7 +43,6 @@
 // From Home or / to Catalogue View
 // --------------------------------------
     // const softwareTopicsRoutes = softwareTopics().re;
-    // console.log('softwareTopicsRoutes', softwareTopicsRoutes);
 
 
 // --------------------------------------
