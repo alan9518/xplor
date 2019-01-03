@@ -43,8 +43,8 @@
     import AppLoader from './Loader/Loader';
     import NoData from './NoData/NoData';
     import ListItem from './Cards/CardHeaderListItem';
-    import ErrorBoundary from './ErrorHandler/ErrorBoundary'
-
+    import ErrorBoundary from './ErrorHandler/ErrorBoundary';
+    import CustomTabs from './Tabs/CustomTabs';
 
 // --------------------------------------
 // Forms
@@ -86,4 +86,5 @@
         NoData,
         ListItem,
         ErrorBoundary,
+        CustomTabs,
     }

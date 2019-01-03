@@ -112,9 +112,10 @@
 // --------------------------------------
 // Define PropTypes
 // --------------------------------------
-    // Carrousel.propTypes = {
-    //     prop: PropTypes
-    // };
+    Carrousel.propTypes = {
+        carrouselData: PropTypes.array,
+        itemsToShow: PropTypes.number
+    };
 
 // --------------------------------------
 // Export Component

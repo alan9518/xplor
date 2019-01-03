@@ -52,9 +52,9 @@
 // --------------------------------------
 // Define PropTypes
 // --------------------------------------
-// CardTabContent.propTypes = {
-//     prop: PropTypes
-// };
+    CardTabContent.propTypes = {
+        children: PropTypes.any
+    };
 
 // --------------------------------------
 // Export Component

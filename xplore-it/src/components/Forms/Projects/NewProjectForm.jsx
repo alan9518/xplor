@@ -8,7 +8,7 @@
 // Import Dependences
 // --------------------------------------
     import React, { Component, Fragment }  from 'react'
-    import PropTypes from 'prop-types';
+    // import PropTypes from 'prop-types';
     import {MaterialButton, AppButton, SingleSelect, MultipleSelect} from '../../../components';
 
 
@@ -68,7 +68,7 @@
         // Add new Category
         // --------------------------------------
             toggleSpecialPermission = (e) => {
-                const value = e.target.value;
+                // const value = e.target.value;
 
                 this.setState((prevstate) => {
                     return {

@@ -22,10 +22,10 @@
         // --------------------------------------
         // Constructor
         // --------------------------------------
-            constructor(props) {
-                super(props);
+            // constructor(props) {
+            //     super(props);
                 
-            }
+            // }
 
         // --------------------------------------
         // Avoid Rerender of Cards each time 
@@ -39,14 +39,32 @@
 
         // --------------------------------------
         // Render Small Description
+        // Choose between small Desc or normal 
         // --------------------------------------
             renderSmallDesc(ShortDescription, DetailedDescription) {
+                // const cardDescription = ShortDescription || DetailedDescription;
                 return (
                     <div className="xpl-cardDescription">
-                        <p> {ShortDescription !== '' ? ShortDescription : DetailedDescription } </p>
+                        <p> {this.setDescriptionWidth(ShortDescription) } </p>
                     </div>
                 )
             }
+
+
+        /** --------------------------------------
+        // Set Maximum Width for the Description
+        // @param {projectDescription <string>}
+        // @returns {Shortened Description}
+        // --------------------------------------*/
+            setDescriptionWidth(projectDescription) {
+                if(projectDescription.length > 40)
+                    return `${projectDescription.substr(0,39)}...`
+                // else if (projectDescription)
+                else
+                    return projectDescription;
+            }
+
+
 
 
         // --------------------------------------

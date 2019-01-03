@@ -8,7 +8,7 @@
 // Import Dependences
 // --------------------------------------
     import React, { Component, Fragment }  from 'react'
-    import PropTypes from 'prop-types'
+    // import PropTypes from 'prop-types'
     import {SingleSelect} from '../../components'
 
 
@@ -44,47 +44,6 @@
         /* ==========================================================================
          *  API Calls
          ========================================================================== */
-
-           // --------------------------------------
-           // Get Data and save it into the State
-           // --------------------------------------
-            // async loadProjects() {
-            
-            //     const topicName = this.splitRouteName();
-            //     const params = {customerid : this.props.match.params.key}
-
-            //     // Get Carrousel Products. Create Promise
-            //         const getCarrouselProductsPromise =  await axios.get(Endpoints.getCarrouselProducts);
-
-            //     // // Get All Products. Createn Promise 
-            //         const getProductsPromise = topicName === 'all' 
-            //             ? await axios.get(Endpoints.getAllProducts) 
-            //             : await axios.get(Endpoints.getAllProductsByCategory,{params});
-
-
-            //     // Get SP Colors
-            //         const SPColorsCategories = await  this.loadSPCategories();
-
-
-            //     // Resolve Promises
-            //         const productsData = getProductsPromise.data;
-            //         const carrouselData = getCarrouselProductsPromise.data;
-
-
-
-            //     // Merge Colors and Projects
-            //         const productsWithColor = this.mergeProductsAndColors(productsData, SPColorsCategories);
-
-
-            //     // Store Results
-
-            //     this.setState( {
-            //         currentCategory : `${startCase(topicName)}  Products`,
-            //         products : productsWithColor || [],
-            //         carrouselproducts : carrouselData || [],
-            //         isLoaded : true
-            //     })
-            // }
 
         
 

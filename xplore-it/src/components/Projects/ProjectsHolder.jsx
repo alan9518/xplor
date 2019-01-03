@@ -11,11 +11,7 @@
     import PropTypes from "prop-types";
     import { ProjectCard, NoData} from "../../components";
     import { Flipper, Flipped } from "react-flip-toolkit";
-    // import {shuffle, concat, upperFirst} from "lodash";
-    import routes from '../../routes/routes';
-    import {Endpoints} from '../../services/endpoints';
     import {sortBy, shuffle} from 'lodash';
-    import {Config} from '../../Config';
 
 
 // --------------------------------------
@@ -61,9 +57,6 @@
         }
 
 
-        // --------------------------------------
-        // Render Flipper
-        // --------------------------------------
         /** --------------------------------------
         // Render Project Cards
         // Use Flipper
@@ -74,11 +67,11 @@
 
 
             return (
-                <Flipper flipKey={data.join("")} className = "row xpl-row">
+                <Flipper flipKey={data.join("")} className = "row xpl-row xpl-projectsContainer">
                                 
                     {productsData.map(product => (
                         <Flipped key={product.partID} flipId={`${product.partID}`}>
-                                <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12 ">
                                     <ProjectCard 
                                             key = {product.partID} 
                                             hasSmallDescription={true}  
@@ -97,9 +90,7 @@
         // --------------------------------------
         renderProjects () {
             const {productsData, categoryColor} = this.props;
-            
             const projectsColor =  categoryColor || '#1197D3';
-
             const data = productsData.map((project) => {return project.partID })
 
             return (

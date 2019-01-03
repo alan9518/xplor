@@ -7,12 +7,12 @@
 // --------------------------------------
 // Import Dependences
 // --------------------------------------
-    import React , {Component, Fragment} from "react";
+    import React , {Fragment} from "react";
     import PropTypes from "prop-types";
     import { ProjectCard } from "../../components";
     import "./styles.css";
     import ListItem from "./CardHeaderListItem";
-    import {shuffle, startCase, replace} from "lodash";
+    import { startCase} from "lodash";
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
@@ -90,9 +90,9 @@
 // --------------------------------------
 // Define PropTypes
 // --------------------------------------
-    // CardHeaderWide.propTypes = {
-    //     prop: PropTypes
-    // };
+    CardHeaderWide.propTypes = {
+        productOverview: PropTypes.object
+    };
 
 // --------------------------------------
 // Export Component

@@ -21,14 +21,14 @@
         // --------------------------------------
         // Constructor
         // --------------------------------------
-        constructor(props) {
-            super(props);
-            // const currentCategory =  this.props.currentMenu.filter((item)=>{return item.sidebarName});
+        // constructor(props) {
+        //     super(props);
+        //     // const currentCategory =  this.props.currentMenu.filter((item)=>{return item.sidebarName});
 
 
-            // this.currentCategory =  this.props.currentMenu[0].sidebarName;
-            // this.currentCategoryColor =  this.props.currentMenu[0].color;
-        }
+        //     // this.currentCategory =  this.props.currentMenu[0].sidebarName;
+        //     // this.currentCategoryColor =  this.props.currentMenu[0].color;
+        // }
 
 
         // --------------------------------------

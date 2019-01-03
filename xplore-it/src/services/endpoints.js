@@ -27,6 +27,7 @@
         // Get All Products
         // --------------------------------------
             getAllProducts : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getProducts',
+            
         // --------------------------------------
         // Get Carrousel Products
         // --------------------------------------

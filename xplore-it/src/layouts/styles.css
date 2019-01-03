@@ -460,8 +460,39 @@
         Hide The SideBar and Displace Body
 ----------------------------------------------------- */
 
+    /* ==========================================================================
+    *  1280 to 1440px
+       ========================================================================== */
+       @media only screen and (min-width:1024px) and (max-width : 1440px) {
 
-    /* @media only screen and */
+            /* .xpl-cardContainer .xpl-mediumCard .xpl-shadow.xpl-cardContainer.xpl-mediumCard.xpl-shadow {
+                display: flex;
+                flex-direction: column;
+            } */
+
+            .xpl-projectsContainer .xpl-cardHeader {
+                padding: 12px;
+                max-height: 110px;
+                min-height: 110px;
+            }
+
+            .xpl-projectsContainer .xpl-cardHeader i {
+                font-size: 53px;
+            }
+
+            .xpl-projectsContainer .xpl-cardName h5 {
+                margin-left: 0;
+                font-size: 17px;
+            }
+
+            .xpl-projectsContainer  .xpl-cardDescription {
+                min-height: 90px;
+                max-height: 110px;
+                font-size: 16px;
+            }
+
+       }
+    
 
     /* ==========================================================================
     *  Mobile 

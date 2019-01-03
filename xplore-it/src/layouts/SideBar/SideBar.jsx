@@ -11,7 +11,6 @@
     import PropTypes from "prop-types";
 
     import { SingleList, DetailsList, Search, AppButton } from "../../components";
-    import {Config} from '../../Config';
 
 
 // --------------------------------------
@@ -97,7 +96,7 @@
                         id : subCap.CustomerID,
                         // path :  `${this.path}/catalogue/${subCap.SubCapabilities}/${subCap.CustomerID}`,
                         // path :  `$catalogue/${subCap.SubCapabilities}/${subCap.CustomerID}`,
-                        path :  `$/catalogue/${subCap.SubCapabilities}/${subCap.CustomerID}`,
+                        path :  `catalogue/${subCap.SubCapabilities}/${subCap.CustomerID}`,
                         exact: true,
                         sidebarName : subCap.SubCapabilities,
                         key : `${subCap.Capabilities}-${subCap.SubCapabilities}`,

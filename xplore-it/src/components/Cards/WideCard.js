@@ -38,9 +38,9 @@
 // --------------------------------------
 // Define PropTypes
 // --------------------------------------
-    // WideCard.propTypes = {
-    //     prop: PropTypes
-    // };
+    WideCard.propTypes = {
+        children: PropTypes.any
+    };
 
 // --------------------------------------
 // Export Component
