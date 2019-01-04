@@ -313,7 +313,7 @@ class DetailsView extends Component {
         // Render Loader
         // --------------------------------------
         renderLoader () {
-            return <div> <AppLoader/> </div>
+            return <div> <AppLoader customHeight = {800}/> </div>
         }
 
 

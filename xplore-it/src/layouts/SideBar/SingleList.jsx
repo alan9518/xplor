@@ -57,7 +57,6 @@
             return (
                 
                     currentMenu.map((menuItem, key)=> {
-                    console.log('menuItem', menuItem);
                     
 
                         if(menuItem.sidebarName ) 

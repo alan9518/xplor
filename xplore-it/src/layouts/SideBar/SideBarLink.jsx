@@ -21,8 +21,6 @@
 // --------------------------------------
     const SideBarLink = ({indexKey,title,link,color, hasIcon, onClick, hideMobileMenu, homeIcon}) => {
             
-            console.log('sidebar link', link);
-
             // --------------------------------------
             // Set Styles for Home Style and Icon
             // --------------------------------------

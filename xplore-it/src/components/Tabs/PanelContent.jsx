@@ -12,36 +12,66 @@
   
     import React , {Component, Fragment} from 'react';
     import ReactDOM from 'react-dom';
+    import {AppLoader} from '../../components'
   
 
-    class PanelContent extends React.Component {
+    class PanelContent extends Component {
 
         // --------------------------------------
         // Constructor
         // --------------------------------------
         constructor(props) {
             super(props);
-            console.log(this.props.id, 'constructor');
+            this.state = {
+                panelTabContent : props.panelTabContent,
+                tabLoading : props.tabLoading
+            }
         }
     
-        componentWillReceiveProps() {
-            console.log(this.props.id, 'componentWillReceiveProps');
+        // static getDerivedStateFromProps(nextProps, prevState) {
+        //    console.log("​PanelContent -> staticgetDerivedStateFromProps -> prevState", prevState)
+        //    console.log("​PanelContent -> staticgetDerivedStateFromProps -> nextProps", nextProps)
+
+        // }
+
+        // --------------------------------------
+        // Loader Inside the Tab Panel
+        // --------------------------------------
+
+        renderTabLoader() {
+            return <AppLoader customHeight = {550}/>
         }
-    
+
+        // --------------------------------------
+        // Render Panel Content
+        // --------------------------------------
+        renderTabContent(panelTabContent) {
+            return (
+                panelTabContent.map((tabItem)=> {
+                    return(
+                        <p> {tabItem.attrName} </p>
+                    )
+                })                                
+            )
+        }
 
         // --------------------------------------
         // Render Panel
         // --------------------------------------
         render() {
-            const {panelTabContent} = this.props;
+            const {panelTabContent, tabLoading} = this.props;
             return (
-                <div style={{ height: 200, overflow: 'auto' }}>
-                    {panelTabContent}
+                <div style={{ minHeight: 550, overflow: 'auto' }}>
+                   {
+                       tabLoading === true ? this.renderTabLoader() : this.renderTabContent(panelTabContent)
+                   }
                 </div>
             )
         }
     }
 
-
-  export default PanelContent;
+    // --------------------------------------
+    // Export Component
+    // --------------------------------------
+    export default PanelContent;
 

@@ -16,9 +16,10 @@
 // --------------------------------------
 // Create Component
 // --------------------------------------    
-    const Apploader = () => {  
+    const Apploader = (props) => {  
+        const {customHeight} = props;
         return (
-            <div className="xpl-loaderContainer">
+            <div className="xpl-loaderContainer" style = {{minHeight : customHeight}}>
                 <div className="xpl-loaderHolder">
                     <Loader
                         type = "Triangle"
@@ -30,6 +31,21 @@
            </div>
         )
     }   
+
+    
+    // --------------------------------------
+    // Props types
+    // --------------------------------------  
+    Apploader.propTypes = {
+        customHeight : PropTypes.number
+    }
+    
+    // --------------------------------------
+    // Default Props
+    // --------------------------------------  
+    Apploader.defaultProps = {
+        customHeight : 800
+    }
 
 
 // --------------------------------------

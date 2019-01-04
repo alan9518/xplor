@@ -45,6 +45,7 @@
     import ListItem from './Cards/CardHeaderListItem';
     import ErrorBoundary from './ErrorHandler/ErrorBoundary';
     import CustomTabs from './Tabs/CustomTabs';
+    import PanelContent from './Tabs/PanelContent';
 
 // --------------------------------------
 // Forms
@@ -87,4 +88,5 @@
         ListItem,
         ErrorBoundary,
         CustomTabs,
+        PanelContent,
     }

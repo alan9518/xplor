@@ -8,10 +8,11 @@
 // Import Dependences
 // --------------------------------------
     import React, { Component, Fragment } from "react";
-    import { Breadcumbs, WideCard, ProjectCard, TabsLayout, AppLoader, CardHeaderWide, CardTabContent  , CustomTabs} from '../../components';
+    import { Breadcumbs, AppLoader,  CustomTabs, PanelContent, ProjectCard} from '../../components';
     import axios from 'axios';
     import {join} from 'lodash';
     import {Endpoints} from '../../services/endpoints'
+    // import  from './PanelContent';
 
 // --------------------------------------
 // Create Component Class
@@ -27,14 +28,19 @@
             // --------------------------------------
             constructor(props) {
                 super(props);
+				console.log("​DetailsView -> constructor -> props", props)
                 this.state = {
                     tabIndex : 0,
                     productTabs: [],
                     currentTab : 0,
                     relatedProducts : [],
                     productOverview:{},
+                    productDetails : {},
                     isLoaded : false,
+                    tabLoading : false,
                 }
+                this.partID = props.match.params.partID;
+
             }
 
             // --------------------------------------
@@ -44,12 +50,7 @@
                 this.loadAPI();
             }
 
-            // --------------------------------------
-            // Will cause component to never re-render
-            // --------------------------------------
-            // shouldComponentUpdate() {
-            //     return false; 
-            // }
+         
 
 
         /* ==========================================================================
@@ -61,17 +62,29 @@
             // --------------------------------------
             async loadAPI () {
                 try {
-                     // Get ALl Tabs
+
+                    // Project Details
+                    const productDetails = await this.loadProductOverview();
+
+
+                    // Get Search Terms 
+                    let searchTerms = productDetails.SearchKeyword;
+
+                    // Get Related Projects
+                    let reladtedProducts = await this.loadRelatedProducts(searchTerms);
+					console.log("​DetailsView -> loadAPI -> reladtedProducts", reladtedProducts)
+
+                     // Get All Tabs
                     const productTabs =  await this.loadProductTabs();
+
+                    // Get Attr for First Tab
                     const tabAttributes = await this.loadTabAttributes(3095);
-                    console.log('product Tabs', productTabs);
-
-                    console.log('tabAttributess', tabAttributes);
-
 
                      // Store Values
                     this.setState({
                         productTabs : productTabs,
+                        productDetails : productDetails,
+                        relatedProducts : reladtedProducts,
                         productOverview : tabAttributes,
                         isLoaded : true
                     })
@@ -81,6 +94,37 @@
                     console.log('error');
                 }
                
+            }
+
+            /** --------------------------------------
+            // Get Project Overview
+            // @param {partID <integer>}
+            // @returns {A Promise Object}
+            // --------------------------------------*/
+            async loadProductOverview() {
+                const params = {partid : this.partID}
+                const loadProjectOverviewPromise = await axios.get(Endpoints.getProduct, {params});
+                const projectOverviewData = await loadProjectOverviewPromise.data[0];
+                return projectOverviewData;
+            }
+
+
+            /** --------------------------------------
+            // Get Related Projects
+            // @param {partID <integer>}
+            // @param {Produt search keywords <string array>}
+            // @returns {A Promise Object}
+            // --------------------------------------*/
+            async loadRelatedProducts(productKeywords) {
+                
+                const params = {
+                    customerid : this.partID,
+                    keyword : join(productKeywords, ',')
+                }
+                const relatedProjectsPromise = await (axios.get(Endpoints.getRelatedProducts, {params}));
+                const relatedProjectsData =  await relatedProjectsPromise.data;
+
+                return relatedProjectsData;
             }
 
 
@@ -104,22 +148,30 @@
             **/
             async loadTabAttributes(busstypeid) {
 
-                
-
-                const params = {partid : this.props.match.params.key, busstypeid : busstypeid}
-
-                const tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params});
-                
+                const params = {partid : this.partID, busstypeid : busstypeid}
+                const tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params});                
                 const tabsAttrData = await tabsDataAttrPromise.data;
-
-                console.log('tab change', tabsAttrData);
-
-
                 return tabsAttrData;
 
 
             }
 
+            
+            /** --------------------------------------
+            // Get Tab Attributes When Tab Changes
+            // @param {partid}
+            // @param {busstypeid}
+            // --------------------------------------
+            **/
+            async changeTabData (businessID) {
+                const newTabData = await  this.loadTabAttributes(businessID); 
+				console.log("​DetailsView -> changeTabData -> newTabData", newTabData)
+                this.setState({
+                    productOverview : newTabData,
+                    tabLoading : false
+                })
+
+            }
 
 
 
@@ -130,12 +182,9 @@
             // --------------------------------------
             // Change Tab and Get Business ID
             // --------------------------------------
-            onTabChange = (businessID)=>  {
-                console.log(businessID);
-                const newTab =  this.loadTabAttributes(businessID);
-                console.log('tab change', newTab);
-
-                // this.loadTabAttributes(businessID)
+            onTabChange = (businessID) =>  {
+                this.setState({tabLoading: true})
+                this.changeTabData(businessID)
             }   
 
 
@@ -153,27 +202,48 @@
             // Render BreadCumbs
             // --------------------------------------
             renderBreadcumbs() {
-                // const {SoftwareTopic} = this.state.productOverview;
-                return <Breadcumbs SoftwareTopic = {'SoftwareTopic'}  />
+                const {SoftwareTopic} = this.state.productDetails;
+                return <Breadcumbs SoftwareTopic = {SoftwareTopic}  />
             }
 
+            // --------------------------------------
+            // Render Related Projects
+            // --------------------------------------
+            renderRelatedProducts() {
+                const {relatedProducts}  = this.state;
+                return (
+                    <Fragment>
+                        <div className="xpl-relatedContainer">
+                        {
+                            relatedProducts && relatedProducts.map(product => (
+                                <ProjectCard key = {product.partID} hasSmallDescription={true} {...product}/>
+                            ))
+                        }
+                        </div>
+                    </Fragment>
+                )
+            }
 
 
             // --------------------------------------
             // Render Loader
             // --------------------------------------
             renderLoader () {
-                return <div> <AppLoader/> </div>
+                return <div> <AppLoader customHeight = {800}/> </div>
             }
 
 
             // --------------------------------------
             // Render Tab Content
             // --------------------------------------            
-            renderProductDetails(productTabs) {
+            renderProductDetails() {
+                const {productTabs, productOverview, tabLoading} = this.state;
+				console.log("​DetailsView -> renderAppDetailsView -> state", this.state)
                 return (
                     <div className="xpl-appDescriptionContainer xpl-wideCard xpl-shadow">
-                        <CustomTabs tabsData = {productTabs} onTabChange = {this.onTabChange}/>
+                        <CustomTabs tabLoading = {tabLoading} tabsData = {productTabs} onTabChange = {this.onTabChange}>
+                            <PanelContent tabLoading = {tabLoading} panelTabContent = {productOverview} /> 
+                        </CustomTabs>
                     </div>
                 )
             }
@@ -183,7 +253,7 @@
             // Render View
             // --------------------------------------
             renderAppDetailsView() {
-                const {productTabs} = this.state;
+                
                 return (
 
                     <Fragment>
@@ -192,17 +262,17 @@
                             <div className="row">
                                 <div className="col-lg-9 col-sm-12">
                                     {this.renderBreadcumbs()}
-                                    {this.renderProductDetails(productTabs)}
+                                    {this.renderProductDetails()}
                                 </div>
 
                                 <div className="col-lg-3 col-md-12 col-sm-12">
                                     <div className="xpl-relatedListApps">
                                     <h5>Related Products</h5>
-                                        {/* {this.renderRelatedProducts()} */}
+                                        {this.renderRelatedProducts()}
                                     </div>
                                 </div>
                             </div>
-                    </div>
+                        </div>
                     </Fragment>
                 )
             }   

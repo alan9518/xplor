@@ -15,7 +15,6 @@
     import Tabs, { TabPane } from 'rc-tabs';
     import TabContent from 'rc-tabs/lib/TabContent';
     import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
-    import PanelContent from './PanelContent';
 
 
  
@@ -25,34 +24,15 @@
 // --------------------------------------
     class CustomTabs extends Component {
 
-        /* ==========================================================================
-        *  Component Setup
-        ========================================================================== */
-
-            // --------------------------------------
-            // Constructor
-            // --------------------------------------
-            constructor(props) {
-                super(props);
-                this.state = {
-                    // start: businesArray[0],
-                    tabKey: 0,
-                }
-            }
 
     
-        /* ==========================================================================
-         * State & Logic Functions
-           ========================================================================== 
-        */
-
-
+            // --------------------------------------
+            // Change Current TabState and Send 
+            // Tab Key to Details View
+            // --------------------------------------
             onTabClick = (key) => {
-                console.log(`onTabClick ${key}`);
-                this.setState({
-                  tabKey: key,
-                });
-              }
+                this.props.onTabChange(key)
+            }
             
 
 
@@ -60,45 +40,32 @@
         * Render Methods
         ========================================================================== */
 
-            
-            onChange = (e) => {
-                console.log('e',e)
-            }
-
-            onTabChange = (BusinessTypeID) => {
-                // const {onTabChange} = this.props;
-
-                this.props.onTabChange(3088)
-
-            }
-
-
+              
+            // --------------------------------------
+            // Render Tabs Content
+            // --------------------------------------
             renderTabs() {
-                const {tabsData} = this.props;
+                const {tabsData, children} = this.props;
                 return (
                     <Fragment>
 
-                        <Tabs
-                         
-                            renderTabBar={() => <ScrollableInkTabBar onTabClick={this.onTabClick}/>}
-                            renderTabContent={() => <TabContent/>}
-                            onChange={this.onTabChange}
-                        >
-                            
+                        <Tabs                        
+                            renderTabBar = {() => <ScrollableInkTabBar onTabClick = {this.onTabClick}/>}
+                            renderTabContent = {() => <TabContent/>}
+                            >    
                             {
                             // Iterate Data to Create tabs Header
 
-                                tabsData.map((tabContent)=> {
+                                tabsData.map((tabDataItem)=> {
                                     return (
-                                        <TabPane tab = {tabContent.BusinessTypeName} key={tabContent.BusinessTypeID} id={tabContent.BusinessTypeID} >       
-                                            <PanelContent panelTabContent = {tabContent.Sequence}/> 
+                                        <TabPane tab = {tabDataItem.BusinessTypeName} key={tabDataItem.BusinessTypeID} id={tabDataItem.BusinessTypeID} >       
+                                            {/* <PanelContent tabLoading = {tabLoading} panelTabContent = {paneContent} />  */}
+                                            {children}
                                         </TabPane>
                                     )
                                 })
                             }
-
                         </Tabs>
-
                     </Fragment>
                 )
             }
@@ -108,9 +75,9 @@
             // --------------------------------------
             // Render Component
             // --------------------------------------
-                render() {
-                    return this.renderTabs();
-                }
+            render() {
+                return this.renderTabs();
+            }
     }
 
 
