@@ -8,11 +8,10 @@
 // Import Dependences
 // --------------------------------------
     import React, { Component, Fragment } from "react";
-    import { Breadcumbs, AppLoader,  CustomTabs, PanelContent, ProjectCard} from '../../components';
+    import { Breadcumbs, AppLoader,  CustomTabs, PanelContent, ProjectCard,WideCard,CardHeaderWide, FieldsMaker} from '../../components';
     import axios from 'axios';
     import {join} from 'lodash';
     import {Endpoints} from '../../services/endpoints'
-    // import  from './PanelContent';
 
 // --------------------------------------
 // Create Component Class
@@ -91,7 +90,14 @@
                 }
 
                 catch (error) {
-                    console.log('error');
+                    console.log('error', error);
+                    this.setState({
+                        productTabs : [],
+                        productDetails : {},
+                        relatedProducts : [],
+                        productOverview : {},
+                        isLoaded : true
+                    })
                 }
                
             }
@@ -116,10 +122,12 @@
             // @returns {A Promise Object}
             // --------------------------------------*/
             async loadRelatedProducts(productKeywords) {
+				console.log("​DetailsView -> loadRelatedProducts -> productKeywords", productKeywords)
                 
                 const params = {
                     customerid : this.partID,
-                    keyword : join(productKeywords, ',')
+                    // keyword : join(productKeywords, ',')
+                    keyword : productKeywords,
                 }
                 const relatedProjectsPromise = await (axios.get(Endpoints.getRelatedProducts, {params}));
                 const relatedProjectsData =  await relatedProjectsPromise.data;
@@ -238,14 +246,36 @@
             // --------------------------------------            
             renderProductDetails() {
                 const {productTabs, productOverview, tabLoading} = this.state;
-				console.log("​DetailsView -> renderAppDetailsView -> state", this.state)
+                // const fieldsMakerComponent =  <FieldsMaker formFields = {productOverview}/>
                 return (
                     <div className="xpl-appDescriptionContainer xpl-wideCard xpl-shadow">
                         <CustomTabs tabLoading = {tabLoading} tabsData = {productTabs} onTabChange = {this.onTabChange}>
-                            <PanelContent tabLoading = {tabLoading} panelTabContent = {productOverview} /> 
+                            <WideCard  >
+                                
+                                <PanelContent tabLoading = {tabLoading} panelTabContent = {productOverview}  /> 
+                    
+                            </WideCard>
                         </CustomTabs>
                     </div>
                 )
+            }
+
+            
+            /** --------------------------------------
+            // Render Project Overview
+            // @param {productOverview <Object>}
+            // @returns {WideCard View <Component>}
+            // --------------------------------------*/
+            renderProjectOverview(productOverview) {
+                return (
+                    <WideCard  
+                        productData = {productOverview} 
+                        isOveview = {true} >
+
+                    <CardHeaderWide productOverview = {productOverview} />  
+                    
+                </WideCard>
+                )    
             }
 
 
@@ -263,6 +293,7 @@
                                 <div className="col-lg-9 col-sm-12">
                                     {this.renderBreadcumbs()}
                                     {this.renderProductDetails()}
+                                    {this.renderProjectOverview(this.state.productDetails)}
                                 </div>
 
                                 <div className="col-lg-3 col-md-12 col-sm-12">

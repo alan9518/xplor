@@ -15,9 +15,11 @@
 // Create Component
 // --------------------------------------   
     const CardImage = (props) => {
+        const {projectIcon} =  props;
+        const iconName = (projectIcon === 'Default' || projectIcon === '' ?  'file' : projectIcon).toLowerCase();
         return( 
                 <div className="xpl-cardImage">
-                    <i className={`${props.projectIcon}`}></i>
+                    <i className={`fas fa-${iconName}`}></i>
                 </div>
         )
     } 
@@ -31,7 +33,7 @@
     }
 
     CardImage.defaultProps = {
-        projectIcon : 'fab fa-accusoft'
+        projectIcon : 'file'
     }
 
 

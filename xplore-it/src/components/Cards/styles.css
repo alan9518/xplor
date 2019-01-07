@@ -43,7 +43,7 @@
 
 
     .xpl-cardHeader i {
-        font-size: 100px;
+        font-size: 80px;
         padding-top: 16px;
         opacity: 0.5;
     }
@@ -56,21 +56,15 @@
         max-height: 80px;
     }
 
-    /* .xpl-cardName {
-        width: 70px;
-        max-width: 110px;
-        line-break: normal;
-        
-    } */
-
+    
     
     .xpl-cardName {
-        width: 100px;
-        max-width: 110px;
+        /* width: 100px; */
+        max-width: 165px;
         line-break: normal;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
         text-align: start;
     }
 

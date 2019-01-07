@@ -46,6 +46,9 @@
     import ErrorBoundary from './ErrorHandler/ErrorBoundary';
     import CustomTabs from './Tabs/CustomTabs';
     import PanelContent from './Tabs/PanelContent';
+    import FieldsMaker from './fieldsMaker/FieldsMaker';
+
+
 
 // --------------------------------------
 // Forms
@@ -89,4 +92,5 @@
         ErrorBoundary,
         CustomTabs,
         PanelContent,
+        FieldsMaker,
     }

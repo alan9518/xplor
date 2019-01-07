@@ -83,4 +83,10 @@
         // @param {listName}
         // --------------------------------------*/
             getSideBarCategoriesSP : `${path}/_api/web/lists/getbyTitle('xplorIT-colors')/items`,
+
+        /** --------------------------------------
+        // Get Sharepoint Categories
+        // @param {listName}
+        // --------------------------------------*/
+            getproductsIcons : `${path}/_api/web/lists/getbyTitle('xplorIT-icons')/items`,
     }

@@ -72,10 +72,14 @@
         // --------------------------------------
             renderCard() {
                 // const {projectPath} =  Config;
-                const {partID, ProductName, hasSmallDescription,projectColor, SoftwareTopic, ProductScope, ShortDescription, productIcon, DetailedDescription, cardHover } = this.props;
+                const {
+                        partID, ProductName, hasSmallDescription,projectColor, 
+                        SoftwareTopic, ProductScope, ShortDescription, 
+                        DetailedDescription, cardHover, IconValue, 
+                } = this.props;
                 const bgColor = hasSmallDescription ? projectColor : '#238ECC';
                 const projectColorStyle = {backgroundColor : bgColor}
-
+                
                 return (
                     
                         <div className="xpl-cardContainer xpl-mediumCard xpl-shadow">
@@ -86,7 +90,7 @@
                                         <h5> {ProductName} </h5> 
                                         <h5 className = {'xpl-productScopeCard'}> {ProductScope || SoftwareTopic} </h5>
                                     </div>
-                                    <CardImage projectIcon = {productIcon}/>
+                                    <CardImage projectIcon = {IconValue}/>
                                 </div>
                                 {hasSmallDescription && this.renderSmallDesc(ShortDescription, DetailedDescription)}
                             </ProjectLink>
@@ -121,7 +125,7 @@
         hasSmallDescription: PropTypes.bool,
         ProductScope: PropTypes.string,
         ShortDescription: PropTypes.string,
-        productIcon: PropTypes.string,
+        IconValue: PropTypes.string,
         DetailedDescription: PropTypes.string,
     };
 

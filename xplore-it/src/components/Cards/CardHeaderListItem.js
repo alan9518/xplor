@@ -13,14 +13,12 @@
 // --------------------------------------
 // Create Component
 // --------------------------------------
-    const ListItem = ({itemName, content}) => {
+    const ListItem = ({classNames,itemName, content}) => {
         return (
-                <li> 
-                    <span className = "xpl-boldText"> 
-                        {itemName}
-                    </span> 
+                <div className = {classNames}> 
+                    <h6 className = "xpl-boldText"> {itemName} </h6> 
                     <span> {content} </span>
-                </li> 
+                </div> 
         )
     }
 

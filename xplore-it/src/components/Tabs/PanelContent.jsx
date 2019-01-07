@@ -12,7 +12,7 @@
   
     import React , {Component, Fragment} from 'react';
     import ReactDOM from 'react-dom';
-    import {AppLoader} from '../../components'
+    import {AppLoader,  FieldsMaker} from '../../components'
   
 
     class PanelContent extends Component {
@@ -28,11 +28,7 @@
             }
         }
     
-        // static getDerivedStateFromProps(nextProps, prevState) {
-        //    console.log("​PanelContent -> staticgetDerivedStateFromProps -> prevState", prevState)
-        //    console.log("​PanelContent -> staticgetDerivedStateFromProps -> nextProps", nextProps)
-
-        // }
+      
 
         // --------------------------------------
         // Loader Inside the Tab Panel
@@ -41,17 +37,15 @@
         renderTabLoader() {
             return <AppLoader customHeight = {550}/>
         }
+      
+        
 
         // --------------------------------------
         // Render Panel Content
         // --------------------------------------
         renderTabContent(panelTabContent) {
             return (
-                panelTabContent.map((tabItem)=> {
-                    return(
-                        <p> {tabItem.attrName} </p>
-                    )
-                })                                
+                <FieldsMaker formFields = {panelTabContent}/>
             )
         }
 
@@ -61,10 +55,10 @@
         render() {
             const {panelTabContent, tabLoading} = this.props;
             return (
-                <div style={{ minHeight: 550, overflow: 'auto' }}>
+                <div style={{ minHeight: 550, width: '100%', overflow: 'hidden' }}>
                    {
                        tabLoading === true ? this.renderTabLoader() : this.renderTabContent(panelTabContent)
-                   }
+                   }    
                 </div>
             )
         }

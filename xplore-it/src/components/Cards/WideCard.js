@@ -22,7 +22,7 @@
         // Render Card
         // --------------------------------------
             return (
-                <div className="xpl-cardContainer xpl-wideCard ">
+                <div className="xpl-cardContainer xpl-wideCard " >
 
                     {props.children}
                 
