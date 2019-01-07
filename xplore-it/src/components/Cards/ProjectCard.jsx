@@ -66,6 +66,17 @@
 
 
 
+        // --------------------------------------
+        // Remove Character from IconValue
+        // --------------------------------------
+        formatIconName(iconName) {
+            let newName = iconName.substr(iconName.indexOf(':') + 1, iconName.length);
+
+            return newName.trim();
+        }
+
+
+
 
         // --------------------------------------
         // Render Card
@@ -79,7 +90,7 @@
                 } = this.props;
                 const bgColor = hasSmallDescription ? projectColor : '#238ECC';
                 const projectColorStyle = {backgroundColor : bgColor}
-                
+                const iconName =  this.formatIconName(IconValue)
                 return (
                     
                         <div className="xpl-cardContainer xpl-mediumCard xpl-shadow">
@@ -90,7 +101,7 @@
                                         <h5> {ProductName} </h5> 
                                         <h5 className = {'xpl-productScopeCard'}> {ProductScope || SoftwareTopic} </h5>
                                     </div>
-                                    <CardImage projectIcon = {IconValue}/>
+                                    <CardImage projectIcon = {iconName}/>
                                 </div>
                                 {hasSmallDescription && this.renderSmallDesc(ShortDescription, DetailedDescription)}
                             </ProjectLink>

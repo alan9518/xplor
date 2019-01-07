@@ -29,6 +29,14 @@
   font-weight: 200;
 }
 
+@font-face {
+  font-family: 'ITC Avant Garde';
+  src: url('./fonts/ie/ITCAvantGardeStd-BkObl.eot') format('embedded-opentype'),
+       url('./fonts/ie/ITCAvantGardeStd-BkObl.ttf')  format('truetype'),
+       url('./fonts/ie/ITCAvantGardeStd-Bold.eot')format('embedded-opentype'),
+       url('./fonts/ie/ITCAvantGardeStd-Bold.ttf')format('truetype');
+}
+
 
 .fade-enter {
   opacity: 0.00;
