@@ -42,15 +42,7 @@
 			console.log("​FieldsMaker -> renderFields -> rows", rows)
 
 
-            // <div className="row">
-            //                 <div className="col-lg-3">
-            //                     {/* <p> {tabItem.attrName} </p> */}
-            //                     {/* <ul>     */}
-            //                         <ListItem itemName = {tabItem.attrName} content = {tabItem.attrName} />
-            //                         {/* <ListItem itemName = {"Product Type"} content = {ProductType} /> */}
-            //                     {/* </ul> */}
-            //                 </div>
-            //            </div>
+            
 
 
             return(

@@ -8,63 +8,103 @@
 @import url('https://flextronics365.sharepoint.com/sites/FlexSettings/Style%20Library/flexBrand/Fonts/ITCAvantGardeStd-Bold.woff');
 
 
+@font-face {
+  font-family: 'texgyreadventorbold';
+  src: url('./fonts/texgyreadventor-bold-webfont.eot');
+  src: url('./fonts/texgyreadventor-bold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/texgyreadventor-bold-webfont.woff2') format('woff2'),
+       url('./fonts/texgyreadventor-bold-webfont.woff') format('woff'),
+       url('./fonts/texgyreadventor-bold-webfont.ttf') format('truetype'),
+       url('./fonts/texgyreadventor-bold-webfont.svg#texgyreadventorbold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+
+
 
 @font-face {
-  font-family: 'ITC Avant Garde';
-  src: url('./fonts/ITCAvantGardeStd-Md.otf') format("OpenType"),
-    url('./fonts/ITCAvantGardeStd-Bk.otf') format("OpenType"),
-    url('./fonts/ITCAvantGardeStd-Bold.otf') format("OpenType"),
-    url('./fonts/ITCAvantGardeStd-Demi.otf') format("OpenType"),
-    url('./fonts/ITCAvantGardeStd-DemiObl.otf') format("OpenType"),
-    url('./fonts/ITCAvantGardeStd-Md.otf') format("OpenType"),
-    url('./fonts/ITCAvantGardeStd-MdObl.otf') format("OpenType"),
-    url('./fonts/ITCAvantGardeStd-XLt.otf') format("OpenType"),
-    url('./fonts/ITCAvantGardeStd-XLtObl.otf') format("OpenType");
+  font-family: 'texgyreadventorbold_italic';
+  src: url('./fonts/texgyreadventor-bolditalic-webfont.eot');
+  src: url('./fonts/texgyreadventor-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/texgyreadventor-bolditalic-webfont.woff2') format('woff2'),
+       url('./fonts/texgyreadventor-bolditalic-webfont.woff') format('woff'),
+       url('./fonts/texgyreadventor-bolditalic-webfont.ttf') format('truetype'),
+       url('./fonts/texgyreadventor-bolditalic-webfont.svg#texgyreadventorbold_italic') format('svg');
+  font-weight: normal;
+  font-style: normal;
 
 }
+
+
+
 
 @font-face {
-  font-family: 'ITC Avant Garde';
-  src: url('./fonts/ITCAvantGardeStd-Bk.otf') format("OpenType");
-  font-weight: 200;
+  font-family: 'tex_gyre_adventoritalic';
+  src: url('./fonts/texgyreadventor-italic-webfont.eot');
+  src: url('./fonts/texgyreadventor-italic-webfont.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/texgyreadventor-italic-webfont.woff2') format('woff2'),
+       url('./fonts/texgyreadventor-italic-webfont.woff') format('woff'),
+       url('./fonts/texgyreadventor-italic-webfont.ttf') format('truetype'),
+       url('./fonts/texgyreadventor-italic-webfont.svg#tex_gyre_adventoritalic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
 }
+
+
+
 
 @font-face {
-  font-family: 'ITC Avant Garde';
-  src: url('./fonts/ie/ITCAvantGardeStd-BkObl.eot') format('embedded-opentype'),
-       url('./fonts/ie/ITCAvantGardeStd-BkObl.ttf')  format('truetype'),
-       url('./fonts/ie/ITCAvantGardeStd-Bold.eot')format('embedded-opentype'),
-       url('./fonts/ie/ITCAvantGardeStd-Bold.ttf')format('truetype');
+  font-family: 'tex_gyre_adventorregular';
+  src: url('./fonts/texgyreadventor-regular-webfont.eot');
+  src: url('./fonts/texgyreadventor-regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/texgyreadventor-regular-webfont.woff2') format('woff2'),
+       url('./fonts/texgyreadventor-regular-webfont.woff') format('woff'),
+       url('./fonts/texgyreadventor-regular-webfont.ttf') format('truetype'),
+       url('./fonts/texgyreadventor-regular-webfont.svg#tex_gyre_adventorregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
 }
 
 
-.fade-enter {
-  opacity: 0.00;
-}
 
-.fade-enter.fade-enter-active {
-  opacity: 1;
-  background-color: rgba(255, 255, 255, 1);
-  transition: all 600ms ease-in;
-}
 
-.fade-exit {
-  opacity: 1;
-}
+/* ==========================================================================
+ * Define Page Intro and Exit Animation
+ ========================================================================== */
 
-.fade-exit.fade-exit-active {
-  opacity: 0.01;
-  transition: all 600ms ease-in;
-  background-color: rgba(255, 255, 255,0.8);
-}
 
-div.transition-group {
-  position: relative;
-}
 
-section.route-section {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-}
+  .fade-enter {
+    opacity: 0.00;
+  }
+
+  .fade-enter.fade-enter-active {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 1);
+    transition: all 600ms ease-in;
+  }
+
+  .fade-exit {
+    opacity: 1;
+  }
+
+  .fade-exit.fade-exit-active {
+    opacity: 0.01;
+    transition: all 600ms ease-in;
+    background-color: rgba(255, 255, 255,0.8);
+  }
+
+  div.transition-group {
+    position: relative;
+  }
+
+  section.route-section {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }

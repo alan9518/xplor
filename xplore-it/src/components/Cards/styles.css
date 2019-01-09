@@ -51,7 +51,9 @@
     .xpl-cardHeader i {
         font-size: 60px;
         padding-top: 16px;
-        opacity: 0.5;
+        opacity: .5;
+        line-height: 60px;
+        padding-bottom: 16px;
     }
 
     .xpl-cardDescription {
@@ -72,6 +74,10 @@
         flex-direction: column;
         justify-content: center;
         text-align: start;
+    }
+
+    .xpl-cardName > h5 {
+        font-weight: 600;
     }
 
 
@@ -213,6 +219,11 @@
     
     .xpl-cardStyleCenter .xpl-mediumCard {
         max-width: 450px !important;
+    }
+
+    .xpl-cardStyleCenter .xpl-mediumCard .xpl-cardImage > i {
+        font-size: 85px;
+        padding-top: 40px;
     }
 
     .xpl-cardStyleCenter .xpl-mediumCard .xpl-cardHeader.cardHover {
