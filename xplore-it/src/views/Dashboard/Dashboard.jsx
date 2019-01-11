@@ -56,9 +56,9 @@
          *  API Calls
          ========================================================================== */
 
-           // --------------------------------------
-           // Get Data and save it into the State
-           // --------------------------------------
+            // --------------------------------------
+            // Get Data and save it into the State
+            // --------------------------------------
             async loadProjects() {
             
                 const topicName = this.splitRouteName();
@@ -125,6 +125,7 @@
                     SPColorsCategories.map((spColor)=> {
                         if(product.SoftwareTopic === spColor.name) {
                             product.color = spColor.color
+                            // product.history = 
                         }
                     })
 
@@ -141,16 +142,14 @@
             // @returns {A Promise Object}
             // --------------------------------------*/
             async getColors(returnArray) {
-                console.time("concatenation");
                 const baseColor = '#1197D3';
                 const getColorsPromise = await axios.get(Endpoints.getSideBarColorsSP)
                 const getColorsResponse =  await getColorsPromise.data.value;
                 const category = this.splitRouteName();
-                // console.log('category', category);
 
             
                 const colorsArray = (getColorsResponse.filter((color)=> {
-                        return category == color.Title
+                        return category === color.Title
                 }));
 
                 // Return all the Colors or just the Color Value
@@ -183,7 +182,7 @@
             // Set Fist Uppercase and remove -
             // --------------------------------------
             formatTitle(routeName) {
-                const title = startCase( replace(routeName [routeName.length - 1]), '-' , '');
+                const title = startCase( replace(routeName[routeName.length - 1]), '-' , '');
                 return title === 'Catalogue' ?  "All" :  title
             }
             

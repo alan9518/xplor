@@ -11,7 +11,7 @@
     import React, { Component, Fragment } from 'react';
     import { Switch, Route, Redirect } from 'react-router-dom';
     import dashboardRoutes from '../../routes/routes';
-    import { AppButton,  SideBar, NavBar, ErrorBoundary,AppLoader, NoData} from '../../components';
+    import { AppButton,  SideBar, NavBar,AppLoader, NoData} from '../../components';
     import 'bootstrap/dist/css/bootstrap.min.css';
     import '../styles.css';
     import logo from '../../images/logo/logo.png';
@@ -62,8 +62,6 @@
             window.removeEventListener("resize", this.updateContainerDimensions);
         }
 
-
-      
 
     /* ==========================================================================
      *  API Connection

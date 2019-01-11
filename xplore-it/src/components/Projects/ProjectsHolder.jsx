@@ -15,12 +15,18 @@
 
 
 // --------------------------------------
+// Init React Context
+// --------------------------------------
+    const Context = React.createContext();
+
+// --------------------------------------
 // Create Component Class
 // --------------------------------------
     class ProjectsHolder extends Component {
 
         constructor(props) {
             super(props);
+			console.log("​ProjectsHolder -> constructor -> props", props)
             this.state = {
                 isLoaded : false,
             }
@@ -44,6 +50,13 @@
 
         }
 
+
+        // --------------------------------------
+        // Get Category ID before Open Project
+        // --------------------------------------
+        // getCategoryID = (event) => {
+        //     const categoryID = 
+        // }
         
 
         
@@ -76,6 +89,7 @@
                                             key = {product.partID} 
                                             hasSmallDescription={true}  
                                             projectColor = {product.color}
+                                            onClick = {this.getCategoryID}
                                             {...product}/>
                                 </div>
                         </Flipped>

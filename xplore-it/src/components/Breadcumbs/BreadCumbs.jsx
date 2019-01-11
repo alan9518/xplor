@@ -15,19 +15,26 @@
 // --------------------------------------
 // Create Functional Component
 // --------------------------------------
-    const BreadCumbs = ({SoftwareTopic, ProductScope}) => {
-
+    const BreadCumbs = (props) => {
         return (
             <div className="xpl-breadcumbsContainer">
-                <ProjectLink route = {"/catalogue"}>
-                    <h4 className = "xpl-breadChild"> All Results  </h4>
-                </ProjectLink>
-                <h4 className = "xpl-breadChild"> > </h4>
-                <ProjectLink route = {`/catalogue/${SoftwareTopic}`} >
-                    <h4 className = "xpl-breadChild">{ SoftwareTopic} </h4>
-                </ProjectLink>
-               
-            </div>
+
+            <div className="row">
+                    <div className="col-lg-3 col-sm-4">
+                        <ProjectLink route = {"catalogue/all/all"} spRoute = {true}> 
+                            <h4 className = "xpl-breadChild"> All Results  <i className="fas fa-arrow-right xpl-breadSeparator"></i> </h4> 
+                        </ProjectLink>
+                    </div>
+
+                    <div className="col-lg-3 col-sm-4"> 
+                        <h4 className = "xpl-breadChild" onClick = {props.onClick}>{ props.softwareTopic}  <i className="fas fa-arrow-right xpl-breadSeparator"></i> </h4> 
+                    </div>
+
+                    <div className="col-lg-3 col-sm-4"> 
+                        <h4 className = "xpl-breadChild"> {props.productName} </h4> 
+                    </div>
+                </div>  
+            </div>  
         )
 
     }
@@ -36,3 +43,6 @@
 // Export Component
 // --------------------------------------
     export default BreadCumbs;
+
+
+    

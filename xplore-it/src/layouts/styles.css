@@ -397,19 +397,28 @@
     }
 
     .xpl-breadcumbsContainer {
-        display: flex;
-        justify-content: flex-start;
+        /* display: flex;
+        justify-content: flex-start; */
         padding-left: 8px;
-        width: 100%;
-        max-width: 500px;
         margin-bottom: 20px;
     }
 
     h4.xpl-breadChild {
         display: flex;
-        flex-direction: column;
-        padding: 0 8px 8px 8px;
+        flex-direction: row;
+        padding: 0 8px 8px;
+        font-weight: 600;
+        cursor: pointer;
+        line-height: 15px;
+        justify-content: space-between;
+
     }
+
+    .xpl-breadSeparator {
+        /* margin-left: 12px; */ 
+        font-size: 18px;
+    }
+    
 
 
 
@@ -469,7 +478,7 @@
     /* ==========================================================================
     *  1280 to 1440px
        ========================================================================== */
-       @media only screen and (min-width:1024px) and (max-width : 1440px) {
+       @media only screen and (min-width:1025px) and (max-width : 1440px) {
 
             /* .xpl-cardContainer .xpl-mediumCard .xpl-shadow.xpl-cardContainer.xpl-mediumCard.xpl-shadow {
                 display: flex;
@@ -483,11 +492,10 @@
             }
 
                
-                .xpl-cardName {
-                    /* width: 100px; */
-                    max-width: 165px;
-                   
-                }
+            .xpl-cardName {
+                /* width: 100px; */
+                max-width: 165px;       
+            }
 
             .xpl-projectsContainer .xpl-cardHeader i {
                 font-size: 53px;
@@ -587,12 +595,7 @@
                 padding: 16px 0 !important;
             }
 
-            /* .xpl-cardName {
-                width: 70px;
-                max-width: 110px;
-                line-break: normal;
-                padding: 16px;
-            } */
+        
 
             .xpl-cardProjectInfo {
                 /* margin-top: 12px; */
@@ -607,6 +610,10 @@
 
             .xpl-relatedListApps {
                 margin-top: 20px;
+            }
+
+            .xpl-relatedListApps > h5{
+                font-weight: 600;
             }
 
 

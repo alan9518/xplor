@@ -62,6 +62,14 @@
         // --------------------------------------*/
             getRelatedProducts : `https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getRelatedPro`,
 
+            
+        /** --------------------------------------
+        // Get Related Products
+        // @param {customerid <String>}
+        // @param {keyword <String array>, split by coma}
+        // --------------------------------------*/
+            getRelatedProductsHard : `https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getRelatedPro?customerid=1014&keyword=MDM,Master%20Data,Reference%20Data,%20GDH`,
+        
         /** --------------------------------------
         // Get Product Attributes Tabs
         // @param {partid <String> }

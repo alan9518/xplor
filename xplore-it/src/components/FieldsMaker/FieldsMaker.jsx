@@ -66,7 +66,7 @@
         // --------------------------------------   
         setFieldType(field, colClass) {
             let {attrName, attrValues, dataType, maxLength, sequence} = field;
-            let divClass = `col-lg-${colClass}`;
+            let divClass = `col-lg-${colClass} col-sm-12 col-xl-12`;
             let formField = null;
             switch(dataType) {
                 case 'String' :

@@ -201,11 +201,24 @@
         flex-direction: column;
     }
 
+    .xpl-relatedListApps > h5 {
+        font-weight: 600;
+    }
+
 
     .xpl-relatedListApps .xpl-cardContainer.xpl-mediumCard.xpl-shadow {
         margin-bottom: 16px;
     }
 
+
+    .xpl-relatedContainer {
+        margin-top: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 672px;
+        max-height: 680px;
+    }
     
     span.xpl-boldText {
         font-weight: 500;

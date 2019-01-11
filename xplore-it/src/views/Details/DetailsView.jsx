@@ -40,6 +40,7 @@
                 }
                 this.partID = props.match.params.partID;
 
+
             }
 
             // --------------------------------------
@@ -49,7 +50,6 @@
                 this.loadAPI();
             }
 
-         
 
 
         /* ==========================================================================
@@ -71,15 +71,19 @@
 
                     // Get Related Projects
                     let reladtedProducts = await this.loadRelatedProducts(searchTerms);
-					console.log("​DetailsView -> loadAPI -> reladtedProducts", reladtedProducts)
+                    let reladtedProducts2 = await this.loadRelatedProducts2(searchTerms);
+					
+                    console.log("​DetailsView -> loadAPI -> reladtedProducts", reladtedProducts)
 
-                     // Get All Tabs
+                    console.log("​DetailsView -> loadAPI -> reladtedProducts2", reladtedProducts2)
+
+                    // Get All Tabs
                     const productTabs =  await this.loadProductTabs();
 
                     // Get Attr for First Tab
                     const tabAttributes = await this.loadTabAttributes(3095);
 
-                     // Store Values
+                    // Store Values
                     this.setState({
                         productTabs : productTabs,
                         productDetails : productDetails,
@@ -99,7 +103,7 @@
                         isLoaded : true
                     })
                 }
-               
+            
             }
 
             /** --------------------------------------
@@ -126,10 +130,26 @@
                 
                 const params = {
                     customerid : this.partID,
-                    // keyword : join(productKeywords, ',')
                     keyword : productKeywords,
                 }
                 const relatedProjectsPromise = await (axios.get(Endpoints.getRelatedProducts, {params}));
+                const relatedProjectsData =  await relatedProjectsPromise.data;
+
+                return relatedProjectsData;
+            }
+
+
+            /** --------------------------------------
+            // Get Related Projects Hardcoded
+            // @param {partID <integer>}
+            // @param {Produt search keywords <string array>}
+            // @returns {A Promise Object}
+            // --------------------------------------*/
+
+            async loadRelatedProducts2(productKeywords) {
+				console.log("​DetailsView -> loadRelatedProducts -> productKeywords", productKeywords)
+        
+                const relatedProjectsPromise = await (axios.get(Endpoints.getRelatedProductsHard));
                 const relatedProjectsData =  await relatedProjectsPromise.data;
 
                 return relatedProjectsData;
@@ -195,8 +215,12 @@
                 this.changeTabData(businessID)
             }   
 
+            onBreadCumbsCatClick = (event) => {
+                console.log('DV props', this.props);
+                this.props.history.goBack();
+            }
 
-          
+
             
 
 
@@ -210,8 +234,9 @@
             // Render BreadCumbs
             // --------------------------------------
             renderBreadcumbs() {
-                const {SoftwareTopic} = this.state.productDetails;
-                return <Breadcumbs SoftwareTopic = {SoftwareTopic}  />
+                const {SoftwareTopic, Shortname} = this.state.productDetails;
+				console.log("​DetailsView -> renderBreadcumbs -> this.state.productDetails", this.state.productDetails)
+                return <Breadcumbs softwareTopic = {SoftwareTopic} productName = {Shortname} onClick = {this.onBreadCumbsCatClick}/>
             }
 
             // --------------------------------------
@@ -293,7 +318,6 @@
                                 <div className="col-lg-9 col-sm-12">
                                     {this.renderBreadcumbs()}
                                     {this.renderProductDetails()}
-                                    {this.renderProjectOverview(this.state.productDetails)}
                                 </div>
 
                                 <div className="col-lg-3 col-md-12 col-sm-12">
@@ -324,3 +348,6 @@
 // Export Component
 // --------------------------------------
     export default DetailsView;
+
+
+
