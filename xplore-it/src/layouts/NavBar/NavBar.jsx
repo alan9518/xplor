@@ -71,7 +71,9 @@
                     <div className="xpl-appHeaderContainer">
                         <nav className="navbar navbar-expand-md navbar-dark fixed-top xpl-appHeader">
                             <div className="navbar-brand" >
-                                <img src={logo}  className="xpl-appLogo d-inline-block align-top" alt=""/>
+                                <ProjectLink route = {`/`} spRoute = {true}>
+                                    <img src={logo}  className="xpl-appLogo d-inline-block align-top" alt=""/>
+                                </ProjectLink>
                             </div>
                     
 

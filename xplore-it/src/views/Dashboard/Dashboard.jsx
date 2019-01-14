@@ -22,6 +22,9 @@
     import axios from 'axios';
 
 
+    // const productsContext = React.createContext({});
+
+
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
