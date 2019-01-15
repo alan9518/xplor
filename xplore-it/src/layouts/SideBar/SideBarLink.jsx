@@ -19,7 +19,7 @@
 // --------------------------------------
 // Create Component
 // --------------------------------------
-    const SideBarLink = ({indexKey,title,link,color, hasIcon, onClick, hideMobileMenu, homeIcon}) => {
+    const SideBarLink = ({indexKey,title,link,color, hasIcon, onClick, hideMobileMenu, homeIcon, customIcon}) => {
             
             // --------------------------------------
             // Set Styles for Home Style and Icon
@@ -28,9 +28,9 @@
                 borderBottom: '1px solid #eee'
             }
     
-            const iconHolderStyleBig = {backgroundColor: color, width : 30, padding : '7px 5px'}
+            const iconHolderStyleBig = {backgroundColor: color || '#238ECC', width : 30, padding : '7px 5px'}
 
-            const iconHolderStyleSmall = {backgroundColor: color, width: 25, padding : 5}
+            const iconHolderStyleSmall = {backgroundColor: color || '#238ECC', width: 25, padding : 5}
 
 
             if(link !== null) 
@@ -41,11 +41,19 @@
                         <ProjectLink route = {link} itemKey = {indexKey} spRoute = {true} >
                             <div className="xpl-iconContainer">
 
+                                {/* Icon For Sidebar LInk */}
                                 {hasIcon && 
                                     <div className="xpl-iconHolder   " style={homeIcon ? iconHolderStyleBig : iconHolderStyleSmall}>
                                         <i className={ homeIcon ? homeIcon : 'fas fa-chevron-right'}></i>
                                     </div>
                                 } 
+
+                                {/* Icon For Search Result Item */}
+                                {customIcon && 
+                                    <div className="xpl-iconHolder   " style={homeIcon ? iconHolderStyleBig : iconHolderStyleSmall}>
+                                        <i className={ `fas fa-${customIcon}`}></i>
+                                    </div>
+                                }
 
                                 <span className="xpl-linkText">{title}</span>
                             </div>

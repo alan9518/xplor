@@ -18,15 +18,14 @@
     const BreadCumbs = (props) => {
         return (
             <div className="xpl-breadcumbsContainer">
-
-            <div className="row">
-                    <div className="col-lg-2 col-sm-4">
+                <div className="row">
+                    <div className="col-lg-3 col-sm-4">
                         <ProjectLink route = {"catalogue/all/all"} spRoute = {true}> 
                             <h4 className = "xpl-breadChild"> All Results  <i className="fas fa-arrow-right xpl-breadSeparator"></i> </h4> 
                         </ProjectLink>
                     </div>
 
-                    <div className="col-lg-4 col-sm-4"> 
+                    <div className="col-lg-5 col-sm-4"> 
                         <h4 className = "xpl-breadChild" onClick = {props.onClick}>{ props.softwareTopic}  <i className="fas fa-arrow-right xpl-breadSeparator"></i> </h4> 
                     </div>
 

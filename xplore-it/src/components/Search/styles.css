@@ -1,0 +1,16 @@
+/* ==========================================================================
+** Search Component Styles
+** 15/01/2019
+** Alan Medina Silva
+** ========================================================================== */
+
+
+.xpl-resultsContainer {
+    padding: 10px 0 0 10px;
+    z-index: 2000;
+    position: relative;
+}
+
+.xpl-resultsContainer.xpl-shadow ul {
+    list-style: none;
+}

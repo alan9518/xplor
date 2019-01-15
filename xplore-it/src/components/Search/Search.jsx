@@ -10,8 +10,10 @@
 // --------------------------------------
     import React, { Component, Fragment } from 'react'
     import PropTypes from 'prop-types'
+    import {SideBarLink} from '../../components'
     import { Endpoints } from '../../services/endpoints';
     import axios from 'axios';
+    import './styles.css';
 
 
 // --------------------------------------
@@ -26,9 +28,9 @@
         constructor(props) {
             super(props);
             this.state = {
-                // productsResults : [],
+                isSearching : false,
                 query : '',
-                productsResults: [
+                productsOptions: [
                     {
                         "partID": 16009,
                         "ProductName": "Agile",
@@ -186,7 +188,8 @@
                         "ProductType": "Application"
                     }
                 ],
-                isLoaded : false
+                isLoaded : false,
+                resultsList : [],
             }
         }
 
@@ -205,20 +208,76 @@
         // --------------------------------------
         handleInputChange = (e) => {
             console.log("​Search -> handleInputChange -> e", e)
-            let searchResults = this.filterOptions(this.searchValues.value);
+            let searchInput = (this.searchValues.value).toLowerCase();
+            let searchResults = this.filterOptions(searchInput);
             this.setState({
-                query : this.searchValues.value
+                query : this.searchValues.value,
+                resultsList : searchResults,
             })
+        }
+
+
+        // --------------------------------------
+        // Close Results List & Reset Input
+        // --------------------------------------
+        onResultItemClick = (e) => {
+            console.log("​Search -> onResultItemClick -> e", e)
+            this.setState({resultsList : []})
         }
 
         // --------------------------------------
         // Filter Data
         // --------------------------------------
         filterOptions(searchInput) {
+            
+            // Exit If Input is Empty
+            if(searchInput === "") return [];
+
+            console.log("​Search -> filterOptions -> searchInput", searchInput)
             const { productsOptions} = this.state;
 
-            let searchResults = productOptions.filter()
+            // Start Filter
+            let searchResults = productsOptions.filter((product) => {
+                let filterOptionObject;
+                let searchName =  product.ProductName.toLowerCase() || product.Shortname.toLowerCase();
+                let searchTopic =  product.SoftwareTopic.toLowerCase();
+				console.log("​Search -> filterOptions -> searchName", searchName)
 
+                if (searchName.indexOf(searchInput) > -1 || searchTopic.indexOf(searchInput) > -1) {
+                    filterOptionObject = {
+                        partID: product.partID,
+                        ProductName: product.ProductName,
+                    }
+                }
+
+                return filterOptionObject
+
+            
+				
+            })
+
+            console.log("​Search -> filterOptions -> searchResults", searchResults)
+
+
+            return searchResults;
+            
+
+        }
+
+
+        // --------------------------------------
+        // Apply Filter
+        // --------------------------------------
+        formatFilter(value) {
+            return value.toLowerCase();
+        }
+
+        // --------------------------------------
+        // Remove Character from IconValue
+        // --------------------------------------
+        formatIconName(iconName) {
+            let newName = iconName.substr(iconName.indexOf(':') + 1, iconName.length);
+            return newName.trim();
         }
 
 
@@ -229,7 +288,7 @@
         // Render Filter Input
         // --------------------------------------
         renderSearchContainer() {
-
+            const {resultsList} = this.state;
             return (
                 <Fragment>
                     <div className="xpl-searchContainer">
@@ -248,6 +307,9 @@
                                 </div>
                             </span>
                         </div>
+
+                        {resultsList && this.renderResultsList(resultsList)}
+
                     </div>
                 </Fragment>
             )
@@ -258,10 +320,29 @@
         // Render Results
         // --------------------------------------
         renderResultsList(results) {
+            const context = this;
             return (
-                <ul>
-
-                </ul>
+                <Fragment>
+                    <div className="xpl-resultsContainer xpl-shadow">
+                        <ul>
+                            {
+                                results && results.map((resultItem)=> {
+                                    return (
+                                        <SideBarLink 
+                                            key = { resultItem.partID } 
+                                            indexKey = {`res-${resultItem.partID}`} 
+                                            title = { resultItem.ProductName } 
+                                            link = { `app/details/${resultItem.partID}` } 
+                                            color = { resultItem.color } 
+                                            customIcon =  {context.formatIconName(resultItem.IconValue)}
+                                            hideMobileMenu = {this.onResultItemClick}  
+                                        />
+                                    )
+                                })
+                            }
+                        </ul>
+                    </div>
+                </Fragment>
             )
         }
 
