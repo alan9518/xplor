@@ -199,7 +199,7 @@
             try {
                 this.setState({showMobileMenu : !showMobileMenu})
                 e.preventDefault();
-           }
+            }
         
             catch(error) {
                 return null;
