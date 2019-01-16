@@ -11,19 +11,16 @@
     import PropTypes from "prop-types";
     import { ProjectCard, NoData} from "../../components";
     import { Flipper, Flipped } from "react-flip-toolkit";
-    import {sortBy, shuffle} from 'lodash';
 
-
-// --------------------------------------
-// Init React Context
-// --------------------------------------
-    const Context = React.createContext();
 
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
     class ProjectsHolder extends Component {
 
+        // --------------------------------------
+        // Component Setup
+        // --------------------------------------
         constructor(props) {
             super(props);
 			console.log("​ProjectsHolder -> constructor -> props", props)
@@ -31,6 +28,10 @@
                 isLoaded : false,
             }
         }
+
+        // --------------------------------------
+        // Mix The Project Cards
+        // --------------------------------------
 
         componentDidMount() {
             this.props.shuffle();

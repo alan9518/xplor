@@ -9,7 +9,6 @@
 // Import Dependences
 // --------------------------------------
     import React, { Component, Fragment } from "react";
-    import PropTypes from "prop-types";
     import {
         Carrousel,
         ProjectsHolder,
@@ -21,8 +20,6 @@
     import {Endpoints} from '../../services/endpoints';
     import axios from 'axios';
 
-
-    // const productsContext = React.createContext({});
 
 
 // --------------------------------------
@@ -37,7 +34,7 @@
         constructor(props) {
             super(props);
             this.state = {
-                currentCategory : 'All Apps',
+                currentCategory : 'All Products',
                 isLoaded : true,
                 categoryColor : '',
                 products : [],
@@ -63,37 +60,39 @@
             // Get Data and save it into the State
             // --------------------------------------
             async loadProjects() {
-            
                 const topicName = this.splitRouteName();
                 const params = {customerid : this.props.match.params.key}
+                try {
+                    // Get Carrousel Products. Create Promise
+                        const getCarrouselProductsPromise =  axios.get(Endpoints.getCarrouselProducts);
 
-                // Get Carrousel Products. Create Promise
-                    const getCarrouselProductsPromise =  axios.get(Endpoints.getCarrouselProducts);
+                        // Get All Products. Createn Promise 
+                            const getProductsPromise = topicName === 'all' 
+                                ? axios.get(Endpoints.getAllProducts) 
+                                : axios.get(Endpoints.getAllProductsByCategory,{params});
+    
+                        // Resolve all Promises
+                            const [carrouselProductsData, homeProductsData ] = await Promise.all([getCarrouselProductsPromise, getProductsPromise]);
 
-                // Get All Products. Createn Promise 
-                    const getProductsPromise = topicName === 'all' 
-                        ? axios.get(Endpoints.getAllProducts) 
-                        : axios.get(Endpoints.getAllProductsByCategory,{params});
+                            const SPColorsCategories =  await this.loadSPCategories();
+    
+                        // Merge Colors and Projects
+                            const productsWithColor = this.mergeProductsAndColors(homeProductsData.data, SPColorsCategories);     
+    
+                        // Store Results
+                        this.setState( {
+                            currentCategory : `${startCase(topicName)}  Products`,              
+                            products : productsWithColor || [],
+                            carrouselproducts : carrouselProductsData.data || [],
+                            isLoaded : true
+                        });
+                }
 
-
-                // Resolve all Promises
-                    const [carrouselProductsData, homeProductsData ] = await Promise.all([getCarrouselProductsPromise, getProductsPromise]);
-                    
-                    const SPColorsCategories =  await this.loadSPCategories();
-
-                    
-                // Merge Colors and Projects
-                    const productsWithColor = this.mergeProductsAndColors(homeProductsData.data, SPColorsCategories);
-
-
-                // Store Results
-
-                this.setState( {
-                    currentCategory : `${startCase(topicName)}  Products`,
-                    products : productsWithColor || [],
-                    carrouselproducts : carrouselProductsData.data || [],
-                    isLoaded : true
-                });
+                catch (error) {
+					console.log("​Dashboard -> catch -> error", error)
+                    this.setState({isLoaded : false })
+                }
+            
             }
 
 
@@ -121,11 +120,11 @@
             // --------------------------------------
             mergeProductsAndColors(productsData, SPColorsCategories) {
                 const productsWithColor = productsData.map((product)=> {
-                    SPColorsCategories.map((spColor)=> {
+                    for (let spColor of SPColorsCategories) {
                         if(product.SoftwareTopic === spColor.name) {
                             product.color = spColor.color
                         }
-                    })
+                    }
                     return product;
                 })
 
@@ -137,31 +136,6 @@
             
 
 
-            /** --------------------------------------
-            // Get Colors
-            // @returns {A Promise Object}
-            // --------------------------------------*/
-            // async getColors(returnArray) {
-            //     const baseColor = '#1197D3';
-            //     const getColorsPromise = await axios.get(Endpoints.getSideBarColorsSP)
-            //     const getColorsResponse =  await getColorsPromise.data.value;
-            //     const category = this.splitRouteName();
-
-            
-            //     const colorsArray = (getColorsResponse.filter((color)=> {
-            //             return category === color.Title
-            //     }));
-
-            //     // Return all the Colors or just the Color Value
-
-            //     if(returnArray)
-            //         return colorsArray;
-            //     else
-            //         return ( colorsArray.length > 0 ? colorsArray[0].Color : baseColor);
-                
-            // }
-
-         
         /* ==========================================================================
          *  Render Logic and State Handle
          ========================================================================== */
@@ -204,6 +178,7 @@
 
             // --------------------------------------
             // Render Dashboard
+            // Render Carrousel if Home Page
             // --------------------------------------
             renderDashboard() {        
                 return (
@@ -217,7 +192,7 @@
 
 
             // --------------------------------------
-            // Render ALl Products View
+            // Render All Products View
             // --------------------------------------
             renderHomePageView() {
                 this.renderCarrousel();

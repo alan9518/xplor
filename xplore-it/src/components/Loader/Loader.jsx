@@ -8,7 +8,7 @@
 // --------------------------------------
 // Import Dependences
 // --------------------------------------
-    import React, { Component } from "react";
+    import React  from "react";
     import PropTypes from "prop-types";
     import Loader from 'react-loader-spinner';
     import './styles.css';
@@ -28,7 +28,7 @@
                         width = {80}
                     ></Loader>
                 </div>
-           </div>
+            </div>
         )
     }   
 

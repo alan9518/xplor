@@ -16,7 +16,6 @@
     import '../styles.css';
     import logo from '../../images/logo/logo.png';
     import axios from 'axios';
-    import {sortBy, shuffle} from 'lodash';
     import {TransitionGroup,CSSTransition} from 'react-transition-group';
     import {Endpoints} from '../../services/endpoints';
     import {Config} from '../../Config';
@@ -42,12 +41,12 @@
                 responsiveWidth : window.innerWidth
             }
             this.path = Config.spPath;
-            // this.updateContainerDimensions = this.updateDimensions.bind(this);
 
         }
 
         // --------------------------------------
-        // Hide Loading 
+        // Load API & Register Window Listener
+        // Event for Responsive Sharepoint
         // --------------------------------------
         componentDidMount() {
             this.loadAPI();
@@ -56,7 +55,7 @@
 
 
         // --------------------------------------
-        // Unregister Events
+        // Unregister Window Listener Event
         // --------------------------------------
         componentWillUnmount() {
             window.removeEventListener("resize", this.updateContainerDimensions);
@@ -135,7 +134,6 @@
         mergeRoutes(APIRoutes, SPRoutes) {
 
             const homeRoute = {
-                    // path : `${this.path}/catalogue/all/all`,
                     path : `catalogue/all/all`,
                     exact: false,
                     sidebarName : 'Home',
@@ -148,19 +146,18 @@
                 const appRoutes = APIRoutes.map((apiRoute) => {
 
                     // Add React Routes Keys
-                    // apiRoute.path =  `${this.path}/catalogue/${apiRoute.CustomerName}/${apiRoute.CustomerID}`;
                     apiRoute.path =  `catalogue/${apiRoute.CustomerName}/${apiRoute.CustomerID}`;
                     apiRoute.exact = false;
                     apiRoute.sidebarName = apiRoute.CustomerName
 
-                    // Add Color and Order
-                    SPRoutes.map((SPRoute)=> {
+                    // Add Color and Order if the Routes have the same name from both arrays
+
+                    for(let SPRoute of SPRoutes) {
                         if(apiRoute.CustomerName === SPRoute.name) {
                             apiRoute.color = SPRoute.color;
                             apiRoute.order = SPRoute.order
                         }
-
-                    })
+                    }
 
                     return apiRoute;
 
@@ -205,7 +202,6 @@
                 return null;
             }
         }
-
 
         // --------------------------------------
         // Show Modal
@@ -263,7 +259,7 @@
         // Render the DashBoard Routes from routes.js
         // --------------------------------------    
             renderApp() {
-                const {showMobileMenu, categories, currentColor, showError, responsiveWidth} =  this.state;
+                const {showMobileMenu, categories,  showError, responsiveWidth} =  this.state;
                 const {location} = this.props;
                 const currentNavigator = window.navigator.appName;
                 const bodyClasses = currentNavigator === "Microsoft Internet Explorer" 

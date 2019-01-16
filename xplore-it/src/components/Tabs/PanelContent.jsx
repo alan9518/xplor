@@ -9,11 +9,11 @@
 // --------------------------------------
 // Import Dependences
 // --------------------------------------
-  
-    import React , {Component, Fragment} from 'react';
+
+    import React, { Component, Fragment } from 'react';
     import ReactDOM from 'react-dom';
-    import {AppLoader,  FieldsMaker} from '../../components'
-  
+    import { AppLoader, FieldsMaker } from '../../components'
+
 
     class PanelContent extends Component {
 
@@ -23,29 +23,29 @@
         constructor(props) {
             super(props);
             this.state = {
-                panelTabContent : props.panelTabContent,
-                tabLoading : props.tabLoading
+                panelTabContent: props.panelTabContent,
+                tabLoading: props.tabLoading
             }
         }
-    
-      
+
+
 
         // --------------------------------------
         // Loader Inside the Tab Panel
         // --------------------------------------
 
         renderTabLoader() {
-            return <AppLoader customHeight = {550}/>
+            return <AppLoader customHeight={550} />
         }
-      
-        
+
+
 
         // --------------------------------------
         // Render Panel Content
         // --------------------------------------
         renderTabContent(panelTabContent) {
             return (
-                <FieldsMaker formFields = {panelTabContent}/>
+                <FieldsMaker formFields={panelTabContent} />
             )
         }
 
@@ -53,19 +53,19 @@
         // Render Panel
         // --------------------------------------
         render() {
-            const {panelTabContent, tabLoading} = this.props;
+            const { panelTabContent, tabLoading } = this.props;
             return (
                 <div style={{ minHeight: 550, width: '100%', overflow: 'hidden' }}>
-                   {
-                       tabLoading === true ? this.renderTabLoader() : this.renderTabContent(panelTabContent)
-                   }    
+                    {
+                        tabLoading === true ? this.renderTabLoader() : this.renderTabContent(panelTabContent)
+                    }
                 </div>
             )
         }
     }
 
-    // --------------------------------------
-    // Export Component
-    // --------------------------------------
+// --------------------------------------
+// Export Component
+// --------------------------------------
     export default PanelContent;
 

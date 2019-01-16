@@ -31,7 +31,7 @@
                 menuComponent : 'singleList',
                 currentCategory : null,
                 currentCategoryColor : null,
-                isLoaded : false
+                // isLoaded : false
             }
         }
 
@@ -39,17 +39,22 @@
         // Call API
         // --------------------------------------
         componentDidMount() {
-            this.getSideBarRoutes();
-        }
-
-
-        getSideBarRoutes() {
+            // this.getSideBarRoutes();
             const {categories} = this.props;
             this.setState({
                 currentMenu : categories,
-                isLoaded : true
+                // isLoaded : true
             })
         }
+
+
+        // getSideBarRoutes() {
+        //     const {categories} = this.props;
+        //     this.setState({
+        //         currentMenu : categories,
+        //         isLoaded : true
+        //     })
+        // }
 
         
 
@@ -123,11 +128,7 @@
          ========================================================================== */
 
 
-            // --------------------------------------
-            // Responsive Sidebar Style
-            // --------------------------------------
-          
-
+        
             // --------------------------------------
             // Render Sidebar 
             // --------------------------------------
@@ -188,7 +189,6 @@
             // Render Component
             // --------------------------------------
             render() {
-                const {isLoaded} = this.state;
                 return ( 
                     this.renderSideBar()
                     // isLoaded ? this.renderSideBar() : null

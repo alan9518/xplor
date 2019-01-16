@@ -8,9 +8,8 @@
 // Import Dependences
 // --------------------------------------
     import React, { Component, Fragment } from "react";
-    import { Breadcumbs, AppLoader,  CustomTabs, PanelContent, ProjectCard,WideCard,CardHeaderWide, FieldsMaker} from '../../components';
+    import { Breadcumbs, AppLoader,  CustomTabs, PanelContent, ProjectCard,WideCard,CardHeaderWide, FieldsMaker, NoData} from '../../components';
     import axios from 'axios';
-    import {join} from 'lodash';
     import {Endpoints} from '../../services/endpoints'
 
 // --------------------------------------
@@ -27,20 +26,17 @@
             // --------------------------------------
             constructor(props) {
                 super(props);
-				console.log("​DetailsView -> constructor -> props", props)
                 this.state = {
-                    tabIndex : 0,
                     productTabs: [],
                     currentTab : 0,
                     relatedProducts : [],
                     productOverview:{},
                     productDetails : {},
                     isLoaded : false,
+                    showError : false,
                     tabLoading : false,
                 }
                 this.partID = props.match.params.partID;
-
-
             }
 
             // --------------------------------------
@@ -62,37 +58,39 @@
             async loadAPI () {
                 try {
 
-                    // Project Details
-                    const productDetails = await this.loadProductOverview();
-
+                    // Get Product Main Data
+                        const productDetails = await this.loadProductOverview();
 
                     // Get Search Terms 
-                    let searchTerms = productDetails.SearchKeyword;
+                        const searchTerms = productDetails.SearchKeyword;
 
-                    // Get Related Projects
-                    let reladtedProducts = await this.loadRelatedProducts(searchTerms);
-                    let reladtedProducts2 = await this.loadRelatedProducts2(searchTerms);
-					
-                    console.log("​DetailsView -> loadAPI -> reladtedProducts", reladtedProducts)
 
-                    console.log("​DetailsView -> loadAPI -> reladtedProducts2", reladtedProducts2)
+                    // Create Promises that can run in parallel
+                        const relatedProductsPromise = this.loadRelatedProducts(searchTerms);
+                        const relatedProductsPromise2 = this.loadRelatedProducts2(searchTerms);
+                        const productTabsPromise =  this.loadProductTabs();
 
-                    // Get All Tabs
-                    const productTabs =  await this.loadProductTabs();
+                    // Resolve Promises
+                    // Execute Parallel Promises
+                        const [productTabsData, relatedProductsData, relatedProductsData2] =  await Promise.all([productTabsPromise, relatedProductsPromise, relatedProductsPromise2]);
+						
+                        console.log("​DetailsView -> loadAPI -> relatedProductsData2", relatedProductsData2)
 
                     // Get Attr for First Tab
-                    const tabAttributes = await this.loadTabAttributes(3095);
+                        const firstTab =  productTabsData.data[0].BusinessTypeID;
+                        const tabAttributes = await this.loadTabAttributes(firstTab);
+                
+
 
                     // Store Values
                     this.setState({
-                        productTabs : productTabs,
+                        productTabs : productTabsData.data,
                         productDetails : productDetails,
-                        relatedProducts : reladtedProducts,
+                        relatedProducts : relatedProductsData.data,
                         productOverview : tabAttributes,
                         isLoaded : true
                     })
                 }
-
                 catch (error) {
                     console.log('error', error);
                     this.setState({
@@ -100,11 +98,16 @@
                         productDetails : {},
                         relatedProducts : [],
                         productOverview : {},
+                        showError : true,
                         isLoaded : true
                     })
                 }
             
             }
+
+
+
+
 
             /** --------------------------------------
             // Get Project Overview
@@ -132,11 +135,11 @@
                     customerid : this.partID,
                     keyword : productKeywords,
                 }
-                const relatedProjectsPromise = await (axios.get(Endpoints.getRelatedProducts, {params}));
-                const relatedProjectsData =  await relatedProjectsPromise.data;
+                
 
-                return relatedProjectsData;
+                return (axios.get(Endpoints.getRelatedProducts, {params}));
             }
+
 
 
             /** --------------------------------------
@@ -147,12 +150,8 @@
             // --------------------------------------*/
 
             async loadRelatedProducts2(productKeywords) {
-				console.log("​DetailsView -> loadRelatedProducts -> productKeywords", productKeywords)
-        
-                const relatedProjectsPromise = await (axios.get(Endpoints.getRelatedProductsHard));
-                const relatedProjectsData =  await relatedProjectsPromise.data;
-
-                return relatedProjectsData;
+				
+                return axios.get(Endpoints.getRelatedProductsHard)
             }
 
 
@@ -161,10 +160,7 @@
             // Get Product Tabs
             // --------------------------------------
             async loadProductTabs() {
-                const tabsDataPromise = await axios.get(Endpoints.getProductTabs);
-                const tabsData =  await tabsDataPromise.data;
-    
-                return tabsData;
+                return axios.get(Endpoints.getProductTabs);
             }
         
 
@@ -232,6 +228,7 @@
             
             // --------------------------------------
             // Render BreadCumbs
+            // TODO : Add Category ID To Breadcumbs
             // --------------------------------------
             renderBreadcumbs() {
                 const {SoftwareTopic, ProductName, partID} = this.state.productDetails;
@@ -264,6 +261,20 @@
             renderLoader () {
                 return <div> <AppLoader customHeight = {800}/> </div>
             }
+
+
+            // --------------------------------------
+            // Render Error Page
+            // --------------------------------------
+            renderErrorPage() {
+                return(
+                    <div>
+                        <NoData message = {"We Can't Connect to the Server. Please Try Again Later"}/>
+                    </div>
+                )
+            }
+
+
 
 
             // --------------------------------------
@@ -303,31 +314,38 @@
                 )    
             }
 
-
             // --------------------------------------
-            // Render View
+            // Render View Body
             // --------------------------------------
-            renderAppDetailsView() {
-                
+            renderAppDetailsViewContainer () {
                 return (
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-lg-9 col-sm-12">
+                                {this.renderBreadcumbs()}
+                                {this.renderProductDetails()}
+                            </div>
 
-                    <Fragment>
-                        
-                        <div className="container-fluid">
-                            <div className="row">
-                                <div className="col-lg-9 col-sm-12">
-                                    {this.renderBreadcumbs()}
-                                    {this.renderProductDetails()}
-                                </div>
-
-                                <div className="col-lg-3 col-md-12 col-sm-12">
-                                    <div className="xpl-relatedListApps">
-                                    <h5>Related Products</h5>
-                                        {this.renderRelatedProducts()}
-                                    </div>
+                            <div className="col-lg-3 col-md-12 col-sm-12">
+                                <div className="xpl-relatedListApps">
+                                <h5>Related Products</h5>
+                                    {this.renderRelatedProducts()}
                                 </div>
                             </div>
                         </div>
+                    </div>
+                )
+            }
+
+            // --------------------------------------
+            // Render View Look for an Error
+            // --------------------------------------
+            renderAppDetailsView() {
+                const {showError}  = this.state;
+                return (
+
+                    <Fragment>
+                        {showError === true ? this.renderErrorPage(): this.renderAppDetailsViewContainer()}
                     </Fragment>
                 )
             }   

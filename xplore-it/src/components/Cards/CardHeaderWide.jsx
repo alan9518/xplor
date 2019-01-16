@@ -61,7 +61,9 @@
                         <div className="xpl-cardProjectInfo">
                             <ul>    
                                 <ListItem itemName = {"Uploaded"} content = {formatDate(CreatedDate)} />
+                                <ListItem itemName = {"Last Update"} content = {formatDate(LastUpdateDate)} />
                                 <ListItem itemName = {"Product Type"} content = {ProductType} />
+                                
                         </ul>
                         </div>
 
@@ -72,7 +74,6 @@
                             </ul>
                         </div> 
 
-                       
                     </div>
 
 

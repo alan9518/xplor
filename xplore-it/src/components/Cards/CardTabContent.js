@@ -9,7 +9,6 @@
 // --------------------------------------
     import React from "react";
     import PropTypes from "prop-types";
-    import { CardHeaderWide } from '../../components';
     import './styles.css';
 
 // --------------------------------------
@@ -24,19 +23,14 @@
             return (
                 <div className="xpl-cardContainer xpl-wideCard ">
                     
-                {/* {props.cardHeader} */}
 
                     <div className="xpl-cardOverviewContainer">
 
-                        {/* <h5> Overview  </h5> */}
-
-                        {/* {props.tabIndex} */}
 
                         {props.children}
 
 
                         <p className="xpl-cardProjectCardOverview">
-                            {/* props.ShortDescription */}
                         </p>
 
                     </div>

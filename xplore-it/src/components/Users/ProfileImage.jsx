@@ -21,7 +21,7 @@
         const profileImage = `https://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=${userMail}&UA=0&size=HR64x64&sc=1535401630498`;
 
         return (
-            <img src={profileImage} className="xpl-userImageMin xpl-rounded" alt = "Profile Image"/>
+            <img src={profileImage} className="xpl-userImageMin xpl-rounded" alt = "User Profile"/>
         )
     }
 
