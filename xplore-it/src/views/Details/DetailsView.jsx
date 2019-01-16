@@ -234,9 +234,9 @@
             // Render BreadCumbs
             // --------------------------------------
             renderBreadcumbs() {
-                const {SoftwareTopic, Shortname} = this.state.productDetails;
+                const {SoftwareTopic, ProductName, partID} = this.state.productDetails;
 				console.log("​DetailsView -> renderBreadcumbs -> this.state.productDetails", this.state.productDetails)
-                return <Breadcumbs softwareTopic = {SoftwareTopic} productName = {Shortname} onClick = {this.onBreadCumbsCatClick}/>
+                return <Breadcumbs softwareTopic = {SoftwareTopic} productName = {ProductName}    onClick = {this.onBreadCumbsCatClick}/>
             }
 
             // --------------------------------------

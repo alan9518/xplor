@@ -16,27 +16,42 @@
 // Create Functional Component
 // --------------------------------------
     const BreadCumbs = (props) => {
+
+        const {productName, softwareTopic , onClick} = props;
+
         return (
             <div className="xpl-breadcumbsContainer">
-                <div className="row">
-                    <div className="col-lg-3 col-sm-4">
-                        <ProjectLink route = {"catalogue/all/all"} spRoute = {true}> 
-                            <h4 className = "xpl-breadChild"> All Results  <i className="fas fa-arrow-right xpl-breadSeparator"></i> </h4> 
-                        </ProjectLink>
-                    </div>
+                <div className="xpl-breadLinksContainer">
+                    <ProjectLink route = {"catalogue/all/all"} spRoute = {true}> 
+                            <h4 className = "xpl-breadChild"> All Results  </h4> 
+                    </ProjectLink>
 
-                    <div className="col-lg-5 col-sm-4"> 
-                        <h4 className = "xpl-breadChild" onClick = {props.onClick}>{ props.softwareTopic}  <i className="fas fa-arrow-right xpl-breadSeparator"></i> </h4> 
-                    </div>
+                    <h4 class="xpl-breadChild" > 
+                        <i class="fas fa-arrow-right xpl-breadSeparator"></i> 
+                    </h4>
 
-                    <div className="col-lg-4 col-sm-4"> 
-                        <h4 className = "xpl-breadChild"> {props.productName} </h4> 
-                    </div>
-                </div>  
+                    <h4 className = "xpl-breadChild" onClick = {onClick}>{ softwareTopic} </h4> 
+
+                    <h4 class="xpl-breadChild" > <i class="fas fa-arrow-right xpl-breadSeparator"></i> </h4>
+
+                    <h4 className = "xpl-breadChild"> {productName} </h4> 
+
+                </div>
             </div>  
         )
-
     }
+
+
+// --------------------------------------
+// Define PropTypes
+// --------------------------------------
+    BreadCumbs.propTypes = {
+        productName: PropTypes.string,
+        softwareTopic: PropTypes.string,
+        onClick: PropTypes.func,
+    }
+
+
 
 // --------------------------------------
 // Export Component

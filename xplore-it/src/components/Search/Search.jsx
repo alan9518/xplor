@@ -222,7 +222,7 @@
         // --------------------------------------
         onResultItemClick = (e) => {
             console.log("​Search -> onResultItemClick -> e", e)
-            this.setState({resultsList : []})
+            this.setState({resultsList : [], query : ''})
         }
 
         // --------------------------------------
@@ -232,25 +232,16 @@
             
             // Exit If Input is Empty
             if(searchInput === "") return [];
-
-            console.log("​Search -> filterOptions -> searchInput", searchInput)
-            const { productsOptions} = this.state;
-
+        
             // Start Filter
+            const { productsOptions} = this.state;
             let searchResults = productsOptions.filter((product) => {
-                let filterOptionObject;
                 let searchName =  product.ProductName.toLowerCase() || product.Shortname.toLowerCase();
                 let searchTopic =  product.SoftwareTopic.toLowerCase();
-				console.log("​Search -> filterOptions -> searchName", searchName)
+                let searchKeywords =  product.SearchKeyword.toLowerCase();
 
-                if (searchName.indexOf(searchInput) > -1 || searchTopic.indexOf(searchInput) > -1) {
-                    filterOptionObject = {
-                        partID: product.partID,
-                        ProductName: product.ProductName,
-                    }
-                }
-
-                return filterOptionObject
+                return (searchName.indexOf(searchInput) > -1 || searchTopic.indexOf(searchInput) > -1 || searchKeywords.indexOf(searchInput) > -1) 
+                
 
             
 				
@@ -288,7 +279,7 @@
         // Render Filter Input
         // --------------------------------------
         renderSearchContainer() {
-            const {resultsList} = this.state;
+            const {resultsList, query} = this.state;
             return (
                 <Fragment>
                     <div className="xpl-searchContainer">
@@ -296,10 +287,11 @@
                             <input 
                                     className="form-control py-2 border-right-0 border" 
                                     type="search" 
-                                    placeholder="Search By Keywords" 
+                                    placeholder="Product Name, Category or Keywords" 
                                     id="xpl-searchInput" 
                                     ref = {input=> this.searchValues = input}
                                     onChange = {this.handleInputChange}
+                                    value = {query}
                                 />
                             <span className="input-group-append">
                                 <div className="input-group-text bg-transparent">

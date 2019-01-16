@@ -68,26 +68,22 @@
                 const params = {customerid : this.props.match.params.key}
 
                 // Get Carrousel Products. Create Promise
-                    const getCarrouselProductsPromise =  await axios.get(Endpoints.getCarrouselProducts);
+                    const getCarrouselProductsPromise =  axios.get(Endpoints.getCarrouselProducts);
 
-                // // Get All Products. Createn Promise 
+                // Get All Products. Createn Promise 
                     const getProductsPromise = topicName === 'all' 
-                        ? await axios.get(Endpoints.getAllProducts) 
-                        : await axios.get(Endpoints.getAllProductsByCategory,{params});
+                        ? axios.get(Endpoints.getAllProducts) 
+                        : axios.get(Endpoints.getAllProductsByCategory,{params});
 
 
-                // Get SP Colors
-                    const SPColorsCategories = await  this.loadSPCategories();
+                // Resolve all Promises
+                    const [carrouselProductsData, homeProductsData ] = await Promise.all([getCarrouselProductsPromise, getProductsPromise]);
+                    
+                    const SPColorsCategories =  await this.loadSPCategories();
 
-
-                // Resolve Promises
-                    const productsData = getProductsPromise.data;
-                    const carrouselData = getCarrouselProductsPromise.data;
-
-
-
+                    
                 // Merge Colors and Projects
-                    const productsWithColor = this.mergeProductsAndColors(productsData, SPColorsCategories);
+                    const productsWithColor = this.mergeProductsAndColors(homeProductsData.data, SPColorsCategories);
 
 
                 // Store Results
@@ -95,15 +91,17 @@
                 this.setState( {
                     currentCategory : `${startCase(topicName)}  Products`,
                     products : productsWithColor || [],
-                    carrouselproducts : carrouselData || [],
+                    carrouselproducts : carrouselProductsData.data || [],
                     isLoaded : true
-                })
+                });
             }
 
 
-            // --------------------------------------
-            // Load SP Categories
-            // --------------------------------------
+
+            /** --------------------------------------
+            // Get Colors From Sharepoint 
+            // @returns {A Promise Object}
+            // --------------------------------------*/
             async loadSPCategories() {
                 const getSPCategoriesPromise = await axios.get(Endpoints.getSideBarCategoriesSP)
                 const getSPCategoriesResponse =  await getSPCategoriesPromise.data.value;
@@ -118,53 +116,52 @@
                 return (SPCatsArray);
             }
 
-
             // --------------------------------------
             // Merge Products & Categories
             // --------------------------------------
-            mergeProductsAndColors(productsData, SPColorsCategories)
-            {
+            mergeProductsAndColors(productsData, SPColorsCategories) {
                 const productsWithColor = productsData.map((product)=> {
                     SPColorsCategories.map((spColor)=> {
                         if(product.SoftwareTopic === spColor.name) {
                             product.color = spColor.color
-                            // product.history = 
                         }
                     })
-
                     return product;
                 })
 
-
-                return productsWithColor
+                return productsWithColor;
             }
+
+
+
+            
 
 
             /** --------------------------------------
             // Get Colors
             // @returns {A Promise Object}
             // --------------------------------------*/
-            async getColors(returnArray) {
-                const baseColor = '#1197D3';
-                const getColorsPromise = await axios.get(Endpoints.getSideBarColorsSP)
-                const getColorsResponse =  await getColorsPromise.data.value;
-                const category = this.splitRouteName();
+            // async getColors(returnArray) {
+            //     const baseColor = '#1197D3';
+            //     const getColorsPromise = await axios.get(Endpoints.getSideBarColorsSP)
+            //     const getColorsResponse =  await getColorsPromise.data.value;
+            //     const category = this.splitRouteName();
 
             
-                const colorsArray = (getColorsResponse.filter((color)=> {
-                        return category === color.Title
-                }));
+            //     const colorsArray = (getColorsResponse.filter((color)=> {
+            //             return category === color.Title
+            //     }));
 
-                // Return all the Colors or just the Color Value
+            //     // Return all the Colors or just the Color Value
 
-                if(returnArray)
-                    return colorsArray;
-                else
-                    return ( colorsArray.length > 0 ? colorsArray[0].Color : baseColor);
+            //     if(returnArray)
+            //         return colorsArray;
+            //     else
+            //         return ( colorsArray.length > 0 ? colorsArray[0].Color : baseColor);
                 
-            }
+            // }
 
-
+         
         /* ==========================================================================
          *  Render Logic and State Handle
          ========================================================================== */

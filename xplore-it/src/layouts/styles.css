@@ -397,25 +397,34 @@
     }
 
     .xpl-breadcumbsContainer {
-        /* display: flex;
-        justify-content: flex-start; */
         padding-left: 8px;
         margin-bottom: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
     }
 
+    .xpl-breadLinksContainer {
+        display: flex;
+        flex-direction: row;
+        width: 75%;
+    }
+
+
     h4.xpl-breadChild {
+
         display: flex;
         flex-direction: row;
         padding: 0 8px 8px;
         font-weight: 600;
         cursor: pointer;
         line-height: 15px;
-        justify-content: space-between;
+        justify-content: flex-start;
+        width: auto;
 
     }
 
     .xpl-breadSeparator {
-        /* margin-left: 12px; */ 
         font-size: 18px;
     }
     
@@ -648,6 +657,8 @@
                 font-size: 30px;
             }
 
+            
+
 
             /*  ==========================================================================
              *  Responsive Modal
@@ -708,15 +719,7 @@
             /*  ==========================================================================
             *  Responsive Tabs
                 ========================================================================== */
-            /* ul.react-tabs__tab-list {
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                align-items: center;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                width: 100%;
-            } */
+            
             
             .react-tabs__tab {
                 max-width: 70px;
@@ -731,6 +734,13 @@
                 width: 100%;
                 justify-content: center;
             }
+
+            .xpl-breadLinksContainer {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+            }
+        
 
             .xpl-breadcumbsContainer a {
                 text-decoration: none;
