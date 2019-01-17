@@ -1,6 +1,7 @@
 /* ==========================================================================
  * Main Dashboard Template View
  * Add Here all the Components that will show on the main Panel
+ * Show All Projects
  * 25/10/2018
  * Alan Medina Silva
  ========================================================================== */
@@ -15,7 +16,6 @@
         AppLoader, 
     } from "../../components";
 
-    
     import {shuffle, startCase, replace} from "lodash";
     import {Endpoints} from '../../services/endpoints';
     import axios from 'axios';
@@ -43,6 +43,7 @@
         }
 
 
+    
         // --------------------------------------
         // Initial Shuffle
         // --------------------------------------
