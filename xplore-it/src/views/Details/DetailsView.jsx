@@ -269,7 +269,7 @@
             renderErrorPage() {
                 return(
                     <div>
-                        <NoData message = {"We Can't Connect to the Server. Please Try Again Later"}/>
+                        <NoData message = {"We Can't Connect to the Server."}/>
                     </div>
                 )
             }
@@ -321,12 +321,12 @@
                 return (
                     <div className="container-fluid">
                         <div className="row">
-                            <div className="col-lg-9 col-sm-12">
+                            <div className="col-xl-9 col-lg-12 col-sm-12">
                                 {this.renderBreadcumbs()}
                                 {this.renderProductDetails()}
                             </div>
 
-                            <div className="col-lg-3 col-md-12 col-sm-12">
+                            <div className="col-xl-3 col-lg-12 col-md-12 col-sm-12">
                                 <div className="xpl-relatedListApps">
                                 <h5>Related Products</h5>
                                     {this.renderRelatedProducts()}

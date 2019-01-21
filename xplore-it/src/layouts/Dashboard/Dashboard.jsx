@@ -69,61 +69,132 @@
         // --------------------------------------
         // Handle all Requests
         // --------------------------------------
+
         async loadAPI() {
-            const APIRoutes =  await this.loadAPICategories();
-            const SPRoutes = await  this.loadSPCategories();
+            try {
+                // Get API Routes
+                const apiRoutesPromise = this.loadAPICategories();
+                // Get SP Routes
+                const SPRoutesPromise =  this.loadSPCategories();
 
+                // Resolve Both Promises
+                const [apiRoutes, SPRoutes] = await Promise.all([apiRoutesPromise,SPRoutesPromise]);
+                
+                // Get Routes Values
+                const apiRoutesData =  apiRoutes.data;
 
-            const appRoutes = this.mergeRoutes(APIRoutes, SPRoutes);
+                // Prepare SP Routes
+                const SPRoutesData = this.createSPArray(SPRoutes.data.value);
 
-            this.setState({
-                categories : appRoutes || [],
-                isLoaded : true,
-                showError : false,
-            })
+                // Merge SP And API Routes
+                const appRoutes = this.mergeRoutes(apiRoutesData, SPRoutesData);
+
+                this.setState({
+                    categories : appRoutes || [],
+                    isLoaded : true,
+                    showError : false,
+                })
+            
+
+            }
+            catch(error) {
+				console.log('​Dashboard -> catch -> error', error)
+                this.setState({isLoaded : true, showError : true})
+            }
         }
+
+
 
         // --------------------------------------
         // Load WebService Categories
         // --------------------------------------
-        async loadAPICategories() {
-            try {
-                const getSoftwareTopicsPromise = await axios.get(Endpoints.getAllCategories);
-                const softwareTopicsData =  await getSoftwareTopicsPromise.data;
-                return softwareTopicsData;
-
-            }
-            catch (error) {
-                this.setState({isLoaded : true, showError : true})
-                return [];
-            }
-            
-
+        loadAPICategories() {
+            return axios.get(Endpoints.getAllCategories);
         }   
 
 
         // --------------------------------------
         // Load SP Categories
         // --------------------------------------
-        async loadSPCategories() {
-            try {
-                const getSPCategoriesPromise = await axios.get(Endpoints.getSideBarCategoriesSP)
-                const getSPCategoriesResponse =  await getSPCategoriesPromise.data.value;
-                const SPCatsArray = (getSPCategoriesResponse.map((SpCat)=> {
-                    return {
-                        color : SpCat.Color,
-                        name : SpCat.Title,
-                        order: SpCat.Order1
-                    }
-                }));
-
-                return (SPCatsArray);
-            }
-            catch (error) {
-                this.setState({isLoaded : true, showError : true})
-                return [];
-            }
+        loadSPCategories() {
+            return axios.get(Endpoints.getSideBarCategoriesSP);
         }
+
+
+        // --------------------------------------
+        // Create An Array with The SP Categories
+        // --------------------------------------
+        createSPArray(SPCategories) {
+            const SPCatsArray = (SPCategories.map((SpCat)=> {
+                return {
+                    color : SpCat.Color,
+                    name : SpCat.Title,
+                    order: SpCat.Order1
+                }
+            }));
+
+
+    
+            return (SPCatsArray);
+        }
+
+
+
+        // async loadAPI() {
+        //     const APIRoutes =  await this.loadAPICategories();
+        //     const SPRoutes = await  this.loadSPCategories();
+
+
+        //     const appRoutes = this.mergeRoutes(APIRoutes, SPRoutes);
+
+        //     this.setState({
+        //         categories : appRoutes || [],
+        //         isLoaded : false,
+        //         showError : false,
+        //     })
+        // }
+
+        // --------------------------------------
+        // Load WebService Categories
+        // --------------------------------------
+        // async loadAPICategories() {
+        //     try {
+        //         const getSoftwareTopicsPromise = await axios.get(Endpoints.getAllCategories);
+        //         const softwareTopicsData =  await getSoftwareTopicsPromise.data;
+        //         return softwareTopicsData;
+
+        //     }
+        //     catch (error) {
+        //         this.setState({isLoaded : true, showError : true})
+        //         return [];
+        //     }
+            
+
+        // }   
+
+
+        // --------------------------------------
+        // Load SP Categories
+        // --------------------------------------
+        // async loadSPCategories() {
+        //     try {
+        //         const getSPCategoriesPromise = await axios.get(Endpoints.getSideBarCategoriesSP)
+        //         const getSPCategoriesResponse =  await getSPCategoriesPromise.data.value;
+        //         const SPCatsArray = (getSPCategoriesResponse.map((SpCat)=> {
+        //             return {
+        //                 color : SpCat.Color,
+        //                 name : SpCat.Title,
+        //                 order: SpCat.Order1
+        //             }
+        //         }));
+
+        //         return (SPCatsArray);
+        //     }
+        //     catch (error) {
+        //         this.setState({isLoaded : true, showError : true})
+        //         return [];
+        //     }
+        // }
 
         
         /** --------------------------------------
@@ -245,10 +316,10 @@
         // --------------------------------------
         // Render Error Page
         // --------------------------------------
-        renderErrorPage() {
+        renderErrorPage(responsiveWidth) {
             return(
-                <div>
-                    <NoData message = {"We Can't Connect to the Server. Please Try Again Later"}/>
+                <div  style = {{maxWidth:responsiveWidth}}>
+                    <NoData message = {"We Can't Connect to the Server."} />
                 </div>
             )
         }
@@ -266,7 +337,7 @@
                                                         ? "xpl-content main xpl-contentIE" 
                                                         : "xpl-content main";
                 if(showError)
-                    return this.renderErrorPage();
+                    return this.renderErrorPage(responsiveWidth);
                 else
                     return (
                         <Fragment>

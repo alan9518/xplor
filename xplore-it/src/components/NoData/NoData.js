@@ -14,15 +14,16 @@
 // Crate Component
 // --------------------------------------
 
-    const noData = ({message}) => {
+    const noData = ({message, subMessage}) => {
 
         return (
                 <React.Fragment>
-                    <div className="xpl-loaderContainer">
-                        <div className="xpl-loaderHolder">
+                    <div className="xpl-loaderContainer xpl-noDataContainer">
+                        <div className="xpl-loaderHolderNoData">
                             <div className="xpl-erroMessageContainer">
-                                <h4 className = "xpl-erroMessage"> {message}  </h4> 
-                                    <h5 className = "xpl-errorSubMessage"> You Can Try to  <br></br>  Reload the Page </h5>  
+                                <h4 className = "xpl-erroMessage"> {message}  </h4>  <br />
+                                {subMessage &&  <h4 className = "xpl-erroMessage"> {subMessage} </h4> }
+                                <h5 className = "xpl-errorSubMessage"> You Can Try to  <br></br>  Reload the Page </h5>  
                                 <i className="fas fa-frown  xpl-noDataIcon"></i>
                             </div>
                         </div>

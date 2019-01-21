@@ -491,7 +491,7 @@
     /* ==========================================================================
     *  1280 to 1440px
        ========================================================================== */
-       @media only screen and (min-width:1025px) and (max-width : 1440px) {
+        @media only screen and (min-width:1025px) and (max-width : 1440px) {
 
             /* .xpl-cardContainer .xpl-mediumCard .xpl-shadow.xpl-cardContainer.xpl-mediumCard.xpl-shadow {
                 display: flex;
@@ -504,14 +504,22 @@
                 min-height: 110px;
             }
 
-               
-            .xpl-cardName {
-                /* width: 100px; */
-                max-width: 165px;       
+            h5.xpl-productScopeCard {
+                font-size: 12px!important;
+                margin-top: 5px;
             }
 
-            .xpl-projectsContainer .xpl-cardHeader i {
-                font-size: 53px;
+            .xpl-cardHeader i {
+                font-size: 40px;
+                padding-top: 16px;
+                opacity: .5;
+                line-height: 40px;
+                padding-bottom: 16px;
+            }
+            
+
+            .xpl-cardName {
+                max-width: 165px;       
             }
 
             .xpl-projectsContainer .xpl-cardName h5 {
@@ -525,7 +533,7 @@
                 font-size: 16px;
             }
 
-       }
+        }
     
 
     /* ==========================================================================
@@ -783,6 +791,22 @@
                 max-width: 100px;
                 padding: 20px;
             }
+
+
+            /* ---------------------------------------------------
+                BreadCumbs Fix
+            ----------------------------------------------------- */
+
+                .xpl-breadLinksContainer {
+                    width: 100%;
+                }
+
+                h4.xpl-breadChild {
+                    font-size: 22px;
+                    line-height: 22px;
+                }
+
+
         }   
 
 

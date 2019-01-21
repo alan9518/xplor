@@ -10,8 +10,7 @@
 // Import Dependences
 // --------------------------------------
 
-    import React, { Component, Fragment } from 'react';
-    import ReactDOM from 'react-dom';
+    import React, { Component, } from 'react';
     import { AppLoader, FieldsMaker } from '../../components'
 
 
@@ -54,8 +53,9 @@
         // --------------------------------------
         render() {
             const { panelTabContent, tabLoading } = this.props;
+            const {innerWidth} = window;
             return (
-                <div style={{ minHeight: 550, width: '100%', overflow: 'hidden' }}>
+                <div style={{ minHeight: innerWidth <= 1024 ? 450 : 550, width: '100%', overflow: 'hidden' }}>
                     {
                         tabLoading === true ? this.renderTabLoader() : this.renderTabContent(panelTabContent)
                     }

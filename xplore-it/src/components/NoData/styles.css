@@ -11,6 +11,15 @@
     align-items: center;
 }
 
+.xpl-noDataContainer {
+    padding-top: 100px;
+}
+
+
+.xpl-loaderHolderNoData {
+    max-width: 80%;
+}
+
 i.xpl-noDataIcon {
     font-size: 50px;
     color: rgba(68, 128, 219, 0.6);
