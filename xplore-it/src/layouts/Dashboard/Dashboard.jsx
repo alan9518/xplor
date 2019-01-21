@@ -140,62 +140,6 @@
 
 
 
-        // async loadAPI() {
-        //     const APIRoutes =  await this.loadAPICategories();
-        //     const SPRoutes = await  this.loadSPCategories();
-
-
-        //     const appRoutes = this.mergeRoutes(APIRoutes, SPRoutes);
-
-        //     this.setState({
-        //         categories : appRoutes || [],
-        //         isLoaded : false,
-        //         showError : false,
-        //     })
-        // }
-
-        // --------------------------------------
-        // Load WebService Categories
-        // --------------------------------------
-        // async loadAPICategories() {
-        //     try {
-        //         const getSoftwareTopicsPromise = await axios.get(Endpoints.getAllCategories);
-        //         const softwareTopicsData =  await getSoftwareTopicsPromise.data;
-        //         return softwareTopicsData;
-
-        //     }
-        //     catch (error) {
-        //         this.setState({isLoaded : true, showError : true})
-        //         return [];
-        //     }
-            
-
-        // }   
-
-
-        // --------------------------------------
-        // Load SP Categories
-        // --------------------------------------
-        // async loadSPCategories() {
-        //     try {
-        //         const getSPCategoriesPromise = await axios.get(Endpoints.getSideBarCategoriesSP)
-        //         const getSPCategoriesResponse =  await getSPCategoriesPromise.data.value;
-        //         const SPCatsArray = (getSPCategoriesResponse.map((SpCat)=> {
-        //             return {
-        //                 color : SpCat.Color,
-        //                 name : SpCat.Title,
-        //                 order: SpCat.Order1
-        //             }
-        //         }));
-
-        //         return (SPCatsArray);
-        //     }
-        //     catch (error) {
-        //         this.setState({isLoaded : true, showError : true})
-        //         return [];
-        //     }
-        // }
-
         
         /** --------------------------------------
         // Combine Routes Arrays

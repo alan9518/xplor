@@ -86,7 +86,7 @@
                     this.setState({
                         productTabs : productTabsData.data,
                         productDetails : productDetails,
-                        relatedProducts : relatedProductsData.data,
+                        relatedProducts : relatedProductsData2.data,
                         productOverview : tabAttributes,
                         isLoaded : true
                     })
@@ -244,17 +244,27 @@
                 return (
                     <Fragment>
                         <div className="xpl-relatedContainer">
-                        {
-                            relatedProducts && relatedProducts.map(product => (
-                                <ProjectCard key = {product.partID} hasSmallDescription={true} {...product}/>
-                            ))
-                        }
+                            <div className="row">
+                                {
+
+                                    relatedProducts && relatedProducts.map((product) => {
+                                        return (
+
+                                                <div className="col-xl-12 col-lg-6 col-md-6 col-sm-12 ">
+                                                    <ProjectCard key = {product.partID} hasSmallDescription={true} {...product}/>
+                                                </div>
+                                        )
+                                    })
+
+                                }
+                            </div>
                         </div>
                     </Fragment>
                 )
             }
 
 
+        
             // --------------------------------------
             // Render Loader
             // --------------------------------------
@@ -282,7 +292,6 @@
             // --------------------------------------            
             renderProductDetails() {
                 const {productTabs, productOverview, tabLoading} = this.state;
-                // const fieldsMakerComponent =  <FieldsMaker formFields = {productOverview}/>
                 return (
                     <div className="xpl-appDescriptionContainer xpl-wideCard xpl-shadow">
                         <CustomTabs tabLoading = {tabLoading} tabsData = {productTabs} onTabChange = {this.onTabChange}>
