@@ -8,41 +8,47 @@
 // --------------------------------------
 // Import Dependences
 // --------------------------------------
-import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
-import { SideBarLink } from '../../components'
-import { Endpoints } from '../../services/endpoints';
-import axios from 'axios';
-import './styles.css';
+    import React, { Component, Fragment } from 'react'
+    import PropTypes from 'prop-types'
+    import { SideBarLink } from '../../components'
+    import { Endpoints } from '../../services/endpoints';
+    import {withRouter} from 'react-router-dom';
+    import axios from 'axios';
+    import './styles.css';
 
 
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
-    class Search extends Component {
+class Search extends Component {
 
 
-        // --------------------------------------
-        // constructor
-        // --------------------------------------\
-        constructor(props) {
-            super(props);
-            this.state = {
-                isSearching: false,
-                query: '',
-                productsOptions : [],
-                isLoaded: false,
-                resultsList: [],
-            }
+    // --------------------------------------
+    // constructor
+    // --------------------------------------\
+    constructor(props) {
+        super(props);
+        this.state = {
+            isSearching: false,
+            query: '',
+            productsOptions: [],
+            isLoaded: false,
+            resultsList: [],
         }
+    }
+
+    // --------------------------------------
+    // Set State
+    // --------------------------------------
+    componentDidMount() {
+        this.loadProducts()
+    }
 
 
-        // --------------------------------------
-        // Initial Shuffle
-        // --------------------------------------
-        componentDidMount() {
-            this.loadProducts()
-        }
+    /* ==========================================================================
+    ** Component Setup
+    ** ========================================================================== */
+
 
 
         // --------------------------------------
@@ -50,73 +56,72 @@ import './styles.css';
         // --------------------------------------
         async loadProducts() {
             //Create Promises
-                const allProductsPromise = axios.get(Endpoints.getAllProducts);
-                const SPColorsPromise =  axios.get(Endpoints.getSideBarCategoriesSP);
+            const allProductsPromise = axios.get(Endpoints.getAllProducts);
+            const SPColorsPromise = axios.get(Endpoints.getSideBarCategoriesSP);
 
             // Resolve Promises
-                const [allProductsData, SpColorsData] =  await Promise.all([allProductsPromise,SPColorsPromise ])
+            const [allProductsData, SpColorsData] = await Promise.all([allProductsPromise, SPColorsPromise])
 
             // Extract Data
-                const productsArray =  allProductsData.data;
-				console.log("​Search -> loadProducts -> productsArray", productsArray)
-                const colorsArray =  await this.loadSPCategoriesColors(SpColorsData.data.value); 
-                console.log("​Search -> loadProducts -> colorsArray", colorsArray);
-                
+            const productsArray = allProductsData.data;
+            console.log("​Search -> loadProducts -> productsArray", productsArray)
+            const colorsArray = await this.loadSPCategoriesColors(SpColorsData.data.value);
+            console.log("​Search -> loadProducts -> colorsArray", colorsArray);
+
             // Merge Products and Colors
-                const productsWithColor = this.mergeProductsAndColors(productsArray, colorsArray); 
-                console.log("​Search -> loadProducts -> productsWithColor", productsWithColor);
-                
+            const productsWithColor = this.mergeProductsAndColors(productsArray, colorsArray);
+            console.log("​Search -> loadProducts -> productsWithColor", productsWithColor);
+
             // Set State
-                this.setState({
-                    productsOptions : productsWithColor,
-                    isLoaded: true 
-                })
+            this.setState({
+                productsOptions: productsWithColor,
+                isLoaded: true
+            })
         }
 
-            /** --------------------------------------
-            // Get Colors From Sharepoint 
-            // @returns {A Promise Object}
-            // --------------------------------------*/
-            async loadSPCategoriesColors(SpResponse) {
-                // const getSPCategoriesPromise = await axios.get(Endpoints.getSideBarCategoriesSP)
-                // const getSPCategoriesResponse =  await getSPCategoriesPromise.data.value;
-                const SPCatsArray = (SpResponse.map((SpCat)=> {
-                    return {
-                        color : SpCat.Color,
-                        name : SpCat.Title,
+        /** --------------------------------------
+        // Iterate Colors from Sharepint and 
+        // Extract Color Code & Name 
+        // @returns {A Promise Object}
+        // --------------------------------------*/
+        async loadSPCategoriesColors(SpResponse) {
+            const SPCatsArray = (SpResponse.map((SpCat) => {
+                return {
+                    color: SpCat.Color,
+                    name: SpCat.Title,
+                }
+            }));
+
+            return (SPCatsArray);
+        }
+
+        // --------------------------------------
+        // Merge Products & Categories Color
+        // --------------------------------------
+        mergeProductsAndColors(productsData, SPColorsCategories) {
+            const productsWithColor = productsData.map((product) => {
+                for (let spColor of SPColorsCategories) {
+                    if (product.SoftwareTopic === spColor.name) {
+                        product.color = spColor.color
                     }
-                }));
-                
+                }
+                return product;
+            })
 
-                return (SPCatsArray);
-            }
-
-            // --------------------------------------
-            // Merge Products & Categories
-            // --------------------------------------
-            mergeProductsAndColors(productsData, SPColorsCategories) {
-                const productsWithColor = productsData.map((product)=> {
-                    for (let spColor of SPColorsCategories) {
-                        if(product.SoftwareTopic === spColor.name) {
-                            product.color = spColor.color
-                        }
-                    }
-                    return product;
-                })
-
-                return productsWithColor;
-            }
+            return productsWithColor;
+        }
 
 
 
-        
 
+    /* ==========================================================================
+    ** Handle State
+    ** ========================================================================== */
 
         // --------------------------------------
         // Get Input Values
         // --------------------------------------
         handleInputChange = (e) => {
-            console.log("​Search -> handleInputChange -> e", e)
             let searchInput = (this.searchValues.value).toLowerCase();
             let searchResults = this.filterOptions(searchInput);
             this.setState({
@@ -127,10 +132,42 @@ import './styles.css';
 
 
         // --------------------------------------
+        // Listen For KeyPress
+        // Look For 'Enter'
+        // --------------------------------------
+        handleKeyPress = (e) => {
+            e.key === 'Enter' && this.filterFirstOption(e);
+        }
+
+        // --------------------------------------
+        // Take The First Option of the 
+        // Result List and Open it
+        // --------------------------------------
+        filterFirstOption(event) {
+            event.preventDefault();
+            const {resultsList} = this.state;
+            const selectedOption =  resultsList[0];
+            this.onResultItemClick();
+            this.handleRedirect(selectedOption)
+        }
+
+        // --------------------------------------
+        // Check the Current Page before Redirecting
+        // app/Details/ --> Just Change AppID
+        // Any Oother, change the Whole route
+        // --------------------------------------
+        handleRedirect(option) {
+            const {history} = this.props;
+            
+            this.props.history.push(`${option.partID}`)
+
+
+        }
+
+        // --------------------------------------
         // Close Results List & Reset Input
         // --------------------------------------
         onResultItemClick = (e) => {
-            console.log("​Search -> onResultItemClick -> e", e)
             this.setState({ resultsList: [], query: '' })
         }
 
@@ -151,17 +188,10 @@ import './styles.css';
 
                 return (searchName.indexOf(searchInput) > -1 || searchTopic.indexOf(searchInput) > -1 || searchKeywords.indexOf(searchInput) > -1)
 
-
-
-
-            })
+            });
 
             console.log("​Search -> filterOptions -> searchResults", searchResults)
-
-
             return searchResults;
-
-
         }
 
 
@@ -182,7 +212,9 @@ import './styles.css';
 
 
 
-
+    /* ==========================================================================
+    ** Render Functions
+    ** ========================================================================== */
 
         // --------------------------------------
         // Render Filter Input
@@ -200,6 +232,7 @@ import './styles.css';
                                 id="xpl-searchInput"
                                 ref={input => this.searchValues = input}
                                 onChange={this.handleInputChange}
+                                onKeyPress={(e) => this.handleKeyPress(e)}
                                 value={query}
                             />
                             <span className="input-group-append">
@@ -209,7 +242,7 @@ import './styles.css';
                             </span>
                         </div>
 
-                        {resultsList && this.renderResultsList(resultsList)}
+                        {resultsList.length > 0 && this.renderResultsList(resultsList)}
 
                     </div>
                 </Fragment>
@@ -258,18 +291,11 @@ import './styles.css';
                 </Fragment>
             )
         }
-    }
+}
 
-
-// --------------------------------------
-// Define PropTypes
-// --------------------------------------
-// Search.propTypes = {
-// prop: PropTypes
-// }
 
 
 // --------------------------------------
 // Export Component
 // --------------------------------------
-    export default Search;  
+    export default withRouter(Search);  

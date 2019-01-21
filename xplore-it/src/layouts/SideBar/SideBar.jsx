@@ -134,7 +134,7 @@
             // --------------------------------------
             renderSideBar() {
                 const {currentMenu, menuComponent, currentCategory, currentCategoryColor} = this.state;
-                const {showMobileMenu ,onClick, responsiveWidth, initialData} = this.props;
+                const {showMobileMenu ,onClick, responsiveWidth} = this.props;
                 const sidebarClass = showMobileMenu === true?  'showMobileMenu' : '';
                 const responsiveSideBarStyle = {
                     maxWidth : `${responsiveWidth}px`
@@ -152,7 +152,7 @@
                                     <div className="xpl-buttonCloseContainer">
                                         <AppButton buttonClass = {'xpl-closeButton'} iconClass = {'fas fa-times'} onClick = {onClick}/>
                                     </div>
-                                    <Search initialData = {initialData}/>
+                                    <Search/>
                                 </div>
                                 
                                 <div className="xpl-appSideBarLinksContainer" >
