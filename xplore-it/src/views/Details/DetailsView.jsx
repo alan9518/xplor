@@ -72,9 +72,9 @@
 
                     // Resolve Promises
                     // Execute Parallel Promises
-                        const [productTabsData, relatedProductsData, relatedProductsData2] =  await Promise.all([productTabsPromise, relatedProductsPromise, relatedProductsPromise2]);
+                        const [productTabsData, relatedProductsData, relatedProductsData2, SPColorsCategories] =  await Promise.all([productTabsPromise, relatedProductsPromise, relatedProductsPromise2, this.loadSPCategories()]);
+						console.log('​DetailsView -> loadAPI -> SPColorsCategories', SPColorsCategories)
 						
-                        console.log("​DetailsView -> loadAPI -> relatedProductsData2", relatedProductsData2)
 
                     // Get Attr for First Tab
                         const firstTab =  productTabsData.data[0].BusinessTypeID;
@@ -152,6 +152,24 @@
             async loadRelatedProducts2(productKeywords) {
 				
                 return axios.get(Endpoints.getRelatedProductsHard)
+            }
+
+            /** --------------------------------------
+            // Get Colors From Sharepoint 
+            // @returns {A new Array With Only Color & Name Values from Response}
+            // --------------------------------------*/
+            async loadSPCategories() {
+                const getSPCategoriesPromise = await axios.get(Endpoints.getSideBarCategoriesSP)
+                const getSPCategoriesResponse =  await getSPCategoriesPromise.data.value;
+                const SPCatsArray = (getSPCategoriesResponse.map((SpCat)=> {
+                    return {
+                        color : SpCat.Color,
+                        name : SpCat.Title,
+                    }
+                }));
+                
+
+                return (SPCatsArray);
             }
 
 

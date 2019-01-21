@@ -100,7 +100,7 @@
 
             /** --------------------------------------
             // Get Colors From Sharepoint 
-            // @returns {A Promise Object}
+            // @returns {A new Array With Only Color & Name Values from Response}
             // --------------------------------------*/
             async loadSPCategories() {
                 const getSPCategoriesPromise = await axios.get(Endpoints.getSideBarCategoriesSP)
@@ -116,9 +116,13 @@
                 return (SPCatsArray);
             }
 
-            // --------------------------------------
-            // Merge Products & Categories
-            // --------------------------------------
+            /** --------------------------------------
+            // Merge Reponse From API & SP
+            // Based on Category Name
+            // @param {productsData <API data>}
+            // @param {SPColorsCategories <SP data>}
+            // @returns {A new Array With Category Colors}
+            // --------------------------------------*/
             mergeProductsAndColors(productsData, SPColorsCategories) {
                 const productsWithColor = productsData.map((product)=> {
                     for (let spColor of SPColorsCategories) {
@@ -179,7 +183,7 @@
 
             // --------------------------------------
             // Render Dashboard
-            // Render Carrousel if Home Page
+            // Render Carrousel if user is in Home Page
             // --------------------------------------
             renderDashboard() {        
                 return (
@@ -242,7 +246,10 @@
                 );
             }
 
-
+            // --------------------------------------
+            // Show All Cards
+            // Flipper takes care of the Animation
+            // --------------------------------------
             renderFlipperBody() {
                 
                 const {currentCategory, products} = this.state;
