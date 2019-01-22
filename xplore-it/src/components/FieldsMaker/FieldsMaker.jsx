@@ -70,14 +70,14 @@
             let formField = null;
             switch(dataType) {
                 case 'String' :
-                    formField =  <ListItem itemName = {attrName} content = {attrName} classNames = {divClass}/>
+                    formField =  <ListItem itemName = {attrName} content = {attrValues} classNames = {divClass}/>
                 break;
 
                 case 'PickList' : 
-                    formField =  <ListItem itemName = {attrName} content = {attrName} classNames = {divClass}/>
+                    formField =  <ListItem itemName = {attrName} content = {attrValues} classNames = {divClass}/>
                     break;
                 default : 
-                    formField =  <ListItem itemName = {attrName} content = {attrName} classNames = {divClass}/>
+                    formField =  <ListItem itemName = {attrName} content = {attrValues} classNames = {divClass}/>
             }
 
             return formField

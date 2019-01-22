@@ -72,8 +72,14 @@
 
                     // Resolve Promises
                     // Execute Parallel Promises
-                        const [productTabsData, relatedProductsData, relatedProductsData2, SPColorsCategories] =  await Promise.all([productTabsPromise, relatedProductsPromise, relatedProductsPromise2, this.loadSPCategories()]);
-						console.log('​DetailsView -> loadAPI -> SPColorsCategories', SPColorsCategories)
+                        const [productTabsData, relatedProducts, relatedProducts2, SPColorsCategories] =  await Promise.all([productTabsPromise, relatedProductsPromise, relatedProductsPromise2, this.loadSPCategories()]);
+                        console.log('​DetailsView -> loadAPI -> SPColorsCategories', SPColorsCategories)
+                        
+
+                    // Get Related Products With its Colors
+                        const relatedProductsData =  this.mergeProductsAndColors(relatedProducts2.data, SPColorsCategories);
+						console.log('​DetailsView -> loadAPI -> relatedProductsData', relatedProductsData)
+
 						
 
                     // Get Attr for First Tab
@@ -86,7 +92,7 @@
                     this.setState({
                         productTabs : productTabsData.data,
                         productDetails : productDetails,
-                        relatedProducts : relatedProductsData2.data,
+                        relatedProducts : relatedProductsData,
                         productOverview : tabAttributes,
                         isLoaded : true
                     })
@@ -172,6 +178,26 @@
                 return (SPCatsArray);
             }
 
+
+            /** --------------------------------------
+            // Merge Reponse From API & SP
+            // Based on Category Name
+            // @param {productsData <API data>}
+            // @param {SPColorsCategories <SP data>}
+            // @returns {A new Array With Category Colors}
+            // --------------------------------------*/
+            mergeProductsAndColors(productsData, SPColorsCategories) {
+                const productsWithColor = productsData.map((product)=> {
+                    for (let spColor of SPColorsCategories) {
+                        if(product.SoftwareTopic === spColor.name) {
+                            product.color = spColor.color
+                        }
+                    }
+                    return product;
+                })
+
+                return productsWithColor;
+            }
 
             
             // --------------------------------------
@@ -269,7 +295,14 @@
                                         return (
 
                                                 <div className="col-xl-12 col-lg-6 col-md-6 col-sm-12 ">
-                                                    <ProjectCard key = {product.partID} hasSmallDescription={true} {...product}/>
+                                                    {/* <ProjectCard key = {product.partID} hasSmallDescription={true} {...product}/> */}
+                                                    <ProjectCard 
+                                                        key = {product.partID} 
+                                                        hasSmallDescription={true}  
+                                                        projectColor = {product.color}
+                                                        onClick = {this.getCategoryID}
+                                                        {...product}
+                                                    />
                                                 </div>
                                         )
                                     })
