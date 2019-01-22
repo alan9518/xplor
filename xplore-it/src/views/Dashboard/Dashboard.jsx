@@ -78,13 +78,17 @@
                             const SPColorsCategories =  await this.loadSPCategories();
     
                         // Merge Colors and Projects
-                            const productsWithColor = this.mergeProductsAndColors(homeProductsData.data, SPColorsCategories);     
+                            const productsWithColor = this.mergeProductsAndColors(homeProductsData.data, SPColorsCategories);   
+                            
+                        // Merge Colors and Carrousel Projects
+                            const carrouselProductsWithColor = this.mergeProductsAndColors(carrouselProductsData.data, SPColorsCategories);   
+							console.log('​Dashboard -> loadProjects -> carrouselProductsWithColor', carrouselProductsWithColor)
     
                         // Store Results
                         this.setState( {
                             currentCategory : `${startCase(topicName)}  Products`,              
                             products : productsWithColor || [],
-                            carrouselproducts : carrouselProductsData.data || [],
+                            carrouselproducts : carrouselProductsWithColor || [],
                             isLoaded : true
                         });
                 }

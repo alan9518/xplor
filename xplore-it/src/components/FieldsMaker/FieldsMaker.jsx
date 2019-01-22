@@ -10,7 +10,10 @@
 // --------------------------------------
     import React, { Component, Fragment } from "react";
     import PropTypes from "prop-types";
-    import {ListItem,} from '../../components'
+    import {ToggleField, FieldItem, FieldList} from '../../components'
+
+    import {orderBy} from 'lodash';
+
     // import { Breadcumbs, AppLoader,  CustomTabs, PanelContent, ProjectCard} from '../../components';
 
 
@@ -33,56 +36,75 @@
         }
 
 
+
+        // --------------------------------------
+        // Render Fields
+        // --------------------------------------
+        renderFields2() {
+            const {formFields} = this.props;
+            // Order By Sequence
+            const orderedFormFields =  orderBy(formFields, ['attrName' , 'sequence'], ['desc', 'asc'] );
+			console.log('​FieldsMaker -> renderFields -> orderedFormFields', orderedFormFields)
+        }
+
+
         // --------------------------------------
         // Render Component
         // --------------------------------------        
         renderFields() {
             const {formFields} = this.props;
-            const rows =  Math.round(12/3) ;
-			console.log("​FieldsMaker -> renderFields -> rows", rows)
-
-
-            
-
-
             return(
                 <div className="row">
-                    {formFields.map((tabItem, index)=> {
-                        return(
-                            this.setFieldType(tabItem , rows )                    
-                        )
-                    })               
-                }
+                    {
+                        formFields.map((tabItem, index)=> {
+
+                            return(
+                                this.setFieldType(tabItem , 6)                    
+                            )
+                        })               
+                    }
                 </div>
             )
-           
-            // Iterate Fields to Detect DataType
+        
 
         }
 
 
+
+
+
         // --------------------------------------
         // Set Field Type
+        // Set Number of Columns
         // --------------------------------------   
         setFieldType(field, colClass) {
-            let {attrName, attrValues, dataType, maxLength, sequence} = field;
-            let divClass = `col-lg-${colClass} col-sm-12 col-xl-12`;
+            let {attrName, attrValues, datatype} = field;
+            let divClass = `col-xl-${colClass} col-lg-${colClass} col-sm-12 col-xs-12`;
             let formField = null;
-            switch(dataType) {
-                case 'String' :
-                    formField =  <ListItem itemName = {attrName} content = {attrValues} classNames = {divClass}/>
+            switch(datatype) {
+                case "String" :
+                    formField =  <FieldItem fieldName = {attrName} fieldValue = {attrValues} colName = {divClass}/>
                 break;
 
-                case 'PickList' : 
-                    formField =  <ListItem itemName = {attrName} content = {attrValues} classNames = {divClass}/>
+                case "PickList" : 
+
+                    // Split The Values to Create a List
+                    const valuesArray = attrValues.split('||');
+                    valuesArray.length > 1 
+                        ? formField =  <FieldList fieldName = {attrName} listValues = {valuesArray} colName = {divClass}/> 
+                        : formField =  <ToggleField fieldName = {attrName} fieldValue = {attrValues} colName = {divClass}/>
+
                     break;
+
                 default : 
-                    formField =  <ListItem itemName = {attrName} content = {attrValues} classNames = {divClass}/>
+                    formField =  <FieldItem fieldName = {attrName} fieldValue = {attrValues} colName = {divClass}/>
+
             }
 
             return formField
         }
 
+        
 
         // --------------------------------------
         // Render Component

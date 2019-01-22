@@ -57,7 +57,7 @@
         // Render No Data Message
         // --------------------------------------
         renderError() {
-            const message = 'No Data Found';
+            const message = 'There are no products defined for the category selected ';
             return <NoData message = {message}></NoData>
         }
 

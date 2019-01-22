@@ -47,7 +47,10 @@
     import CustomTabs from './Tabs/CustomTabs';
     import PanelContent from './Tabs/PanelContent';
     import FieldsMaker from './fieldsMaker/FieldsMaker';
-
+    import FieldItem from './FieldsMaker/FieldItem';
+    import FieldList from './FieldsMaker/FieldList';
+    import ToggleField from './FieldsMaker/ToggleField';
+    import RowContainer from './FieldsMaker/RowContainer';
 
 
 // --------------------------------------
@@ -93,4 +96,8 @@
         CustomTabs,
         PanelContent,
         FieldsMaker,
+        FieldItem,
+        FieldList,
+        RowContainer,
+        ToggleField,
     }

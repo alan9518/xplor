@@ -71,9 +71,14 @@
         // Of the Card
         // --------------------------------------
         createCarrouselItem(carrouselItem, index, itemsToShow) {
+			console.log('​Carrousel -> createCarrouselItem -> carrouselItem', carrouselItem)
             return (
                 <div key={index} className={`col-lg-12 col-md-12 col-sm-12 ${itemsToShow <= 3 && 'xpl-cardStyleCenter'}`} >
-                    <ProjectCard  {...carrouselItem} />
+                    {/* <ProjectCard  {...carrouselItem} /> */}
+
+                    <ProjectCard                     
+                        projectColor = {carrouselItem.color}
+                        {...carrouselItem}/>
                 </div>
             )
         }
