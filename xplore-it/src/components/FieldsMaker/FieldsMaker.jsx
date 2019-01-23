@@ -87,7 +87,7 @@
                 break;
 
                 case "PickList" : 
-
+                    
                     // Split The Values to Create a List
                     const valuesArray = attrValues.split('||');
                     valuesArray.length > 1 

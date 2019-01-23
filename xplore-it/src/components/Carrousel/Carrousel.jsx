@@ -31,14 +31,16 @@
                 infinite: true,
                 arrows: true,
                 speed: 500,
-                slidesToShow: this.props.itemsToShow - 1,
+                // slidesToShow: this.props.itemsToShow - 1,
+                slidesToShow: 3,
                 slidesToScroll: 1,
                 initialSlide: 0,
                 responsive: [
                     {
                         breakpoint: 1024,
                         settings: {
-                            slidesToShow: this.props.itemsToShow,
+                            // slidesToShow: this.props.itemsToShow,
+                            slidesToShow: 3,
                             slidesToScroll: 1,
                             infinite: true,
                             dots: true

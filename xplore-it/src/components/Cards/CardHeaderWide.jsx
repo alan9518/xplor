@@ -17,7 +17,7 @@
 // Create Component Class
 // --------------------------------------
 
-    const CardHeaderWide = props => {
+    const CardHeaderWide = (props) => {
 
         // --------------------------------------
         // Get Values

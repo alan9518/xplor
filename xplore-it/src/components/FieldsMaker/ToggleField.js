@@ -10,7 +10,8 @@
 // --------------------------------------
     import React, { Component, Fragment } from 'react';
     import PropTypes from 'prop-types';
-    import './styles.css';
+    import Toggle from 'react-toggle'
+    import "react-toggle/style.css" // for ES6 modules
 
 
 // --------------------------------------
@@ -19,13 +20,18 @@
     const ToggleField = (props) => {
 
         const {colName, fieldName, fieldValue} = props;
+		console.log('​ToggleField -> props', props)
 
         return (
+
             <div className = {colName}>
 
-                <div className="xpl-ToggleField">
-                    <input class="tgl tgl-flat" id="cb4" type="checkbox"/>
-                    <label class="tgl-btn" for="cb4"></label>
+                <div className="xpl-fieldItem">
+                    <h6 className = "xpl-boldText"> {fieldName} </h6> 
+                    <Toggle
+                        defaultChecked={false}
+                        disabled = {true} />
+                        <p className='label-text'> {fieldValue}  </p>
                 </div>
             </div>
         )

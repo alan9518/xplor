@@ -8,7 +8,7 @@
 // Import Dependences
 // --------------------------------------
     import React, { Component, Fragment } from "react";
-    import { Breadcumbs, AppLoader,  CustomTabs, PanelContent, ProjectCard,WideCard,CardHeaderWide, FieldsMaker, NoData} from '../../components';
+    import { Breadcumbs, AppLoader,  CustomTabs, PanelContent, ProjectCard,WideCard,CardHeaderWide, NoData} from '../../components';
     import axios from 'axios';
     import {Endpoints} from '../../services/endpoints'
 
@@ -80,22 +80,29 @@
                         const relatedProductsData =  this.mergeProductsAndColors(relatedProducts2.data, SPColorsCategories);
 						console.log('​DetailsView -> loadAPI -> relatedProductsData', relatedProductsData)
 
+                    // Add Static Tab 0 With Product Overview
+
+                        const tab0 = { "BusinessTypeID": 0, "BusinessTypeName": "Product Overview", "Sequence": 0};
 						
 
                     // Get Attr for First Tab
-                        const firstTab =  productTabsData.data[0].BusinessTypeID;
-                        const tabAttributes = await this.loadTabAttributes(firstTab);
-                
-
+                        // const firstTab =  productTabsData.data[0].BusinessTypeID;
+                        const firstTab =  tab0.BusinessTypeID;
+                        // const tabAttributes = await this.loadTabAttributes(firstTab);
+                    
+                    // Add Static Tab to The ones that come from API
+                        const tabsHeaderList = [tab0, ...productTabsData.data];
+						console.log('​DetailsView -> loadAPI -> tabsHeaderList', tabsHeaderList)
 
                     // Store Values
                     this.setState({
-                        productTabs : productTabsData.data,
+                        productTabs : tabsHeaderList,
                         productDetails : productDetails,
                         relatedProducts : relatedProductsData,
-                        productOverview : tabAttributes,
+                        // productOverview : tabAttributes,
+                        productOverview : [],
                         isLoaded : true
-                    })
+                    });
                 }
                 catch (error) {
                     console.log('error', error);
@@ -215,7 +222,6 @@
             // --------------------------------------
             **/
             async loadTabAttributes(busstypeid) {
-
                 const params = {partid : this.partID, busstypeid : busstypeid}
                 const tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params});                
                 const tabsAttrData = await tabsDataAttrPromise.data;
@@ -232,11 +238,14 @@
             // --------------------------------------
             **/
             async changeTabData (businessID) {
-                const newTabData = await  this.loadTabAttributes(businessID); 
+                const {productDetails} = this.state;
+                const newTabData = businessID === 0 ? productDetails : await this.loadTabAttributes(businessID); 
+				console.log('​DetailsView -> changeTabData -> businessID', businessID)
 				console.log("​DetailsView -> changeTabData -> newTabData", newTabData)
                 this.setState({
                     productOverview : newTabData,
-                    tabLoading : false
+                    tabLoading : false,
+                    currentTab : businessID
                 })
 
             }
@@ -275,9 +284,9 @@
             // TODO : Add Category ID To Breadcumbs
             // --------------------------------------
             renderBreadcumbs() {
-                const {SoftwareTopic, ProductName, partID} = this.state.productDetails;
+                const {SoftwareTopic, ProductName, SoftwareTopicID} = this.state.productDetails;
 				console.log("​DetailsView -> renderBreadcumbs -> this.state.productDetails", this.state.productDetails)
-                return <Breadcumbs softwareTopic = {SoftwareTopic} productName = {ProductName}    onClick = {this.onBreadCumbsCatClick}/>
+                return <Breadcumbs softwareTopic = {SoftwareTopic} softwareTopicID = {SoftwareTopicID} productName = {ProductName}    onClick = {this.onBreadCumbsCatClick}/>
             }
 
             // --------------------------------------
@@ -342,13 +351,15 @@
             // Render Tab Content
             // --------------------------------------            
             renderProductDetails() {
-                const {productTabs, productOverview, tabLoading} = this.state;
+                const {productTabs, productOverview, tabLoading, productDetails, currentTab} = this.state;
+                // const tabCeroContent = <CardHeaderWide productOverview = {productDetails} />  ;
+
                 return (
                     <div className="xpl-appDescriptionContainer xpl-wideCard xpl-shadow">
                         <CustomTabs tabLoading = {tabLoading} tabsData = {productTabs} onTabChange = {this.onTabChange}>
                             <WideCard  >
                                 
-                                <PanelContent tabLoading = {tabLoading} panelTabContent = {productOverview}  /> 
+                                <PanelContent tabLoading = {tabLoading} panelTabContent = {productOverview}  tabCeroContent = {productDetails} currentTab = {currentTab}/> 
                     
                             </WideCard>
                         </CustomTabs>
@@ -362,13 +373,14 @@
             // @param {productOverview <Object>}
             // @returns {WideCard View <Component>}
             // --------------------------------------*/
-            renderProjectOverview(productOverview) {
+            renderProjectOverview() {
+                const {productDetails} = this.state;
                 return (
                     <WideCard  
-                        productData = {productOverview} 
+                        productData = {productDetails} 
                         isOveview = {true} >
 
-                    <CardHeaderWide productOverview = {productOverview} />  
+                    <CardHeaderWide productOverview = {productDetails} />  
                     
                 </WideCard>
                 )    
@@ -384,6 +396,7 @@
                             <div className="col-xl-9 col-lg-12 col-sm-12">
                                 {this.renderBreadcumbs()}
                                 {this.renderProductDetails()}
+                                
                             </div>
 
                             <div className="col-xl-3 col-lg-12 col-md-12 col-sm-12">
