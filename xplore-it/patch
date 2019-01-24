@@ -1,0 +1,349 @@
+diff --git a/xplore-it/package-lock.json b/xplore-it/package-lock.json
+index 2c7c714..7980c3d 100644
+--- a/xplore-it/package-lock.json
++++ b/xplore-it/package-lock.json
+@@ -13950,6 +13950,14 @@
+         "prop-types": "^15.5.0"
+       }
+     },
++    "react-toggle": {
++      "version": "4.0.2",
++      "resolved": "https://registry.npmjs.org/react-toggle/-/react-toggle-4.0.2.tgz",
++      "integrity": "sha512-EPTWnN7gQHgEAUEmjheanZXNzY5TPnQeyyHfEs3YshaiWZf5WNjfYDrglO5F1Hl/dNveX18i4l0grTEsYH2Ccw==",
++      "requires": {
++        "classnames": "^2.2.5"
++      }
++    },
+     "react-transition-group": {
+       "version": "2.5.0",
+       "resolved": "https://registry.npmjs.org/react-transition-group/-/react-transition-group-2.5.0.tgz",
+diff --git a/xplore-it/package.json b/xplore-it/package.json
+index 46aceb3..de95c19 100644
+--- a/xplore-it/package.json
++++ b/xplore-it/package.json
+@@ -26,6 +26,7 @@
+     "react-select": "^2.1.1",
+     "react-slick": "^0.23.2",
+     "react-tabs": "^2.3.0",
++    "react-toggle": "^4.0.2",
+     "react-transition-group": "^2.4.0",
+     "slick-carousel": "^1.8.1"
+   },
+diff --git a/xplore-it/src/XplorIT.aspx b/xplore-it/src/XplorIT.aspx
+index 5e320c5..be18507 100644
+--- a/xplore-it/src/XplorIT.aspx
++++ b/xplore-it/src/XplorIT.aspx
+@@ -9,12 +9,12 @@
+     <SharePoint:ScriptLink name="sp.core.js" runat="server" LoadAfterUI="true" Localizable="false" />
+ </asp:Content>
+ <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
+-  <head><meta charset="utf-8"><link rel="shortcut icon" href="/sites/xplorit_portal/XplorIT/favicon.ico"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="theme-color" content="#000000"><link rel="manifest" href="/sites/xplorit_portal/XplorIT/manifest.json"><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"><style>.modal-backdrop{display:none}#DeltaHelpPanel,#DeltaPageInstrumentation,#DeltaPlaceHolderUtilityContent,#flexFooter,#s4-ribbonrow,div#s4-titlerow,div#sideNavBox,span#DeltaDelegateControls,span#DeltaSPWebPartManager{display:none!important}#contentBox{margin-right:0!important;margin-left:0!important;width:100%!important}#contentRow{padding-top:0}#s4-bodyContainer{padding-bottom:0!important}#containerParallax{padding-left:0!important;padding-right:0!important}.container .jumbotron,.container-fluid .jumbotron{border-radius:0!important}</style><title>React App</title><link href="/sites/xplorit_portal/XplorIT/static/css/1.2089675f.chunk.css" rel="stylesheet"><link href="/sites/xplorit_portal/XplorIT/static/css/main.33d5bdf6.chunk.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div><!--[if lt IE 9]>
++  <head><meta charset="utf-8"><link rel="shortcut icon" href="/sites/xplorit_portal/XplorIT/favicon.ico"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="theme-color" content="#000000"><link rel="manifest" href="/sites/xplorit_portal/XplorIT/manifest.json"><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"><style>.modal-backdrop{display:none}#DeltaHelpPanel,#DeltaPageInstrumentation,#DeltaPlaceHolderUtilityContent,#flexFooter,#s4-ribbonrow,div#s4-titlerow,div#sideNavBox,span#DeltaDelegateControls,span#DeltaSPWebPartManager{display:none!important}#contentBox{margin-right:0!important;margin-left:0!important;width:100%!important}#contentRow{padding-top:0}#s4-bodyContainer{padding-bottom:0!important}#containerParallax{padding-left:0!important;padding-right:0!important}.container .jumbotron,.container-fluid .jumbotron{border-radius:0!important}</style><title>React App</title><link href="/sites/xplorit_portal/XplorIT/static/css/1.209335ed.chunk.css" rel="stylesheet"><link href="/sites/xplorit_portal/XplorIT/static/css/main.17889cf7.chunk.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div><!--[if lt IE 9]>
+     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv-printshiv.min.js"></script>
+     <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.js"></script>
+     <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-sham.js"></script>
+-  <![endif]--><script>function getCurrentSPUser(){return SPUser={user_ID:_spPageContextInfo.userId,user_email:_spPageContextInfo.userEmail,user_name:_spPageContextInfo.userDisplayName}}</script><script>!function(f){function e(e){for(var r,t,n=e[0],o=e[1],u=e[2],l=0,i=[];l<n.length;l++)t=n[l],a[t]&&i.push(a[t][0]),a[t]=0;for(r in o)Object.prototype.hasOwnProperty.call(o,r)&&(f[r]=o[r]);for(s&&s(e);i.length;)i.shift()();return c.push.apply(c,u||[]),p()}function p(){for(var e,r=0;r<c.length;r++){for(var t=c[r],n=!0,o=1;o<t.length;o++){var u=t[o];0!==a[u]&&(n=!1)}n&&(c.splice(r--,1),e=l(l.s=t[0]))}return e}var t={},a={2:0},c=[];function l(e){if(t[e])return t[e].exports;var r=t[e]={i:e,l:!1,exports:{}};return f[e].call(r.exports,r,r.exports,l),r.l=!0,r.exports}l.m=f,l.c=t,l.d=function(e,r,t){l.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},l.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},l.t=function(r,e){if(1&e&&(r=l(r)),8&e)return r;if(4&e&&"object"==typeof r&&r&&r.__esModule)return r;var t=Object.create(null);if(l.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:r}),2&e&&"string"!=typeof r)for(var n in r)l.d(t,n,function(e){return r[e]}.bind(null,n));return t},l.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return l.d(r,"a",r),r},l.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},l.p="/sites/xplorit_portal/XplorIT/";var r=window.webpackJsonp=window.webpackJsonp||[],n=r.push.bind(r);r.push=e,r=r.slice();for(var o=0;o<r.length;o++)e(r[o]);var s=n;p()}([])</script><script src="/sites/xplorit_portal/XplorIT/static/js/1.7c5cd652.chunk.js"></script><script src="/sites/xplorit_portal/XplorIT/static/js/main.b9aeca5a.chunk.js"></script></body>  
++  <![endif]--><script>function getCurrentSPUser(){return SPUser={user_ID:_spPageContextInfo.userId,user_email:_spPageContextInfo.userEmail,user_name:_spPageContextInfo.userDisplayName}}</script><script>!function(f){function e(e){for(var r,t,n=e[0],o=e[1],u=e[2],l=0,i=[];l<n.length;l++)t=n[l],a[t]&&i.push(a[t][0]),a[t]=0;for(r in o)Object.prototype.hasOwnProperty.call(o,r)&&(f[r]=o[r]);for(s&&s(e);i.length;)i.shift()();return c.push.apply(c,u||[]),p()}function p(){for(var e,r=0;r<c.length;r++){for(var t=c[r],n=!0,o=1;o<t.length;o++){var u=t[o];0!==a[u]&&(n=!1)}n&&(c.splice(r--,1),e=l(l.s=t[0]))}return e}var t={},a={2:0},c=[];function l(e){if(t[e])return t[e].exports;var r=t[e]={i:e,l:!1,exports:{}};return f[e].call(r.exports,r,r.exports,l),r.l=!0,r.exports}l.m=f,l.c=t,l.d=function(e,r,t){l.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},l.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},l.t=function(r,e){if(1&e&&(r=l(r)),8&e)return r;if(4&e&&"object"==typeof r&&r&&r.__esModule)return r;var t=Object.create(null);if(l.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:r}),2&e&&"string"!=typeof r)for(var n in r)l.d(t,n,function(e){return r[e]}.bind(null,n));return t},l.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return l.d(r,"a",r),r},l.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},l.p="/sites/xplorit_portal/XplorIT/";var r=window.webpackJsonp=window.webpackJsonp||[],n=r.push.bind(r);r.push=e,r=r.slice();for(var o=0;o<r.length;o++)e(r[o]);var s=n;p()}([])</script><script src="/sites/xplorit_portal/XplorIT/static/js/1.081b634a.chunk.js"></script><script src="/sites/xplorit_portal/XplorIT/static/js/main.ad5441a8.chunk.js"></script></body>  
+ </asp:Content>
+ 
+ 
+diff --git a/xplore-it/src/components/Breadcumbs/BreadCumbs.jsx b/xplore-it/src/components/Breadcumbs/BreadCumbs.jsx
+index bec2c74..be1f0f6 100644
+--- a/xplore-it/src/components/Breadcumbs/BreadCumbs.jsx
++++ b/xplore-it/src/components/Breadcumbs/BreadCumbs.jsx
+@@ -17,7 +17,7 @@
+ // --------------------------------------
+     const BreadCumbs = (props) => {
+ 
+-        const {productName, softwareTopic , onClick} = props;
++        const {productName, softwareTopic , softwareTopicID,  onClick} = props;
+ 
+         return (
+             <div className="xpl-breadcumbsContainer">
+@@ -30,7 +30,11 @@
+                         <i class="fas fa-arrow-right xpl-breadSeparator"></i> 
+                     </h4>
+ 
+-                    <h4 className = "xpl-breadChild" onClick = {onClick}>{ softwareTopic} </h4> 
++                    {/* <h4 className = "xpl-breadChild" onClick = {onClick}>{ softwareTopic} </h4>  */}
++
++                    <ProjectLink route = {`catalogue/${softwareTopic}/${softwareTopicID}`} spRoute = {true}> 
++                    <h4 className = "xpl-breadChild" >{softwareTopic} </h4> 
++                    </ProjectLink>
+ 
+                     <h4 class="xpl-breadChild" > <i class="fas fa-arrow-right xpl-breadSeparator"></i> </h4>
+ 
+diff --git a/xplore-it/src/components/Cards/CardHeaderWide.jsx b/xplore-it/src/components/Cards/CardHeaderWide.jsx
+index 8762e0f..b11d2a0 100644
+--- a/xplore-it/src/components/Cards/CardHeaderWide.jsx
++++ b/xplore-it/src/components/Cards/CardHeaderWide.jsx
+@@ -17,7 +17,7 @@
+ // Create Component Class
+ // --------------------------------------
+ 
+-    const CardHeaderWide = props => {
++    const CardHeaderWide = (props) => {
+ 
+         // --------------------------------------
+         // Get Values
+diff --git a/xplore-it/src/components/Carrousel/Carrousel.jsx b/xplore-it/src/components/Carrousel/Carrousel.jsx
+index 5931690..a4c896a 100644
+--- a/xplore-it/src/components/Carrousel/Carrousel.jsx
++++ b/xplore-it/src/components/Carrousel/Carrousel.jsx
+@@ -31,14 +31,16 @@
+                 infinite: true,
+                 arrows: true,
+                 speed: 500,
+-                slidesToShow: this.props.itemsToShow - 1,
++                // slidesToShow: this.props.itemsToShow - 1,
++                slidesToShow: 3,
+                 slidesToScroll: 1,
+                 initialSlide: 0,
+                 responsive: [
+                     {
+                         breakpoint: 1024,
+                         settings: {
+-                            slidesToShow: this.props.itemsToShow,
++                            // slidesToShow: this.props.itemsToShow,
++                            slidesToShow: 3,
+                             slidesToScroll: 1,
+                             infinite: true,
+                             dots: true
+diff --git a/xplore-it/src/components/FieldsMaker/FieldsMaker.jsx b/xplore-it/src/components/FieldsMaker/FieldsMaker.jsx
+index 30dd6cd..b05211c 100644
+--- a/xplore-it/src/components/FieldsMaker/FieldsMaker.jsx
++++ b/xplore-it/src/components/FieldsMaker/FieldsMaker.jsx
+@@ -87,7 +87,7 @@
+                 break;
+ 
+                 case "PickList" : 
+-
++                    
+                     // Split The Values to Create a List
+                     const valuesArray = attrValues.split('||');
+                     valuesArray.length > 1 
+diff --git a/xplore-it/src/components/FieldsMaker/ToggleField.js b/xplore-it/src/components/FieldsMaker/ToggleField.js
+index 8fe83b9..120b9a0 100644
+--- a/xplore-it/src/components/FieldsMaker/ToggleField.js
++++ b/xplore-it/src/components/FieldsMaker/ToggleField.js
+@@ -10,7 +10,8 @@
+ // --------------------------------------
+     import React, { Component, Fragment } from 'react';
+     import PropTypes from 'prop-types';
+-    import './styles.css';
++    import Toggle from 'react-toggle'
++    import "react-toggle/style.css" // for ES6 modules
+ 
+ 
+ // --------------------------------------
+@@ -19,13 +20,18 @@
+     const ToggleField = (props) => {
+ 
+         const {colName, fieldName, fieldValue} = props;
++		console.log('​ToggleField -> props', props)
+ 
+         return (
++
+             <div className = {colName}>
+ 
+-                <div className="xpl-ToggleField">
+-                    <input class="tgl tgl-flat" id="cb4" type="checkbox"/>
+-                    <label class="tgl-btn" for="cb4"></label>
++                <div className="xpl-fieldItem">
++                    <h6 className = "xpl-boldText"> {fieldName} </h6> 
++                    <Toggle
++                        defaultChecked={false}
++                        disabled = {true} />
++                        <p className='label-text'> {fieldValue}  </p>
+                 </div>
+             </div>
+         )
+diff --git a/xplore-it/src/components/Tabs/PanelContent.jsx b/xplore-it/src/components/Tabs/PanelContent.jsx
+index 10cd495..aac275c 100644
+--- a/xplore-it/src/components/Tabs/PanelContent.jsx
++++ b/xplore-it/src/components/Tabs/PanelContent.jsx
+@@ -11,7 +11,7 @@
+ // --------------------------------------
+ 
+     import React, { Component, } from 'react';
+-    import { AppLoader, FieldsMaker } from '../../components'
++    import { AppLoader, FieldsMaker, CardHeaderWide } from '../../components'
+ 
+ 
+     class PanelContent extends Component {
+@@ -42,22 +42,37 @@
+         // --------------------------------------
+         // Render Panel Content
+         // --------------------------------------
+-        renderTabContent(panelTabContent) {
+-            return (
+-                <FieldsMaker formFields={panelTabContent} />
+-            )
++        renderTabContent(panelTabContent, tabCeroContent, currentTab) {
++			console.log('​PanelContent -> renderTabContent -> currentTab', currentTab)
++            // const tabCeroContent = <CardHeaderWide productOverview = {productDetails} />  ;
++            let content = null;
++            currentTab === 0 ? content = <CardHeaderWide productOverview = {tabCeroContent} /> : content = <FieldsMaker formFields={panelTabContent} />
++
++            return content;
++            // return (
++            //     <FieldsMaker formFields={panelTabContent} />
++            // )
++        }
++
++        renderTabContentCero() {
++            const {tabCeroContent} = this.props;
++
++            return tabCeroContent;
+         }
+ 
+         // --------------------------------------
+         // Render Panel
+         // --------------------------------------
+         render() {
+-            const { panelTabContent, tabLoading } = this.props;
++            const { panelTabContent, tabLoading, tabCeroContent, currentTab } = this.props;
++			console.log('​PanelContent -> render -> currentTab', currentTab)
+             const {innerWidth} = window;
++            // const tabsContent = [...]
+             return (
+                 <div style={{ minHeight: innerWidth <= 1024 ? 450 : 550, width: '100%', overflow: 'hidden' }}>
+                     {
+-                        tabLoading === true ? this.renderTabLoader() : this.renderTabContent(panelTabContent)
++                        tabLoading === true ? this.renderTabLoader() : this.renderTabContent(panelTabContent, tabCeroContent,currentTab)
++                        // tabLoading === true ? this.renderTabLoader() : this.renderTabContentCero()
+                     }
+                 </div>
+             )
+diff --git a/xplore-it/src/views/Details/DetailsView.jsx b/xplore-it/src/views/Details/DetailsView.jsx
+index 15ae41d..4160957 100644
+--- a/xplore-it/src/views/Details/DetailsView.jsx
++++ b/xplore-it/src/views/Details/DetailsView.jsx
+@@ -8,7 +8,7 @@
+ // Import Dependences
+ // --------------------------------------
+     import React, { Component, Fragment } from "react";
+-    import { Breadcumbs, AppLoader,  CustomTabs, PanelContent, ProjectCard,WideCard,CardHeaderWide, FieldsMaker, NoData} from '../../components';
++    import { Breadcumbs, AppLoader,  CustomTabs, PanelContent, ProjectCard,WideCard,CardHeaderWide, NoData} from '../../components';
+     import axios from 'axios';
+     import {Endpoints} from '../../services/endpoints'
+ 
+@@ -80,22 +80,29 @@
+                         const relatedProductsData =  this.mergeProductsAndColors(relatedProducts2.data, SPColorsCategories);
+ 						console.log('​DetailsView -> loadAPI -> relatedProductsData', relatedProductsData)
+ 
++                    // Add Static Tab 0 With Product Overview
++
++                        const tab0 = { "BusinessTypeID": 0, "BusinessTypeName": "Product Overview", "Sequence": 0};
+ 						
+ 
+                     // Get Attr for First Tab
+-                        const firstTab =  productTabsData.data[0].BusinessTypeID;
+-                        const tabAttributes = await this.loadTabAttributes(firstTab);
+-                
+-
++                        // const firstTab =  productTabsData.data[0].BusinessTypeID;
++                        const firstTab =  tab0.BusinessTypeID;
++                        // const tabAttributes = await this.loadTabAttributes(firstTab);
++                    
++                    // Add Static Tab to The ones that come from API
++                        const tabsHeaderList = [tab0, ...productTabsData.data];
++						console.log('​DetailsView -> loadAPI -> tabsHeaderList', tabsHeaderList)
+ 
+                     // Store Values
+                     this.setState({
+-                        productTabs : productTabsData.data,
++                        productTabs : tabsHeaderList,
+                         productDetails : productDetails,
+                         relatedProducts : relatedProductsData,
+-                        productOverview : tabAttributes,
++                        // productOverview : tabAttributes,
++                        productOverview : [],
+                         isLoaded : true
+-                    })
++                    });
+                 }
+                 catch (error) {
+                     console.log('error', error);
+@@ -215,7 +222,6 @@
+             // --------------------------------------
+             **/
+             async loadTabAttributes(busstypeid) {
+-
+                 const params = {partid : this.partID, busstypeid : busstypeid}
+                 const tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params});                
+                 const tabsAttrData = await tabsDataAttrPromise.data;
+@@ -232,11 +238,14 @@
+             // --------------------------------------
+             **/
+             async changeTabData (businessID) {
+-                const newTabData = await  this.loadTabAttributes(businessID); 
++                const {productDetails} = this.state;
++                const newTabData = businessID === 0 ? productDetails : await this.loadTabAttributes(businessID); 
++				console.log('​DetailsView -> changeTabData -> businessID', businessID)
+ 				console.log("​DetailsView -> changeTabData -> newTabData", newTabData)
+                 this.setState({
+                     productOverview : newTabData,
+-                    tabLoading : false
++                    tabLoading : false,
++                    currentTab : businessID
+                 })
+ 
+             }
+@@ -275,9 +284,9 @@
+             // TODO : Add Category ID To Breadcumbs
+             // --------------------------------------
+             renderBreadcumbs() {
+-                const {SoftwareTopic, ProductName, partID} = this.state.productDetails;
++                const {SoftwareTopic, ProductName, SoftwareTopicID} = this.state.productDetails;
+ 				console.log("​DetailsView -> renderBreadcumbs -> this.state.productDetails", this.state.productDetails)
+-                return <Breadcumbs softwareTopic = {SoftwareTopic} productName = {ProductName}    onClick = {this.onBreadCumbsCatClick}/>
++                return <Breadcumbs softwareTopic = {SoftwareTopic} softwareTopicID = {SoftwareTopicID} productName = {ProductName}    onClick = {this.onBreadCumbsCatClick}/>
+             }
+ 
+             // --------------------------------------
+@@ -342,13 +351,15 @@
+             // Render Tab Content
+             // --------------------------------------            
+             renderProductDetails() {
+-                const {productTabs, productOverview, tabLoading} = this.state;
++                const {productTabs, productOverview, tabLoading, productDetails, currentTab} = this.state;
++                // const tabCeroContent = <CardHeaderWide productOverview = {productDetails} />  ;
++
+                 return (
+                     <div className="xpl-appDescriptionContainer xpl-wideCard xpl-shadow">
+                         <CustomTabs tabLoading = {tabLoading} tabsData = {productTabs} onTabChange = {this.onTabChange}>
+                             <WideCard  >
+                                 
+-                                <PanelContent tabLoading = {tabLoading} panelTabContent = {productOverview}  /> 
++                                <PanelContent tabLoading = {tabLoading} panelTabContent = {productOverview}  tabCeroContent = {productDetails} currentTab = {currentTab}/> 
+                     
+                             </WideCard>
+                         </CustomTabs>
+@@ -362,13 +373,14 @@
+             // @param {productOverview <Object>}
+             // @returns {WideCard View <Component>}
+             // --------------------------------------*/
+-            renderProjectOverview(productOverview) {
++            renderProjectOverview() {
++                const {productDetails} = this.state;
+                 return (
+                     <WideCard  
+-                        productData = {productOverview} 
++                        productData = {productDetails} 
+                         isOveview = {true} >
+ 
+-                    <CardHeaderWide productOverview = {productOverview} />  
++                    <CardHeaderWide productOverview = {productDetails} />  
+                     
+                 </WideCard>
+                 )    
+@@ -384,6 +396,7 @@
+                             <div className="col-xl-9 col-lg-12 col-sm-12">
+                                 {this.renderBreadcumbs()}
+                                 {this.renderProductDetails()}
++                                
+                             </div>
+ 
+                             <div className="col-xl-3 col-lg-12 col-md-12 col-sm-12">

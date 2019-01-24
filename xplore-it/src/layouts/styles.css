@@ -97,6 +97,15 @@
         display: none;
     }
 
+    .xpl-fieldItem {
+        text-align: justify;
+        white-space: pre-line;      /* Webkit */    
+        white-space: -moz-pre-line; /* Firefox */     
+        white-space: -pre-line;     /* Opera <7 */    
+        white-space: -o-pre-line;   /* Opera 7 */     
+        word-wrap: break-word;      /* IE */ 
+    }
+
 
 
 

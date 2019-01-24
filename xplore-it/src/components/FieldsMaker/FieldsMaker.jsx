@@ -10,7 +10,7 @@
 // --------------------------------------
     import React, { Component, Fragment } from "react";
     import PropTypes from "prop-types";
-    import {ToggleField, FieldItem, FieldList} from '../../components'
+    import {ToggleField, FieldItem, FieldList, CardHeaderWide} from '../../components'
 
     import {orderBy} from 'lodash';
 
@@ -36,37 +36,43 @@
         }
 
 
-
-        // --------------------------------------
-        // Render Fields
-        // --------------------------------------
-        renderFields2() {
-            const {formFields} = this.props;
-            // Order By Sequence
-            const orderedFormFields =  orderBy(formFields, ['attrName' , 'sequence'], ['desc', 'asc'] );
-			console.log('​FieldsMaker -> renderFields -> orderedFormFields', orderedFormFields)
-        }
-
-
         // --------------------------------------
         // Render Component
         // --------------------------------------        
         renderFields() {
             const {formFields} = this.props;
-            return(
-                <div className="row">
-                    {
-                        formFields.map((tabItem, index)=> {
+            if(formFields.isOverview)
+                return  <CardHeaderWide productOverview = {formFields} /> ;
+            else {
+                return(
+                    <div className="row" style = {{height:'100%'}}>
+                        {
+                            formFields.map((tabItem, index)=> {
+                                let {attrValues} = tabItem;
+                                let valuesLength =  attrValues.length;
+                                let colNum = valuesLength >= 200 ? 12 : 6;
+                                return(
+                                    this.setFieldType(tabItem , colNum)                    
+                                )
+                            })               
+                        }
+                    </div>
+                )
+            }
 
-                            return(
-                                this.setFieldType(tabItem , 6)                    
-                            )
-                        })               
-                    }
-                </div>
-            )
-        
+        }   
 
+
+
+        // --------------------------------------
+        // Choose Between Toggle Control
+        // Or Label Text
+        // --------------------------------------
+        setTextField(attrName, attrValues, divClass) {
+            if(attrValues === "N" || attrValues === "Y")
+                return <ToggleField fieldName = {attrName} fieldValue = {attrValues} colName = {divClass}/>
+            else
+                return <FieldItem fieldName = {attrName} fieldValue = {attrValues} colName = {divClass}/>
         }
 
 
@@ -83,7 +89,7 @@
             let formField = null;
             switch(datatype) {
                 case "String" :
-                    formField =  <FieldItem fieldName = {attrName} fieldValue = {attrValues} colName = {divClass}/>
+                    formField =  this.setTextField(attrName, attrValues, divClass);
                 break;
 
                 case "PickList" : 
@@ -92,7 +98,7 @@
                     const valuesArray = attrValues.split('||');
                     valuesArray.length > 1 
                         ? formField =  <FieldList fieldName = {attrName} listValues = {valuesArray} colName = {divClass}/> 
-                        : formField =  <ToggleField fieldName = {attrName} fieldValue = {attrValues} colName = {divClass}/>
+                        : formField =  this.setTextField(attrName, attrValues, divClass);
 
                     break;
 

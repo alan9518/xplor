@@ -9,9 +9,8 @@
 // --------------------------------------
 // Import Dependences
 // --------------------------------------
-
     import React, { Component, } from 'react';
-    import { AppLoader, FieldsMaker, CardHeaderWide } from '../../components'
+    import { AppLoader, FieldsMaker,CardHeaderWide } from '../../components'
 
 
     class PanelContent extends Component {
@@ -42,41 +41,40 @@
         // --------------------------------------
         // Render Panel Content
         // --------------------------------------
-        renderTabContent(panelTabContent, tabCeroContent, currentTab) {
-			console.log('​PanelContent -> renderTabContent -> currentTab', currentTab)
-            // const tabCeroContent = <CardHeaderWide productOverview = {productDetails} />  ;
-            let content = null;
-            currentTab === 0 ? content = <CardHeaderWide productOverview = {tabCeroContent} /> : content = <FieldsMaker formFields={panelTabContent} />
-
-            return content;
-            // return (
-            //     <FieldsMaker formFields={panelTabContent} />
-            // )
-        }
-
-        renderTabContentCero() {
-            const {tabCeroContent} = this.props;
-
-            return tabCeroContent;
+        renderTabContent(panelTabContent) {
+            const {isOverview} = this.props
+            return (
+                <FieldsMaker formFields={panelTabContent} />
+            )
         }
 
         // --------------------------------------
         // Render Panel
         // --------------------------------------
         render() {
-            const { panelTabContent, tabLoading, tabCeroContent, currentTab } = this.props;
-			console.log('​PanelContent -> render -> currentTab', currentTab)
-            const {innerWidth} = window;
-            // const tabsContent = [...]
+            const { panelTabContent, tabLoading } = this.props;
+            const { innerWidth } = window;
             return (
                 <div style={{ minHeight: innerWidth <= 1024 ? 450 : 550, width: '100%', overflow: 'hidden' }}>
                     {
-                        tabLoading === true ? this.renderTabLoader() : this.renderTabContent(panelTabContent, tabCeroContent,currentTab)
-                        // tabLoading === true ? this.renderTabLoader() : this.renderTabContentCero()
+                        tabLoading === true ? this.renderTabLoader() : this.renderTabContent(panelTabContent)
                     }
                 </div>
             )
         }
+
+
+        // render() {
+        //     const { panelTabContent, tabLoading } = this.props;
+        //     const { innerWidth } = window;
+        //     return (
+        //         <div style={{ minHeight: innerWidth <= 1024 ? 450 : 550, width: '100%', overflow: 'hidden' }}>
+        //             {
+        //                 tabLoading === true ? this.renderTabLoader() : this.renderTabContent(panelTabContent)
+        //             }
+        //         </div>
+        //     )
+        // }
     }
 
 // --------------------------------------
