@@ -56,8 +56,8 @@
         // @returns {Shortened Description}
         // --------------------------------------*/
             setDescriptionWidth(projectDescription) {
-                if(projectDescription.length > 40)
-                    return `${projectDescription.substr(0,39)}...`
+                if(projectDescription.length > 200)
+                    return `${projectDescription.substr(0,200)}...`
                 // else if (projectDescription)
                 else
                     return projectDescription;

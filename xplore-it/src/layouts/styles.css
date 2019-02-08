@@ -106,6 +106,9 @@
         word-wrap: break-word;      /* IE */ 
     }
 
+    .xpl-blueToggle {
+        background-color: #1197D3;
+    }
 
 
 
@@ -538,7 +541,7 @@
 
             .xpl-projectsContainer  .xpl-cardDescription {
                 min-height: 90px;
-                max-height: 110px;
+                max-height: 190px;
                 font-size: 16px;
             }
 

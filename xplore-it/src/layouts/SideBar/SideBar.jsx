@@ -11,7 +11,7 @@
     import PropTypes from "prop-types";
 
     import { SingleList, DetailsList, Search, AppButton } from "../../components";
-
+    import {withRouter, Redirect} from 'react-router-dom';
 
 // --------------------------------------
 // Create Component Class
@@ -31,6 +31,8 @@
                 menuComponent : 'singleList',
                 currentCategory : null,
                 currentCategoryColor : null,
+                redirectUser : false,
+                redirectPath : ''
                 // isLoaded : false
             }
         }
@@ -47,16 +49,6 @@
             })
         }
 
-
-        // getSideBarRoutes() {
-        //     const {categories} = this.props;
-        //     this.setState({
-        //         currentMenu : categories,
-        //         isLoaded : true
-        //     })
-        // }
-
-        
 
         
         /* ==========================================================================
@@ -83,7 +75,9 @@
                 const {previousMenu} = this.state;
                 this.setState({
                     currentMenu : previousMenu,
-                    menuComponent : 'singleList'
+                    menuComponent : 'singleList',
+                    redirectUser : false,
+                    redirectPath : ''
                 })
             }
 
@@ -92,19 +86,20 @@
             // Open SubMenu
             // --------------------------------------
             onListItemClick = (menu) =>  {
+				console.log('TCL: SideBar -> onListItemClick -> menu', menu)
                 const {currentMenu} =  this.state;
                 const {SubCap, sidebarName, color } = menu;
 
                 // Create New Menu Based on the SubCap
-                const subMenu = SubCap.map((subCap) => {
+                const subMenu = SubCap.map((subCapValue) => {
                     return {
-                        id : subCap.CustomerID,
-                        // path :  `${this.path}/catalogue/${subCap.SubCapabilities}/${subCap.CustomerID}`,
-                        // path :  `$catalogue/${subCap.SubCapabilities}/${subCap.CustomerID}`,
-                        path :  `catalogue/${subCap.SubCapabilities}/${subCap.CustomerID}`,
+                        id : subCapValue.CustomerID,
+                        // path :  `${this.path}/catalogue/${subCapValue.SubCapabilities}/${subCapValue.CustomerID}`,
+                        // path :  `$catalogue/${subCapValue.SubCapabilities}/${subCapValue.CustomerID}`,
+                        path :  `catalogue/${subCapValue.SubCapabilities}/${subCapValue.CustomerID}`,
                         exact: true,
-                        sidebarName : subCap.SubCapabilities,
-                        key : `${subCap.Capabilities}-${subCap.SubCapabilities}`,
+                        sidebarName : subCapValue.SubCapabilities,
+                        key : `${subCapValue.Capabilities}-${subCapValue.SubCapabilities}`,
                     }
                 })
 
@@ -116,7 +111,10 @@
                         menuComponent : 'detailsList',
                         currentCategoryColor : color,
                         currentMenu: subMenu,
-                        previousMenu : currentMenu  
+                        previousMenu : currentMenu  ,
+                        redirectUser : true,
+                        redirectPath : `sites/xplorit_portal/xplorit/XplorIT.aspx/catalogue/${menu.CustomerName}/${menu.CustomerID}`,
+                        // redirectPath : `sites/xplorit_portal/xplorit/XplorIT.aspx/catalogue/Productivity(ITTools)/1014`
                     };
                 });
                 
@@ -133,7 +131,9 @@
             // Render Sidebar 
             // --------------------------------------
             renderSideBar() {
-                const {currentMenu, menuComponent, currentCategory, currentCategoryColor} = this.state;
+                const {currentMenu, menuComponent, currentCategory, currentCategoryColor, redirectUser, redirectPath} = this.state;
+				console.log('TCL: SideBar -> renderSideBar -> redirectPath', redirectPath)
+				console.log('TCL: SideBar -> renderSideBar -> redirectUser', redirectUser)
                 const {showMobileMenu ,onClick, responsiveWidth} = this.props;
                 const sidebarClass = showMobileMenu === true?  'showMobileMenu' : '';
                 const responsiveSideBarStyle = {
@@ -171,6 +171,7 @@
                                                         currentCategory = {currentCategory} 
                                                         currentCategoryColor = {currentCategoryColor} 
                                                         onClick = {this.onListItemBackClick}
+                                                        // onClick = {this.onListItemClick}
                                                         key = {'Details-List'}
                                                         hideMobileMenu = {(e) => showMobileMenu === true && this.props.onClick(e)}
                                         /> 
@@ -179,6 +180,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        { redirectUser  && <Redirect to={`/${redirectPath}`}  />}
                         
                 </Fragment>
                 )
@@ -206,4 +209,4 @@
 // --------------------------------------
 // Export Component
 // --------------------------------------
-    export default SideBar;
+    export default withRouter(SideBar);

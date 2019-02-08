@@ -28,6 +28,14 @@
         margin-bottom: 24px;
     }
 
+    .slick-slider .xpl-cardHeader {
+        height: 160px;
+    }
+
+    .slick-slider .xpl-mediumCard {
+        width: 100% !important;
+        max-width: none;
+    }
 
 
     .xpl-cardHeader {
@@ -60,8 +68,10 @@
         background-color: #fff;
         padding: 12px 8px;
         border-radius: 3px;
+        /* min-height: 80px;
+        max-height: 80px; */
         min-height: 80px;
-        max-height: 80px;
+        max-height: 185px;
     }
 
     

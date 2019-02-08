@@ -74,12 +74,15 @@ class DetailsView extends Component {
                 // Resolve Promises
                 // Execute Parallel Promises
                     const [productTabsData, relatedProducts, relatedProducts2, SPColorsCategories] =  await Promise.all([productTabsPromise, relatedProductsPromise, relatedProductsPromise2, this.loadSPCategories()]);
-                    console.log('​DetailsView -> loadAPI -> SPColorsCategories', SPColorsCategories)
+                    
                     
 
                 // Get Related Products With its Colors
                     const relatedProductsData =  this.mergeProductsAndColors(relatedProducts2.data, SPColorsCategories);
-                    console.log('​DetailsView -> loadAPI -> relatedProductsData', relatedProductsData)
+                    const productDetailsWithColor = this.mergeProductAndColors(productDetails, SPColorsCategories);
+					console.log('​loadAPI -> productDetailsWithColor', productDetailsWithColor)
+					
+                    
 
 
                 // Add Static Tab 0 With Product Overview
@@ -89,25 +92,15 @@ class DetailsView extends Component {
                     const tabsHeaderList = [tab0, ...productTabsData.data];
                     console.log('​DetailsView -> loadAPI -> tabsHeaderList', tabsHeaderList)
 
-                
-
-                
-                // Get Attr for First Tab
-                    // const firstTab =  productTabsData.data[0].BusinessTypeID;
-                    // const tabAttributes = await this.loadTabAttributes(0, true);
-                    // const tabAttributes = await this.loadTabAttributes(firstTab, true);
-            
-
 
                 // Store Values
                 this.setState({
                     productTabs : tabsHeaderList,
-                    productDetails : productDetails,
+                    productDetails : productDetailsWithColor,
                     relatedProducts : relatedProductsData,
-                    // productOverview : tabAttributes,
-                    productOverview : {...productDetails, isOverview: true},
+                    productOverview : {...productDetailsWithColor, isOverview: true},
                     isLoaded : true
-                })
+                });
             }
             catch (error) {
                 console.log('error', error);
@@ -211,6 +204,25 @@ class DetailsView extends Component {
             return productsWithColor;
         }
 
+         /** --------------------------------------
+        // Merge Single Object From API & SP
+        // Based on Category Name
+        // @param {productsData <API data>}
+        // @param {SPColorsCategories <SP data>}
+        // @returns {A new Array With Category Colors}
+        // --------------------------------------*/
+        mergeProductAndColors(productData, SPColorsCategories) {
+            let productWithColor =  productData;
+
+            for (let spColor of SPColorsCategories) {
+                if(productWithColor.SoftwareTopic === spColor.name) {
+                    productWithColor.color = spColor.color
+                }
+            }
+
+            return productWithColor;
+        }
+
         
         // --------------------------------------
         // Get Product Tabs
@@ -228,7 +240,6 @@ class DetailsView extends Component {
         **/
         async loadTabAttributes(busstypeid, isProductOverview) {
 
-            // if(busstypeid === 0 && isProductOverview) {
             if(busstypeid === 0 || busstypeid === "0" || busstypeid <= 0 ) {
 				console.log('​loadTabAttributes -> busstypeid', busstypeid)
                 const {productDetails} = this.state;
@@ -271,22 +282,21 @@ class DetailsView extends Component {
 
         // --------------------------------------
         // Change Tab and Get Business ID
+        // If the Tab ID is the same as the 
+        // state, exit. Is Clicking same tab
         // --------------------------------------
         onTabChange = (businessID) =>  {
-			console.log('​DetailsView -> onTabChange -> businessID', businessID);
-            this.setState({tabLoading: true})
-            this.changeTabData(businessID)
-            console.log('​DetailsView -> onTabChange -> businessID', businessID);
+            const {currentTab} =  this.state;
+            if(businessID === currentTab)
+                return 
+            else {
+                console.log('​DetailsView -> onTabChange -> businessID', businessID);
+                this.setState({tabLoading: true})
+                this.changeTabData(businessID)
+                console.log('​DetailsView -> onTabChange -> businessID', businessID);
+            }
+		
         }   
-
-        onBreadCumbsCatClick = (event) => {
-            console.log('DV props', this.props);
-            this.props.history.goBack();
-        }
-
-
-        
-
 
 
     /* ==========================================================================
@@ -300,7 +310,7 @@ class DetailsView extends Component {
         // --------------------------------------
         renderBreadcumbs() {
             const {SoftwareTopic, ProductName,} = this.state.productDetails;
-            return <Breadcumbs softwareTopic = {SoftwareTopic} productName = {ProductName}    onClick = {this.onBreadCumbsCatClick}/>
+            return <Breadcumbs softwareTopic = {SoftwareTopic} productName = {ProductName} />
         }
 
         // --------------------------------------
@@ -369,7 +379,7 @@ class DetailsView extends Component {
             const {isOverview} = productOverview;
             return (
                 <div className="xpl-appDescriptionContainer xpl-wideCard xpl-shadow">
-                    <CustomTabs tabLoading = {tabLoading} tabsData = {productTabs} onTabChange = {this.onTabChange}>
+                    <CustomTabs tabLoading = {tabLoading} tabsData = {productTabs} onTabChange = {this.onTabChange.bind(this)}>
                         <WideCard  >
                             
                             <PanelContent tabLoading = {tabLoading} panelTabContent = {productOverview} isOverview = {isOverview} /> 

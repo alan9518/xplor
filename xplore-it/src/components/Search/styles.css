@@ -13,4 +13,9 @@
 
 .xpl-resultsContainer.xpl-shadow ul {
     list-style: none;
+    padding: 10px 0;
+}
+
+.xpl-resultsContainer.xpl-shadow li {
+    padding-left: 5px;
 }

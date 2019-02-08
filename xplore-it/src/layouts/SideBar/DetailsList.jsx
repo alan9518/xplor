@@ -46,7 +46,7 @@
             const {currentMenu, onClick, currentCategory, currentCategoryColor} = this.props;
             const borderStyle = {
                 borderLeft: `26px solid ${currentCategoryColor}`,
-                height:'544px'
+                height:'600px'
             }
 
 
@@ -81,17 +81,19 @@
         
             return (
                 currentMenu.map((menuItem)=> {
-                    return ( 
-                        <SideBarLink 
-                            key = { menuItem.key } 
-                            indexKey = { menuItem.key } 
-                            title = { menuItem.sidebarName } 
-                            link = { menuItem.path } 
-                            color = { menuItem.color } 
-                            hasIcon =  {false}
-                            hideMobileMenu = {this.hideMobileMenu}
-                        />
-                    )
+                    console.log('TCL: DetailsList -> renderList -> menuItem', menuItem)
+                    if (menuItem.sidebarName !== "")
+                        return ( 
+                            <SideBarLink 
+                                key = { menuItem.key } 
+                                indexKey = { menuItem.key } 
+                                title = { menuItem.sidebarName } 
+                                link = { menuItem.path } 
+                                color = { menuItem.color } 
+                                hasIcon =  {false}
+                                hideMobileMenu = {this.hideMobileMenu}
+                            />
+                        )
                 })
             )
         }

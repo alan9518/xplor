@@ -8,7 +8,7 @@
 // --------------------------------------
 // Get Dependences
 // --------------------------------------
-    import React, { Component, Fragment } from 'react';
+    import React from 'react';
     import PropTypes from 'prop-types';
 
 
@@ -20,7 +20,7 @@
 
 
         if (regexp.test(value))
-            return <a href={value} > {value} </a>
+            return <a href={value} target="_blank" rel="noopener noreferrer"> {value} </a>
         else
             return <p> {value}  </p>
     }
@@ -49,8 +49,19 @@
 // Define PropTypes 
 // -------------------------------------- 
     FieldItem.propTypes = {
-        props: PropTypes
+        colName: PropTypes.string,
+        fieldName: PropTypes.string,
+        fieldValue: PropTypes.string
     };
+
+
+// --------------------------------------
+// Default Props
+// --------------------------------------
+    FieldItem.defaultProps = {
+        colName:  'col-xl-6 col-lg-6 col-sm-12 col-xs-12'
+    };
+
 // --------------------------------------
 // Export Component
 // --------------------------------------

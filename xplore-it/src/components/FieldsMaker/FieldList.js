@@ -28,7 +28,7 @@
                     <ul>
                         {
                             listValues && listValues.map((listItem)=> {
-                                return( <li> <span  className = "xpl-bolText"> > </span> {listItem}  </li>)
+                                return( <li className = "xpl-detailsListItem">  {listItem}  </li>)
                             })
                         }
                     </ul>

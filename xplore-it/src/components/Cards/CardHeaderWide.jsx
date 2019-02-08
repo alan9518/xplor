@@ -11,7 +11,8 @@
     import PropTypes from "prop-types";
     import { ProjectCard } from "../../components";
     import "./styles.css";
-    import ListItem from "./CardHeaderListItem";
+    // import ListItem from "./CardHeaderListItem";
+    import { FieldItem } from '../../components'
     import { startCase} from "lodash";
 // --------------------------------------
 // Create Component Class
@@ -54,32 +55,45 @@
             return (
                 <Fragment>
                     <div className="xpl-cardWideHeader ">
-
+{/* 
                         <div className="xpl-cardHeader">
-                            <ProjectCard key = {productOverview.partID} {...productOverview} cardHover = {false}/>
-                        </div> 
+                            
+                        </div>  */}
 
-                        <div className="xpl-cardProjectInfo">
-                            <ul>    
-                                <ListItem itemName = {"Uploaded"} content = {formatDate(CreatedDate)} />
-                                <ListItem itemName = {"Last Update"} content = {formatDate(LastUpdateDate)} />
-                                <ListItem itemName = {"Product Type"} content = {ProductType} />
-                                
-                        </ul>
+                        <div className="container">
+
+
+                            <div className="row">
+
+                                    <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12">
+                                        <ProjectCard 
+                                            key = {productOverview.partID}
+                                            cardHover = {false}  
+                                            projectColor = {productOverview.color}
+                                            {...productOverview}
+                                        />
+                                    </div>
+
+
+                                    <div className="col-xl-7 col-lg-7 col-md-12">
+                                        <div className="row">
+                                            <FieldItem fieldName = {"Uploaded"} fieldValue = {formatDate(CreatedDate)}  />
+                                            <FieldItem fieldName = {"Owner"} fieldValue = {formatOwners(`${OwnerFirstName} ${OwnerLastName}`)}  />
+                                            <FieldItem fieldName = {"Last Update"} fieldValue = {formatDate(LastUpdateDate)}  />
+                                            <FieldItem fieldName = {"Co-Owner"} fieldValue = {formatOwners(`${CoownerFirstName} ${CoownerLastName}`)}  />
+                                            {/* <FieldItem fieldName = {"Product Type"} fieldValue = {ProductType}  /> */}
+                                        </div>
+                                    </div>
+                                    
+
+                            </div>
                         </div>
-
-                        <div className="xpl-cardProjectInfo">
-                            <ul>
-                                <ListItem itemName = {"Owner"} content = {formatOwners(`${OwnerFirstName} ${OwnerLastName}`)}/>
-                                <ListItem itemName = {"Co-Owner"} content = {formatOwners(`${CoownerFirstName} ${CoownerLastName}`)} />
-                            </ul>
-                        </div> 
 
                     </div>
 
 
                     <div className="xpl-cardOverviewContainer">
-                        <h5> Description  </h5>
+                        <h5 className = "xpl-boldText"> Description  </h5>
                         <p className="xpl-cardProjectCardOverview">
                             {ShortDescription}
                         </p>

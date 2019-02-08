@@ -17,7 +17,7 @@
 // --------------------------------------
     const BreadCumbs = (props) => {
 
-        const {productName, softwareTopic , softwareTopicID,  onClick} = props;
+        const {productName, softwareTopic , softwareTopicID} = props;
 
         return (
             <div className="xpl-breadcumbsContainer">
@@ -29,8 +29,6 @@
                     <h4 class="xpl-breadChild" > 
                         <i class="fas fa-arrow-right xpl-breadSeparator"></i> 
                     </h4>
-
-                    {/* <h4 className = "xpl-breadChild" onClick = {onClick}>{ softwareTopic} </h4>  */}
 
                     <ProjectLink route = {`catalogue/${softwareTopic}/${softwareTopicID}`} spRoute = {true}> 
                     <h4 className = "xpl-breadChild" >{softwareTopic} </h4> 

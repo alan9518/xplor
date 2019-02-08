@@ -10,7 +10,7 @@
 // Import Dependences
 // --------------------------------------
     import React, { Component, } from 'react';
-    import { AppLoader, FieldsMaker,CardHeaderWide } from '../../components'
+    import { AppLoader, FieldsMaker, } from '../../components'
 
 
     class PanelContent extends Component {

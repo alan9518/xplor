@@ -80,6 +80,7 @@
 
                     <ProjectCard                     
                         projectColor = {carrouselItem.color}
+                        fullCard = {true}
                         {...carrouselItem}/>
                 </div>
             )
