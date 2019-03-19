@@ -120,6 +120,15 @@
                 
             }
 
+
+            // --------------------------------------
+            // Filter Routes By Category
+            // --------------------------------------
+            filterRoutesByParentCategory = (menuFromDetailsList) => {
+				// 
+                this.props.onFilterRoutesClick(menuFromDetailsList);
+            }
+
         
         /* ==========================================================================
          * Render Methods
@@ -132,8 +141,6 @@
             // --------------------------------------
             renderSideBar() {
                 const {currentMenu, menuComponent, currentCategory, currentCategoryColor, redirectUser, redirectPath} = this.state;
-				console.log('TCL: SideBar -> renderSideBar -> redirectPath', redirectPath)
-				console.log('TCL: SideBar -> renderSideBar -> redirectUser', redirectUser)
                 const {showMobileMenu ,onClick, responsiveWidth} = this.props;
                 const sidebarClass = showMobileMenu === true?  'showMobileMenu' : '';
                 const responsiveSideBarStyle = {
@@ -173,6 +180,7 @@
                                                         onClick = {this.onListItemBackClick}
                                                         // onClick = {this.onListItemClick}
                                                         key = {'Details-List'}
+                                                        onFilterRoutesClick = {this.filterRoutesByParentCategory}
                                                         hideMobileMenu = {(e) => showMobileMenu === true && this.props.onClick(e)}
                                         /> 
                                     }

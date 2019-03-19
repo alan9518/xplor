@@ -38,7 +38,8 @@
                 showMobileMenu : false,
                 showModal : false,
                 showError : false,
-                responsiveWidth : window.innerWidth
+                responsiveWidth : window.innerWidth,
+                filterRoutes : '',
             }
             this.path = Config.spPath;
 
@@ -237,6 +238,23 @@
         }
         
 
+        // --------------------------------------
+        // Filter Routes Based on Parent Category
+        // --------------------------------------
+        filterRoutesByCategory = (event) => (categoriesFromSidebar) => {
+            console.log('TCL: Dashboard -> filterRoutesByCategory -> categoriesFromSidebar', categoriesFromSidebar)
+            console.log('TCL: Dashboard -> filterRoutesByCategory -> this.state', this.state)
+
+            this.setState({filterRoutes : categoriesFromSidebar});
+            // const filteredCategories = categoriesFromSidebar.filter((category) => {
+            //     return 
+            // })
+
+            // const {categories} =  this.state;
+			
+			// console.log('TCL: Dashboard -> filterRoutesByCategory -> categories', categories)
+        }
+
 
     /* ==========================================================================
      *  Render Methods
@@ -298,6 +316,7 @@
                                         categories = {categories}
                                         onClick = {this.toggleMobileMenu }
                                         responsiveWidth = {responsiveWidth}
+                                        onFilterRoutesClick = {this.filterRoutesByCategory}
                                     />
 
 

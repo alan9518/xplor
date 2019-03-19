@@ -39,6 +39,16 @@
             hideMobileMenu();
         }
 
+        onClick = (event)=> {
+            // event.preventDefault();
+            const {currentCategory} = this.props;
+            this.props.onFilterRoutesClick(currentCategory);
+        }
+
+        // --------------------------------------
+        // Route Click
+        // --------------------------------------
+
         // --------------------------------------
         // Render Menu Structure
         // --------------------------------------
@@ -85,10 +95,12 @@
                     if (menuItem.sidebarName !== "")
                         return ( 
                             <SideBarLink 
+                                onClick = {this.onClick}
                                 key = { menuItem.key } 
                                 indexKey = { menuItem.key } 
                                 title = { menuItem.sidebarName } 
                                 link = { menuItem.path } 
+                                // link = {null}
                                 color = { menuItem.color } 
                                 hasIcon =  {false}
                                 hideMobileMenu = {this.hideMobileMenu}

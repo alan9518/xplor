@@ -199,9 +199,9 @@ class SideBar extends Component {
 // --------------------------------------
 // Define PropTypes
 // --------------------------------------
-SideBar.propTypes = {
-    routes : PropTypes.array
-};
+    SideBar.propTypes = {
+        routes : PropTypes.array
+    };
 
 // --------------------------------------
 // Export Component
