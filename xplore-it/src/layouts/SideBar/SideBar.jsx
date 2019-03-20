@@ -96,7 +96,7 @@
                         id : subCapValue.CustomerID,
                         // path :  `${this.path}/catalogue/${subCapValue.SubCapabilities}/${subCapValue.CustomerID}`,
                         // path :  `$catalogue/${subCapValue.SubCapabilities}/${subCapValue.CustomerID}`,
-                        path :  `catalogue/${subCapValue.SubCapabilities}/${subCapValue.CustomerID}`,
+                        path :  `catalogue/${subCapValue.SubCapabilities}/${subCapValue.CustomerID}/sub`,
                         exact: true,
                         sidebarName : subCapValue.SubCapabilities,
                         key : `${subCapValue.Capabilities}-${subCapValue.SubCapabilities}`,

@@ -62,16 +62,19 @@
             // --------------------------------------
             async loadProjects() {
                 const topicName = this.splitRouteName();
-                const params = {customerid : this.props.match.params.key}
+                // const params = {Bussmodel : 'XPLOR', customerid : this.props.match.params.key}
+                // const globalParams = {Bussmodel: 'XPLOR'};
                 try {
                     // Get Carrousel Products. Create Promise
-                        const getCarrouselProductsPromise =  axios.get(Endpoints.getCarrouselProducts);
+                        const getCarrouselProductsPromise =  axios.get(Endpoints.getCarrouselProducts,{params: {Bussmodel: 'XPLOR'}});
 
                         // Get All Products. Createn Promise 
+                        // Lok for /sub on URL if true then query subCategories
                             const getProductsPromise = topicName === 'all' 
-                                ? axios.get(Endpoints.getAllProducts) 
-                                : axios.get(Endpoints.getAllProductsByCategory,{params});
+                                ? axios.get(Endpoints.getAllProducts,{params: {Bussmodel: 'XPLOR'}})
+                                : this.findSubFilterRoute();
     
+                                // axios.get(Endpoints.getAllProductsByCategory,{params:{Bussmodel : 'XPLOR', customerid : this.props.match.params.key}})
                         // Resolve all Promises
                             const [carrouselProductsData, homeProductsData ] = await Promise.all([getCarrouselProductsPromise, getProductsPromise]);
 
@@ -99,6 +102,22 @@
                 }
             
             }
+
+
+            // --------------------------------------
+            // Lok for /sub on URL 
+            // if true then query subCategories
+            // else filter by Category
+            // --------------------------------------
+            findSubFilterRoute() {
+                const url =  window.location.href;
+                if(url.indexOf('/sub') >= 0)
+                    return axios.get(Endpoints.getAllProductsBySubCategory,{params:{subcap : this.props.match.params.topic, Bussmodel : 'XPLOR', customerid : this.props.match.params.key}})
+                else
+                    return axios.get(Endpoints.getAllProductsByCategory,{params:{Bussmodel : 'XPLOR', customerid : this.props.match.params.key}})
+            }
+
+
 
 
 

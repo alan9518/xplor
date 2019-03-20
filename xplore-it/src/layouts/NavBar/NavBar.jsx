@@ -73,6 +73,7 @@
                             <div className="navbar-brand" >
                                 <ProjectLink route = {`/`} spRoute = {true}>
                                     <img src={logo}  className="xpl-appLogo d-inline-block align-top" alt=""/>
+                                    <span className = "xpl-subTitle"> Product Explorer  </span>
                                 </ProjectLink>
                             </div>
                     

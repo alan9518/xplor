@@ -34,6 +34,8 @@
             if(link !== null) 
             {
                 // Link With React Router
+                // Create Route for SubItem
+                // const subLink = customIcon === true ? `${link}/sub` : link;
                 return (
                     <li className = {`xpl-sidebarLink `}  style =  {homeIcon && homeStyles}  onClick = {hideMobileMenu}>
                         <ProjectLink route = {link} itemKey = {indexKey} spRoute = {true} >

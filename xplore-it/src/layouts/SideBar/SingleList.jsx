@@ -93,6 +93,7 @@
                                             indexKey = {`link-${key}`} 
                                             title = { menuItem.sidebarName } 
                                             link = { menuItemPath } 
+                                            // link = { `${menuItemPath}/sub` } 
                                             color = { menuItem.color } 
                                             hasIcon =  {true}
                                             hideMobileMenu = {this.hideMobileMenu}  
@@ -110,6 +111,8 @@
                                         indexKey = {`link-${key}`} 
                                         title = { menuItem.sidebarName } 
                                         link = { menuItemPath } 
+                                        hasSub = {true}
+                                        // link = { `${menuItem.path}/sub` } 
                                         color = { menuItem.color } 
                                         hasIcon =  {true}
                                         onClick =  {this.onItemClick(menuItem)}

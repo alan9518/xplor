@@ -110,7 +110,8 @@
         // Load WebService Categories
         // --------------------------------------
         loadAPICategories() {
-            return axios.get(Endpoints.getAllCategories);
+            const params = {Bussmodel: 'XPLOR'}
+            return axios.get(Endpoints.getAllCategories, {params});
         }   
 
 

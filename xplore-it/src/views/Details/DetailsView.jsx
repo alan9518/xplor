@@ -68,17 +68,18 @@ class DetailsView extends Component {
 
                 // Create Promises that can run in parallel
                     const relatedProductsPromise = this.loadRelatedProducts(searchTerms);
-                    const relatedProductsPromise2 = this.loadRelatedProducts2(searchTerms);
+                    // const relatedProductsPromise2 = this.loadRelatedProducts2(searchTerms);
                     const productTabsPromise =  this.loadProductTabs();
 
                 // Resolve Promises
                 // Execute Parallel Promises
-                    const [productTabsData, relatedProducts, relatedProducts2, SPColorsCategories] =  await Promise.all([productTabsPromise, relatedProductsPromise, relatedProductsPromise2, this.loadSPCategories()]);
+                    // const [productTabsData, relatedProducts, relatedProducts2, SPColorsCategories] =  await Promise.all([productTabsPromise, relatedProductsPromise, relatedProductsPromise2, this.loadSPCategories()]);
+                    const [productTabsData, relatedProducts,  SPColorsCategories] =  await Promise.all([productTabsPromise, relatedProductsPromise,  this.loadSPCategories()]);
                     
                     
 
                 // Get Related Products With its Colors
-                    const relatedProductsData =  this.mergeProductsAndColors(relatedProducts2.data, SPColorsCategories);
+                    const relatedProductsData =  this.mergeProductsAndColors(relatedProducts.data, SPColorsCategories);
                     const productDetailsWithColor = this.mergeProductAndColors(productDetails, SPColorsCategories);
 					console.log('​loadAPI -> productDetailsWithColor', productDetailsWithColor)
 					
@@ -126,8 +127,9 @@ class DetailsView extends Component {
         // @returns {A Promise Object}
         // --------------------------------------*/
         async loadProductOverview() {
-            const params = {partid : this.partID}
-            const loadProjectOverviewPromise = await axios.get(Endpoints.getProduct, {params});
+            const params = {partid : this.partID, }
+            // const loadProjectOverviewPromise = await axios.get(Endpoints.getProduct, {params});
+            const loadProjectOverviewPromise = await axios.get(Endpoints.getProduct, {params:{partid : this.partID, Bussmodel : 'XPLOR'}});
             const projectOverviewData = await loadProjectOverviewPromise.data[0];
             return projectOverviewData;
         }
@@ -145,10 +147,12 @@ class DetailsView extends Component {
             const params = {
                 customerid : this.partID,
                 keyword : productKeywords,
+                Bussmodel : 'XPLOR'
             }
             
 
-            return (axios.get(Endpoints.getRelatedProducts, {params}));
+            // return (axios.get(Endpoints.getRelatedProducts, {params}));
+            return axios.get(Endpoints.getRelatedProducts,{params: { customerid : this.partID , keyword : productKeywords, Bussmodel: 'XPLOR'}})
         }
 
 
@@ -192,6 +196,8 @@ class DetailsView extends Component {
         // @returns {A new Array With Category Colors}
         // --------------------------------------*/
         mergeProductsAndColors(productsData, SPColorsCategories) {
+            if(!productsData) return [];
+            
             const productsWithColor = productsData.map((product)=> {
                 for (let spColor of SPColorsCategories) {
                     if(product.SoftwareTopic === spColor.name) {
@@ -228,7 +234,7 @@ class DetailsView extends Component {
         // Get Product Tabs
         // --------------------------------------
         async loadProductTabs() {
-            return axios.get(Endpoints.getProductTabs);
+            return axios.get(Endpoints.getProductTabs,{params: {Bussmodel: 'XPLOR'}});
         }
     
 

@@ -55,8 +55,9 @@ class Search extends Component {
         // Load Products
         // --------------------------------------
         async loadProducts() {
+            const params = {Bussmodel: 'XPLOR'}
             //Create Promises
-            const allProductsPromise = axios.get(Endpoints.getAllProducts);
+            const allProductsPromise = axios.get(Endpoints.getAllProducts,  {params});
             const SPColorsPromise = axios.get(Endpoints.getSideBarCategoriesSP);
 
             // Resolve Promises

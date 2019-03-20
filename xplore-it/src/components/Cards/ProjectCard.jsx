@@ -99,7 +99,7 @@
                                 <div className = {`xpl-cardHeader ${cardHover && 'cardHover'}`} style = {projectColorStyle}>
                                     <div className="xpl-cardName"> 
                                         <h5> {ProductName} </h5> 
-                                        <h5 className = {'xpl-productScopeCard'}> {ProductScope || SoftwareTopic} </h5>
+                                        <h5 className = {'xpl-productScopeCard'}> {SoftwareTopic} </h5>
                                     </div>
                                     <CardImage projectIcon = {iconName}/>
                                 </div>

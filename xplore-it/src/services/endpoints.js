@@ -25,6 +25,7 @@
      ========================================================================== */
         // --------------------------------------
         // Get All Products
+        // @param Bussmodel=XPLOR
         // --------------------------------------
             getAllProducts : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getProducts',
             
@@ -36,8 +37,19 @@
         /** --------------------------------------
         // Get Products By Category
         // @param {customerid <String>}
+        // @param {Bussmodel <String>}
         // --------------------------------------*/
             getAllProductsByCategory: 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getProductsByCategory',
+        
+        /** --------------------------------------
+        // Get Products By Category
+        // @param {customerid <String>}
+        // @param {subcap <String>}
+        // @param {Bussmodel <String>}
+        // @returns {}
+        // -------------------------------------- */
+            // getAllProductsBySubCategory : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getProductsBySubcap?customerid=1025&subcap=Analytics&Bussmodel=XPLOR'
+            getAllProductsBySubCategory : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getProductsBySubcap',
         
         // --------------------------------------
         // Get All Categories
