@@ -253,8 +253,9 @@ class DetailsView extends Component {
                 return {...productDetails, isOverview: true};
             }
             else {
-                const params = {partid : this.partID, busstypeid : busstypeid}
-                const tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params});                
+                const params = {partid : this.partID, busstypeid : busstypeid, Bussmodel: 'XPLOR'}
+                // const tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params});                
+                const tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params: {partid : this.partID, busstypeid : busstypeid, Bussmodel: 'XPLOR'}});
                 const tabsAttrData = await tabsDataAttrPromise.data;
                 return tabsAttrData;
             }
@@ -315,8 +316,8 @@ class DetailsView extends Component {
         // TODO : Add Category ID To Breadcumbs
         // --------------------------------------
         renderBreadcumbs() {
-            const {SoftwareTopic, ProductName,} = this.state.productDetails;
-            return <Breadcumbs softwareTopic = {SoftwareTopic} productName = {ProductName} />
+            const {SoftwareTopic, ProductName,SoftwareTopicID} = this.state.productDetails;
+            return <Breadcumbs softwareTopic = {SoftwareTopic} productName = {ProductName} softwareTopicID = {SoftwareTopicID}/>
         }
 
         // --------------------------------------

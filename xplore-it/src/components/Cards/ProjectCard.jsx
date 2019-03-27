@@ -9,9 +9,9 @@
 // --------------------------------------
     import React, { Component } from "react";
     import PropTypes from "prop-types";
-    import './styles.css';
     import { CardImage, ProjectLink } from '../../components';
-
+    import ReactTooltip from 'react-tooltip'
+    import './styles.css';
 
 // --------------------------------------
 // Create Component Class
@@ -40,11 +40,11 @@
         // Render Small Description
         // Choose between small Desc or normal 
         // --------------------------------------
-            renderSmallDesc(ShortDescription, DetailedDescription) {
+            renderSmallDesc(ShortDescription, DetailedDescription,ProductName) {
                 // const cardDescription = ShortDescription || DetailedDescription;
                 return (
                     <div className="xpl-cardDescription">
-                        <p> {this.setDescriptionWidth(ShortDescription) } </p>
+                        {this.setDescriptionWidth(ShortDescription,ProductName) } 
                     </div>
                 )
             }
@@ -55,12 +55,32 @@
         // @param {projectDescription <string>}
         // @returns {Shortened Description}
         // --------------------------------------*/
-            setDescriptionWidth(projectDescription) {
-                if(projectDescription.length > 200)
-                    return `${projectDescription.substr(0,200)}...`
+            setDescriptionWidth(projectDescription,ProductName) {
+                if(projectDescription.length > 100) {
+                     // return `${projectDescription.substr(0,100)}`
+                    //  let toolTip =  <ToolTip tipText={projectDescription} isButton={false} />
+                     
+                     return (
+                         <p data-tip = {projectDescription} data-for = {`tip-${ProductName}`}>  
+                            {`${projectDescription.substr(0,100)} ...`} 
+                            
+                            <ReactTooltip 
+                                className='xpl-toolTip' 
+                                delayHide={1000} 
+                                place = "top" 
+                                type = "dark" 
+                                effect="float"
+                                id = {`tip-${ProductName}`}
+                                border = {true}
+                                style = {{border:'2px solid red'}}/> 
+                        </p>
+                    )
+                }
+                   
+
                 // else if (projectDescription)
                 else
-                    return projectDescription;
+                    return <p>{projectDescription}</p>   ;
             }
 
 
@@ -103,7 +123,8 @@
                                     </div>
                                     <CardImage projectIcon = {iconName}/>
                                 </div>
-                                {hasSmallDescription && this.renderSmallDesc(ShortDescription, DetailedDescription)}
+                                {hasSmallDescription && this.renderSmallDesc(ShortDescription, DetailedDescription,ProductName) }
+                                
                             </ProjectLink>
                         </div>
                 )

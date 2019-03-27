@@ -690,6 +690,11 @@
                 font-size: 30px;
             }
 
+            span.xpl-subTitle {
+                font-size: 14px;
+                bottom: 56px;
+                color: hsla(0,0%,100%,.5);
+            }
             
 
 
@@ -783,6 +788,12 @@
             h4.xpl-breadChild {
                 font-size: 17px;
                 font-weight: 600;
+                text-align: center;
+            }
+
+            .xpl-cardOverviewContainer {
+                margin-top: 16px;
+                padding: 15px;
             }
         
         }

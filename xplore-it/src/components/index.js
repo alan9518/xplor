@@ -51,6 +51,7 @@
     import FieldList from './FieldsMaker/FieldList';
     import ToggleField from './FieldsMaker/ToggleField';
     import RowContainer from './FieldsMaker/RowContainer';
+    import ToolTip from './ToolTip/ToolTip';
 
 
 // --------------------------------------
@@ -100,4 +101,5 @@
         FieldList,
         RowContainer,
         ToggleField,
+        ToolTip
     }

@@ -70,7 +70,7 @@
         border-radius: 3px;
         /* min-height: 80px;
         max-height: 80px; */
-        min-height: 80px;
+        min-height: 112px;
         max-height: 185px;
     }
 
@@ -252,3 +252,5 @@
     .xpl-cardStyleCenter .xpl-mediumCard .xpl-cardHeader.cardHover {
         height: 180px;
     }
+
+

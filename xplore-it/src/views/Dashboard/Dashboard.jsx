@@ -236,10 +236,13 @@
                 const itemsToShow = carrouselproducts.length;
                 return (
                     <div className="row xpl-carrouselRow">
-                        <div className="col-lg-12">
-                            <h3 className="xpl-row xpl-allAppTitle"> What's New? </h3>
-                            <Carrousel carrouselData = {carrouselproducts} itemsToShow = {itemsToShow} />
-                        </div>
+                      {
+                        itemsToShow > 0 && 
+                            <div className="col-lg-12">
+                                <h3 className="xpl-row xpl-allAppTitle"> What's New? </h3>
+                                <Carrousel carrouselData = {carrouselproducts} itemsToShow = {itemsToShow} />
+                            </div>
+                      }
                     </div>
                 )
             }
