@@ -67,7 +67,7 @@ class DetailsView extends Component {
 
 
                 // Create Promises that can run in parallel
-                    const relatedProductsPromise = this.loadRelatedProducts(searchTerms);
+                    const relatedProductsPromise = this.loadRelatedProducts(searchTerms, productDetails.SoftwareTopicID);
                     // const relatedProductsPromise2 = this.loadRelatedProducts2(searchTerms);
                     const productTabsPromise =  this.loadProductTabs();
 
@@ -80,6 +80,7 @@ class DetailsView extends Component {
 
                 // Get Related Products With its Colors
                     const relatedProductsData =  this.mergeProductsAndColors(relatedProducts.data, SPColorsCategories);
+					console.log("TCL: DetailsView -> loadAPI -> relatedProductsData", relatedProductsData)
                     const productDetailsWithColor = this.mergeProductAndColors(productDetails, SPColorsCategories);
 					console.log('​loadAPI -> productDetailsWithColor', productDetailsWithColor)
 					
@@ -127,7 +128,7 @@ class DetailsView extends Component {
         // @returns {A Promise Object}
         // --------------------------------------*/
         async loadProductOverview() {
-            const params = {partid : this.partID, }
+            // const params = {partid : this.partID, }
             // const loadProjectOverviewPromise = await axios.get(Endpoints.getProduct, {params});
             const loadProjectOverviewPromise = await axios.get(Endpoints.getProduct, {params:{partid : this.partID, Bussmodel : 'XPLOR'}});
             const projectOverviewData = await loadProjectOverviewPromise.data[0];
@@ -141,18 +142,19 @@ class DetailsView extends Component {
         // @param {Produt search keywords <string array>}
         // @returns {A Promise Object}
         // --------------------------------------*/
-        async loadRelatedProducts(productKeywords) {
+        async loadRelatedProducts(productKeywords, customerid) {
+            console.log("​DetailsView -> loadRelatedProducts -> customerid", customerid)
             console.log("​DetailsView -> loadRelatedProducts -> productKeywords", productKeywords)
             
-            const params = {
-                customerid : this.partID,
-                keyword : productKeywords,
-                Bussmodel : 'XPLOR'
-            }
+            // const params = {
+            //     customerid : customerid,
+            //     keyword : productKeywords,
+            //     Bussmodel : 'XPLOR'
+            // }
             
 
             // return (axios.get(Endpoints.getRelatedProducts, {params}));
-            return axios.get(Endpoints.getRelatedProducts,{params: { customerid : this.partID , keyword : productKeywords, Bussmodel: 'XPLOR'}})
+            return axios.get(Endpoints.getRelatedProducts,{params: { customerid : customerid ,partid: this.partID , keyword : productKeywords, Bussmodel: 'XPLOR'}})
         }
 
 
@@ -325,6 +327,7 @@ class DetailsView extends Component {
         // --------------------------------------
         renderRelatedProducts() {
             const {relatedProducts}  = this.state;
+			console.log("TCL: DetailsView -> renderRelatedProducts -> relatedProducts", relatedProducts)
             return (
                 <Fragment>
                     <div className="xpl-relatedContainer">
@@ -332,17 +335,19 @@ class DetailsView extends Component {
                             {
 
                                 relatedProducts && relatedProducts.map((product) => {
+									console.log("TCL: DetailsView -> renderRelatedProducts -> product", product)
                                     return (
 
                                             <div className="col-xl-12 col-lg-6 col-md-6 col-sm-12 ">
-                                                {/* <ProjectCard key = {product.partID} hasSmallDescription={true} {...product}/> */}
-                                                <ProjectCard 
+                                                <ProjectCard key = {product.partID} hasSmallDescription={true} {...product}/> 
+                                                {/*<ProjectCard 
                                                     key = {product.partID} 
                                                     hasSmallDescription={true}  
                                                     projectColor = {product.color}
                                                     onClick = {this.getCategoryID}
                                                     {...product}
                                                 />
+                                                */}
                                             </div>
                                     )
                                 })
@@ -467,6 +472,5 @@ class DetailsView extends Component {
 // Export Component
 // --------------------------------------
 export default DetailsView;
-
 
 

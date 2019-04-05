@@ -93,8 +93,8 @@
 
 
                     <div className="xpl-cardOverviewContainer">
-                        <h5 className = "xpl-boldText"> Description  </h5>
-                        <p className="xpl-cardProjectCardOverview">
+                        <h5 className = "xpl-boldText xpl-fieldSeparator" > Description  </h5>
+                        <p className="xpl-cardProjectCardOverview" >
                             {ShortDescription}
                         </p>
                     </div> 

@@ -107,6 +107,7 @@
                         SoftwareTopic, ProductScope, ShortDescription, 
                         DetailedDescription, cardHover, IconValue, 
                 } = this.props;
+				console.log("TCL: ProjectCard -> renderCard -> this.props", this.props)
                 // const bgColor = hasSmallDescription ? projectColor : '#238ECC';
                 const bgColor =  projectColor ||  '#238ECC';
                 const projectColorStyle = {backgroundColor : bgColor}

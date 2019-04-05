@@ -38,7 +38,7 @@
 
                 <div className="xpl-fieldItem">
 
-                    <h6 className="xpl-boldText"> {fieldName} </h6>
+                    <h6 className="xpl-boldText xpl-fieldSeparator"> {fieldName} </h6>
                     {isFieldLink(fieldValue)}
 
                 </div>

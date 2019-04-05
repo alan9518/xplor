@@ -90,3 +90,8 @@ ul.react-tabs__tab-list {
 .xpl-appDescriptionContainer.xpl-wideCard.xpl-shadow {
     margin-bottom: 50px;
 }
+
+
+.rc-tabs-top .rc-tabs-bar {
+  border-bottom: 2px solid #f3f3f3 !important;
+}

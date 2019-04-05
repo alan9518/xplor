@@ -479,6 +479,12 @@
         }
 
 
+        .xpl-fieldSeparator {
+            font-size: 1.05rem !important;
+            padding-bottom : 10px;
+            border-bottom: 2px solid #f3f3f3 !important;
+        }
+
 /* ---------------------------------------------------
     5.0 ANIMATIONS STYLES	
 ----------------------------------------------------- */
