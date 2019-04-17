@@ -504,6 +504,19 @@
             padding: 5px;
             list-style: none;
         }
+
+        input.xpl-fieldEditInput, textarea.xpl-fieldEditInput {
+            width: 100%;
+            padding: 5px;
+            background: #F6F7F9;
+            border: none;
+            outline: none;
+            border-radius: 2px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        
 /* ---------------------------------------------------
     5.0 ANIMATIONS STYLES	
 ----------------------------------------------------- */

@@ -8,11 +8,11 @@
 // --------------------------------------
 // Import Dependences
 // --------------------------------------
-    import React, { Component, Fragment } from "react";
+    import React, { Component } from "react";
     import PropTypes from "prop-types";
-    import {ToggleField, FieldItem, FieldList, CardHeaderWide, MaterialButton, SingleButton} from '../../components'
+    import {ToggleField, FieldItem, FieldList, CardHeaderWide,  SingleButton} from '../../components'
 
-    import {orderBy} from 'lodash'; 
+    // import {orderBy} from 'lodash'; 
 
     // import { Breadcumbs, AppLoader,  CustomTabs, PanelContent, ProjectCard} from '../../components';
 
@@ -46,10 +46,10 @@
         // --------------------------------------
         // Enable Edition of Fields
         // --------------------------------------
-        enableFieldsEdit = (event) => {
+        toggleFieldsEdit = (event) => {
             event.preventDefault();
-			console.log("TCL: FieldsMaker -> enableFieldsEdit -> event", event)
-            
+            const {editControls} = this.state;
+            this.setState({editControls : !editControls})
         }
 
 
@@ -58,11 +58,62 @@
     ** Render Methdos
     ** ========================================================================== */
 
+       
+
+        // --------------------------------------
+        // Choose Between Toggle Control
+        // Or Label Text
+        // --------------------------------------
+        setTextField(attrName, attrValues, divClass, editField) {
+            if(attrValues === "N" || attrValues === "Y")
+                return <ToggleField fieldName = {attrName} fieldValue = {attrValues} colName = {divClass} editField = {editField}/>
+            else
+                return <FieldItem fieldName = {attrName} fieldValue = {attrValues} colName = {divClass} editField = {editField}/>
+        }
+
+
+
+
+
+        // --------------------------------------
+        // Set Field Type
+        // Set Number of Columns
+        // --------------------------------------   
+        setFieldType(field, colClass, editField) {
+            
+            let {attrName, attrValues, datatype} = field;
+            let divClass = `col-xl-${colClass} col-lg-${colClass} col-sm-12 col-xs-12`;
+            let formField = null;
+            switch(datatype) {
+                case "String" :
+                    formField =  this.setTextField(attrName, attrValues, divClass, editField);
+                break;
+
+                case "PickList" : 
+                    
+                    // Split The Values to Create a List
+                    const valuesArray = attrValues.split('||');
+                    valuesArray.length > 1 
+                        ? formField =  <FieldList fieldName = {attrName} listValues = {valuesArray} colName = {divClass} editField = {editField}/> 
+                        : formField =  this.setTextField(attrName, attrValues, divClass, editField);
+
+                    break;
+
+                default : 
+                    formField =  <FieldItem fieldName = {attrName} fieldValue = {attrValues} colName = {divClass} editField = {editField}/>
+
+            }
+
+            return formField
+        }
+
+
         // --------------------------------------
         // Render Component
         // --------------------------------------        
         renderFields() {
             const {formFields, tabTitle} = this.props;
+            const {editControls} = this.state;
             if(formFields.isOverview)
                 return  <CardHeaderWide productOverview = {formFields} /> ;
             else {
@@ -74,9 +125,9 @@
                             <h2> {tabTitle}  </h2>
 
                                 <SingleButton 
-                                    buttonText = {"Edit Content"}
+                                    buttonText = {editControls ? "Save Content" :  "Edit Content" }
                                     buttonColor= {"primary"} 
-                                    onClick = {this.enableFieldsEdit}
+                                    onClick = {this.toggleFieldsEdit}
                                 />
                             </div>
                         </div>
@@ -88,7 +139,7 @@
                                     let valuesLength =  attrValues.length;
                                     let colNum = valuesLength >= 200 ? 12 : 6;
                                     return(
-                                        this.setFieldType(tabItem , colNum)                    
+                                        this.setFieldType(tabItem , colNum, editControls)                    
                                     )
                                 })               
                             }
@@ -101,53 +152,6 @@
 
         }   
 
-
-
-        // --------------------------------------
-        // Choose Between Toggle Control
-        // Or Label Text
-        // --------------------------------------
-        setTextField(attrName, attrValues, divClass) {
-            if(attrValues === "N" || attrValues === "Y")
-                return <ToggleField fieldName = {attrName} fieldValue = {attrValues} colName = {divClass}/>
-            else
-                return <FieldItem fieldName = {attrName} fieldValue = {attrValues} colName = {divClass}/>
-        }
-
-
-
-
-
-        // --------------------------------------
-        // Set Field Type
-        // Set Number of Columns
-        // --------------------------------------   
-        setFieldType(field, colClass) {
-            let {attrName, attrValues, datatype} = field;
-            let divClass = `col-xl-${colClass} col-lg-${colClass} col-sm-12 col-xs-12`;
-            let formField = null;
-            switch(datatype) {
-                case "String" :
-                    formField =  this.setTextField(attrName, attrValues, divClass);
-                break;
-
-                case "PickList" : 
-                    
-                    // Split The Values to Create a List
-                    const valuesArray = attrValues.split('||');
-                    valuesArray.length > 1 
-                        ? formField =  <FieldList fieldName = {attrName} listValues = {valuesArray} colName = {divClass}/> 
-                        : formField =  this.setTextField(attrName, attrValues, divClass);
-
-                    break;
-
-                default : 
-                    formField =  <FieldItem fieldName = {attrName} fieldValue = {attrValues} colName = {divClass}/>
-
-            }
-
-            return formField
-        }
 
         
 

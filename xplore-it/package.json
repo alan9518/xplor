@@ -20,6 +20,7 @@
     "react-flip-toolkit": "^6.2.2",
     "react-ga": "^2.5.6",
     "react-infinite-scroller": "^1.2.2",
+    "react-lazy-load-image-component": "^1.3.2",
     "react-loader-spinner": "^2.2.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
@@ -27,8 +28,8 @@
     "react-slick": "^0.23.2",
     "react-tabs": "^2.3.0",
     "react-toggle": "^4.0.2",
-    "react-transition-group": "^2.4.0",
     "react-tooltip": "^3.9.2",
+    "react-transition-group": "^2.4.0",
     "slick-carousel": "^1.8.1"
   },
   "scripts": {
