@@ -485,6 +485,25 @@
             border-bottom: 2px solid #f3f3f3 !important;
         }
 
+
+        .xpl-editButtonContainer {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: flex-start;
+            padding: 10px;
+            align-items: center;
+        }
+
+        .xpl-editButtonContainer h2 {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        li.xpl-detailsListItem {
+            padding: 5px;
+            list-style: none;
+        }
 /* ---------------------------------------------------
     5.0 ANIMATIONS STYLES	
 ----------------------------------------------------- */

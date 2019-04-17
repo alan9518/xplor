@@ -24,11 +24,11 @@
 
                 <div className="xpl-fieldList">
 
-                    <h6 className = "xpl-boldText"> {fieldName} </h6> 
+                    <h6 className = "xpl-boldText xpl-fieldSeparator"> {fieldName} </h6> 
                     <ul>
                         {
                             listValues && listValues.map((listItem)=> {
-                                return( <li className = "xpl-detailsListItem">  {listItem}  </li>)
+                                return( <li className = "xpl-detailsListItem"> <i className="fas fa-caret-right"></i> {listItem}  </li>)
                             })
                         }
                     </ul>

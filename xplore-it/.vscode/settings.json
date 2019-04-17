@@ -6,5 +6,7 @@
         "markdown",
         "latex",
         "plaintext"
-    ]
+    ],
+    "editor.fontFamily": "'HASKLIG',Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true
 }

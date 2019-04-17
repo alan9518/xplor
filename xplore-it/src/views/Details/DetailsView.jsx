@@ -18,7 +18,7 @@ import {Endpoints} from '../../services/endpoints'
 class DetailsView extends Component {
 
     /* ==========================================================================
-     *  Component Setup
+     * //?Component Setup
      ========================================================================== */
 
         // --------------------------------------
@@ -32,9 +32,10 @@ class DetailsView extends Component {
                 relatedProducts : [],
                 productOverview:{},
                 productDetails : {},
+                currentTabName : '',
                 isLoaded : false,
                 showError : false,
-                tabLoading : false,
+                tabLoading : false
             }
             this.partID = props.match.params.partID;
         }
@@ -50,7 +51,7 @@ class DetailsView extends Component {
     
 
     /* ==========================================================================
-     *  API Calls
+     * //?API Calls
      ========================================================================== */
 
         // --------------------------------------
@@ -68,31 +69,30 @@ class DetailsView extends Component {
 
                 // Create Promises that can run in parallel
                     const relatedProductsPromise = this.loadRelatedProducts(searchTerms, productDetails.SoftwareTopicID);
-                    // const relatedProductsPromise2 = this.loadRelatedProducts2(searchTerms);
+                    
                     const productTabsPromise =  this.loadProductTabs();
 
                 // Resolve Promises
                 // Execute Parallel Promises
-                    // const [productTabsData, relatedProducts, relatedProducts2, SPColorsCategories] =  await Promise.all([productTabsPromise, relatedProductsPromise, relatedProductsPromise2, this.loadSPCategories()]);
+                    
                     const [productTabsData, relatedProducts,  SPColorsCategories] =  await Promise.all([productTabsPromise, relatedProductsPromise,  this.loadSPCategories()]);
                     
                     
 
                 // Get Related Products With its Colors
                     const relatedProductsData =  this.mergeProductsAndColors(relatedProducts.data, SPColorsCategories);
-					console.log("TCL: DetailsView -> loadAPI -> relatedProductsData", relatedProductsData)
-                    const productDetailsWithColor = this.mergeProductAndColors(productDetails, SPColorsCategories);
-					console.log('​loadAPI -> productDetailsWithColor', productDetailsWithColor)
 					
-                    
-
-
+                    const productDetailsWithColor = this.mergeProductAndColors(productDetails, SPColorsCategories);
+					
+					
+                
                 // Add Static Tab 0 With Product Overview
                     const tab0 = { "BusinessTypeID": 0, "BusinessTypeName": "Product Overview", "Sequence": 0};
                     
                 // Add Static Tab to The ones that come from API
                     const tabsHeaderList = [tab0, ...productTabsData.data];
-                    console.log('​DetailsView -> loadAPI -> tabsHeaderList', tabsHeaderList)
+					console.log("TCL: DetailsView -> loadAPI -> tabsHeaderList", tabsHeaderList)
+                    
 
 
                 // Store Values
@@ -105,7 +105,7 @@ class DetailsView extends Component {
                 });
             }
             catch (error) {
-                console.log('error', error);
+                
                 this.setState({
                     productTabs : [],
                     productDetails : {},
@@ -128,8 +128,6 @@ class DetailsView extends Component {
         // @returns {A Promise Object}
         // --------------------------------------*/
         async loadProductOverview() {
-            // const params = {partid : this.partID, }
-            // const loadProjectOverviewPromise = await axios.get(Endpoints.getProduct, {params});
             const loadProjectOverviewPromise = await axios.get(Endpoints.getProduct, {params:{partid : this.partID, Bussmodel : 'XPLOR'}});
             const projectOverviewData = await loadProjectOverviewPromise.data[0];
             return projectOverviewData;
@@ -143,17 +141,6 @@ class DetailsView extends Component {
         // @returns {A Promise Object}
         // --------------------------------------*/
         async loadRelatedProducts(productKeywords, customerid) {
-            console.log("​DetailsView -> loadRelatedProducts -> customerid", customerid)
-            console.log("​DetailsView -> loadRelatedProducts -> productKeywords", productKeywords)
-            
-            // const params = {
-            //     customerid : customerid,
-            //     keyword : productKeywords,
-            //     Bussmodel : 'XPLOR'
-            // }
-            
-
-            // return (axios.get(Endpoints.getRelatedProducts, {params}));
             return axios.get(Endpoints.getRelatedProducts,{params: { customerid : customerid ,partid: this.partID , keyword : productKeywords, Bussmodel: 'XPLOR'}})
         }
 
@@ -165,7 +152,6 @@ class DetailsView extends Component {
         // @param {Produt search keywords <string array>}
         // @returns {A Promise Object}
         // --------------------------------------*/
-
         async loadRelatedProducts2(productKeywords) {
             
             return axios.get(Endpoints.getRelatedProductsHard)
@@ -212,7 +198,7 @@ class DetailsView extends Component {
             return productsWithColor;
         }
 
-         /** --------------------------------------
+        /** --------------------------------------
         // Merge Single Object From API & SP
         // Based on Category Name
         // @param {productsData <API data>}
@@ -249,14 +235,10 @@ class DetailsView extends Component {
         async loadTabAttributes(busstypeid, isProductOverview) {
 
             if(busstypeid === 0 || busstypeid === "0" || busstypeid <= 0 ) {
-				console.log('​loadTabAttributes -> busstypeid', busstypeid)
                 const {productDetails} = this.state;
-				console.log('​loadTabAttributes -> productDetails', productDetails)
                 return {...productDetails, isOverview: true};
             }
-            else {
-                const params = {partid : this.partID, busstypeid : busstypeid, Bussmodel: 'XPLOR'}
-                // const tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params});                
+            else {           
                 const tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params: {partid : this.partID, busstypeid : busstypeid, Bussmodel: 'XPLOR'}});
                 const tabsAttrData = await tabsDataAttrPromise.data;
                 return tabsAttrData;
@@ -271,14 +253,25 @@ class DetailsView extends Component {
         // --------------------------------------
         **/
         async changeTabData (businessID) {
+            const {productTabs} = this.state;
+            console.log("TCL: DetailsView -> changeTabData -> his.state.tabsData", this.state.productTabs)
             const isProductOverview = businessID === 0 ? true: false;
-			console.log('​changeTabData -> businessID', businessID)
-			console.log('​DetailsView -> changeTabData -> isProductOverview', isProductOverview)
+            const currentTab = productTabs.filter((tabItem)=> {
+                return tabItem.BusinessTypeID === parseInt(businessID)
+            })[0];
+            
+
+
+            console.log("TCL: DetailsView -> changeTabData -> currentTab", currentTab)
+            
             const newTabData = await  this.loadTabAttributes(businessID, isProductOverview); 
-            console.log("​DetailsView -> changeTabData -> newTabData", newTabData)
+
+			
             this.setState({
                 productOverview : newTabData,
+                currentTabName : currentTab.BusinessTypeName,
                 tabLoading : false
+
             })
 
         }
@@ -286,7 +279,7 @@ class DetailsView extends Component {
 
 
     /* ==========================================================================
-     * State & Logic Functions
+     * //? State & Logic Functions
     ========================================================================== */
 
         // --------------------------------------
@@ -299,23 +292,20 @@ class DetailsView extends Component {
             if(businessID === currentTab)
                 return 
             else {
-                console.log('​DetailsView -> onTabChange -> businessID', businessID);
                 this.setState({tabLoading: true})
                 this.changeTabData(businessID)
-                console.log('​DetailsView -> onTabChange -> businessID', businessID);
             }
 		
         }   
 
 
     /* ==========================================================================
-     * Render Methods
+     * //? Render Methods
     ========================================================================== */
 
         
         // --------------------------------------
         // Render BreadCumbs
-        // TODO : Add Category ID To Breadcumbs
         // --------------------------------------
         renderBreadcumbs() {
             const {SoftwareTopic, ProductName,SoftwareTopicID} = this.state.productDetails;
@@ -335,7 +325,7 @@ class DetailsView extends Component {
                             {
 
                                 relatedProducts && relatedProducts.map((product) => {
-									console.log("TCL: DetailsView -> renderRelatedProducts -> product", product)
+									
                                     return (
 
                                             <div className="col-xl-12 col-lg-6 col-md-6 col-sm-12 ">
@@ -387,14 +377,15 @@ class DetailsView extends Component {
         // Render Tab Content
         // --------------------------------------            
         renderProductDetails() {
-            const {productTabs, productOverview, tabLoading} = this.state;
+            const {productTabs, productOverview, tabLoading, currentTabName} = this.state;
+			console.log("TCL: DetailsView -> renderProductDetails -> currentTabName", currentTabName)
             const {isOverview} = productOverview;
             return (
                 <div className="xpl-appDescriptionContainer xpl-wideCard xpl-shadow">
                     <CustomTabs tabLoading = {tabLoading} tabsData = {productTabs} onTabChange = {this.onTabChange.bind(this)}>
                         <WideCard  >
                             
-                            <PanelContent tabLoading = {tabLoading} panelTabContent = {productOverview} isOverview = {isOverview} /> 
+                            <PanelContent tabLoading = {tabLoading} tabTitle = {currentTabName}  panelTabContent = {productOverview} isOverview = {isOverview} /> 
                 
                         </WideCard>
                     </CustomTabs>

@@ -126,3 +126,41 @@
     .xpl-secondary {
         background-color: #6c757d;
     }
+
+
+
+/* ==========================================================================
+ * Single Button
+   ========================================================================== */
+
+    .xpl-singleButton {
+        background-color: transparent;
+        border: 2px solid #009add;
+        padding: 10px 16px;
+        font-size: 12px;
+        color: #009add;
+        cursor: pointer;
+        transition: ease .2s;
+        font-weight: 600;
+    }
+
+    .xpl-singleButton:hover{
+        background-color: #009add;
+        color: #fff;
+        border: 2px solid #fff;
+    }
+
+    .xpl-singleButtonDanger {
+        background-color: transparent;
+        border: 2px solid #d23338;
+        padding: 10px 16px;
+        font-size: 12px;
+        color: #d23338;
+        cursor: pointer;
+    }
+
+    .xpl-singleButtonDanger:hover{
+        background-color: #d23338;
+        color: #fff;
+        border: 2px solid #fff;
+    }

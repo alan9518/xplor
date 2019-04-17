@@ -24,6 +24,7 @@
     import ProfileImage from './Users/ProfileImage';
     import Search from './Search/Search';
     import AppButton from './Buttons/AppButton';
+    import SingleButton from './Buttons/SingleButton' ;
     import ProjectCard from './Cards/ProjectCard';
     import CardHeaderWide from './Cards/CardHeaderWide';
     import CardImage from './Cards/CardImage';
@@ -69,6 +70,7 @@
         ProfileImage,
         Search,
         AppButton,
+        SingleButton,
         ProjectCard,
         Carrousel,
         SingleList,

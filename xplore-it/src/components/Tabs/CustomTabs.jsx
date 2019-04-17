@@ -9,12 +9,12 @@
 // --------------------------------------
 // Import Dependences
 // --------------------------------------
-import 'rc-tabs/assets/index.css';
-import React , {Component, Fragment} from 'react';
-import ReactDOM from 'react-dom';
-import Tabs, { TabPane } from 'rc-tabs';
-import TabContent from 'rc-tabs/lib/TabContent';
-import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
+    import 'rc-tabs/assets/index.css';
+    import React , {Component, Fragment} from 'react';
+    import ReactDOM from 'react-dom';
+    import Tabs, { TabPane } from 'rc-tabs';
+    import TabContent from 'rc-tabs/lib/TabContent';
+    import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
 
 
 
@@ -31,14 +31,20 @@ class CustomTabs extends Component {
         // Tab Key to Details View
         // --------------------------------------
         onTabClick = (key) => {
+			console.log("TCL: CustomTabs -> onTabClick -> key", key)
             this.props.onTabChange(key)
+        }
+
+        onTabChange = (event) => {
+			console.log("TCL: CustomTabs -> onTabChange -> event", event)
+            
         }
         
 
 
     /* ==========================================================================
-    * Render Methods
-    ========================================================================== */
+     * Render Methods
+       ========================================================================== */
 
         // --------------------------------------
         // Render Tabs Content
@@ -48,7 +54,8 @@ class CustomTabs extends Component {
             return (
                 <Fragment>
 
-                    <Tabs                        
+                    <Tabs
+                        onChange = {this.onTabChange}                        
                         renderTabBar = {() => <ScrollableInkTabBar onTabClick = {this.onTabClick}/>}
                         renderTabContent = {() => <TabContent/>}
                         >    
@@ -56,6 +63,7 @@ class CustomTabs extends Component {
                         // Iterate Data to Create tabs Header
 
                             tabsData.map((tabDataItem)=> {
+								console.log("TCL: CustomTabs -> renderTabs -> tabDataItem", tabDataItem)
                                 return (
                                     <TabPane tab = {tabDataItem.BusinessTypeName} key={tabDataItem.BusinessTypeID} id={tabDataItem.BusinessTypeID} >       
                                         {/* <PanelContent tabLoading = {tabLoading} panelTabContent = {paneContent} />  */}

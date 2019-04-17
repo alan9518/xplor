@@ -42,9 +42,10 @@
         // Render Panel Content
         // --------------------------------------
         renderTabContent(panelTabContent) {
-            const {isOverview} = this.props
+			console.log("TCL: PanelContent -> renderTabContent -> panelTabContent", panelTabContent)
+            const {isOverview, tabTitle} = this.props
             return (
-                <FieldsMaker formFields={panelTabContent} />
+                <FieldsMaker formFields={panelTabContent} tabTitle = {tabTitle}/>
             )
         }
 
@@ -53,6 +54,7 @@
         // --------------------------------------
         render() {
             const { panelTabContent, tabLoading } = this.props;
+			console.log("TCL: PanelContent -> render -> this.props", this.props)
             const { innerWidth } = window;
             return (
                 <div style={{ minHeight: innerWidth <= 1024 ? 450 : 550, width: '100%', overflow: 'hidden' }}>
@@ -62,19 +64,6 @@
                 </div>
             )
         }
-
-
-        // render() {
-        //     const { panelTabContent, tabLoading } = this.props;
-        //     const { innerWidth } = window;
-        //     return (
-        //         <div style={{ minHeight: innerWidth <= 1024 ? 450 : 550, width: '100%', overflow: 'hidden' }}>
-        //             {
-        //                 tabLoading === true ? this.renderTabLoader() : this.renderTabContent(panelTabContent)
-        //             }
-        //         </div>
-        //     )
-        // }
     }
 
 // --------------------------------------

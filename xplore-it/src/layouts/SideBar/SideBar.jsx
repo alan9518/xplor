@@ -113,8 +113,8 @@
                         currentMenu: subMenu,
                         previousMenu : currentMenu  ,
                         redirectUser : true,
-                        redirectPath : `sites/xplorit_portal/xplorit/XplorIT.aspx/catalogue/${menu.CustomerName}/${menu.CustomerID}`,
-                        // redirectPath : `sites/xplorit_portal/xplorit/XplorIT.aspx/catalogue/Productivity(ITTools)/1014`
+                        redirectPath : `sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/catalogue/${menu.CustomerName}/${menu.CustomerID}`,
+                        // redirectPath : `sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/catalogue/Productivity(ITTools)/1014`
                     };
                 });
                 

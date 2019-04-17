@@ -1,7 +1,7 @@
 /* ==========================================================================
  * Fields Maker Component For Product Details Attributes
  * 05/11/2018
- * Alan Medina Silva
+ * Alan Medina Silva 
 //  ========================================================================== */
 
 
@@ -10,9 +10,9 @@
 // --------------------------------------
     import React, { Component, Fragment } from "react";
     import PropTypes from "prop-types";
-    import {ToggleField, FieldItem, FieldList, CardHeaderWide} from '../../components'
+    import {ToggleField, FieldItem, FieldList, CardHeaderWide, MaterialButton, SingleButton} from '../../components'
 
-    import {orderBy} from 'lodash';
+    import {orderBy} from 'lodash'; 
 
     // import { Breadcumbs, AppLoader,  CustomTabs, PanelContent, ProjectCard} from '../../components';
 
@@ -22,41 +22,80 @@
 // --------------------------------------
     class FieldsMaker extends Component {
 
+
+    /* ==========================================================================
+    ** Compomenet Setup
+    ** ========================================================================== */
+
         // --------------------------------------
         // constructor
         // --------------------------------------
         constructor(props) {
             super(props);
-            this.formControls = [
-                {name : 'input', type : ['text', 'password', 'email','phone'], soportedType : 'string'},
-                {name : 'selectList', type : [], soportedType : 'PickList'},
-                {name : 'datepicker', type : [], soportedType : 'date'},
-                {name : 'toggle', type : 'boolean', soportedType : ['string' ,'boolean']},
-            ]
+            this.state = {
+                editControls : false
+            }
         }
 
+
+
+    /* ==========================================================================
+    ** Handle State
+    ** ========================================================================== */
+
+        // --------------------------------------
+        // Enable Edition of Fields
+        // --------------------------------------
+        enableFieldsEdit = (event) => {
+            event.preventDefault();
+			console.log("TCL: FieldsMaker -> enableFieldsEdit -> event", event)
+            
+        }
+
+
+    
+    /* ==========================================================================
+    ** Render Methdos
+    ** ========================================================================== */
 
         // --------------------------------------
         // Render Component
         // --------------------------------------        
         renderFields() {
-            const {formFields} = this.props;
+            const {formFields, tabTitle} = this.props;
             if(formFields.isOverview)
                 return  <CardHeaderWide productOverview = {formFields} /> ;
             else {
                 return(
-                    <div className="row" style = {{height:'100%'}}>
-                        {
-                            formFields.map((tabItem, index)=> {
-                                let {attrValues} = tabItem;
-                                let valuesLength =  attrValues.length;
-                                let colNum = valuesLength >= 200 ? 12 : 6;
-                                return(
-                                    this.setFieldType(tabItem , colNum)                    
-                                )
-                            })               
-                        }
+                    <div className="container">
+                        <div className="row">
+                            <div className="xpl-editButtonContainer">
+
+                            <h2> {tabTitle}  </h2>
+
+                                <SingleButton 
+                                    buttonText = {"Edit Content"}
+                                    buttonColor= {"primary"} 
+                                    onClick = {this.enableFieldsEdit}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="row" style = {{height:'100%'}}>
+                            {
+                                formFields.map((tabItem, index)=> {
+                                    let {attrValues} = tabItem;
+                                    let valuesLength =  attrValues.length;
+                                    let colNum = valuesLength >= 200 ? 12 : 6;
+                                    return(
+                                        this.setFieldType(tabItem , colNum)                    
+                                    )
+                                })               
+                            }
+                        </div>
+                    
                     </div>
+                  
                 )
             }
 
