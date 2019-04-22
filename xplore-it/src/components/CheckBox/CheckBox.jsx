@@ -26,6 +26,7 @@ class CheckBox extends Component {
             super(props);
             this.state = {
                 isLoaded: false,
+                isChecked : false
             }
         }
 
@@ -35,6 +36,7 @@ class CheckBox extends Component {
         componentDidMount() {
             // Apply the indeterminate attribute of the checkbox input
             this.selector.indeterminate = this.props.indeterminate;
+            this.setState({isChecked : this.props.isChecked})
         }
         
         // --------------------------------------
@@ -42,9 +44,20 @@ class CheckBox extends Component {
         // --------------------------------------
         componentDidUpdate(prevProps) {
             if (prevProps.indeterminate !== this.props.indeterminate) {
-            this.selector.indeterminate = this.props.indeterminate;
+                this.selector.indeterminate = this.props.indeterminate;
             }
         }
+
+
+
+        toggleCheckedValue = (event) => {
+            const {isChecked} = this.state;
+            this.setState({
+                isChecked : !isChecked
+            })
+        }
+
+
     /* ==========================================================================
     ** Render Methods
     ** ========================================================================== */
@@ -55,6 +68,10 @@ class CheckBox extends Component {
         renderCheckBox() {
 
             const { id, label, type, indeterminate, hasError, value, ...inputProps } = this.props;
+
+
+            const {isChecked} = this.state
+
             console.log("TCL: CheckBox -> renderCheckBox -> inputProps", inputProps)
             
             const checkboxClassname = `
@@ -76,14 +93,16 @@ class CheckBox extends Component {
             
             return (
                 <Fragment>
-                    <div className={checkboxClassname}>
+                    <div className={checkboxClassname} >
                         <input
                           type="checkbox"
                           className={inputClassname}
                           ref={el => (this.selector = el)}
                           id={id}
                           value = {value}
-                          {...inputProps}
+                          checked = {isChecked}
+                          onChange = {this.toggleCheckedValue}
+                        //   {...inputProps}
                         />
                           <label className={labelClassname} htmlFor={id}>{label}</label>
                       </div>

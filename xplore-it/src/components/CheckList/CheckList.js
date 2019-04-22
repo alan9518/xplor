@@ -19,7 +19,7 @@ const CheckList = (props) => {
         <div className = 'xpl-checkListContainer'>
             {
                 listValues && listValues.map((item)=> {
-                    return <CheckBox id= { item } label = {item}  value = {item}  />
+                    return <CheckBox id= { item } label = {item}  value = {item} isChecked = {true} />
                 })
             }
             
