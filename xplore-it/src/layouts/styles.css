@@ -516,6 +516,37 @@
             margin-bottom: 10px;
         }
 
+        .product-brand {
+            margin-top: 10px;
+        }
+        
+        .product-brand .search-content {
+            display: block;
+            margin-bottom: 0px;
+            padding: 10px 0;
+        }
+        
+        .product-brand .search-content .search-content-area {
+            margin-bottom: 0px;
+        }
+        
+        .product-brand .search-content:last-child {
+            display: block;
+            margin-bottom: 0px;
+        }
+
+
+        .xpl-checkListContainer {
+            margin-top: 10px;
+            width: 100%;
+            background: #f6f7f9;
+            height: 400px;
+            overflow-y: scroll;
+            padding: 10px 20px;
+        }
+
+   
+
         
 /* ---------------------------------------------------
     5.0 ANIMATIONS STYLES	

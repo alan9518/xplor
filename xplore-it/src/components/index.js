@@ -53,6 +53,8 @@
     import ToggleField from './FieldsMaker/ToggleField';
     import RowContainer from './FieldsMaker/RowContainer';
     import ToolTip from './ToolTip/ToolTip';
+    import CheckList from './CheckList/CheckList';
+    import CheckBox from './CheckBox/CheckBox';
 
 
 // --------------------------------------
@@ -103,5 +105,7 @@
         FieldList,
         RowContainer,
         ToggleField,
-        ToolTip
+        ToolTip,
+        CheckList,
+        CheckBox,
     }
