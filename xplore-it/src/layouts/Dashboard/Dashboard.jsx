@@ -11,7 +11,7 @@
     import React, { Component, Fragment } from 'react';
     import { Switch, Route, Redirect } from 'react-router-dom';
     import dashboardRoutes from '../../routes/routes';
-    import { AppButton,  SideBar, NavBar,AppLoader, NoData} from '../../components';
+    import { AppButton,  SideBar, NavBar,AppLoader, NoData, ProjectLink} from '../../components';
     import 'bootstrap/dist/css/bootstrap.min.css';
     import '../styles.css';
     import logo from '../../images/logo/logo.png';
@@ -159,6 +159,15 @@
                     homeIcon : 'fas fa-home',
                     order : 0
             }
+
+            const addProjectRoute = {
+                path : `addProject`,
+                sidebarName : 'Add Project',
+                exact: true,
+                key:`app-route-addProject`,
+                color : '#1197D3',
+                addProjectIcon : 'fas fa-folder-plus'
+        }
             try {
                 const appRoutes = APIRoutes.map((apiRoute) => {
 
@@ -181,7 +190,7 @@
                 });
 
                 // Return All Routes, On an Array Merging The HomeRoute
-                const sideBarRoutes = [homeRoute, ...appRoutes ];
+                const sideBarRoutes = [homeRoute, addProjectRoute, ...appRoutes ];
                 return sideBarRoutes;
 
             }
@@ -330,6 +339,8 @@
                                                         onClick = {this.toggleMobileMenu } 
                                                         iconClass = {'fas fa-bars'} 
                                                 />
+
+                                              
 
                                             </div>
                                                 

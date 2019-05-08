@@ -93,6 +93,7 @@
 
     .xpl-cardName h5 {
         margin-left: 0;
+        word-break: break-word;
     }
 
     h5.xpl-productScopeCard {
@@ -140,6 +141,7 @@
         padding: 16px;
         background-color: #fff;
         border-radius: 3px 3px 0 0;
+        min-height: 760px;
     }
 
     .xpl-cardWideHeader {

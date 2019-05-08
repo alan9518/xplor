@@ -49,18 +49,29 @@
     import PanelContent from './Tabs/PanelContent';
     import FieldsMaker from './fieldsMaker/FieldsMaker';
     import FieldItem from './FieldsMaker/FieldItem';
+    import FieldSelect from './FieldsMaker/FieldSelect';
+    import FieldDate from './FieldsMaker/FieldDate';
+    import FieldColor from './FieldsMaker/FieldColor';
+    import FieldIcon from './FieldsMaker/FieldIcon';
+    import FieldPicker from './FieldsMaker/FieldPicker';
     import FieldList from './FieldsMaker/FieldList';
     import ToggleField from './FieldsMaker/ToggleField';
     import RowContainer from './FieldsMaker/RowContainer';
     import ToolTip from './ToolTip/ToolTip';
     import CheckList from './CheckList/CheckList';
     import CheckBox from './CheckBox/CheckBox';
+    import SPPeoplePicker from './SPPeoplePicker/SPPeoplePicker';
+    import DatePicker from './DatePicker/DatePicker'
+    import SmallDatePicker from './DatePicker/SmallDatePicker'
+    import EditableProjectCard from './Cards/EditableProjectCard';
+    import ColorPicker from './ColorPicker/ColorPicker';
+    import IconPicker from './IconPicker/IconPicker';
 
 
 // --------------------------------------
 // Forms
 // --------------------------------------
-    import NewProjectForm from './Forms/Projects/NewProjectForm';
+    import AddProjectForm from './Forms/Projects/AddProjectForm';
 
 // --------------------------------------
 // Export Components
@@ -86,7 +97,7 @@
         AppModal,
         MaterialButton,
         NewProject,
-        NewProjectForm,
+        AddProjectForm,
         HistoryList,
         SingleSelect,
         MultipleSelect,
@@ -102,10 +113,21 @@
         PanelContent,
         FieldsMaker,
         FieldItem,
+        FieldDate,
+        FieldPicker,
+        FieldColor,
         FieldList,
         RowContainer,
         ToggleField,
         ToolTip,
         CheckList,
         CheckBox,
+        SPPeoplePicker,
+        DatePicker,
+        SmallDatePicker,
+        EditableProjectCard,
+        ColorPicker,
+        IconPicker,
+        FieldIcon,
+        FieldSelect
     }

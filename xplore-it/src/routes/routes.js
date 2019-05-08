@@ -10,6 +10,7 @@
     import CatalogueView from '../views/Dashboard/Dashboard';
     import DetailsView from '../views/Details/DetailsView';
     import UserProfile from '../views/User/UserProfile';
+    import NewProjectView from '../views/NewProject/NewProject'
     import {Config} from '../Config';
 
 
@@ -48,11 +49,20 @@
             key:`app-route-:partID`,
             component : DetailsView,
         },
+        // {
+        //     path : `${path}/user/details/:UserID`,
+        //     exact: false,
+        //     key:`user-route`,
+        //     component : UserProfile,
+        // },
         {
-            path : `${path}/user/details/:UserID`,
-            exact: false,
-            key:`user-route`,
-            component : UserProfile,
+            path : `${path}/addProject/`,
+            sidebarName : 'Add Project',
+            exact: true,
+            key:`app-route-addProject`,
+            color : communication,
+            component : NewProjectView,
+            addProjectIcon : 'fas fa-add'
         },
     
         {redirect:true, path:'/', to : `${path}/catalogue/all/all`, navbarName: 'Redirect', key : 'index-route' }

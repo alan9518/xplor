@@ -33,6 +33,7 @@ class DetailsView extends Component {
                 productOverview:{},
                 productDetails : {},
                 currentTabName : '',
+                editingContent : false,
                 isLoaded : false,
                 showError : false,
                 tabLoading : false

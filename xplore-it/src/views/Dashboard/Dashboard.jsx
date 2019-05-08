@@ -14,6 +14,8 @@
         Carrousel,
         ProjectsHolder,
         AppLoader, 
+        ProjectLink,
+        AppButton
     } from "../../components";
 
     import {shuffle, startCase, replace} from "lodash";
@@ -239,7 +241,19 @@
                       {
                         itemsToShow > 0 && 
                             <div className="col-lg-12">
-                                <h3 className="xpl-row xpl-allAppTitle"> What's New? </h3>
+                                <div className="xpl-headerContainer">
+
+                                        <h3 className="xpl-row xpl-allAppTitle" style = {{marginLeft:0}}> What's New? </h3>
+                                        <ProjectLink route = {'addProject/'} spRoute = {true}>
+                                            <AppButton 
+                                                buttonClass = {'xpl-addNewAppButton'} 
+                                                onClick =  {this.toggleModal}
+                                                buttonText = {'Add New Project'} 
+                                                iconClass = {'fas fa-plus-circle'} 
+                                            /> 
+                                        </ProjectLink>
+                                </div>
+                                
                                 <Carrousel carrouselData = {carrouselproducts} itemsToShow = {itemsToShow} />
                             </div>
                       }
@@ -284,6 +298,7 @@
                         <div className="row xpl-row">
                             <div className="col-lg-12">
                                 <h3 className="xpl-allAppTitle">{currentCategory}</h3>
+                               
                             </div>
                         </div>
 

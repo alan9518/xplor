@@ -21,7 +21,7 @@
 
         const {colName, fieldName, fieldValue, editField} = props;
 		// console.log('​ToggleField -> props', props)
-        const isActive = fieldValue === "N" ? false : true;
+        const isActive = fieldValue === "false" ? false : true;
         return (
 
             <div className = {colName}>

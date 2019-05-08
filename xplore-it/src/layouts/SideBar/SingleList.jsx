@@ -84,6 +84,23 @@
                                         />
                                     ) 
                                 }
+
+                                // Look for Add Project Route
+                                else if(menuItem.addProjectIcon) {
+                                    return ( 
+                                        <SideBarLink 
+                                            key = { menuItem.key } 
+                                            indexKey = {`link-${key}`} 
+                                            title = { menuItem.sidebarName } 
+                                            link = { menuItemPath } 
+                                            color = { menuItem.color } 
+                                            hasIcon =  {true}
+                                            homeIcon = {menuItem.addProjectIcon}
+                                            hideMobileMenu = {this.hideMobileMenu}  
+                                        />
+                                    ) 
+                                }
+
                                 // Other Routes
 
                                 else {

@@ -1,0 +1,68 @@
+/* ==========================================================================
+** Icon Picker styles Grid
+** 03/05/2019
+** Alan Medina Silva
+** ========================================================================== */ */
+
+.xpl-iconsGridContainer {
+    /* max-width: 350px; */
+    padding: 15px;
+    max-height: 320px;
+    overflow: hidden;
+    overflow-y: scroll;
+    border: none;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    /* transition: box-shadow 0.2s; */
+}
+
+.xpl-iconsGridContainer .container {
+    /* max-width: 350px; */
+    padding: 15px;
+    max-height: 360px;
+    overflow: hidden;
+    overflow-y: scroll;
+    border: none;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    /* transition: box-shadow 0.2s; */
+}
+
+
+.xpl-iconGridItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px;
+    transition: all .2s ease;
+}
+
+.xpl-iconButton {
+    border: none;
+    cursor: pointer;
+}
+
+.xpl-iconButton:hover i {
+    color: #238ecc;
+}
+
+
+.xpl-iconButton:active i {
+    color: #238ecc;
+}
+
+.xpl-iconGridItem .xpl-iconButton i {
+    font-size: 30px;
+}
+
+
+.xpl-iconsGridContainer {
+    /* max-width: 350px; */
+    padding: 15px;
+    max-height: 360px;
+    overflow: hidden;
+    overflow-y: scroll;
+    border: none;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}

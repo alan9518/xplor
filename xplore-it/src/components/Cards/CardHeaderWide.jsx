@@ -9,10 +9,10 @@
 // --------------------------------------
     import React , {Fragment} from "react";
     import PropTypes from "prop-types";
-    import { ProjectCard } from "../../components";
+    import { ProjectCard , FieldItem} from "../../components";
     import "./styles.css";
     // import ListItem from "./CardHeaderListItem";
-    import { FieldItem } from '../../components'
+    // import {  } from '../../components'
     import { startCase} from "lodash";
 // --------------------------------------
 // Create Component Class
@@ -55,10 +55,7 @@
             return (
                 <Fragment>
                     <div className="xpl-cardWideHeader ">
-{/* 
-                        <div className="xpl-cardHeader">
-                            
-                        </div>  */}
+
 
                         <div className="container">
 

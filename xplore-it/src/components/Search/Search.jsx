@@ -65,9 +65,9 @@ class Search extends Component {
 
             // Extract Data
             const productsArray = allProductsData.data;
-            console.log("​Search -> loadProducts -> productsArray", productsArray)
+            // console.log("​Search -> loadProducts -> productsArray", productsArray)
             const colorsArray = await this.loadSPCategoriesColors(SpColorsData.data.value);
-            console.log("​Search -> loadProducts -> colorsArray", colorsArray);
+            // console.log("​Search -> loadProducts -> colorsArray", colorsArray);
 
             // Merge Products and Colors
             const productsWithColor = this.mergeProductsAndColors(productsArray, colorsArray);

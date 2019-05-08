@@ -104,10 +104,27 @@
         white-space: -pre-line;     /* Opera <7 */    
         white-space: -o-pre-line;   /* Opera 7 */     
         word-wrap: break-word;      /* IE */ 
+        margin-bottom: 10px;
     }
 
     .xpl-blueToggle {
         background-color: #1197D3;
+    }
+
+    .xpl-headerContainer {
+        display: flex;
+        flex-direction: row;
+        padding: 0 10px 10px 0;
+        width: 100%;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .xpl-buttonCenterContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
     }
 
 
@@ -505,9 +522,9 @@
             list-style: none;
         }
 
-        input.xpl-fieldEditInput, textarea.xpl-fieldEditInput {
+        input.xpl-fieldEditInput, textarea.xpl-fieldEditInput, button.xpl-fieldEditInput {
             width: 100%;
-            padding: 5px;
+            padding: 7px 5px;
             background: #F6F7F9;
             border: none;
             outline: none;
@@ -545,6 +562,138 @@
             padding: 10px 20px;
         }
 
+
+
+
+    /* ==========================================================================
+    ** Custom DatePicker
+    ** ========================================================================== */
+
+    .DateInput__small {
+        width: 130px;
+    }
+
+    .DayPicker {
+        background: #fff;
+        position: relative;
+        text-align: left;
+        font-family: 'Roboto Mono', monospace;
+    }
+
+    .SingleDatePickerInput {
+        background-color: transparent;
+        border: none;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: row ;
+        align-items: center !important;
+        padding: 0 0px 0 20px !important;
+        justify-content: space-between !important;
+        line-height: 3 !important;
+    }
+
+  
+    .DateInput {
+        background-color: transparent !important;
+    }
+
+
+    .SingleDatePicker {
+        background: #F6F7F9 !important;
+        width: 100% !important;
+    }
+
+    .SingleDatePicker.SingleDatePicker_1 {
+        width: 100%;
+    }
+
+    .DateInput_input, .DateInput_input__focused {
+        width: 100% !important;
+        padding: 5px !important;
+        background: #F6F7F9 !important;
+        border: none !important;
+        outline: none !important;
+        border-radius: 2px !important;
+        font-weight: 400 !important;
+        margin-bottom: 10px !important;
+        
+        
+        
+    }
+
+    /* .DateInput_input__focused {
+        background-color: #f3f3f3 !important;
+    } */
+
+    .SingleDatePickerInput_calendarIcon_svg {
+        fill: #0099dd !important;
+    }
+
+    .DateInput_input__focused {
+        border-bottom: 2px solid #0099dd;
+    }
+
+    .CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover {
+        background: #0099dd;
+        border: 1px double #0099dd;
+        color: #fff;
+    }
+
+
+    /* ==========================================================================
+    ** Custom React Select
+    ** ========================================================================== */
+
+    .react-select__control {
+        width: 100%;
+        background: #f6f7f9;
+        border: none;
+        outline: none;
+        border-radius: 2px;
+        margin-bottom: 10px;
+    }
+
+    
+    /* ==========================================================================
+    ** Custom People Picker
+    ** ========================================================================== */
+        
+    .peoplePicker.form-control.int-textInput {
+        background-color: #f6f7f9 !important;
+        border: none !important;
+    }
+    
+    div.sp-peoplepicker-topLevel {
+        background-color: transparent;
+        border: none !important;
+        width: 100% !important;
+        padding: 0 6px;
+    }
+
+    /* .sp-peoplepicker-initialHelpText {
+        top: 9px !important;
+        left: 16px !important;
+        font-size: 16px !important;
+    } */
+
+    .sp-peoplepicker-initialHelpText {
+        top: 0px!important;
+        left: 16px!important;
+        font-size: 16px!important;
+    }
+
+    div.sp-peoplepicker-topLevel {
+
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .sp-peoplepicker-autoFillContainer {
+        z-index: 2;
+        max-width: 100% !important;
+        min-width: 100% !important;
+
+    }
    
 
         

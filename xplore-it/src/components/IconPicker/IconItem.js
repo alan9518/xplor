@@ -1,44 +1,40 @@
 /* ==========================================================================
-** Single Button
-** 28/02/2019
+** Icons Layout Grid Item 
+** 03/05/2019
 ** Alan Medina Silva
 ** ========================================================================== */
+
 
 // --------------------------------------
 // Get Dependences
 // --------------------------------------
     import React from 'react';
     import PropTypes from 'prop-types';
-    import './styles.css';
+
 
 // --------------------------------------
 // Create Functional Component
 // --------------------------------------
-    const SingleButton = (props) => {
-        const {buttonText, value, onClick,  wideButton} = props;
-        // const disabledClass = !disbaledButton && '.xpl-disabledLink';
-
-        const classNames = wideButton ? 'xpl-singleButton xpl-wideButton' : 'xpl-singleButton'
-
+    const IconItem = (props) => {
+        const {iconName} = props;
         return (
-            <button 
-                onClick = {onClick} 
-                className = {classNames}
-                value = {value}
-            >
-                {buttonText}
-            </button>
+            <div className = "xpl-iconGridItem" >
+                <button value = {iconName}  onClick = {props.onIconClick} name = {iconName} className = "xpl-iconButton">  
+                    <i className = {iconName}  id = {iconName}>  </i>   
+                </button>
+            </div>
         )
     }
+    
 // -------------------------------------- 
 // Define PropTypes 
 // -------------------------------------- 
-    SingleButton.propTypes = {
-        props: PropTypes
+    IconItem.propTypes = {
+        iconName: PropTypes.string
     };
 
 
 // --------------------------------------
 // Export Component
 // --------------------------------------
-    export default SingleButton;
+    export default IconItem;

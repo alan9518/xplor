@@ -16,6 +16,7 @@
 // --------------------------------------   
     const CardImage = (props) => {
         const {projectIcon} =  props;
+		console.log("TCL: CardImage -> projectIcon", projectIcon)
         const iconName = (projectIcon === 'Default' || projectIcon === '' ?  'laptop-code' : projectIcon).toLowerCase();
         return( 
                 <div className="xpl-cardImage">

@@ -28,19 +28,33 @@
                             <h4 className = "xpl-breadChild"> All Results  </h4> 
                     </ProjectLink>
 
-                    <h4 class="xpl-breadChild" style = {{margin : 0}}> 
-                        <i class="fas fa-arrow-right xpl-breadSeparator"></i> 
-                    </h4>
+                    {
+                        softwareTopic &&
+                       
+                           
 
-                    <ProjectLink route = {`catalogue/${softwareTopic}/${softwareTopicID}`} spRoute = {true}> 
-                    <h4 className = "xpl-breadChild" >{softwareTopic} </h4> 
-                    </ProjectLink>
+                            
+                            <ProjectLink route = {`catalogue/${softwareTopic}/${softwareTopicID}`} spRoute = {true}> 
 
-                    <h4 class="xpl-breadChild" style = {{margin : 0}} > 
-                        <i class="fas fa-arrow-right xpl-breadSeparator"></i> 
-                    </h4>
+                                <h4 class="xpl-breadChild" style = {{margin : 0}}> 
+                                    <i class="fas fa-arrow-right xpl-breadSeparator"></i> 
+                                </h4>
 
-                    <h4 className = "xpl-breadChild" style = {{marginLeft : 0}}> {productName} </h4> 
+                                <h4 className = "xpl-breadChild" >{softwareTopic} </h4> 
+                            </ProjectLink>
+                        
+                    }
+
+                    { 
+                        productName && 
+                        <div>
+                            <h4 class="xpl-breadChild" style = {{margin : 0}} > 
+                                <i class="fas fa-arrow-right xpl-breadSeparator"></i> 
+                            </h4>
+
+                            <h4 className = "xpl-breadChild" style = {{marginLeft : 0}}> {productName} </h4>
+                        </div> 
+                    }
 
                 </div>
             </div>  

@@ -17,18 +17,39 @@
 // --------------------------------------
     const SingleSelect = (props) => {
         return (
-            <Select  
-                className="basic-single"
-                classNamePrefix="Categfories"
-                defaultValue={'Categories'}
+
+            <Select
+                className= {props.className}
+                classNamePrefix = {props.classNamePrefix}
+                // className='react-select-container'
+                // classNamePrefix="react-select"
+                defaultValue={props.defaultValue}
                 isDisabled={props.isDisabled}
                 isLoading={props.isLoading}
                 isClearable={props.isClearable}
                 isRtl={props.isRtl}
                 isSearchable={props.isSearchable}
-                name="color"
+                name={props.controlName}
+                inputId={props.inputId}
+                id={props.id}
                 options={props.options}
+                value = {props.selectedValue}
+                onChange = {props.onChange}
+                tabIndex = {props.tabIndex}
             />
+
+            // <Select  
+            //     className="basic-single"
+            //     classNamePrefix="Categfories"
+            //     defaultValue={'Categories'}
+            //     isDisabled={props.isDisabled}
+            //     isLoading={props.isLoading}
+            //     isClearable={props.isClearable}
+            //     isRtl={props.isRtl}
+            //     isSearchable={props.isSearchable}
+            //     name="color"
+            //     options={props.options}
+            // />
         )
     }
 

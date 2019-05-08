@@ -43,9 +43,15 @@
         // --------------------------------------
         renderTabContent(panelTabContent) {
 			console.log("TCL: PanelContent -> renderTabContent -> panelTabContent", panelTabContent)
-            const {isOverview, tabTitle} = this.props
+            const {isOverview, tabTitle, editFields, newProject} = this.props
             return (
-                <FieldsMaker formFields={panelTabContent} tabTitle = {tabTitle}/>
+                <FieldsMaker 
+                    formFields={panelTabContent} 
+                    tabTitle = {tabTitle} 
+                    editFields = {editFields} 
+                    isOverview = {isOverview} 
+                    newProject = {newProject}
+                />
             )
         }
 
