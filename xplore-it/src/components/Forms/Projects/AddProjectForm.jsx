@@ -41,7 +41,8 @@
                     softwareTopicName : '',
                     softwareTopicValues : [],
                     vendorValues : [],
-                    subCategoriesValues : [],
+                    subCapabilitesValues : [],
+                    subCapability : {label : 'Select a SubCapability', value : ''},
                     owner : '', 
                     createdDate : moment().format("DD/MM/YYYY") , 
                     lastUpdateDate : moment().format("DD/MM/YYYY"), 
@@ -52,7 +53,8 @@
                     showColorPicker : false
 
                 }
-                // this.onInputChange = this.onInputChange.bind(this)
+                this.onChangeSelect =  this.onChangeSelect.bind(this);
+                this.onSoftTopicsSelectChage =  this.onSoftTopicsSelectChage.bind(this);
             }
 
 
@@ -88,7 +90,7 @@
                     const SPRoutesData = this.createSPArray(SPRoutes.data.value);
 
 
-                    const softwareTopicValues = this.mergeRoutes(apiRoutesData, SPRoutesData)
+                    const softwareTopicValues = this.mergeCat(apiRoutesData, SPRoutesData)
 					
 
                     
@@ -157,7 +159,7 @@
             // @param {APIRoutes <Array>}
             // @param {SPRoutes <Array>}
             // --------------------------------------*/
-            mergeRoutes(APIRoutes, SPRoutes) {
+            mergeCat(APIRoutes, SPRoutes) {
 
             
                 try {
@@ -170,6 +172,7 @@
                             if(apiRoute.CustomerName === SPRoute.name) {
                                 selectOption.label = apiRoute.CustomerName;
                                 selectOption.value = `${SPRoute.color}-${apiRoute.CustomerName}`
+                                 selectOption.subCap = apiRoute.SubCap || []
                             }
                         }
 
@@ -177,7 +180,7 @@
 
                     });
 
-                    console.log("TCL: AddProjectForm -> mergeRoutes -> softwareTopicValues", softwareTopicValues)
+                    console.log("TCL: AddProjectForm -> mergeCat -> softwareTopicValues", softwareTopicValues)
 
                     // Return All Routes, On an Array Merging The HomeRoute
                     // const sideBarRoutes = [homeRoute, addProjectRoute, ...appRoutes ];
@@ -217,11 +220,11 @@
         ** ========================================================================== */
 
 
-            // ?--------------------------------------
-            // ? Set Card Color
-            // ?--------------------------------------
+            // !--------------------------------------
+            // ! Color Picker Component Not Used
+            // ! Set Card Color
+            // !--------------------------------------
                 onColorChange = (colorCode)=> {
-					console.log("TCL: AddProjectForm -> onColorChange -> colorCode", colorCode)
                     this.setState({
                         cardColor : colorCode
                     })
@@ -239,24 +242,80 @@
                 }
 
 
+            // ?--------------------------------------
+            // ? On SelectChange
+            // ?--------------------------------------
+                onChangeSelect(control, selectedOption) {
+                    console.log("TCL: AddProjectForm -> onChangeSelect -> selectedOption", selectedOption)
+                    console.log("TCL: AddProjectForm -> onChangeSelect -> control", control);
+
+                    this.setState({
+                      [control] : selectedOption
+                    })   
+                  
+                    
+
+                }
+
+
 
             
             // ?--------------------------------------
             // ? On InputChage
             // ?--------------------------------------
-                onSoftTopicsSelectChage = (event)=> {
-                    console.log("TCL: AddProjectForm -> onInputChage -> event", event)
-                    const {label, value}  = event;
+                onSoftTopicsSelectChage = (event, selectedOption)=> {
+					console.log("TCL: AddProjectForm -> onSoftTopicsSelectChage -> selectedOption", selectedOption)
+                    console.log("TCL: AddProjectForm -> onSoftTopicsSelectChage -> event", event)
+                    const {label, value, subCap}  = selectedOption;
+                    // Get Category Name
                     let valueArray =  value.split('-');
                     let colorValue =  valueArray[0];
                     let softValue = valueArray[1];
 
-                    this.setState({
-                        softwareTopic: value,
-                        softwareTopicName : softValue,
-                        cardColor : colorValue
-                        // selectedSoftwareTopic
-                    })
+                    if(subCap.length > 0) {
+                        this.setState({
+                            softwareTopic: value,
+                            softwareTopicName : softValue,
+                            cardColor : colorValue,
+                            subCapabilitesValues : subCap,
+                            subCapability : {}
+                            // selectedSoftwareTopic
+                        })
+                    }
+                    else 
+                        this.setState({
+                            softwareTopic: value,
+                            softwareTopicName : softValue,
+                            cardColor : colorValue,
+                            subCapabilitesValues : [],
+                            subCapability : {}
+                            // selectedSoftwareTopic
+                        })
+                }
+
+            // ?--------------------------------------
+            // ? Create Select Options
+            // ?--------------------------------------
+                createOptions (values) {
+                    if(values.length <= 0) 
+                        return [];
+
+                    let selectValues = values && values.map((value) => {
+                        if(value.SubCapabilities !== '') {
+							console.log("TCL: AddProjectForm -> createOptions -> value", value)
+                            let selectValue = {};
+                            selectValue.label = value.SubCapabilities
+                            selectValue.value = value.SubCapabilities
+    
+                            return selectValue;
+                        }
+                       
+                    }).filter((item)=> {return item !== undefined})
+                    
+
+
+                    return selectValues;
+					
                 }
 
 
@@ -267,8 +326,6 @@
             // ?--------------------------------------
                 onIconChage = (iconName)=> {
                     console.log("TCL: AddProjectForm -> onIconChage -> iconName", iconName)
-                    // const {value} = event.target;
-                    // console.log("TCL: AddProjectForm -> onIconChage -> value", value)
                     this.setState({
                         cardIcon : iconName
                     })
@@ -311,8 +368,11 @@
                         projectName, owner, cardIcon, createdDate, 
                         lastUpdateDate, coOwner, cardColor  ,
                         softwareTopic,softwareTopicName,
-                        softwareTopicValues,shortDescription, vendorValues,subCategoriesValues
+                        softwareTopicValues,shortDescription, vendorValues,
+                        subCapabilitesValues, subCapability
                     } = this.state;
+                let capOptions = this.createOptions(subCapabilitesValues);
+				console.log("TCL: AddProjectForm -> renderAddProjectForm -> capOptions", capOptions)
         
 
                 return (
@@ -352,11 +412,11 @@
                                                     fieldName = {"Vendor"} 
                                                     fieldValue = {null} 
                                                     optionsData = {vendorValues}
-                                                    inputName = {'softwareTopic'} 
+                                                    inputName = {'vendors'} 
                                                     editField = {true} 
                                                     mandatory = {true}
                                                     
-                                                    onChangeInput = {(event) => this.onSoftTopicsSelectChage(event)}
+                                                    onChangeInput = {this.onChangeSelect}
                                                 />
 
 
@@ -371,21 +431,26 @@
                                                     inputName = {'softwareTopic'} 
                                                     editField = {true} 
                                                     mandatory = {true}
-                                                    
-                                                    onChangeInput = {(event) => this.onSoftTopicsSelectChage(event)}
+                                                    // onChangeInput = {this.onChangeSelect}
+                                                    onChangeInput = {this.onSoftTopicsSelectChage}
                                                 />
 
 
 
-                                               <FieldSelect
-                                                    fieldName = {"Sub Category"} 
-                                                    fieldValue = {null} 
-                                                    optionsData = {subCategoriesValues}
-                                                    inputName = {'softwareTopic'} 
-                                                    editField = {true} 
-                                                    mandatory = {true}
-                                                    onChangeInput = {(event) => this.onSoftTopicsSelectChage(event)}
-                                               />
+                                            {
+                                                subCapabilitesValues.length > 0 && 
+                                                    <FieldSelect
+                                                        fieldName = {"Sub Category"} 
+                                                        fieldValue = {subCapability} 
+                                                        optionsData = {capOptions}
+                                                        inputName = {'subCapability'} 
+                                                        editField = {true} 
+                                                        isMulti =  {true}
+                                                        mandatory = {true}
+                                                        onChangeInput = {this.onChangeSelect}
+                                                        isSearchable = {false}
+                                                    />
+                                            }
 
                                           
 

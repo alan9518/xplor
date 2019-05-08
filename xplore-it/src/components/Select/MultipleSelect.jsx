@@ -20,11 +20,22 @@
     const MultipleSelect = (props) => (
         <Select
             isMulti
-            // defaultValue={props.options[1]}
+            className= {props.className}
+            classNamePrefix = {props.classNamePrefix}
             defaultValue = {props.defaultValue}
+            isDisabled={props.isDisabled}
+            isLoading={props.isLoading}
+            isClearable={props.isClearable}
+            isRtl={props.isRtl}
+            isSearchable={props.isSearchable}
+            name={props.controlName}
+            inputId={props.inputId}
+            id={props.id}
             options={props.options}
-            className="basic-multi-select"
-            classNamePrefix="select"
+            value = {props.selectedValue}
+            onChange = {props.onChange}
+            tabIndex = {props.tabIndex}
+            closeMenuOnSelect = {false}
         />
     );
 

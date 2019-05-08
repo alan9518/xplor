@@ -152,7 +152,7 @@
             // --------------------------------------
             onTabChange = (businessID) =>  {
                 const {currentTab} =  this.state;
-                if(businessID === currentTab)
+                if(businessID === currentTab || businessID === 0)
                     return 
                 else {
                     this.setState({tabLoading: true})

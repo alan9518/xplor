@@ -51,15 +51,21 @@
             // getAllProductsBySubCategory : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getProductsBySubcap?customerid=1025&subcap=Analytics&Bussmodel=XPLOR'
             getAllProductsBySubCategory : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getProductsBySubcap',
         
-        // --------------------------------------
+        /** --------------------------------------
         // Get All Categories
-        // --------------------------------------
+        // @param {Bussmodel <String>}
+        // --------------------------------------**/
             getAllCategories : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getCategories',
         
         // --------------------------------------
         // Get Sub Categories
         // --------------------------------------
             getSubCapacities : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getSubCap',
+
+        // --------------------------------------
+        // Get Vendors (Manufacturer)
+        // --------------------------------------
+            getVendors : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getSubCap',
         
         /** --------------------------------------
         // Get Product Details

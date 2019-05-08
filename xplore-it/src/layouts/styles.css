@@ -419,6 +419,7 @@
     .xpl-addNewAppButton, .xpl-toggleButton {
         padding: 20px 7px;
         font-size: 1.2em;
+        font-weight: 600;
     }
 
     .xpl-button.xpl-addNewAppButton i {

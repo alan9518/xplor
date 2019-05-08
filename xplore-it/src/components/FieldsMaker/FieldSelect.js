@@ -9,22 +9,23 @@
 // --------------------------------------
 // Get Dependences
 // --------------------------------------
-import React from 'react';
-import PropTypes from 'prop-types';
-import {SingleSelect} from '../../components'
-// import ColorPicker from '../ColorPicker/ColorPicker';
+    import React from 'react';
+    import PropTypes from 'prop-types';
+    import {SingleSelect, MultipleSelect} from '../../components'
+    
 
 
 
 // --------------------------------------
 // Create Functional Component
 // --------------------------------------
-    const FieldColor = (props) => {
+    const FieldSelect = (props) => {
         const {
             colName, fieldName,  inputName, fieldValue, 
             optionsData,  editField, allowFilter, 
             mandatory,  sequence, 
-            defaultComboValue, wideControl, mediumControl, extraWideControl
+            defaultComboValue, wideControl, mediumControl, extraWideControl,
+            isMulti
         } = props;
         
         // Set Class
@@ -50,7 +51,7 @@ import {SingleSelect} from '../../components'
         // className = {  Mandatory ? 'int-textInput int-validate ' : 'int-textInput'  }
         
         const selectClassPrefix = `react-select${controlWidthName}`;
-
+        // console.log("TCL: FieldSelect -> this", this)
 
         return (
             <div className={colName}>
@@ -59,20 +60,40 @@ import {SingleSelect} from '../../components'
 
                     <h6 className="xpl-boldText xpl-fieldSeparator"> {fieldName} </h6>
 
-                        <SingleSelect 
-                            options = {optionsData} 
-                            name = {inputName} 
-                            className = {selectClassName} 
-                            classNamePrefix = {selectClassPrefix} 
-                            defaultValue = {defaultComboValue}
-                            onChange = {props.onChangeInput}
-                            value = {fieldValue}
-                            id = {inputName}
-                            inputId  = {inputName}
-                            isSearchable = {allowFilter ? true : false}
-                            isDisabled = {!editField}
-                            tabIndex = {sequence}
-                        />
+                       {
+                           isMulti === true 
+                           ?
+                                <MultipleSelect 
+                                    options = {optionsData || [] }
+                                    name = {inputName} 
+                                    className = {selectClassName} 
+                                    classNamePrefix = {selectClassPrefix} 
+                                    defaultValue = {defaultComboValue}
+                                    onChange = {props.onChangeInput.bind(this,inputName)}
+                                    value = {fieldValue}
+                                    id = {inputName}
+                                    inputId  = {inputName}
+                                    isSearchable = {allowFilter ? true : false}
+                                    tabIndex = {sequence}
+                                />
+
+                            :
+                                <SingleSelect 
+                                    options = {optionsData || [] } 
+                                    name = {inputName} 
+                                    className = {selectClassName} 
+                                    classNamePrefix = {selectClassPrefix} 
+                                    defaultValue = {defaultComboValue}
+                                    // onChange = {props.onChangeInput}
+                                    onChange = {props.onChangeInput.bind(this,inputName)}
+                                    value = {fieldValue}
+                                    id = {inputName}
+                                    inputId  = {inputName}
+                                    isSearchable = {allowFilter ? true : false}
+                                    isDisabled = {!editField}
+                                    tabIndex = {sequence}
+                                />
+                       }
 
                 </div>
             </div>
@@ -83,7 +104,7 @@ import {SingleSelect} from '../../components'
 // --------------------------------------
 // Define PropTypes
 // --------------------------------------
-    FieldColor.propTypes = {
+    FieldSelect.propTypes = {
         colName: PropTypes.string,
         fieldName: PropTypes.string,
         fieldValue: PropTypes.string
@@ -92,7 +113,7 @@ import {SingleSelect} from '../../components'
 // --------------------------------------
 // Default Props
 // --------------------------------------
-    FieldColor.defaultProps = {
+    FieldSelect.defaultProps = {
         colName:  'col-xl-6 col-lg-6 col-sm-12 col-xs-12'
     };
 
@@ -100,4 +121,4 @@ import {SingleSelect} from '../../components'
 // --------------------------------------
 // Export Component
 // --------------------------------------
-export default FieldColor;
+export default FieldSelect;
