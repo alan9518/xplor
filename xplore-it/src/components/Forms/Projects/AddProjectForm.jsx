@@ -41,6 +41,7 @@
                     softwareTopicName : '',
                     softwareTopicValues : [],
                     vendorValues : [],
+                    vendor : {},
                     subCapabilitesValues : [],
                     subCapability : {label : 'Select a SubCapability', value : ''},
                     owner : '', 
@@ -78,8 +79,11 @@
                     // Get SP Routes
                     const SPRoutesPromise =  this.loadSPCategories();
 
+                    // Get Vendors
+                    const vendorsPromise = this.loadVendors();
+
                     // Resolve Both Promises
-                    const [apiRoutes, SPRoutes] = await Promise.all([apiRoutesPromise,SPRoutesPromise]);
+                    const [apiRoutes, SPRoutes, vendorsData] = await Promise.all([apiRoutesPromise,SPRoutesPromise, vendorsPromise]);
 					
                     
                     // Get Routes Values
@@ -99,6 +103,7 @@
                         // categories : appRoutes || [],
                         isLoaded : true,
                         softwareTopicValues : softwareTopicValues,
+                        vendorValues : this.createOptionsVendors(vendorsData.data),
                         showError : false,
                     })
                 
@@ -124,6 +129,17 @@
             async loadAPICategories() {
                 const params = {Bussmodel: 'XPLOR'}
                 return axios.get(Endpoints.getAllCategories, {params});
+            }   
+
+
+
+            
+            // --------------------------------------
+            // Load WebService Categories
+            // --------------------------------------
+            async loadVendors() {
+                const params = {erpid: '13'}
+                return axios.get(Endpoints.getVendors, {params});
             }   
 
 
@@ -261,7 +277,7 @@
 
             
             // ?--------------------------------------
-            // ? On InputChage
+            // ? On Software Topic Change
             // ?--------------------------------------
                 onSoftTopicsSelectChage = (event, selectedOption)=> {
 					console.log("TCL: AddProjectForm -> onSoftTopicsSelectChage -> selectedOption", selectedOption)
@@ -293,6 +309,8 @@
                         })
                 }
 
+
+
             // ?--------------------------------------
             // ? Create Select Options
             // ?--------------------------------------
@@ -316,6 +334,33 @@
 
                     return selectValues;
 					
+                }
+
+
+
+                // ?--------------------------------------
+                // ? Create Select Options Vendors
+                // ?--------------------------------------
+                createOptionsVendors (values) {
+                    if(values.length <= 0) 
+                        return [];
+
+                    let selectValues = values && values.map((value) => {
+                        if(value.SubCapabilities !== '') {
+                            console.log("TCL: AddProjectForm -> createOptionsVendors -> value", value)
+                            let selectValue = {};
+                            selectValue.label = value.ManufacturerName
+                            selectValue.value = value.ERPCompanyID
+
+                            return selectValue;
+                        }
+                    
+                    }).filter((item)=> {return item !== undefined})
+                    
+
+
+                    return selectValues;
+                    
                 }
 
 
@@ -369,7 +414,7 @@
                         lastUpdateDate, coOwner, cardColor  ,
                         softwareTopic,softwareTopicName,
                         softwareTopicValues,shortDescription, vendorValues,
-                        subCapabilitesValues, subCapability
+                        vendor,subCapabilitesValues, subCapability
                     } = this.state;
                 let capOptions = this.createOptions(subCapabilitesValues);
 				console.log("TCL: AddProjectForm -> renderAddProjectForm -> capOptions", capOptions)
@@ -410,7 +455,7 @@
 
                                                 <FieldSelect
                                                     fieldName = {"Vendor"} 
-                                                    fieldValue = {null} 
+                                                    fieldValue = {vendor} 
                                                     optionsData = {vendorValues}
                                                     inputName = {'vendors'} 
                                                     editField = {true} 

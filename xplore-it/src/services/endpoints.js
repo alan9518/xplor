@@ -64,8 +64,9 @@
 
         // --------------------------------------
         // Get Vendors (Manufacturer)
+        // @param {erpid <string>}
         // --------------------------------------
-            getVendors : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getSubCap',
+            getVendors : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getMaufacturer',
         
         /** --------------------------------------
         // Get Product Details
