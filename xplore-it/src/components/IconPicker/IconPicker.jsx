@@ -938,7 +938,7 @@ class IconPicker extends Component {
                         {
                             this.icons.map((icon)=> {
                                 return (
-                                    <div className="col-md-2 col-sm-4 col-sx-6">
+                                    <div className="col-md-2 col-sm-4 col-xs-6">
                                         <IconItem iconName = {icon} onIconClick = {this.onIconClick} key = {icon}/> 
                                     </div>
                                 )

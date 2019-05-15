@@ -10,54 +10,53 @@
 // --------------------------------------
     import React from 'react';
     import PropTypes from 'prop-types';
-    import {ProjectLink} from '../../components';
+    import { ProjectLink } from '../../components';
 
 // --------------------------------------
 // Create Functional Component
 // --------------------------------------
     const BreadCumbs = (props) => {
 
-        
-        const {productName, softwareTopic , softwareTopicID} = props;
-		
+
+        const { productName, softwareTopic, softwareTopicID } = props;
+
 
         return (
             <div className="xpl-breadcumbsContainer">
                 <div className="xpl-breadLinksContainer">
-                    <ProjectLink route = {"catalogue/all/all"} spRoute = {true}> 
-                            <h4 className = "xpl-breadChild"> All Results  </h4> 
+                    <ProjectLink route={"catalogue/all/all"} spRoute={true}>
+                        <h4 className="xpl-breadChild"> All Results  </h4>
                     </ProjectLink>
 
-                    {
-                        softwareTopic &&
-                       
-                           
 
-                            
-                            <ProjectLink route = {`catalogue/${softwareTopic}/${softwareTopicID}`} spRoute = {true}> 
 
-                                <h4 class="xpl-breadChild" style = {{margin : 0}}> 
-                                    <i class="fas fa-arrow-right xpl-breadSeparator"></i> 
-                                </h4>
 
-                                <h4 className = "xpl-breadChild" >{softwareTopic} </h4> 
-                            </ProjectLink>
-                        
-                    }
+                    <h4 class="xpl-breadChild" style={{ margin: 0 }}>
+                        <i class="fas fa-arrow-right xpl-breadSeparator"></i>
+                    </h4>
 
-                    { 
-                        productName && 
-                        <div>
-                            <h4 class="xpl-breadChild" style = {{margin : 0}} > 
-                                <i class="fas fa-arrow-right xpl-breadSeparator"></i> 
-                            </h4>
 
-                            <h4 className = "xpl-breadChild" style = {{marginLeft : 0}}> {productName} </h4>
-                        </div> 
-                    }
+                    <ProjectLink route={`catalogue/${softwareTopic}/${softwareTopicID}`} spRoute={true}>
+
+
+
+                        <h4 className="xpl-breadChild" >{softwareTopic} </h4>
+                    </ProjectLink>
+
+
+
+
+
+                    <h4 class="xpl-breadChild" style={{ margin: 0 }} >
+                        <i class="fas fa-arrow-right xpl-breadSeparator"></i>
+                    </h4>
+
+                    <h4 className="xpl-breadChild" style={{ marginLeft: 0 }}> {productName} </h4>
+
+
 
                 </div>
-            </div>  
+            </div>
         )
     }
 
@@ -79,4 +78,3 @@
     export default BreadCumbs;
 
 
-    

@@ -71,7 +71,7 @@
                         "sequence": 3,
                         "datatype": "date",
                         "maxlength": "10",
-                        "attrValues":  moment().format("DD/MM/YYYY"),  
+                        "attrValues":  moment().format("MM/DD/YYYY"),  
                         "partRecord": "",
                         "valueID": "",
                         "valsequence": ""
@@ -82,7 +82,7 @@
                         "sequence": 10,
                         "datatype": "date",
                         "maxlength": "",
-                        "attrValues":  moment().format("DD/MM/YYYY"), 
+                        "attrValues":  moment().format("MM/DD/YYYY"), 
                         "partRecord": "92347",
                         "valueID": "92385",
                         "valsequence": "1"
@@ -203,7 +203,7 @@
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-xl-12  col-lg-12 col-sm-12">
-                                {this.renderBreadcumbs()}
+                                
                                 {this.renderProductDetails()}
                             </div>
 

@@ -45,13 +45,14 @@
                     subCapabilitesValues : [],
                     subCapability : {label : 'Select a SubCapability', value : ''},
                     owner : '', 
-                    createdDate : moment().format("DD/MM/YYYY") , 
-                    lastUpdateDate : moment().format("DD/MM/YYYY"), 
+                    createdDate : moment().format("MM/DD/YYYY") , 
+                    lastUpdateDate : moment().format("MM/DD/YYYY"), 
                     coOwner : '', 
                     shortDescription : '',
                     cardColor : null,
                     cardIcon :  '',
-                    showColorPicker : false
+                    showColorPicker : false,
+                    ERPCompanyID : 0
 
                 }
                 this.onChangeSelect =  this.onChangeSelect.bind(this);
@@ -80,10 +81,11 @@
                     const SPRoutesPromise =  this.loadSPCategories();
 
                     // Get Vendors
-                    const vendorsPromise = this.loadVendors();
+                    // const vendorsPromise = this.loadVendors();
 
                     // Resolve Both Promises
-                    const [apiRoutes, SPRoutes, vendorsData] = await Promise.all([apiRoutesPromise,SPRoutesPromise, vendorsPromise]);
+                    // const [apiRoutes, SPRoutes, vendorsData] = await Promise.all([apiRoutesPromise,SPRoutesPromise, vendorsPromise]);
+                    const [apiRoutes, SPRoutes] = await Promise.all([apiRoutesPromise,SPRoutesPromise]);
 					
                     
                     // Get Routes Values
@@ -103,7 +105,7 @@
                         // categories : appRoutes || [],
                         isLoaded : true,
                         softwareTopicValues : softwareTopicValues,
-                        vendorValues : this.createOptionsVendors(vendorsData.data),
+                        // vendorValues : this.createOptionsVendors(vendorsData.data),
                         showError : false,
                     })
                 
@@ -137,8 +139,10 @@
             // --------------------------------------
             // Load WebService Categories
             // --------------------------------------
-            async loadVendors() {
-                const params = {erpid: '13'}
+            async loadVendors(ERPCompanyID = '13') {
+                // const {ERPCompanyID} = this.state;
+				console.log("TCL: loadVendors -> ERPCompanyID", ERPCompanyID)
+                const params = {erpid: ERPCompanyID.toString()}
                 return axios.get(Endpoints.getVendors, {params});
             }   
 
@@ -188,7 +192,8 @@
                             if(apiRoute.CustomerName === SPRoute.name) {
                                 selectOption.label = apiRoute.CustomerName;
                                 selectOption.value = `${SPRoute.color}-${apiRoute.CustomerName}`
-                                 selectOption.subCap = apiRoute.SubCap || []
+                                selectOption.subCap = apiRoute.SubCap || []
+                                selectOption.ERPCompanyID = apiRoute.ERPCompanyID
                             }
                         }
 
@@ -288,13 +293,16 @@
                     let colorValue =  valueArray[0];
                     let softValue = valueArray[1];
 
+
+                    // Set SubCap and ID for Vendors Request
                     if(subCap.length > 0) {
                         this.setState({
                             softwareTopic: value,
                             softwareTopicName : softValue,
                             cardColor : colorValue,
                             subCapabilitesValues : subCap,
-                            subCapability : {}
+                            subCapability : {},
+                            ERPCompanyID : selectedOption.ERPCompanyID
                             // selectedSoftwareTopic
                         })
                     }
@@ -304,9 +312,26 @@
                             softwareTopicName : softValue,
                             cardColor : colorValue,
                             subCapabilitesValues : [],
-                            subCapability : {}
+                            subCapability : {},
+                            ERPCompanyID : selectedOption.ERPCompanyID
                             // selectedSoftwareTopic
                         })
+
+
+                    // GET Vendors
+                    if (!this.state.ERPCompanyID ===  selectedOption.ERPCompanyID) {
+                        this.loadVendors(selectedOption.ERPCompanyID)
+                            .then((vendorsData)=> {
+                                console.log("TCL: onSoftTopicsSelectChage -> data", vendorsData)
+                                this.setState({
+                                    vendorValues : this.createOptionsVendors(vendorsData.data)
+                                })
+                            })
+                    }
+                   
+
+
+                   
                 }
 
 
@@ -324,6 +349,7 @@
                             let selectValue = {};
                             selectValue.label = value.SubCapabilities
                             selectValue.value = value.SubCapabilities
+                            
     
                             return selectValue;
                         }
@@ -453,6 +479,21 @@
                                                 />
 
 
+
+                                                <FieldSelect
+                                                    fieldName = {"Software Topic"} 
+                                                    fieldValue = {softwareTopic} 
+                                                    optionsData = {softwareTopicValues}
+                                                    inputName = {'softwareTopic'} 
+                                                    editField = {true} 
+                                                    mandatory = {true}
+                                                    // onChangeInput = {this.onChangeSelect}
+                                                    onChangeInput = {this.onSoftTopicsSelectChage}
+                                                />
+
+                                                
+                                                
+
                                                 <FieldSelect
                                                     fieldName = {"Vendor"} 
                                                     fieldValue = {vendor} 
@@ -469,17 +510,7 @@
                                                 
 
 
-                                                <FieldSelect
-                                                    fieldName = {"Software Topic"} 
-                                                    fieldValue = {softwareTopic} 
-                                                    optionsData = {softwareTopicValues}
-                                                    inputName = {'softwareTopic'} 
-                                                    editField = {true} 
-                                                    mandatory = {true}
-                                                    // onChangeInput = {this.onChangeSelect}
-                                                    onChangeInput = {this.onSoftTopicsSelectChage}
-                                                />
-
+                                              
 
 
                                             {
