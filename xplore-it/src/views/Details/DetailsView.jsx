@@ -36,7 +36,8 @@ class DetailsView extends Component {
                 editingContent : false,
                 isLoaded : false,
                 showError : false,
-                tabLoading : false
+                tabLoading : false,
+                userIsEditingTab : false
             }
             this.partID = props.match.params.partID;
         }
@@ -287,17 +288,36 @@ class DetailsView extends Component {
         // Change Tab and Get Business ID
         // If the Tab ID is the same as the 
         // state, exit. Is Clicking same tab
+        // If the User is Editing the Tabs, block
+        // Navigation
         // --------------------------------------
         onTabChange = (businessID) =>  {
             const {currentTab} =  this.state;
             if(businessID === currentTab)
                 return 
+            // else if (this.state.userIsEditingTab === true)
+            //     return ;
             else {
                 this.setState({tabLoading: true})
                 this.changeTabData(businessID)
             }
 		
         }   
+
+        // ?--------------------------------------
+        // ? The User is Editing a Tab
+        // ? true || false
+        // ?--------------------------------------
+        enableTabEdit = (tabStatus) => {
+			console.log("TCL: DetailsView -> enableTabEdit -> tabStatus", tabStatus)
+            this.setState({userIsEditingTab : tabStatus})
+
+
+            let tabsHeader = document.getElementsByClassName('.rc-tabs-top');
+            console.log("TCL: DetailsView -> enableTabEdit -> tabsHeader", tabsHeader)
+            console.log("TCL: DetailsView -> enableTabEdit -> tabsHeader style", tabsHeader.style)
+
+        }
 
 
     /* ==========================================================================
@@ -386,7 +406,14 @@ class DetailsView extends Component {
                     <CustomTabs tabLoading = {tabLoading} tabsData = {productTabs} onTabChange = {this.onTabChange.bind(this)}>
                         <WideCard  >
                             
-                            <PanelContent tabLoading = {tabLoading} tabTitle = {currentTabName}  panelTabContent = {productOverview} isOverview = {isOverview} /> 
+                            <PanelContent 
+                                tabLoading = {tabLoading} 
+                                tabTitle = {currentTabName}  
+                                panelTabContent = {productOverview} 
+                                isOverview = {isOverview} 
+                                enableTabEdit =  {this.enableTabEdit}
+                                formName = {currentTabName}
+                            /> 
                 
                         </WideCard>
                     </CustomTabs>

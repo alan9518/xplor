@@ -134,40 +134,40 @@
    ========================================================================== */
 
     .xpl-singleButton {
-        background-color: transparent;
-        border: 2px solid #009add;
-        padding: 10px 16px;
-        font-size: 12px;
-        color: #009add;
-        cursor: pointer;
-        transition: ease .2s;
-        font-weight: 600;
+        background-color: transparent !important;
+        border: 2px solid #009add !important;
+        padding: 10px 16px !important;
+        font-size: 12px !important;
+        color: #009add !important;
+        cursor: pointer !important;
+        transition: ease .2s !important;
+        font-weight: 600 !important;
     }
 
     .xpl-singleButton:hover{
-        background-color: #009add;
-        color: #fff;
-        border: 2px solid #fff;
+        background-color: #009add !important;
+        color: #fff !important;
+        border: 2px solid #fff !important; 
     }
 
     .xpl-singleButtonDanger {
-        background-color: transparent;
-        border: 2px solid #d23338;
-        padding: 10px 16px;
-        font-size: 12px;
-        color: #d23338;
-        cursor: pointer;
+        background-color: transparent !important;
+        border: 2px solid #d23338 !important;
+        padding: 10px 16px !important;
+        font-size: 12px !important;
+        color: #d23338 !important;
+        cursor: pointer !important;
     }
 
     .xpl-singleButtonDanger:hover{
-        background-color: #d23338;
-        color: #fff;
-        border: 2px solid #fff;
+        background-color: #d23338 !important;
+        color: #fff !important;
+        border: 2px solid #fff !important;
     }
 
 
 
     .xpl-wideButton {
-        font-size: 18px;
+        font-size: 18px !important;
     }
     

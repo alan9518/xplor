@@ -61,6 +61,7 @@
     import CheckList from './CheckList/CheckList';
     import CheckBox from './CheckBox/CheckBox';
     import SPPeoplePicker from './SPPeoplePicker/SPPeoplePicker';
+    import DynamicPeoplePicker from './SPPeoplePicker/DynamicPeoplePicker'
     import DatePicker from './DatePicker/DatePicker'
     import SmallDatePicker from './DatePicker/SmallDatePicker'
     import EditableProjectCard from './Cards/EditableProjectCard';
@@ -129,5 +130,6 @@
         ColorPicker,
         IconPicker,
         FieldIcon,
-        FieldSelect
+        FieldSelect,
+        DynamicPeoplePicker
     }

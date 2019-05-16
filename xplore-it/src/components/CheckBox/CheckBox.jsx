@@ -72,7 +72,7 @@ class CheckBox extends Component {
 
             const {isChecked} = this.state
 
-            console.log("TCL: CheckBox -> renderCheckBox -> inputProps", inputProps)
+            
             
             const checkboxClassname = `
               m-checkbox

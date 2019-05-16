@@ -128,6 +128,16 @@
     }
 
 
+    .xpl-controlDisabled {
+        pointer-events: none;
+    }
+      
+      
+    .xpl-controlEnabled {
+        pointer-events: all;
+    }
+
+
 
 /* ---------------------------------------------------
     2.0 NAVBAR STYLES
@@ -469,6 +479,7 @@
 
     .xpl-breadSeparator {
         font-size: 18px;
+        line-height: 30px;
     }
     
 

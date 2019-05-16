@@ -18,7 +18,8 @@
 // --------------------------------------
     const FieldList = (props) => {
 
-        const {colName, fieldName, listValues, editField} = props;
+        const {colName, fieldName, listValues, editField, posibleValues} = props;
+		console.log("TCL: FieldList -> posibleValues", posibleValues)
 
         return (
             <div className = {colName}>
@@ -34,7 +35,8 @@
                         :   <ul>
                                 {
                                     listValues && listValues.map((listItem)=> {
-                                        return( <li className = "xpl-detailsListItem"> <i className="fas fa-caret-right"></i> {listItem}  </li>)
+                                        if(listItem.isChecked ===  true)
+                                            return( <li className = "xpl-detailsListItem"> <i className="fas fa-caret-right"></i> {listItem.name}  </li>)
                                     })
                                 }
                             </ul>

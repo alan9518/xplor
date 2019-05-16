@@ -33,7 +33,8 @@
                 super(props);
                 this.state = {
                     editControls: this.props.editFields || false,
-                    parentTabHeight : 0
+                    formFields : [],
+                    isLoaded : false
                 }
                 // this.parentTabHeight = document.getElementsByClassName('rc-tabs-tabpane-active')[0].clientHeight
             }
@@ -41,8 +42,9 @@
 
             componentDidMount() {
                 this.setState({
-                    parentTabHeight: document.getElementsByClassName('rc-tabs-tabpane-active')[0].clientHeight
-                })
+                    formFields : this.props.formFields,
+                    isLoaded : true
+                });
             }
 
 
@@ -52,32 +54,60 @@
             ** Handle State
             ** ========================================================================== */
 
-            // --------------------------------------
-            // Enable Edition of Fields
-            // --------------------------------------
-            toggleFieldsEdit = (event) => {
-                event.preventDefault();
-                const { editControls } = this.state;
-                
-                // ? Change Tab Height
-                editControls === true 
-                    ? document.getElementsByClassName('rc-tabs-tabpane-active')[0].style = '1200px'
-                    : document.getElementsByClassName('rc-tabs-tabpane-active')[0].style = this.state.parentTabHeight
-                
-                this.setState({ editControls: !editControls })
-            }
+                // --------------------------------------
+                // Enable Edition of Fields
+                // --------------------------------------
+                toggleFieldsEdit = (event) => {
+                    event.preventDefault();
+                    const { editControls } = this.state;
+                    
+                    
+                    this.setState({ editControls: !editControls })
+                    this.props.enableTabEdit(!editControls)
+                }
 
 
-            // --------------------------------------
-            // Convert String to Moment Object
-            // --------------------------------------
-            convertStringToMomentObject(date) {
-                let dateObj = new Date(date);
-                let momentObj = moment(dateObj);
-                //console.log('TCL: RequirementsDefinition -> convertStringToMomentObject -> momentObj', momentObj)
+                // ?--------------------------------------
+                // ? Save New Data
+                // ?--------------------------------------
+                saveFields = (event)=> {
+                    event.preventDefault();
+                    console.log("TCL: FieldsMaker -> saveFields -> event", event)
+                    
 
-                return momentObj;
-            }
+                    const {target} = event;
+                    const {formFields} = this.state;
+					console.log("TCL: FieldsMaker -> saveFields -> formFields", formFields)
+                    
+
+
+                    this.setState({ editControls: false })
+                    this.props.enableTabEdit(false)
+                }
+
+
+
+                // ?--------------------------------------
+                // ? Merge Selected Values && Possible
+                // ? Values in One List
+                // ?--------------------------------------
+                setCheckboxList(selectedItems, posibleValues) {
+
+                    let origLength = posibleValues.length;
+                    let updatingLength = selectedItems.length;
+                    let checkList = posibleValues;
+
+                    //Traverse the original array and replace only if the second array also has the same value
+                    for(let i = origLength-1; i >= 0; i--) {
+                        for(let j = updatingLength -1; j >= 0; j--) {
+                            if(checkList[i].name === selectedItems[j].name) {
+                                checkList[i] = selectedItems[j];
+                            }
+                        }
+                    }
+
+                    return checkList
+                }
 
 
 
@@ -100,14 +130,12 @@
 
 
             // --------------------------------------
-            // Set PeoplePciker Control
+            // Set Date Control
             // Or Label Text
             // --------------------------------------
             setDatePickerField(attrName, attrValues, divClass, editField) {
                 console.log("TCL: FieldsMaker -> setDatePickerField -> attrValues", attrValues)
-                // let dateValue =  this.convertStringToMomentObject(attrValues);
-                // console.log("TCL: FieldsMaker -> setDatePickerField -> dateValue", dateValue)
-                
+               
 
                 return (
                     <FieldDate
@@ -125,19 +153,64 @@
             }
 
 
-            setTextPeoplePicker(attrName, attrValues, divClass, editField) {
+
+            // --------------------------------------
+            // Set PeoplePciker Control
+            // Or Label Text
+            // --------------------------------------
+            setTextPeoplePicker(attrName, attrValues, divClass, editField, dynamicPicker) {
                 return (
                     <FieldPicker
                         fieldName={attrName}
                         fieldValue={attrValues}
                         editField={editField}
                         inputName={attrName}
-                        colName={'col-md-12 col-lg-12'}
+                        dynamicPicker = {dynamicPicker}
+                        // colName={'col-md-12 col-lg-12'}
                     // onPickerChange = {this.onChangeInput}
                     />
                 )
             }
 
+
+            // ?--------------------------------------
+            // ? Create Picklist Control
+            // ?--------------------------------------
+            setListField(attrName , valuesArray, posibleValues , divClass, editField,valuesDataArray) {
+                // Merge values names list and values names array
+            
+                    const selectedItems  = valuesArray.map((item, index) => {
+                        let itemObject = {
+                            name : item,
+                            value : valuesDataArray[index],
+                            isChecked : true
+                        }
+
+                        return itemObject
+                    })
+
+                // format All Possible Values
+                    const unSelectedItems = posibleValues.map((item) => {
+                        let itemObject = {
+                            name : item,
+                            value : 0,
+                            isChecked : false
+                        }
+
+                        return itemObject
+                    });
+
+
+                let CheckboxList = this.setCheckboxList(selectedItems, unSelectedItems)
+                    
+                return <FieldList 
+                    fieldName={attrName} 
+                    listValues={CheckboxList} 
+                    posibleValues = {unSelectedItems} 
+                    colName={divClass} 
+                    editField={editField} 
+                /> 
+            }
 
 
 
@@ -149,7 +222,7 @@
             setFieldType(field, colClass, editField) {
 
                 try {
-                    let { attrName, attrValues, datatype } = field;
+                    let { attrName, attrValues, datatype, pickListValues, valueID } = field;
                     let divClass = `col-xl-${colClass} col-lg-${colClass} col-sm-12 col-xs-12`;
                     let formField = null;
                     switch ((datatype.toLowerCase())) {
@@ -163,8 +236,10 @@
 
                             //? Split The Values to Create a List
                             const valuesArray = attrValues.split('||');
+                            const posibleValues = pickListValues.split('|');
+                            const valuesDataArray = valueID.split('||');
                             valuesArray.length > 1
-                                ? formField = <FieldList fieldName={attrName} listValues={valuesArray} colName={divClass} editField={editField} />
+                                ? formField = this.setListField(attrName , valuesArray, posibleValues , divClass, editField, valuesDataArray)
                                 : formField = this.setTextField(attrName, attrValues, divClass, editField);
 
                             break;
@@ -176,6 +251,11 @@
                         //? Sharepoint PeoplePicker
                         case "peoplepicker":
                             formField = this.setTextPeoplePicker(attrName, attrValues, divClass, editField);
+                            break;
+
+                        //? Sharepoint PeoplePicker
+                        case "person":
+                            formField = this.setTextPeoplePicker(attrName, attrValues, divClass, editField, true);
                             break;
 
                         //? DatePicker
@@ -203,50 +283,66 @@
             // Render Component
             // --------------------------------------        
             renderFields() {
-                const { isOverview, formFields, tabTitle, newProject } = this.props;
-                const { editControls } = this.state;
+                const { isOverview,  tabTitle, newProject } = this.props;
+                const { editControls, formFields } = this.state;
 
                 if (isOverview) {
 
                     if (newProject)
-                        return <AddProjectForm productOverview={formFields} />;
+                        return <AddProjectForm productOverview={formFields || this.props.formFields} />;
                     else
-                        return <CardHeaderWide productOverview={formFields} />;
+                        return <CardHeaderWide productOverview={formFields || this.props.formFields} />;
 
                 }
 
 
                 else {
                     return (
-                        <div className="container">
-                            <div className="row">
-                                <div className="xpl-editButtonContainer">
+                        <form name = {`form-${tabTitle}`} style = {{width:'100%'}} onSubmit = {this.saveFields}>
+                            <div className="container">
+                                <div className="row">
+                                    <div className="xpl-editButtonContainer">
 
-                                    <h2> {tabTitle}  </h2>
+                                        <h2> {tabTitle}  </h2>
 
-                                    <SingleButton
-                                        buttonText={editControls ? "Save Content" : "Edit Content"}
-                                        buttonColor={"primary"}
-                                        onClick={this.toggleFieldsEdit}
-                                    />
+                                    {
+                                        editControls === false ?
+                                            <SingleButton
+                                                buttonText={"Edit Content"}
+                                                buttonColor={"primary"}
+                                                onClick={this.toggleFieldsEdit}
+                                            />
+
+                                            // <SingleButton
+                                            //     buttonText={"Save Content" }
+                                            //     buttonColor={"primary"}
+                                            //     onClick={this.saveFields}
+                                            // />
+
+                                        :
+
+                                           <input type="submit" value="Save Content" className = 'xpl-singleButton' name = {'saveContent'}/>
+                                    }
+                                    </div>
                                 </div>
+
+                                <div className="row" style={{ height: '100%' }}>
+                                    
+                                        {
+                                            formFields.map((tabItem, index) => {
+                                                let { attrValues } = tabItem;
+                                                let valuesLength = attrValues.length;
+                                                let colNum = valuesLength >= 200 ? 12 : 6;
+                                                return (
+                                                    this.setFieldType(tabItem, colNum, editControls)
+                                                )
+                                            })
+                                        }
+                                
+                                </div>
+
                             </div>
-
-                            <div className="row" style={{ height: '100%' }}>
-                                {
-                                    formFields.map((tabItem, index) => {
-                                        let { attrValues } = tabItem;
-                                        let valuesLength = attrValues.length;
-                                        let colNum = valuesLength >= 200 ? 12 : 6;
-                                        return (
-                                            this.setFieldType(tabItem, colNum, editControls)
-                                        )
-                                    })
-                                }
-                            </div>
-
-                        </div>
-
+                        </form>
                     )
                 }
 
@@ -260,7 +356,8 @@
         // --------------------------------------   
 
         render() {
-            return (this.renderFields())
+            const { isLoaded } = this.state;
+            return isLoaded === true  && this.renderFields()
         }
 
 

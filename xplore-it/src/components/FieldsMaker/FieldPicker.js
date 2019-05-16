@@ -1,5 +1,5 @@
 /* ==========================================================================
- ** Field Item Component
+ ** Field Peopele Picker Component
  ** 22/01/2019
  ** Alan Medina Silva
  ** ========================================================================== */
@@ -8,7 +8,7 @@
 // Get Dependences
 // --------------------------------------
     import React, { Component } from "react";
-    import {SPPeoplePicker} from '../../components'
+    import { SPPeoplePicker , DynamicPeoplePicker} from '../../components'
     import PropTypes from "prop-types";
 
 
@@ -65,19 +65,22 @@ class FieldPicker extends Component {
         // --------------------------------------
         renderFieldPicker() {
             
-            const { colName, fieldName,  editField, inputName, onPickerChange } = this.props;
+            const { colName, fieldName,  editField, inputName, onPickerChange, dynamicPicker } = this.props;
             const {inputValue} = this.state;
-
+            let enabledClass = editField === false ? 'xpl-controlDisabled' : 'xpl-controlEnabled';
+            let pickerName = inputName.replace(' ', '_')
             return (
                 <div className={colName}>
 
-                    <div className="xpl-fieldPicker">
+                    <div className = {`xpl-fieldPicker ${enabledClass} `}>
 
                         <h6 className="xpl-boldText xpl-fieldSeparator"> {fieldName} </h6>
-                        { editField === true 
-                            ? <SPPeoplePicker name={inputName} value={inputValue} onChange={onPickerChange} />
-                            :  <p> {inputValue}  </p>
+
                         
+                        {
+                            dynamicPicker === true 
+                            ? <DynamicPeoplePicker name={pickerName} value={inputValue} onChange={onPickerChange} />
+                            : <SPPeoplePicker name={inputName} value={inputValue} onChange={onPickerChange} />
                         }
 
                     </div>
