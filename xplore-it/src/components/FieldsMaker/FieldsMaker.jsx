@@ -208,6 +208,44 @@
                 }   
 
 
+                // ?--------------------------------------
+                // ? List Item Click
+                // ?--------------------------------------
+                onListItemClick = (event) => {
+                    const {target} = event;
+                    
+                    let selectedItemArray  = target.id.split('-')
+                    let optionName = selectedItemArray[0];
+                    let stateIndex = selectedItemArray[1];
+                    
+                    // const { value } = target;
+                    let {formFields} = this.state
+                    console.log("TCL: FieldsMaker -> onListItemClick -> event", event)
+
+                    
+                    let currentField = formFields[stateIndex];
+                    console.log("TCL: FieldsMaker -> onListItemClick -> currentField", currentField)
+                    // let currentField = formFields[stateIndex];
+
+
+                    // Find selected Option on the Possible Values
+                    // Add the new value to attrValues
+                    let currrentValuesArray =  currentField.attrValues.split('||');
+                    if(!currrentValuesArray.includes(optionName))
+                        currrentValuesArray.push(optionName);
+                        
+
+                    console.log("TCL: FieldsMaker -> onListItemClick -> currrentValuesArray", currrentValuesArray)
+
+
+                    // Convert the Array to string and update State
+                    currentField.attrValues = currrentValuesArray.join('||');
+                    console.log("TCL: FieldsMaker -> onListItemClick -> currentField.attrValues", currentField.attrValues)
+                    formFields[stateIndex] = currentField;
+                    this.setState({formFields : formFields});
+                    
+                }
+
 
 
         /* ==========================================================================
@@ -305,7 +343,7 @@
             // ?--------------------------------------
             // ? Create Picklist Control
             // ?--------------------------------------
-            setListField(attrName , valuesArray, posibleValues , divClass, editField,valuesDataArray) {
+            setListField(attrName , valuesArray, posibleValues , divClass, editField,valuesDataArray, index) {
                 // Merge values names list and values names array
             
                     const selectedItems  = valuesArray.map((item, index) => {
@@ -333,12 +371,14 @@
                 let CheckboxList = this.setCheckboxList(selectedItems, unSelectedItems)
                     
                 return <FieldList 
-                    fieldName={attrName} 
-                    listValues={CheckboxList} 
-                    posibleValues = {unSelectedItems} 
-                    colName={divClass} 
-                    editField={editField} 
-                /> 
+                            fieldName={attrName} 
+                            listValues={CheckboxList} 
+                            posibleValues = {unSelectedItems} 
+                            colName={divClass} 
+                            editField={editField} 
+                            onClick = {this.onListItemClick}
+                            index = {index}
+                        /> 
             }
 
 
@@ -385,8 +425,8 @@
                             const valuesArray = attrValues.split('||');
                             const posibleValues = pickListValues.split('|');
                             const valuesDataArray = valueID.split('||');
-                            valuesArray.length > 1
-                                ? formField = this.setListField(attrName , valuesArray, posibleValues , divClass, editField, valuesDataArray)
+                            valuesArray.length > 0
+                                ? formField = this.setListField(attrName , valuesArray, posibleValues , divClass, editField, valuesDataArray, index)
                                 : formField = this.setTextField(attrName, attrValues, divClass, editField, index);
 
                             break;

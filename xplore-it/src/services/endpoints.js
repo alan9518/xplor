@@ -108,6 +108,12 @@
         // --------------------------------------*/
             getProCategories : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getProCategory',
 
+        /** --------------------------------------
+        // Create New Product
+        // @param {busstypeid <String>}
+        // --------------------------------------*/
+            createNewProject : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/insertNewProduct',
+
     /* ==========================================================================
      *  Sharepoint EndPoints
      ========================================================================== */

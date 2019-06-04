@@ -254,12 +254,13 @@
 
 
 
-            // ?--------------------------------------
+            // !--------------------------------------
             // ! Create New Project
             // ?{
             // /?    "productName":"Xplore IT New Pro3",
             // /?    "vendorMfdID":1227, (From getMaufacturer web service) 
             // /?    "mpnDescription":"Xplore IT New Pro3 is a new Product",
+            // ?     "cpnSearch"
             // /?    "bussModel":"XPLOR",
             // ?    "erpCompanyID":11, (From getCustomer web service)
             // ?    "customerID":1014, (From getCustomer web service)
@@ -269,7 +270,7 @@
             // /?    "userID":"JOSE.VAZQUEZ2@FLEX.COM"
             // ?}
         
-            // ?--------------------------------------
+            // !--------------------------------------
             saveProject = async () => {
                 const formData =  new FormData();
                 const userDetails = window.getCurrentSPUser();
@@ -277,17 +278,27 @@
                     formData.append('productName' , this.state.projectName);
                     formData.append('vendorMfdID' , this.state.vendor.value);
                     formData.append('mpnDescription' , this.state.shortDescription);
+                    formData.append('cpnSearch' , this.formatSearchKeywords());
                     formData.append('bussModel' ,'XPLOR');
                     formData.append('erpCompanyID' , this.state.softwareTopic.ERPCompanyID);
                     formData.append('customerID' , this.state.softwareTopic.CustomerID);
-                    formData.append('proCategoryID' , this.state.softwareTopic);
+                    formData.append('proCategoryID' , this.state.proCategory.value);
                     formData.append('ownerID' , this.getPeoplePickerData('Owner'));
                     formData.append('delegateID' , this.getPeoplePickerData('CoOwner'));
-                    formData.append('searchKeywords', this.formatSearchKeywords());
+                    
                     formData.append('userID' , userDetails.user_email);
 
 
                 console.log("TCL: saveProject -> formData", formData)
+
+
+               
+                return axios({
+                    method : 'post',
+                    url : Endpoints.createNewProject,
+                    headers: { "Content-Type": "application/json; charset=utf-8" ,  "Accept": "text/plain"},
+                    data : formData
+                });
 
             }
 
@@ -591,15 +602,23 @@
             }
 
 
-            // ?--------------------------------------
-            // ? Create New Project
+            // !--------------------------------------
+            // ! Create New Project
             // ! Save Project Data
-            // ?--------------------------------------
-            createNewProject = (event)=> {
+            // !--------------------------------------
+            createNewProject = async (event)=> {
                 event.preventDefault();
                 this.setState({isLoaded : false})
                 console.log("TCL: AddProjectForm -> createNewProject -> this.state", this.state)
-                this.saveProject();
+                try {
+                    const createNewProjectPromise =  await this.saveProject();
+                    const createNewProjectResponse =  await createNewProjectPromise.data;
+                    console.log("TCL: createNewProject -> createNewProjectResponse", createNewProjectResponse)
+                }
+                catch(error) {
+                    console.log("TCL: createNewProject -> error", error)
+                    
+                }
             }
 
 
@@ -905,7 +924,7 @@
                                             editField = {true} 
                                             // inputName = {'shortDescription'} 
                                             colName = {'col-md-12 col-lg-12'}
-                                            onChangeInput = {(event) => this.onInputChage(event)}
+                                            onChangeInput = {this.onInputChage}
                                         />
                                     </div>
                                     

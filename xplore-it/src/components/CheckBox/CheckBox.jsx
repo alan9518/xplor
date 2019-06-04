@@ -55,6 +55,8 @@ class CheckBox extends Component {
             this.setState({
                 isChecked : !isChecked
             })
+
+            this.props.onClick(event);
         }
 
 
@@ -67,7 +69,7 @@ class CheckBox extends Component {
         // --------------------------------------
         renderCheckBox() {
 
-            const { id, label, type, indeterminate, hasError, value, ...inputProps } = this.props;
+            const { id, label, type, indeterminate, hasError, value, index, ...inputProps } = this.props;
 
 
             const {isChecked} = this.state
@@ -98,10 +100,11 @@ class CheckBox extends Component {
                           type="checkbox"
                           className={inputClassname}
                           ref={el => (this.selector = el)}
-                          id={id}
+                          id={`${id}-${index}`}
                           value = {value}
                           checked = {isChecked}
                           onChange = {this.toggleCheckedValue}
+                        //   name = {}
                         //   {...inputProps}
                         />
                           <label className={labelClassname} htmlFor={id}>{label}</label>

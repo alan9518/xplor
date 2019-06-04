@@ -18,7 +18,7 @@
 // --------------------------------------
     const FieldList = (props) => {
 
-        const {colName, fieldName, listValues, editField, posibleValues} = props;
+        const {colName, fieldName, listValues, editField, posibleValues, index} = props;
 		console.log("TCL: FieldList -> posibleValues", posibleValues)
 
         return (
@@ -31,7 +31,7 @@
                     {
                         // ? Choose Between Display List or CheckList
                         editField === true 
-                        ?  <CheckList listValues = {listValues} /> 
+                        ?  <CheckList listValues = {listValues} onClick = {props.onClick} index = {index}/> 
                         :   <ul>
                                 {
                                     listValues && listValues.map((listItem)=> {
