@@ -16,17 +16,28 @@ import PropTypes from 'prop-types';
     // --------------------------------------
     const SPPeoplePicker = (props) => {
 
-        const { name, tabIndex } = props;
+        const { name } = props;
+		console.log("TCL: SPPeoplePicker -> name", name)
         
         return (
             
             
+                // <div
+                //     id = {`peoplePicker${name}`}  
+                //     name = {`peoplePicker${name}`}  
+                //     className="peoplePicker form-control int-textInput ">
+                // </div>
+            
+            
                 <div 
                     id = {`peoplePicker${name}`}  
-                    name = {`peoplePicker${name}`}  
+                    name = {`peoplePicker-${name}`}  
+                    
+                    // tabIndex = {tabIndex}
+                    // onFocus = {props.checkErrorClass}
+                    // onBlur = {props.checkErrorClass}
                     className="peoplePicker form-control int-textInput ">
                 </div>
-            
             
         )
     }
@@ -38,7 +49,10 @@ import PropTypes from 'prop-types';
     SPPeoplePicker.propTypes = {
         props: PropTypes
     };
+
+
+
 // --------------------------------------
 // Export Component
 // --------------------------------------
-export default SPPeoplePicker;
+    export default SPPeoplePicker;

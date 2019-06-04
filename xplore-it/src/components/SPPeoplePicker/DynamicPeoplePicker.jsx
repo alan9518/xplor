@@ -7,6 +7,8 @@
 // Get Dependences
 // --------------------------------------
     import React, { Component, Fragment } from 'react';
+    // import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
+
     import PropTypes from 'prop-types';
 
 
@@ -35,14 +37,14 @@
                 const { name, tabIndex } = this.props;
                 // let pickerName = name.replace(' ', '_')
                 const pickersWidth = '175px';
-                window.initializePeoplePicker(`peoplePickerOwner`, pickersWidth, 19);
-                setTimeout(() => {
+                // window.initializePeoplePicker(`peoplePickerOwner`, pickersWidth, 19);
+                // setTimeout(() => {
                     
                     
-                    window.initializePeoplePicker(`peoplePickerOwner`, pickersWidth, 19);
+                //     window.initializePeoplePicker(`peoplePickerOwner`, pickersWidth, 19);
                   
                     
-                }, 0);
+                // }, 0);
 
                 
                
@@ -65,9 +67,10 @@
 
                 return (
                     <Fragment>
-                        <div
-                            id={`peoplePickerOwner`}
-                            name={`peoplePickerOwner`}
+                        
+                        <div 
+                            id = {`peoplePicker${name}`}  
+                            name = {`peoplePicker${name}`}  
                             className="peoplePicker form-control int-textInput ">
                         </div>
                     </Fragment>

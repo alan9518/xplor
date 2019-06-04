@@ -9,8 +9,11 @@
 // --------------------------------------
     import React, { Component, Fragment } from 'react';
     import PropTypes from 'prop-types';
-    import IconItem from './IconItem';
+    import axios from 'axios';
+    import { AppLoader, IconItem } from '../index'
+    // import IconItem from './IconItem';
     import './styles.css';
+    import { Endpoints } from '../../services/endpoints';
     
 // --------------------------------------
 // Create Component Class
@@ -26,8 +29,10 @@ class IconPicker extends Component {
             super(props);
             this.state = {
                 selectedIcon: '',
-
+                iconsData : [],
+                isLoaded : false
             }
+            // this.
             this.icons = [
                 'fas fa-ad',
                 'fas fa-address-book',
@@ -898,11 +903,25 @@ class IconPicker extends Component {
                 'fas fa-yen-sign',
                 'fas fa-yin-yang',
             ]
+            
         }
+
+
+
         // --------------------------------------
         // Set Initial Values
+        // Get Icons
         // --------------------------------------
-        componentDidMount() {
+        async componentDidMount() {
+            const getIconsPromise = await axios.get(Endpoints.getAllowedProductsIcons);
+            const iconsData =  await getIconsPromise.data;
+            console.log("TCL: IconPicker -> componentDidMount -> iconsData", iconsData)
+            console.log("TCL: IconPicker -> componentDidMount -> iconsData", iconsData.value)
+
+            this.setState({
+                iconsData : iconsData.value,
+                isLoaded : true
+            })
         }
 
 
@@ -931,15 +950,15 @@ class IconPicker extends Component {
         // Iterate Icons && Render Grid
         // --------------------------------------
         renderIconPicker() {
-
+            const {iconsData} = this.state;
             return (
                 <div className = "xpl-iconsGridContainer"> 
                     <div className="row">
                         {
-                            this.icons.map((icon)=> {
+                            iconsData && iconsData.map((icon)=> {
                                 return (
                                     <div className="col-md-2 col-sm-4 col-xs-6">
-                                        <IconItem iconName = {icon} onIconClick = {this.onIconClick} key = {icon}/> 
+                                        <IconItem iconName = {(icon.icon).toLowerCase()} onIconClick = {this.onIconClick} key = {icon}/> 
                                     </div>
                                 )
                             })
@@ -950,12 +969,12 @@ class IconPicker extends Component {
             
         }
 
-
         // --------------------------------------
         // Render Component
         // --------------------------------------
         render() {
-            return this.renderIconPicker();
+            const {isLoaded } = this.state;
+            return isLoaded === true ? this.renderIconPicker() : <AppLoader/>;
         }
 }
 // -------------------------------------- 

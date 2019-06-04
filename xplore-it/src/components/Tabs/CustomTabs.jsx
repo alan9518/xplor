@@ -63,7 +63,7 @@ class CustomTabs extends Component {
                         // Iterate Data to Create tabs Header
 
                             tabsData.length > 0 && tabsData.map((tabDataItem)=> {
-								console.log("TCL: CustomTabs -> renderTabs -> tabDataItem", tabDataItem)
+								
                                 return (
                                     <TabPane tab = {tabDataItem.BusinessTypeName} key={tabDataItem.BusinessTypeID} id={tabDataItem.BusinessTypeID} >       
                                         {/* <PanelContent tabLoading = {tabLoading} panelTabContent = {paneContent} />  */}

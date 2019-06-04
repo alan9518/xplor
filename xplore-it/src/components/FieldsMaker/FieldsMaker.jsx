@@ -10,7 +10,7 @@
 // --------------------------------------
     import React, { Component } from "react";
     import PropTypes from "prop-types";
-    import { ToggleField, FieldItem, FieldList, CardHeaderWide, SingleButton, FieldDate, FieldPicker, AddProjectForm } from '../../components'
+    import { ToggleField, FieldItem, FieldList, CardHeaderWide, SingleButton, FieldDate, FieldPicker, AddProjectForm, CustomPicker } from '../../components'
     import moment from 'moment';
 
 
@@ -41,18 +41,44 @@
 
 
             componentDidMount() {
-                this.setState({
-                    formFields : this.props.formFields,
-                    isLoaded : true
-                });
+
+                
+                setTimeout(() => {
+                        
+                    // window.initializePeoplePicker('peoplePickerDomainOwners', '175px', 19);
+                    // window.initializePeoplePicker('peoplePickerProductSponsor', '175px', 31);
+
+
+                    // window.initializePeoplePicker('peoplePickerDomainOwners', '175px', 19);
+                    // let picker = document.getElementById('peoplePickerDomainOwners')
+                    // let pickerContainer = document.getElementById('DomainOwners-container')
+                    // console.log("TCL: FieldsMaker -> toggleFieldsEdit -> pickerContainer", pickerContainer)
+                    // console.log("TCL: FieldsMaker -> toggleFieldsEdit -> picker", picker)
+    
+                    // this.fillPickers();
+
+
+                    this.setState({
+                        formFields : this.props.formFields,
+                        isLoaded : true
+                    });
+                
+                    
+                }, 0);
+
+
+             
+             
+
+              
             }
 
 
 
 
-            /* ==========================================================================
-            ** Handle State
-            ** ========================================================================== */
+        /* ==========================================================================
+        ** Handle State
+        ** ========================================================================== */
 
                 // --------------------------------------
                 // Enable Edition of Fields
@@ -63,7 +89,12 @@
                     
                     
                     this.setState({ editControls: !editControls })
+                    // window.initializePeoplePicker('peoplePickerBusiness', '175px', 19);
+                    // window.initializePeoplePicker('peoplePickerProductSponsor', '175px', 19);
+                    // peoplePickerProductSponsor
                     this.props.enableTabEdit(!editControls)
+
+
                 }
 
 
@@ -77,12 +108,18 @@
 
                     const {target} = event;
                     const {formFields} = this.state;
-					console.log("TCL: FieldsMaker -> saveFields -> formFields", formFields)
+                    console.log("TCL: FieldsMaker -> saveFields -> formFields", formFields)
+                    
+
+                    // get form Data
                     
 
 
                     this.setState({ editControls: false })
                     this.props.enableTabEdit(false)
+
+
+                    this.props.updateFormValues(formFields)
                 }
 
 
@@ -111,8 +148,70 @@
 
 
 
+                // ?--------------------------------------
+                // ? On change Input Text
+                // ?--------------------------------------
+                onTextChange = (name , value, index)=> {
+                   
+                    let {formFields} = this.state
+                    let stateIndex = index.split('-')[1]
+                    let currentField = this.state.formFields[stateIndex];
+                    
+
+                    currentField.attrValues =  value
+                    
+
+                    formFields[stateIndex] = currentField
+                    
+                    
+                    this.setState({formFields : formFields});
+                }
+
+
+                // ?--------------------------------------
+                // ? On Toggle Component Change
+                // ? Since the values come as N and Y
+                // ? Bind string to Bool values
+                // ?--------------------------------------
+                onToggleChange = (event) => {
+                    console.log("TCL: FieldsMaker -> onToggleChange -> event", event)
+                    const {target} = event;
+                    console.log("TCL: FieldsMaker -> onToggleChange -> target", target)
+
+                    // target.id
+                    console.log("TCL: FieldsMaker -> onToggleChange -> target.id", target.id)
+                    console.log("TCL: FieldsMaker -> onToggleChange -> target.name", target.name)
+
+                    // event.target.checked
+                    console.log("TCL: FieldsMaker -> onToggleChange -> event.target.checked", event.target.checked)
+
+
+                    let {formFields} = this.state
+                    let stateIndex = target.id.split('-')[1]
+                    let currentField = formFields[stateIndex];
+                    console.log("TCL: FieldsMaker -> onToggleChange -> currentField", currentField)
+
+                    // ?Change Value
+                        if(event.target.checked ===  true)
+                            currentField.attrValues = "Y"
+                        else
+                            currentField.attrValues = "N"    
+
+                    
+                    // ? Udpate State
+                        formFields[stateIndex] = currentField
+                    
+                    
+                        this.setState({formFields : formFields});
+
+
+                }   
+
+
+
+
         /* ==========================================================================
-        ** Render Methdos
+        ** Render Methods
         ** ========================================================================== */
 
 
@@ -121,11 +220,18 @@
             // Choose Between Toggle Control
             // Or Label Text
             // --------------------------------------
-            setTextField(attrName, attrValues, divClass, editField) {
+            setTextField(attrName, attrValues, divClass, editField, index) {
                 if (attrValues === "false" || attrValues === "true")
-                    return <ToggleField fieldName={attrName} fieldValue={attrValues} colName={divClass} editField={editField} />
+                    return <ToggleField fieldName={attrName} fieldValue={attrValues} colName={divClass} editField={editField}  />
                 else
-                    return <FieldItem fieldName={attrName} fieldValue={attrValues} colName={divClass} editField={editField} isTextArea={true} />
+                    return <FieldItem 
+                                    fieldName={attrName} 
+                                    fieldValue={attrValues} 
+                                    colName={divClass} 
+                                    editField={editField} 
+                                    isTextArea={true}  
+                                    onChangeInput =  {this.onTextChange}
+                                    index = {index} />
             }
 
 
@@ -154,22 +260,45 @@
 
 
 
-            // --------------------------------------
-            // Set PeoplePciker Control
-            // Or Label Text
-            // --------------------------------------
+            // ?--------------------------------------
+            // ?Set PeoplePciker Control
+            // ?Or Label Text
+            // ?--------------------------------------
             setTextPeoplePicker(attrName, attrValues, divClass, editField, dynamicPicker) {
+                console.log("TCL: FieldsMaker -> setTextPeoplePicker -> attrName", attrName)
+
+
+                
+
+                
                 return (
                     <FieldPicker
                         fieldName={attrName}
+                        
                         fieldValue={attrValues}
                         editField={editField}
                         inputName={attrName}
+                        // inputName ={'Owner'}
                         dynamicPicker = {dynamicPicker}
                         // colName={'col-md-12 col-lg-12'}
                     // onPickerChange = {this.onChangeInput}
                     />
                 )
+
+
+
+                // return (    
+                //     <FieldPicker 
+                //         fieldName={attrName}
+                //         fieldValue = {attrValues} 
+                //         editField = {true} 
+                //         inputName = {"Owner"}
+                //         colName = {'col-md-12 col-lg-12'}
+                //         // onPickerChange = {this.onChangeInput}
+                //         dynamicPicker = {false}
+                //     />
+                // )
+
             }
 
 
@@ -213,22 +342,40 @@
             }
 
 
+            // ?--------------------------------------
+            // ? Create Toggle Control
+            // ?--------------------------------------
+            setToggleField(attrName, attrValues, divClass, editField, index) {
+                return (
+                    <ToggleField 
+                            fieldName={attrName} 
+                            fieldValue={attrValues} 
+                            colName={divClass} 
+                            editField={editField} 
+                            onChange = {this.onToggleChange}
+                            index  = {index}
+                    />
+                )
+            }
+
+
 
 
             // --------------------------------------
             // Set Field Type
             // Set Number of Columns
             // --------------------------------------   
-            setFieldType(field, colClass, editField) {
+            setFieldType(field, colClass, editField, index) {
 
                 try {
                     let { attrName, attrValues, datatype, pickListValues, valueID } = field;
                     let divClass = `col-xl-${colClass} col-lg-${colClass} col-sm-12 col-xs-12`;
                     let formField = null;
                     switch ((datatype.toLowerCase())) {
+
                         //? Text Input Field
                         case "string":
-                            formField = this.setTextField(attrName, attrValues, divClass, editField);
+                            formField = this.setTextField(attrName, attrValues, divClass, editField, index);
                             break;
 
                         //? CheckboxList
@@ -240,12 +387,13 @@
                             const valuesDataArray = valueID.split('||');
                             valuesArray.length > 1
                                 ? formField = this.setListField(attrName , valuesArray, posibleValues , divClass, editField, valuesDataArray)
-                                : formField = this.setTextField(attrName, attrValues, divClass, editField);
+                                : formField = this.setTextField(attrName, attrValues, divClass, editField, index);
 
                             break;
 
+                        // Toggle
                         case "boolean":
-                            formField = <ToggleField fieldName={attrName} fieldValue={attrValues} colName={divClass} editField={editField} />
+                            formField = this.setToggleField(attrName, attrValues, divClass, editField, index);
                             break;
 
                         //? Sharepoint PeoplePicker
@@ -265,7 +413,14 @@
 
                         //? Text Input Field
                         default:
-                            formField = <FieldItem fieldName={attrName} fieldValue={attrValues} colName={divClass} editField={editField} />
+                            formField = this.setTextField(attrName, attrValues, divClass, editField, index);
+                            // formField = <FieldItem 
+                            //                 fieldName={attrName} 
+                            //                 fieldValue={attrValues} 
+                            //                 colName={divClass} 
+                            //                 editField={editField} 
+                            //                 onChangeInput =  {this.onTextChange}
+                            //                 useParentState = {true} />
 
                     }
 
@@ -334,7 +489,7 @@
                                                 let valuesLength = attrValues.length;
                                                 let colNum = valuesLength >= 200 ? 12 : 6;
                                                 return (
-                                                    this.setFieldType(tabItem, colNum, editControls)
+                                                    this.setFieldType(tabItem, colNum, editControls, index)
                                                 )
                                             })
                                         }

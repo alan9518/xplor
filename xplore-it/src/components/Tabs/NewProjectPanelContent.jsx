@@ -42,7 +42,7 @@ class PanelContent extends Component {
     // Render Panel Content
     // --------------------------------------
     renderTabContent(panelTabContent) {
-        console.log("TCL: PanelContent -> renderTabContent -> panelTabContent", panelTabContent)
+        
         const {isOverview, tabTitle, editFields} = this.props
         return (
             <FieldsMaker formFields={panelTabContent} tabTitle = {tabTitle} editFields = {editFields}/>

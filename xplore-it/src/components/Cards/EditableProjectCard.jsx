@@ -39,7 +39,7 @@ const EditableProjectCard = (props) => {
     //     return newName.trim();
     // }
 
-    console.log("TCL: EditableProjectCard -> renderCard -> props", props)
+    
     
     const bgColor = projectColor || '#238ECC';
     const projectColorStyle = { backgroundColor: bgColor }

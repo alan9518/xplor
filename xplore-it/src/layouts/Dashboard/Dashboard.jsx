@@ -162,9 +162,9 @@
 
             const addProjectRoute = {
                 path : `addProject`,
-                sidebarName : 'Add Project',
+                sidebarName : 'Add Product',
                 exact: true,
-                key:`app-route-addProject`,
+                key:`app-route-addProduct`,
                 color : '#1197D3',
                 addProjectIcon : 'fas fa-folder-plus'
         }

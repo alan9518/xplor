@@ -1,99 +1,61 @@
 /* ==========================================================================
- ** Field Peopele Picker Component
- ** 22/01/2019
- ** Alan Medina Silva
- ** ========================================================================== */
+** FIeld Layout For People Picker
+** 14/02/2019
+** Alan Medina Silva
+** ========================================================================== */
+
 
 // --------------------------------------
 // Get Dependences
 // --------------------------------------
-    import React, { Component } from "react";
-    import { SPPeoplePicker , DynamicPeoplePicker} from '../../components'
-    import PropTypes from "prop-types";
+    import React from 'react';
+    import { ToolTip } from '../../components';
+    import PropTypes from 'prop-types';
+    import { AddInputButton, SPPeoplePicker } from '../../components'
+    import ReactTooltip from 'react-tooltip'
 
 
 // --------------------------------------
-// Create Component Class
+// Create Functional Component
 // --------------------------------------
-class FieldPicker extends Component {
-    /* ==========================================================================
-    ** Component Setup
-    ** ========================================================================== */
-        // --------------------------------------
-        // Constructor
-        // --------------------------------------
-        constructor(props) {
-            super(props);
-            this.state = {
-                inputValue: '',
-                isLoaded : false
-            };
-        }
+    const FieldPicker = (props) => {
 
-        // --------------------------------------
-        // Set Initial Values
-        // --------------------------------------
-        componentDidMount() {
-            const {fieldValue} = this.props;
-            this.setState({inputValue : fieldValue, isLoaded : true});
-
-        }
+        // const { Field_Name, Field_State_Name, Mandatory, columns,  Enabled, hasToolTip, toolTipText,  value, Sequence} = props.data;
 
 
+        const { colName, fieldName, editField, inputName, onPickerChange, dynamicPicker, inputValue } = props;
+        let enabledClass = editField === false ? 'xpl-controlDisabled' : 'xpl-controlEnabled';
+        let pickerName = inputName.replace(' ', '')
+        // const { renderBorder } = props;
+        // const labelBorderClassName = renderBorder === true ? 'int-fieldLabel bordered' : 'int-fieldLabel';
+        // const inputWidth = columns === 2 ? 175 : 300;
+        // let classNames = Enabled === false ? 'int-controlDisabled' : 'int-controlEnabled';
 
-        // ?--------------------------------------
-        // ? Change State Value
-        // ?--------------------------------------
-        setInputValue = (event)=> {
-            const {target} = event;
-            const {name, value} = target;
-            console.log("TCL: FieldPicker -> setInputValue -> value", value)
-            console.log("TCL: FieldPicker -> setInputValue -> name", name)
-            this.setState({
-                inputValue: value
-            })
+        // maxWidth: 400 
 
-        }
 
-    /* ==========================================================================
-    ** Render Methods
-    ** ========================================================================== */
+        return (
+            <div className={colName} id = {`${pickerName}-container`}>
 
-      
-        // --------------------------------------
-        // Render Projects
-        // --------------------------------------
-        renderFieldPicker() {
+            <div className = {`xpl-fieldPicker ${enabledClass} `}>
+
+                <h6 className="xpl-boldText xpl-fieldSeparator"> {fieldName} </h6>
+                <SPPeoplePicker 
+                    name={pickerName} 
+                    value={inputValue} 
+                    // onChange={props.onChange} 
+                    // tabIndex = {Sequence} 
+                    enabled = {true}
+                />
+                
+                    
             
-            const { colName, fieldName,  editField, inputName, onPickerChange, dynamicPicker } = this.props;
-            const {inputValue} = this.state;
-            let enabledClass = editField === false ? 'xpl-controlDisabled' : 'xpl-controlEnabled';
-            let pickerName = inputName.replace(' ', '_')
-            return (
-                <div className={colName}>
+            </div>
+        </div>
 
-                    <div className = {`xpl-fieldPicker ${enabledClass} `}>
+        )
+    }
 
-                        <h6 className="xpl-boldText xpl-fieldSeparator"> {fieldName} </h6>
-
-                        
-                        {
-                            dynamicPicker === true 
-                            ? <DynamicPeoplePicker name={pickerName} value={inputValue} onChange={onPickerChange} />
-                            : <SPPeoplePicker name={inputName} value={inputValue} onChange={onPickerChange} />
-                        }
-
-                    </div>
-                </div>
-            )
-        }
-        // --------------------------------------
-        // Render Component
-        // --------------------------------------
-        render() {
-            return this.renderFieldPicker();
-        }
-}
 
 // --------------------------------------
 // Define PropTypes

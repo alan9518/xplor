@@ -36,6 +36,7 @@
                 value = {props.selectedValue}
                 onChange = {props.onChange}
                 tabIndex = {props.tabIndex}
+                placeholder= {props.placeholder}
             />
 
             // <Select  

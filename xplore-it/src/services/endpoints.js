@@ -102,6 +102,12 @@
         // --------------------------------------*/
             getTabAttributes : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getTabAttributes',
 
+        /** --------------------------------------
+        // Get Pro Categories
+        // @param {busstypeid <String>}
+        // --------------------------------------*/
+            getProCategories : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getProCategory',
+
     /* ==========================================================================
      *  Sharepoint EndPoints
      ========================================================================== */
@@ -116,4 +122,10 @@
         // @param {listName}
         // --------------------------------------*/
             getproductsIcons : `${path}/_api/web/lists/getbyTitle('xplorIT-icons')/items`,
+
+        /** --------------------------------------
+        // Get Products Icons
+        // @param {listName}
+        // --------------------------------------*/
+            getAllowedProductsIcons : `${path}/_api/web/lists/getbyTitle('xplorIT-icons-allowed')/items`,
     }

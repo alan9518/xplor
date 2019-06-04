@@ -25,7 +25,7 @@
             optionsData,  editField, allowFilter, 
             mandatory,  sequence, 
             defaultComboValue, wideControl, mediumControl, extraWideControl,
-            isMulti
+            isMulti, placeholder
         } = props;
         
         // Set Class
@@ -75,6 +75,7 @@
                                     inputId  = {inputName}
                                     isSearchable = {allowFilter ? true : false}
                                     tabIndex = {sequence}
+                                    placeholder= {placeholder || 'Select Options'}
                                 />
 
                             :
@@ -92,6 +93,7 @@
                                     isSearchable = {allowFilter ? true : false}
                                     isDisabled = {!editField}
                                     tabIndex = {sequence}
+                                    placeholder= {placeholder || 'Select Option'} 
                                 />
                        }
 

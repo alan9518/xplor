@@ -27,27 +27,26 @@ class DatePicker extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // startDate :  props.initialValue ||  moment() ,
-            // focusedInput: 'startDate',
+            
             date: this.convertStringToMomentObject(props.initialValue) ||  moment() ,
-            // date :  moment().format()
-            // focused: null
+            
         };
     }
 
-     // --------------------------------------
-            // Convert String to Moment Object
-            // --------------------------------------
-            convertStringToMomentObject(date) {
-				console.log("TCL: DatePicker -> convertStringToMomentObject -> date", date)
-                let dateObj = new Date(date);
-                let momentObj = moment(dateObj);
-                let dateFormat = moment(dateObj).format("DD/MM/YYYY");
-				//console.log('TCL: RequirementsDefinition -> convertStringToMomentObject -> dateFormat', dateFormat)
-                //console.log('TCL: RequirementsDefinition -> convertStringToMomentObject -> momentObj', momentObj)
-                
-                return momentObj;
-            }
+    // --------------------------------------
+    // Convert String to Moment Object
+    // --------------------------------------
+    convertStringToMomentObject(date) {
+        if(date === "")
+            return moment()
+        
+        let dateObj = new Date(date);
+        let momentObj = moment(dateObj);
+        // let dateFormat = moment(dateObj).format("DD/MM/YYYY");
+			
+        
+        return momentObj;
+    }
 
     // --------------------------------------
     // Set Component TabIndex

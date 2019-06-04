@@ -104,7 +104,7 @@
         white-space: -pre-line;     /* Opera <7 */    
         white-space: -o-pre-line;   /* Opera 7 */     
         word-wrap: break-word;      /* IE */ 
-        margin-bottom: 10px;
+        margin-bottom: 25px;
     }
 
     .xpl-blueToggle {
@@ -511,6 +511,7 @@
         .xpl-fieldSeparator {
             font-size: 1.05rem !important;
             padding-bottom : 10px;
+            margin-top: 15px;
             border-bottom: 2px solid #f3f3f3 !important;
         }
 
@@ -532,6 +533,32 @@
         li.xpl-detailsListItem {
             padding: 5px;
             list-style: none;
+            display: flex;
+            flex-direction: row;
+            /* justify-content: space-between; */
+            width: 100%;
+            word-break: break-all;
+            align-items: center;
+        }
+
+        li.xpl-detailsListItem  i {
+            margin-right: 10px;
+        }
+
+
+        .xpl-keyWordListItem {
+            padding: 5px;
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            word-break: break-all;
+            align-items: center;
+        }
+
+        li.xpl-keyWordListItem i {
+            cursor: pointer;
         }
 
         input.xpl-fieldEditInput, textarea.xpl-fieldEditInput, button.xpl-fieldEditInput {
@@ -544,6 +571,16 @@
             font-weight: 400;
             margin-bottom: 10px;
         }
+
+
+        textarea.xpl-fieldEditInput {
+            padding: 5px 10px;
+        }
+
+        input.xpl-fieldEditInput {
+            padding: 5px 10px;
+        }
+
 
         .product-brand {
             margin-top: 10px;

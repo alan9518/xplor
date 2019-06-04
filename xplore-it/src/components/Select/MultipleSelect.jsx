@@ -36,6 +36,7 @@
             onChange = {props.onChange}
             tabIndex = {props.tabIndex}
             closeMenuOnSelect = {false}
+            placeholder = {props.placeholder}
         />
     );
 

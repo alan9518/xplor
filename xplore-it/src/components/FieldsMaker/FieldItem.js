@@ -24,7 +24,7 @@
         constructor(props) {
             super(props);
             this.state = {
-                inputValue: '',
+                inputValue: this.props.fieldValue || '',
                 isLoaded : false
             };
         }
@@ -45,11 +45,11 @@
         // ?--------------------------------------
         setInputValue = (event)=> {
             const {target} = event;
-            const {name, value} = target;
+            const {name, value, id} = target;
             this.setState({
                 inputValue: value
             })
-            this.props.onChangeInput(event);
+            this.props.onChangeInput(name ,value, id);
 
         }
 
@@ -75,11 +75,28 @@
         // ?----------------------------------------
         // ? Choose Between Field Input or Text Area
         // ?----------------------------------------
-        setFieldInputOrTextArea = (fieldName, value, isTextArea, inputName) => {
+        setFieldInputOrTextArea = (fieldName, value, isTextArea, inputName,index) => {
             if(value.length > 200 || isTextArea) 
-                return <textarea value = {value} className = "xpl-fieldEditInput" onChange = {this.setInputValue} name= {inputName || fieldName} cols="30" rows="10"></textarea>
+                return ( <textarea 
+                                value = {value} 
+                                className = "xpl-fieldEditInput" 
+                                onChange = {this.setInputValue} 
+                                name= {inputName || fieldName} 
+                                cols="30" 
+                                rows="10"
+                                id = {`${inputName || fieldName}-${index}`}
+                                onKeyPress = {this.props.onKeyPress}>
+                        </textarea>)
             else
-                return <input type = "text" value = {value} className = "xpl-fieldEditInput" onChange = {this.setInputValue} name= {inputName || fieldName}/>
+                return ( <input 
+                                type = "text" 
+                                value = {value} 
+                                className = "xpl-fieldEditInput" 
+                                onChange = {this.setInputValue} 
+                                name= {inputName || fieldName}
+                                id = {`${inputName || fieldName}-${index}`}
+                                onKeyPress = {this.props.onKeyPress} />
+                        )
 
                 
         }
@@ -90,8 +107,9 @@
         // --------------------------------------
         renderFieldItem() {
             
-            const { colName, fieldName, inputName, editField, isTextArea } = this.props;
-            const {inputValue} = this.state;
+            const { colName, fieldName, inputName, editField, isTextArea, useParentState, index  } = this.props;
+            // const {inputValue} = this.state;
+            const inputValue = useParentState === true ? this.props.fieldValue : this.state.inputValue 
 
             return (
                 <div className={colName}>
@@ -100,7 +118,7 @@
 
                         <h6 className="xpl-boldText xpl-fieldSeparator"> {fieldName} </h6>
                         { editField === true 
-                            ? this.setFieldInputOrTextArea(fieldName, inputValue, isTextArea, inputName)
+                            ? this.setFieldInputOrTextArea(fieldName, inputValue, isTextArea, inputName, index)
                             : this.renderFieldLinkOrText(inputValue)
                         
                         }

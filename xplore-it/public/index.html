@@ -11,7 +11,9 @@
       homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
   <!-- <link rel="stylesheet" href="../src/css/all.css"> -->
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
@@ -112,6 +114,16 @@
 
     }
 
+
+
+    function getSiteContext() {
+        var ctx = new SP.ClientContext.get_current();
+
+
+        return ctx;
+    }
+
+
     // --------------------------------------
     // Configure People Picker 
     // --------------------------------------
@@ -135,6 +147,13 @@
       // PickerEntity objects to set the picker value, and a schema that defines
       // picker properties.
       SPClientPeoplePicker_InitStandaloneControlWrapper($peoplePicker, null, $schema);
+
+
+      console.log("TCL: initializePeoplePicker -> $peoplePicker", $peoplePicker)
+      console.log("TCL: initializePeoplePicker -> schema", $schema)
+
+
+      // return SPClientPeoplePicker_InitStandaloneControlWrapper($peoplePicker, null, $schema);
     }
 
 

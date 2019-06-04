@@ -55,6 +55,7 @@
     import FieldIcon from './FieldsMaker/FieldIcon';
     import FieldPicker from './FieldsMaker/FieldPicker';
     import FieldList from './FieldsMaker/FieldList';
+    import FieldRemovableList from './FieldsMaker/FieldRemovableList';
     import ToggleField from './FieldsMaker/ToggleField';
     import RowContainer from './FieldsMaker/RowContainer';
     import ToolTip from './ToolTip/ToolTip';
@@ -67,7 +68,9 @@
     import EditableProjectCard from './Cards/EditableProjectCard';
     import ColorPicker from './ColorPicker/ColorPicker';
     import IconPicker from './IconPicker/IconPicker';
+    import IconItem from './IconPicker/IconItem';
 
+    import CustomPicker from './SPPeoplePicker/CustomPicker';
 
 // --------------------------------------
 // Forms
@@ -129,7 +132,10 @@
         EditableProjectCard,
         ColorPicker,
         IconPicker,
+        IconItem,
         FieldIcon,
         FieldSelect,
-        DynamicPeoplePicker
+        FieldRemovableList,
+        DynamicPeoplePicker,
+        CustomPicker
     }

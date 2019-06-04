@@ -19,9 +19,20 @@
 // --------------------------------------
     const ToggleField = (props) => {
 
-        const {colName, fieldName, fieldValue, editField} = props;
+        const {colName, fieldName, fieldValue, editField, index} = props;
 		// console.log('​ToggleField -> props', props)
-        const isActive = fieldValue === "false" ? false : true;
+        // const isActive = fieldValue === "N" ? false : true;
+
+        let isActive = false;
+
+        //? Set Tooggle Vale
+        if(fieldValue === "N" || fieldValue === "")
+            isActive = false
+        else if(fieldValue === null || fieldValue === undefined)
+            isActive = null;
+        else    
+            isActive = true;
+
         return (
 
             <div className = {colName}>
@@ -30,7 +41,13 @@
                     <h6 className = "xpl-boldText xpl-fieldSeparator"> {fieldName} </h6> 
                     <Toggle
                         defaultChecked={isActive}
-                        disabled = {!editField} />
+                        disabled = {!editField} 
+                        checked = {isActive}
+                        onChange = {props.onChange} 
+                        name = {fieldName}
+                        id = {`${fieldName}-${index}`}
+                    />
+                        
                         {/* <span className='label-text'> {fieldValue}  </span> */}
                 </div>
             </div>

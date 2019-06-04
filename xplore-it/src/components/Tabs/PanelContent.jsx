@@ -46,12 +46,13 @@
             const {isOverview, tabTitle, editFields, newProject, enableTabEdit} = this.props
             return (
                 <FieldsMaker 
-                    formFields={panelTabContent} 
+                    formFields = {panelTabContent} 
                     tabTitle = {tabTitle} 
                     editFields = {editFields} 
                     isOverview = {isOverview} 
                     newProject = {newProject}
                     enableTabEdit = {enableTabEdit}
+                    updateFormValues = {this.props.updateFormValues}
                 />
             )
         }
