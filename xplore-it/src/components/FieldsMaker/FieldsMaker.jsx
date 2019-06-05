@@ -97,6 +97,16 @@
 
                 }
 
+                // ?--------------------------------------
+                // ? Use moment js to format Date Object
+                // ?--------------------------------------
+
+                formatDate = (dateToFormat) => {
+                    console.log("TCL: FieldsMaker -> formatDate ->  ", moment(dateToFormat).format("DD/MM/YYYY")  )
+                    return  moment(dateToFormat).format("DD/MM/YYYY")  
+                    
+                }
+
 
                 // ?--------------------------------------
                 // ? Save New Data
@@ -213,7 +223,7 @@
                 // ?--------------------------------------
                 onListItemClick = (event) => {
                     const {target} = event;
-                    
+                    const {checked} = target;
                     let selectedItemArray  = target.id.split('-')
                     let optionName = selectedItemArray[0];
                     let stateIndex = selectedItemArray[1];
@@ -225,14 +235,27 @@
                     
                     let currentField = formFields[stateIndex];
                     console.log("TCL: FieldsMaker -> onListItemClick -> currentField", currentField)
+
+                   
                     // let currentField = formFields[stateIndex];
 
 
                     // Find selected Option on the Possible Values
                     // Add the new value to attrValues
                     let currrentValuesArray =  currentField.attrValues.split('||');
-                    if(!currrentValuesArray.includes(optionName))
-                        currrentValuesArray.push(optionName);
+
+                    // check if the action is add or remove items
+                    if(checked === true) {
+                        if(!currrentValuesArray.includes(optionName))
+                            currrentValuesArray.push(optionName);
+                    }
+                    else if(checked === false) {
+                        if(currrentValuesArray.includes(optionName)){
+                            currrentValuesArray = currrentValuesArray.filter(currentValue => currentValue !== optionName)
+                        }
+                    }
+
+                   
                         
 
                     console.log("TCL: FieldsMaker -> onListItemClick -> currrentValuesArray", currrentValuesArray)
@@ -243,6 +266,32 @@
                     console.log("TCL: FieldsMaker -> onListItemClick -> currentField.attrValues", currentField.attrValues)
                     formFields[stateIndex] = currentField;
                     this.setState({formFields : formFields});
+                    
+                }
+
+
+                // ?--------------------------------------
+                // ? Set DatePicker Value
+                // ?--------------------------------------
+                onDateChange = (date, name , index) => {
+                    console.log("TCL: FieldsMaker -> onDateChange -> index", index)
+                    console.log("TCL: FieldsMaker -> onDateChange -> name", name)
+                    console.log("TCL: FieldsMaker -> onDateChange -> date", date)
+
+
+                    // Get Item
+                    // const {target} = event;
+                    // const {checked} = target;
+                    let {formFields} = this.state
+                    let currentField = formFields[index];
+
+                    // currentField.attrValues = this.formatDate(date);
+                    currentField.attrValues =  date;
+                    formFields[index] = currentField
+                    
+                    
+                    this.setState({formFields : formFields});
+                    
                     
                 }
 
@@ -277,7 +326,7 @@
             // Set Date Control
             // Or Label Text
             // --------------------------------------
-            setDatePickerField(attrName, attrValues, divClass, editField) {
+            setDatePickerField(attrName, attrValues, divClass, editField, index) {
                 console.log("TCL: FieldsMaker -> setDatePickerField -> attrValues", attrValues)
                
 
@@ -286,9 +335,10 @@
                         name={attrName}
                         colName={divClass}
                         fieldName = {attrName}
-                        // onDateChange = {props.onDateChange}
+                        onDateChange = {this.onDateChange}
                         inputValue = {attrValues}
                         editField={editField}
+                        index = {index}
                         // tabIndex = {Sequence}
                     />
                 )
@@ -344,6 +394,7 @@
             // ? Create Picklist Control
             // ?--------------------------------------
             setListField(attrName , valuesArray, posibleValues , divClass, editField,valuesDataArray, index) {
+                console.log("TCL: FieldsMaker -> setListField -> divClass", divClass)
                 // Merge values names list and values names array
             
                     const selectedItems  = valuesArray.map((item, index) => {
@@ -448,7 +499,7 @@
 
                         //? DatePicker
                         case "date":
-                            formField = this.setDatePickerField(attrName, attrValues, divClass, editField);
+                            formField = this.setDatePickerField(attrName, attrValues, divClass, editField, index);
                             break;
 
                         //? Text Input Field
@@ -525,9 +576,12 @@
                                     
                                         {
                                             formFields.map((tabItem, index) => {
-                                                let { attrValues } = tabItem;
+                                                let { attrValues, datatype } = tabItem;
                                                 let valuesLength = attrValues.length;
                                                 let colNum = valuesLength >= 200 ? 12 : 6;
+
+                                                if(datatype.toLowerCase() === 'picklist')
+                                                    colNum = 6
                                                 return (
                                                     this.setFieldType(tabItem, colNum, editControls, index)
                                                 )

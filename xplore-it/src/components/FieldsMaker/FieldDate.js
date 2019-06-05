@@ -18,7 +18,7 @@
 // Create Functional Component
 // --------------------------------------
 const FieldDate = (props) => {
-    const { colName, fieldName , editField , inputValue,   } = props;
+    const { colName, fieldName , editField , inputValue,  index } = props;
     return (
         <div className={colName}>
 
@@ -28,11 +28,11 @@ const FieldDate = (props) => {
                 {editField === true
                     ? <DatePicker
                         name={fieldName}
-                        // onDateChange = {props.onDateChange}
+                        onDateChange = {props.onDateChange}
                         initialValue = {inputValue}
                         editField = {editField}
                         readOnly = {false}
-                        tabIndex = {0}
+                        index = {index}
                     />
                     : <p> { inputValue !== "" && moment(inputValue).format("MM/DD/YYYY")}  </p>
                 }

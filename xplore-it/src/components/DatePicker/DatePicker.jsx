@@ -66,19 +66,24 @@ class DatePicker extends Component {
     // --------------------------------------
     // Handle Input Change
     // --------------------------------------
-    handleChange = (date) => {
+    handleChange = (date, name, index) => {
+        console.log("TCL: DatePicker -> handleChange -> index", index)
+        console.log("TCL: DatePicker -> handleChange -> name", name)
+    
 		console.log("TCL: DatePicker -> handleChange -> date", date)
 		// const {name} = this.props;
 		
         this.setState({ date:date })
         // const dateStr = this.getValueAsString(startDate)
         // this.props.onDateChange(name, dateStr, startDate);
+
+        this.props.onDateChange(date, name , index);
     }
 
 
 
     render() {
-        const {name, editField,  readOnly, tabIndex, } = this.props;
+        const {name, editField,  readOnly, index } = this.props;
         const containerStyles = this.state.focused === true ? {marginBottom:'600px', transition : 'all .3s ease'} : {marginBottom:'0', transition : 'all .3s ease'} 
        
         return (
@@ -87,14 +92,14 @@ class DatePicker extends Component {
             <div style = {containerStyles} className = "xpl-animateContainer">
                     <SingleDatePicker
                         name = {name}
-                        id = {name}
+                        id = {`${name}-${index}`}
                         showDefaultInputIcon = {true}
                         inputIconPosition="after"
                         small={true}
                         isOutsideRange={() => false}
                         numberOfMonths={1}
                         date={this.state.date}
-                        onDateChange={date => this.handleChange(date)}
+                        onDateChange={date => this.handleChange(date, name, index)}
                         focused={this.state.focused}
                         onFocusChange={({ focused }) =>
                           this.setState({ focused })
