@@ -707,7 +707,7 @@
     ** Custom People Picker
     ** ========================================================================== */
         
-    .peoplePicker.form-control.int-textInput {
+    .xpl-peoplePicker.form-control.int-textInput {
         background-color: #f6f7f9 !important;
         border: none !important;
     }
@@ -742,6 +742,16 @@
         max-width: 100% !important;
         min-width: 100% !important;
 
+    }
+
+
+    .xpl-peoplePicker {
+        background: #f6f7f9;
+        border: none;
+        outline: none;
+        border-radius: 2px;
+        font-weight: 400;
+        margin-bottom: 10px;
     }
    
 

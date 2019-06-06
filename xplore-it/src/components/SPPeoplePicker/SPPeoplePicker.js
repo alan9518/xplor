@@ -12,35 +12,53 @@ import PropTypes from 'prop-types';
 
 
     // --------------------------------------
+    // Preload PeoplePicker
+    // --------------------------------------
+
+    
+    const loadPicker = (pickerName, value, dynamicPicker) => {
+        console.log("TCL: loadPicker -> pickerName", pickerName)
+        console.log("TCL: loadPicker -> value", value)
+        setTimeout(() => {
+                    
+            window.initializePeoplePicker(`peoplePicker${pickerName}`, '175px', 19);
+
+            if( dynamicPicker === true && value ) {
+                console.log("TCL: loadPicker -> dynamicPicker", dynamicPicker)
+
+                window.fillPeoplePicker(value, pickerName);
+            }
+                
+            
+                
+
+        }, 0);
+    }
+
+
+    // --------------------------------------
     // Create Functional Component
     // --------------------------------------
     const SPPeoplePicker = (props) => {
 
-        const { name } = props;
+        const { name,index, value, dynamicPicker } = props;
 		console.log("TCL: SPPeoplePicker -> name", name)
         
         return (
+     
             
-            
-                // <div
-                //     id = {`peoplePicker${name}`}  
-                //     name = {`peoplePicker${name}`}  
-                //     className="peoplePicker form-control int-textInput ">
-                // </div>
-            
-            
-                <div 
+                <div onLoad = {loadPicker(name, value, dynamicPicker)}
                     id = {`peoplePicker${name}`}  
-                    name = {`peoplePicker-${name}`}  
-                    
-                    // tabIndex = {tabIndex}
-                    // onFocus = {props.checkErrorClass}
-                    // onBlur = {props.checkErrorClass}
-                    className="peoplePicker form-control int-textInput ">
+                    name = {`peoplePicker${name}-${index}`}  
+                    onBlur = {props.onBlur}
+                    onFocus = {props.onFocus}
+                    className="xpl-peoplePicker xpl-form-control ">
                 </div>
             
         )
     }
+
+
 
     
 // -------------------------------------- 
@@ -54,5 +72,8 @@ import PropTypes from 'prop-types';
 
 // --------------------------------------
 // Export Component
+// Use React Memo to disable re-render
+// Of component
 // --------------------------------------
-    export default SPPeoplePicker;
+    // export default SPPeoplePicker;
+    export default React.memo(SPPeoplePicker)

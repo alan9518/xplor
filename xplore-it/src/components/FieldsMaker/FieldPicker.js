@@ -23,7 +23,7 @@
         // const { Field_Name, Field_State_Name, Mandatory, columns,  Enabled, hasToolTip, toolTipText,  value, Sequence} = props.data;
 
 
-        const { colName, fieldName, editField, inputName, onPickerChange, dynamicPicker, inputValue } = props;
+        const { colName, fieldName, editField, inputName, onPickerChange, dynamicPicker, fieldValue, index } = props;
         let enabledClass = editField === false ? 'xpl-controlDisabled' : 'xpl-controlEnabled';
         let pickerName = inputName.replace(' ', '')
         // const { renderBorder } = props;
@@ -33,24 +33,41 @@
 
         // maxWidth: 400 
 
+        // <div className = {`xpl-fieldPicker ${enabledClass} `}>
+        // onFocus = {props.onFocus}
+
 
         return (
-            <div className={colName} id = {`${pickerName}-container`}>
+            <div className={colName} id = {`${pickerName}-container-${index}`} >
 
-            <div className = {`xpl-fieldPicker ${enabledClass} `}>
+            
 
                 <h6 className="xpl-boldText xpl-fieldSeparator"> {fieldName} </h6>
-                <SPPeoplePicker 
-                    name={pickerName} 
-                    value={inputValue} 
-                    // onChange={props.onChange} 
-                    // tabIndex = {Sequence} 
-                    enabled = {true}
-                />
+
+
+                {
+                    editField === true 
+                    ?
+                        <SPPeoplePicker 
+                            name={pickerName} 
+                            value={fieldValue} 
+                            onBlur = {props.onBlur}
+                            onFocus = {props.onFocus}
+                            enabled = {true}
+                            index = {index}
+                            dynamicPicker = {dynamicPicker}
+                        />
+                    :
+                     <p> {fieldValue} </p>   
+
+                
+                }
+
+               
                 
                     
             
-            </div>
+            
         </div>
 
         )

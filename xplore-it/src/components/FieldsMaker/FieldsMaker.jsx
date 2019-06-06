@@ -43,29 +43,21 @@
             componentDidMount() {
 
                 
-                setTimeout(() => {
+                // setTimeout(() => {
                         
-                    // window.initializePeoplePicker('peoplePickerDomainOwners', '175px', 19);
-                    // window.initializePeoplePicker('peoplePickerProductSponsor', '175px', 31);
+                
 
 
-                    // window.initializePeoplePicker('peoplePickerDomainOwners', '175px', 19);
-                    // let picker = document.getElementById('peoplePickerDomainOwners')
-                    // let pickerContainer = document.getElementById('DomainOwners-container')
-                    // console.log("TCL: FieldsMaker -> toggleFieldsEdit -> pickerContainer", pickerContainer)
-                    // console.log("TCL: FieldsMaker -> toggleFieldsEdit -> picker", picker)
-    
-                    // this.fillPickers();
-
-
-                    this.setState({
-                        formFields : this.props.formFields,
-                        isLoaded : true
-                    });
                 
                     
-                }, 0);
+                // }, 0);
 
+
+                
+                this.setState({
+                    formFields : this.props.formFields,
+                    isLoaded : true
+                });
 
              
              
@@ -184,17 +176,7 @@
                 // ? Bind string to Bool values
                 // ?--------------------------------------
                 onToggleChange = (event) => {
-                    console.log("TCL: FieldsMaker -> onToggleChange -> event", event)
                     const {target} = event;
-                    console.log("TCL: FieldsMaker -> onToggleChange -> target", target)
-
-                    // target.id
-                    console.log("TCL: FieldsMaker -> onToggleChange -> target.id", target.id)
-                    console.log("TCL: FieldsMaker -> onToggleChange -> target.name", target.name)
-
-                    // event.target.checked
-                    console.log("TCL: FieldsMaker -> onToggleChange -> event.target.checked", event.target.checked)
-
 
                     let {formFields} = this.state
                     let stateIndex = target.id.split('-')[1]
@@ -230,15 +212,10 @@
                     
                     // const { value } = target;
                     let {formFields} = this.state
-                    console.log("TCL: FieldsMaker -> onListItemClick -> event", event)
 
                     
                     let currentField = formFields[stateIndex];
-                    console.log("TCL: FieldsMaker -> onListItemClick -> currentField", currentField)
-
                    
-                    // let currentField = formFields[stateIndex];
-
 
                     // Find selected Option on the Possible Values
                     // Add the new value to attrValues
@@ -258,7 +235,6 @@
                    
                         
 
-                    console.log("TCL: FieldsMaker -> onListItemClick -> currrentValuesArray", currrentValuesArray)
 
 
                     // Convert the Array to string and update State
@@ -274,10 +250,7 @@
                 // ? Set DatePicker Value
                 // ?--------------------------------------
                 onDateChange = (date, name , index) => {
-                    console.log("TCL: FieldsMaker -> onDateChange -> index", index)
-                    console.log("TCL: FieldsMaker -> onDateChange -> name", name)
-                    console.log("TCL: FieldsMaker -> onDateChange -> date", date)
-
+                 
 
                     // Get Item
                     // const {target} = event;
@@ -294,6 +267,145 @@
                     
                     
                 }
+
+
+
+                
+                // ?--------------------------------------
+                // ? Handle PeoplePicker Selction event
+                // peoplePickerProductSponsor_TopSpan
+                // peoplePickerProductSponsor_TopSpan_HiddenInput
+                // peoplePickerProductSponsor_TopSpan_EditorInput
+                // ?--------------------------------------
+            
+                onPeoplePickerResourceFocus = (event, index) => {
+                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> event", event)
+                    const context = this;
+                    const {target} = event;
+                    const {id, name} = target;
+                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> name", name)
+
+
+                    if (id.indexOf('peoplePicker') < 0)
+                        return;
+
+
+
+                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> target", target)
+                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> id", id)
+
+                    let pickerNameArray =  id.split('_TopSpan_');
+                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> pickerNameArray", pickerNameArray)
+
+                    // target.querySelectorAll(`${id}_HiddenInput`);
+
+                    const pickerValue = document.getElementById(`${pickerNameArray[0]}_TopSpan_HiddenInput`).value;
+                    
+                    if(pickerValue === "" || pickerValue === "[]" || pickerValue === [] ) 
+                        return ;
+
+                    else {
+                        // ? Get picker Value
+                        let peoplePickerUserValue = (JSON.parse(pickerValue))[0].Description;
+
+                        // ? Get Current Field
+                        let {formFields} = this.state;
+                        // const pickerContainer = document.getElementById(`${pickerNameArray[0]}_TopSpan_HiddenInput`).value;
+                        let stateNameItemArray = pickerNameArray[0].split('peoplePicker')
+                        console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> stateNameItemArray", stateNameItemArray)
+                        // let currentField = formFields.filter((formItem) => {formItem.attrName.toLowerCase().replace(' ', '') === stateNameItemArray[0].toLowerCase()} )
+
+                        // let currentField =  formFields.filter((formItem, index) => {
+                            
+                        //     console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> formItem", formItem)
+
+                        //     console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> formItem.attrName.toLowerCase()", formItem.attrName.toLowerCase())
+                            
+                        //     if((formItem.attrName.toLowerCase()).replace(' ', '') === stateNameItemArray[1].toLowerCase()) {
+                        //         console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> index", index)
+                                
+                        //         return formItem
+                        //     }
+                              
+                        // })[0]
+
+
+
+                        let newFormFields =  formFields.map((formItem, index) => {
+                            
+                            console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> formItem", formItem)
+
+                            console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> formItem.attrName.toLowerCase()", formItem.attrName.toLowerCase())
+                            
+                            if((formItem.attrName.toLowerCase()).replace(' ', '') === stateNameItemArray[1].toLowerCase()) {
+                                console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> index", index)
+
+                                formItem.attrValues = peoplePickerUserValue
+
+                                // return formItem
+                            }
+
+                            return formItem
+                              
+                        })
+                        console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> newFormFields", newFormFields)
+                        
+                        
+                        // console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> currentField", currentField)
+
+
+                        // console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> peoplePickerUserValue", peoplePickerUserValue)
+                        // console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> pickerValue", pickerValue)
+
+
+                        // currentField.attrValues = peoplePickerUserValue;
+
+
+
+                        this.setState({formFields : newFormFields})
+                    }   
+                        
+
+                    // if(this.getPeoplePickerData(`${id}_HiddenInput`))
+
+                    // if (target.className === 'ms-core-menu-sublabel ms-metadata' || target.className === 'ms-core-menu-label') {
+                        
+                        
+                    //     // let owner = context.getPeoplePickerData('peoplePickerOwner_TopSpan_HiddenInput');
+                    //     // let pickerInput =  target.querySelectorAll(`${id}_HiddenInput`);
+                    //     console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus ->  owner",  owner)
+                    //     // context.setState({
+                    //     //     owner: owner
+                    //     // })
+
+                    //     // console.log('owner', context.state.owner)
+
+                    // }
+
+                    // else
+                    //     return;
+
+                }
+
+
+
+                
+            // ?--------------------------------------
+            // ? Get Data From People Picker
+            // ?--------------------------------------
+            getPeoplePickerData(peoplePicker) {
+                let pickerValue = JSON.parse(document.getElementById(peoplePicker).value);
+                if(pickerValue === "" || pickerValue === "[]" || pickerValue === [] ) 
+                    return null;
+                else
+                {
+                    const picker = JSON.parse(pickerValue) || {};
+                    return picker[0].Description;
+                }
+                // return picker[0];   
+            }
+
+
 
 
 
@@ -352,7 +464,7 @@
             // ?Set PeoplePciker Control
             // ?Or Label Text
             // ?--------------------------------------
-            setTextPeoplePicker(attrName, attrValues, divClass, editField, dynamicPicker) {
+            setTextPeoplePicker(attrName, attrValues, divClass, editField, index) {
                 console.log("TCL: FieldsMaker -> setTextPeoplePicker -> attrName", attrName)
 
 
@@ -362,30 +474,18 @@
                 return (
                     <FieldPicker
                         fieldName={attrName}
-                        
                         fieldValue={attrValues}
                         editField={editField}
                         inputName={attrName}
-                        // inputName ={'Owner'}
-                        dynamicPicker = {dynamicPicker}
-                        // colName={'col-md-12 col-lg-12'}
-                    // onPickerChange = {this.onChangeInput}
+                        index ={index}
+                        dynamicPicker = {true}
+                        onFocus = {this.onPeoplePickerResourceFocus}
+                        onBlur = {this.onPeoplePickerResourceFocus}
+                       
                     />
                 )
 
 
-
-                // return (    
-                //     <FieldPicker 
-                //         fieldName={attrName}
-                //         fieldValue = {attrValues} 
-                //         editField = {true} 
-                //         inputName = {"Owner"}
-                //         colName = {'col-md-12 col-lg-12'}
-                //         // onPickerChange = {this.onChangeInput}
-                //         dynamicPicker = {false}
-                //     />
-                // )
 
             }
 
@@ -494,7 +594,7 @@
 
                         //? Sharepoint PeoplePicker
                         case "person":
-                            formField = this.setTextPeoplePicker(attrName, attrValues, divClass, editField, true);
+                            formField = this.setTextPeoplePicker(attrName, attrValues, divClass, editField, true, index);
                             break;
 
                         //? DatePicker
@@ -505,13 +605,6 @@
                         //? Text Input Field
                         default:
                             formField = this.setTextField(attrName, attrValues, divClass, editField, index);
-                            // formField = <FieldItem 
-                            //                 fieldName={attrName} 
-                            //                 fieldValue={attrValues} 
-                            //                 colName={divClass} 
-                            //                 editField={editField} 
-                            //                 onChangeInput =  {this.onTextChange}
-                            //                 useParentState = {true} />
 
                     }
 

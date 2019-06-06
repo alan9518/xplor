@@ -129,6 +129,7 @@
     // --------------------------------------
 
     function initializePeoplePicker($peoplePicker, $peoplePickerWidth, $tabIndex) {
+      console.log("TCL: initializePeoplePicker -> $peoplePicker", $peoplePicker)
       //console.log('TCL: initializePeoplePicker -> $peoplePicker', $peoplePicker)
       // Create a schema to store picker properties, and set the properties.
       var $schema = {};
@@ -163,15 +164,18 @@
     // peoplePickerBusiness_lead_TopSpan
     // --------------------------------------
     function fillPeoplePicker($user, $peoplePicker) {
+      console.log("TCL: fillPeoplePicker -> $user", $user)
       // //console.log('user owner', user)
       var pickerName = `peoplePicker${$peoplePicker}_TopSpan`
       // cleanPeoplePicker('peoplePickerOwner_TopSpan');
+      console.log("TCL: fillPeoplePicker -> pickerName", pickerName)
       // cleanPeoplePicker(pickerName);
       // var peoplePicker = this.SPClientPeoplePicker.SPClientPeoplePickerDict.peoplePickerOwner_TopSpan
       var peoplePicker = this.SPClientPeoplePicker.SPClientPeoplePickerDict[pickerName]
       var usrObj = {
         'Key': $user
       };
+      console.log("TCL: fillPeoplePicker -> usrObj", usrObj)
       peoplePicker.AddUnresolvedUser(usrObj, true);
     }
 

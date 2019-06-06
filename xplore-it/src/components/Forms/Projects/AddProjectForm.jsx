@@ -256,48 +256,47 @@
 
             // !--------------------------------------
             // ! Create New Project
-            // ?{
             // /?    "productName":"Xplore IT New Pro3",
             // /?    "vendorMfdID":1227, (From getMaufacturer web service) 
             // /?    "mpnDescription":"Xplore IT New Pro3 is a new Product",
-            // ?     "cpnSearch"
+            // /?     "cpnSearch"
             // /?    "bussModel":"XPLOR",
-            // ?    "erpCompanyID":11, (From getCustomer web service)
-            // ?    "customerID":1014, (From getCustomer web service)
-            // ?    "proCategoryID":3228, (From getProCategory web service)
+            // /?    "erpCompanyID":11, (From getCustomer web service)
+            // /?    "customerID":1014, (From getCustomer web service)
+            // /?    "proCategoryID":3228, (From getProCategory web service)
             // /?    "ownerID":4033, (From getUsers web service)
             // /?    "delegateID":4033, (From getUsers web service)
             // /?    "userID":"JOSE.VAZQUEZ2@FLEX.COM"
-            // ?}
-        
             // !--------------------------------------
             saveProject = async () => {
-                const formData =  new FormData();
+                // const formData =  new FormData();
                 const userDetails = window.getCurrentSPUser();
-				
-                    formData.append('productName' , this.state.projectName);
-                    formData.append('vendorMfdID' , this.state.vendor.value);
-                    formData.append('mpnDescription' , this.state.shortDescription);
-                    formData.append('cpnSearch' , this.formatSearchKeywords());
-                    formData.append('bussModel' ,'XPLOR');
-                    formData.append('erpCompanyID' , this.state.softwareTopic.ERPCompanyID);
-                    formData.append('customerID' , this.state.softwareTopic.CustomerID);
-                    formData.append('proCategoryID' , this.state.proCategory.value);
-                    formData.append('ownerID' , this.getPeoplePickerData('Owner'));
-                    formData.append('delegateID' , this.getPeoplePickerData('CoOwner'));
-                    
-                    formData.append('userID' , userDetails.user_email);
 
+                //? Create Request Data
+                const data = JSON.stringify({
+                    'newPro' : {
+                        'productName' : this.state.projectName,  
+                        'vendorMfdID' : this.state.vendor.value, 
+                        'mpnDescription' : this.state.shortDescription,
+                        'bussModel' : 'XPLOR',
+                        'erpCompanyID' : this.state.softwareTopic.ERPCompanyID,
+                        'customerID' : this.state.softwareTopic.CustomerID,
+                        'proCategoryID' : this.state.proCategory.value,
+                        'ownerID' : this.getPeoplePickerData('Owner'),
+                        'delegateID' : this.getPeoplePickerData('CoOwner'),
+                        'userID' : userDetails.user_email
+                    }
+                })
 
-                console.log("TCL: saveProject -> formData", formData)
+                
+                // ? Send Promise Request
 
-
-               
                 return axios({
                     method : 'post',
                     url : Endpoints.createNewProject,
-                    headers: { "Content-Type": "application/json; charset=utf-8" ,  "Accept": "text/plain"},
-                    data : formData
+                    headers: { "Content-Type": "application/json; charset=utf-8" ,  "Accept": "application/json"},
+                    data : data
+                    
                 });
 
             }
@@ -357,8 +356,31 @@
         ** ========================================================================== */
 
 
+        
             // !--------------------------------------
-            // ! Color Picker Component Not Used
+            // ! Create New Project
+            // ! Save Project Data
+            // !--------------------------------------
+            createNewProject = async (event)=> {
+                event.preventDefault();
+                this.setState({isLoaded : false})
+                console.log("TCL: AddProjectForm -> createNewProject -> this.state", this.state)
+                try {
+                    const createNewProjectPromise =  await this.saveProject();
+                    const createNewProjectResponse =  await createNewProjectPromise.data;
+                    console.log("TCL: createNewProject -> createNewProjectResponse", createNewProjectResponse)
+                }
+                catch(error) {
+                    console.log("TCL: createNewProject -> error", error)
+                    
+                }
+            }
+
+            
+
+            // !--------------------------------------
+            // ! Color Picker Component 
+            // ! NOT LONGER USED
             // ! Set Card Color
             // !--------------------------------------
                 onColorChange = (colorCode)=> {
@@ -602,24 +624,102 @@
             }
 
 
-            // !--------------------------------------
-            // ! Create New Project
-            // ! Save Project Data
-            // !--------------------------------------
-            createNewProject = async (event)=> {
-                event.preventDefault();
-                this.setState({isLoaded : false})
-                console.log("TCL: AddProjectForm -> createNewProject -> this.state", this.state)
-                try {
-                    const createNewProjectPromise =  await this.saveProject();
-                    const createNewProjectResponse =  await createNewProjectPromise.data;
-                    console.log("TCL: createNewProject -> createNewProjectResponse", createNewProjectResponse)
-                }
-                catch(error) {
-                    console.log("TCL: createNewProject -> error", error)
+
+                 
+                // ?--------------------------------------
+                // ? Handle PeoplePicker Selction event
+                // peoplePickerProductSponsor_TopSpan
+                // peoplePickerProductSponsor_TopSpan_HiddenInput
+                // peoplePickerProductSponsor_TopSpan_EditorInput
+                // ?--------------------------------------
+            
+                onPeoplePickerResourceFocus = (event) => {
+                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> event", event)
+                    const context = this;
+                    const {target} = event;
+                    const {id, name} = target;
+                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> name", name)
+
+
+                    if (id.indexOf('peoplePicker') < 0)
+                        return;
+
+
+
+                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> target", target)
+                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> id", id)
+
+                    let pickerNameArray =  id.split('_TopSpan_');
+                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> pickerNameArray", pickerNameArray)
+
+                    // target.querySelectorAll(`${id}_HiddenInput`);
+
+                    const pickerValue = document.getElementById(`${pickerNameArray[0]}_TopSpan_HiddenInput`).value;
                     
+                    if(pickerValue === "" || pickerValue === "[]" || pickerValue === [] ) 
+                        return ;
+
+                    else {
+                        // ? Get picker Value
+                        let peoplePickerUserValue = (JSON.parse(pickerValue))[0].Description;
+
+                        // ? Get Current Field
+                        let {formFields} = this.state;
+                        // const pickerContainer = document.getElementById(`${pickerNameArray[0]}_TopSpan_HiddenInput`).value;
+                        let stateNameItemArray = pickerNameArray[0].split('peoplePicker')
+                        console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> stateNameItemArray", stateNameItemArray)
+                      
+
+
+                        let newFormFields =  formFields.map((formItem, index) => {
+                            
+                            console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> formItem", formItem)
+
+                            console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> formItem.attrName.toLowerCase()", formItem.attrName.toLowerCase())
+                            
+                            if((formItem.attrName.toLowerCase()).replace(' ', '') === stateNameItemArray[1].toLowerCase()) {
+                                console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> index", index)
+
+                                formItem.attrValues = peoplePickerUserValue
+
+                                // return formItem
+                            }
+
+                            return formItem
+                              
+                        })
+                        console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> newFormFields", newFormFields)
+                        
+                        
+                     
+
+                        this.setState({formFields : newFormFields})
+                    }   
+                        
+
+                    // if(this.getPeoplePickerData(`${id}_HiddenInput`))
+
+                    // if (target.className === 'ms-core-menu-sublabel ms-metadata' || target.className === 'ms-core-menu-label') {
+                        
+                        
+                    //     // let owner = context.getPeoplePickerData('peoplePickerOwner_TopSpan_HiddenInput');
+                    //     // let pickerInput =  target.querySelectorAll(`${id}_HiddenInput`);
+                    //     console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus ->  owner",  owner)
+                    //     // context.setState({
+                    //     //     owner: owner
+                    //     // })
+
+                    //     // console.log('owner', context.state.owner)
+
+                    // }
+
+                    // else
+                    //     return;
+
                 }
-            }
+
+
+
 
 
 
@@ -816,7 +916,7 @@
                                             editField = {true} 
                                             inputName = {"Owner"}
                                             colName = {'col-md-12 col-lg-12'}
-                                            onPickerChange = {this.onChangeInput}
+                                            // onPickerChange = {this.onChangeInput}
                                             dynamicPicker = {false}
                                         />
                                      
@@ -832,8 +932,8 @@
                                                 editField = {true} 
                                                 inputName = {"CoOwner"}
                                                 colName = {'col-md-12 col-lg-12'} 
-                                                onPickerChange = {this.onChangeInput}
-                                                dynamicPicker = {false}
+                                                // onPickerChange = {this.onChangeInput}
+                                                dynamicPicker = {true}
                                             />
                                             
                                         </div>
