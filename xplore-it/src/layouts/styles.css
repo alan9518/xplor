@@ -525,6 +525,11 @@
             align-items: center;
         }
 
+
+        .xpl-editButtonContainerEnd {
+            justify-content: flex-end !important;
+        }
+
         .xpl-editButtonContainer h2 {
             margin-left: 0;
             margin-right: auto;

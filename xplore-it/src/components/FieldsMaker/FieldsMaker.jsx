@@ -39,30 +39,18 @@
                 // this.parentTabHeight = document.getElementsByClassName('rc-tabs-tabpane-active')[0].clientHeight
             }
 
+            // --------------------------------------
+            // Get Props Fields and Set them as
+            // Local State
+            // --------------------------------------
 
             componentDidMount() {
 
-                
-                // setTimeout(() => {
-                        
-                
-
-
-                
-                    
-                // }, 0);
-
-
-                
                 this.setState({
                     formFields : this.props.formFields,
                     isLoaded : true
                 });
 
-             
-             
-
-              
             }
 
 
@@ -627,10 +615,12 @@
 
                 if (isOverview) {
 
+                    // Set false if the editControls Val is undefined, eg => the fist time the page loads
+
                     if (newProject)
                         return <AddProjectForm productOverview={formFields || this.props.formFields} />;
                     else
-                        return <CardHeaderWide productOverview={formFields || this.props.formFields} />;
+                        return <CardHeaderWide productOverview={formFields || this.props.formFields} editControls = {editControls || false} toggleFields = {this.toggleFieldsEdit}/>;
 
                 }
 

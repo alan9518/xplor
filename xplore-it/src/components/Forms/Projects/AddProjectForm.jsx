@@ -10,7 +10,7 @@
 // --------------------------------------
     import React , {Component, Fragment} from "react";
     import PropTypes from "prop-types";
-    import {  FieldPicker, FieldDate, FieldItem,  EditableProjectCard, FieldSelect, FieldIcon, SingleButton, FieldRemovableList  } from "../../../components";
+    import {  FieldPicker, FieldDate, AppLoader,  FieldItem,  EditableProjectCard, FieldSelect, FieldIcon, SingleButton, FieldRemovableList  } from "../../../components";
     import {Endpoints} from '../../../services/endpoints';
     import axios from 'axios';
     import moment from 'moment';
@@ -36,7 +36,7 @@
                 super(props);
                 this.state = {
                     isLoaded: false,
-                    projectName : '',
+                    projectName : this.props.productOverview.ProductName || '',
                     softwareTopic : {label : 'Select a Software Topic', value : ''},
                     softwareTopicName : '',
                     softwareTopicValues : [],
@@ -44,20 +44,20 @@
                     vendor : {},
                     subCapabilitesValues : [],
                     subCapability : {label : 'Select a SubCapability', value : ''},
-                    owner : '', 
+                    owner : this.props.productOverview.OwnerEmail.toLowerCase() || '', 
                     createdDate : moment().format("MM/DD/YYYY") , 
                     lastUpdateDate : moment().format("MM/DD/YYYY"), 
-                    coOwner : '', 
-                    shortDescription : '',
-                    cardColor : null,
-                    cardIcon :  '',
+                    coOwner : this.props.productOverview.CoownerEmail.toLowerCase() || '', 
+                    shortDescription : this.props.productOverview.ShortDescription ||  '',
+                    cardColor : this.props.productOverview.color || null,
+                    cardIcon :  this.setCardIcon(this.props.productOverview.IconValue) || '',
                     showColorPicker : false,
                     currentVendorID : 0,
                     proCategories : [],
                     proCategory : {label : 'Select a proCategory', value : ''},
                     keywords : [],
                     productKeyword : '',
-                    keywordsList : [], 
+                    keywordsList : this.props.productOverview.SearchKeyword.split(',') || [], 
 
                 }
                 this.onChangeSelect =  this.onChangeSelect.bind(this);
@@ -69,19 +69,63 @@
             // --------------------------------------
             // Set Initial Values
             // --------------------------------------
-            componentDidMount() {
+            async componentDidMount() {
                 const pickersWidth = '175px';
-                this.loadAPI();
-                // this.initPickers()
+                this.setState({isLoaded : false})
+
+                // ? Get Data
+                let dataLoaded = await this.loadAPI();
+                
+              
+
+                // dataLoaded === true && this.setState({isLoaded : true})
+
+                //? Preload Data from Details View
+                if (this.props.editCard && this.props.productOverview) {
+                    const { 
+                        OwnerFirstName, OwnerLastName, ProductType, CreatedDate, 
+                        LastUpdateDate, CoownerFirstName,  CoownerLastName  ,ShortDescription, 
+                        ProductName, ProductScope, SoftwareTopic, SoftwareTopicID, SearchKeyword,
+                        Vendors, partID, partProjectID
+                    } = this.props.productOverview;
+                    console.log("TCL: componentDidMount -> this.props.productOverview", this.props.productOverview)
+                    // this.state.softwareTopicValues
+                    console.log("TCL: componentDidMount -> this.state", this.state)
+                    console.log("TCL: componentDidMount -> this.state.softwareTopicValues", this.state.softwareTopicValues)
+
+                    let softwareTopicValue = this.setSelectedOption(SoftwareTopic, this.state.softwareTopicValues)
+                    let vendorValue = this.setSelectedOption(Vendors, this.state.vendorValues)
+
+                    this.setState({
+                        projectName : ProductName,
+                        shortDescription : ShortDescription,
+                        keywordsList : SearchKeyword.split(','),
+                        softwareTopic : softwareTopicValue,
+                        softwareTopicName : softwareTopicValue.label,
+                        vendor : vendorValue,
+                        isLoaded : dataLoaded === true && true
+
+                    })
+                }
+
+                else
+                    dataLoaded === true && this.setState({isLoaded : true})
+
+
+
+                      // ? Init People Pickers
                 setTimeout(() => {
                     
                         
                     window.initializePeoplePicker('peoplePickerOwner', pickersWidth, 19);
                     window.initializePeoplePicker('peoplePickerCoOwner', pickersWidth, 31);
+
+                    this.fillPickers();
                   
                     
                 }, 0);
             }
+
 
 
             // --------------------------------------
@@ -118,18 +162,23 @@
 
                     this.setState({
                         // categories : appRoutes || [],
-                        isLoaded : true,
+                        // isLoaded : true,
                         softwareTopicValues : softwareTopicValues,
                         proCategories : this.createOptionsProCat(proCategoriesData.data),
                         // vendorValues : this.createOptionsVendors(vendorsData.data),
                         showError : false,
                     })
+
+                    return true;
                 
 
                 }
                 catch(error) {
                     console.log('​Dashboard -> catch -> error', error)
                     this.setState({isLoaded : true, showError : true})
+
+
+                    return false;
                 }
             }
 
@@ -232,21 +281,18 @@
 
                     });
 
-                    console.log("TCL: AddProjectForm -> mergeCat -> softwareTopicValues", softwareTopicValues)
+                    
 
-                    // Return All Routes, On an Array Merging The HomeRoute
-                    // const sideBarRoutes = [homeRoute, addProjectRoute, ...appRoutes ];
-                    // return sideBarRoutes;
+                    
 
                     return softwareTopicValues;
 
                 }
                 catch(error) {
-                    // const appRoutes = [];
+                    
                     this.setState({isLoaded : true, showError : true})
 
-                    // Return The Array with Only the HomeRoute
-                    // return [...homeRoute];
+                  
                 }
 
             }
@@ -626,98 +672,114 @@
 
 
                  
-                // ?--------------------------------------
-                // ? Handle PeoplePicker Selction event
-                // peoplePickerProductSponsor_TopSpan
-                // peoplePickerProductSponsor_TopSpan_HiddenInput
-                // peoplePickerProductSponsor_TopSpan_EditorInput
-                // ?--------------------------------------
+            // ?--------------------------------------
+            // ? Handle PeoplePicker Selction event
+            // peoplePickerProductSponsor_TopSpan
+            // peoplePickerProductSponsor_TopSpan_HiddenInput
+            // peoplePickerProductSponsor_TopSpan_EditorInput
+            // ?--------------------------------------
             
-                onPeoplePickerResourceFocus = (event) => {
-                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> event", event)
-                    const context = this;
-                    const {target} = event;
-                    const {id, name} = target;
-                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> name", name)
-
-
-                    if (id.indexOf('peoplePicker') < 0)
-                        return;
+            onPeoplePickerResourceFocus = (event) => {
+                const context = this;
+                const {target} = event;
+                const {id, name} = target;
 
 
 
-                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> target", target)
-                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> id", id)
+                if (id.indexOf('peoplePicker') < 0)
+                    return;
 
-                    let pickerNameArray =  id.split('_TopSpan_');
-                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> pickerNameArray", pickerNameArray)
-
-                    // target.querySelectorAll(`${id}_HiddenInput`);
-
-                    const pickerValue = document.getElementById(`${pickerNameArray[0]}_TopSpan_HiddenInput`).value;
-                    
-                    if(pickerValue === "" || pickerValue === "[]" || pickerValue === [] ) 
-                        return ;
-
-                    else {
-                        // ? Get picker Value
-                        let peoplePickerUserValue = (JSON.parse(pickerValue))[0].Description;
-
-                        // ? Get Current Field
-                        let {formFields} = this.state;
-                        // const pickerContainer = document.getElementById(`${pickerNameArray[0]}_TopSpan_HiddenInput`).value;
-                        let stateNameItemArray = pickerNameArray[0].split('peoplePicker')
-                        console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> stateNameItemArray", stateNameItemArray)
-                      
+                let pickerNameArray =  id.split('_TopSpan_');
 
 
-                        let newFormFields =  formFields.map((formItem, index) => {
-                            
-                            console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> formItem", formItem)
+                // target.querySelectorAll(`${id}_HiddenInput`);
 
-                            console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> formItem.attrName.toLowerCase()", formItem.attrName.toLowerCase())
-                            
-                            if((formItem.attrName.toLowerCase()).replace(' ', '') === stateNameItemArray[1].toLowerCase()) {
-                                console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> index", index)
+                const pickerValue = document.getElementById(`${pickerNameArray[0]}_TopSpan_HiddenInput`).value;
 
-                                formItem.attrValues = peoplePickerUserValue
+                if(pickerValue === "" || pickerValue === "[]" || pickerValue === [] ) 
+                    return ;
 
-                                // return formItem
-                            }
+                else {
+                    // ? Get picker Value
+                    let peoplePickerUserValue = (JSON.parse(pickerValue))[0].Description;
 
-                            return formItem
-                              
-                        })
-                        console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> newFormFields", newFormFields)
-                        
-                        
-                     
+                    // ? Get Current Field
+                    let {formFields} = this.state;
+                    // const pickerContainer = document.getElementById(`${pickerNameArray[0]}_TopSpan_HiddenInput`).value;
+                    let stateNameItemArray = pickerNameArray[0].split('peoplePicker')
 
-                        this.setState({formFields : newFormFields})
-                    }   
-                        
+                
+                    let newFormFields =  formFields.map((formItem, index) => {
+                        if((formItem.attrName.toLowerCase()).replace(' ', '') === stateNameItemArray[1].toLowerCase()) 
+                            formItem.attrValues = peoplePickerUserValue
 
-                    // if(this.getPeoplePickerData(`${id}_HiddenInput`))
+                        return formItem
 
-                    // if (target.className === 'ms-core-menu-sublabel ms-metadata' || target.className === 'ms-core-menu-label') {
-                        
-                        
-                    //     // let owner = context.getPeoplePickerData('peoplePickerOwner_TopSpan_HiddenInput');
-                    //     // let pickerInput =  target.querySelectorAll(`${id}_HiddenInput`);
-                    //     console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus ->  owner",  owner)
-                    //     // context.setState({
-                    //     //     owner: owner
-                    //     // })
+                    })
 
-                    //     // console.log('owner', context.state.owner)
 
-                    // }
 
-                    // else
-                    //     return;
+                
 
-                }
+                    this.setState({formFields : newFormFields})
+                }   
 
+
+            }
+
+
+            /** --------------------------------------
+             * Set Select Option from Details View
+            // @param {Option comes from Props, current selected }
+            // @param {dataOptions data source }
+            // @returns {{label : , value :}}
+            // -------------------------------------- */
+            setSelectedOption = (selOption, dataOptions, optionalFilter = null) =>  {
+                console.log("TCL: setSelectedOption -> option", selOption);
+                console.log("TCL: setSelectedOption -> dataOptions", dataOptions);
+
+                let selectedOption = dataOptions.filter((option)=> {
+                    // option.CustomerID => software Topic Values
+                    if(selOption === option.label || optionalFilter === option.CustomerID) 
+                        return option
+                })[0];
+                console.log("TCL: setSelectedOption -> selectedOption", selectedOption)
+
+
+                return selectedOption;
+             
+            }
+
+
+            /** --------------------------------------
+             * Set Card Icon
+            // @param {icon value with : T: chart-line}
+            // @returns {FA icon class name}
+            // -------------------------------------- */
+            setCardIcon = (cardIconName) => {
+                let iconNameArray = cardIconName ? cardIconName.split(':') : ''
+                console.log("TCL: setCardIcon -> iconNameArray", iconNameArray)
+
+                if(iconNameArray.length >= 1)
+                    return iconNameArray[1];
+                else    
+                    return ''
+                
+
+            }
+
+
+            // ?--------------------------------------
+            // ? Fill PeoplePickers
+            // ? only if values are !== from null
+            // ?--------------------------------------
+            fillPickers = ()=> {
+                const {owner, coOwner} = this.state;
+                if(owner !== '' )
+                    window.fillPeoplePicker(owner, 'Owner')
+                if(coOwner !== '')
+                    window.fillPeoplePicker(coOwner, 'CoOwner')
+            }
 
 
 
@@ -733,6 +795,14 @@
             formatDate = (date) => {
                 const productDate = new Date(date);
                 return productDate.toLocaleDateString();
+            }
+
+
+            // --------------------------------------
+            // Render Loader
+            // --------------------------------------
+            renderLoader () {
+                return <div> <AppLoader customHeight = {800}/> </div>
             }
 
 
@@ -752,9 +822,12 @@
                         vendor,subCapabilitesValues, subCapability, 
                         proCategories, proCategory, productKeyword, keywordsList
                     } = this.state;
-                let capOptions = this.createOptions(subCapabilitesValues);
+                // let capOptions = this.createOptions(subCapabilitesValues);
 				
         
+                let softwareTopicValue = this.setSelectedOption(this.props.productOverview.SoftwareTopic, this.state.softwareTopicValues)
+                let vendorValue = this.setSelectedOption(this.props.productOverview.Vendors, this.state.vendorValues)
+
 
                 return (
                     <Fragment>
@@ -775,10 +848,32 @@
                                                 softwareTopic = {softwareTopicName}
                                            />
                                         </div>
+
+                                             
     
     
                                         <div className="col-xl-7 col-lg-7 col-md-12">
                                             <div className="row">
+
+                                            
+                                                {
+                                                    // ? If the view comes from DetailsView Component
+                                                    // ? Show a cancel edit Button
+                                                    // ? xpl-editButtonContainer => Push button to the right
+                                                    this.props.editCard &&
+                                                    
+                                                        <div className="xpl-editButtonContainer xpl-editButtonContainerEnd">
+        
+                                                            <SingleButton
+                                                                buttonText={"Cancel"}
+                                                                buttonColor={"primary"}
+                                                                onClick={this.props.toggleFields}
+                                                            />
+                                                        </div>
+                                                    
+
+                                                
+                                                }
                                                
                                                 <FieldItem 
                                                     fieldName = {"Project Name"} 
@@ -794,7 +889,7 @@
 
                                                 <FieldSelect
                                                     fieldName = {"Software Topic"} 
-                                                    fieldValue = {softwareTopic} 
+                                                    fieldValue = {softwareTopicValue || softwareTopic} 
                                                     optionsData = {softwareTopicValues}
                                                     inputName = {'softwareTopic'} 
                                                     editField = {true} 
@@ -809,7 +904,7 @@
 
                                                 <FieldSelect
                                                     fieldName = {"Vendor"} 
-                                                    fieldValue = {vendor} 
+                                                    fieldValue = {vendorValue || vendor} 
                                                     optionsData = {vendorValues}
                                                     inputName = {'vendor'} 
                                                     editField = {true} 
@@ -933,7 +1028,7 @@
                                                 inputName = {"CoOwner"}
                                                 colName = {'col-md-12 col-lg-12'} 
                                                 // onPickerChange = {this.onChangeInput}
-                                                dynamicPicker = {true}
+                                                dynamicPicker = {false}
                                             />
                                             
                                         </div>
@@ -1053,7 +1148,8 @@
             // Render Component
             // --------------------------------------
             render() {
-                return this.renderAddProjectForm();
+                const {isLoaded} = this.state
+                return isLoaded === true ? this.renderAddProjectForm() : this.renderLoader();
             }
     }
 

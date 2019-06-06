@@ -378,22 +378,25 @@
                             <div className="row">
                                 {
 
-                                    relatedProducts && relatedProducts.map((product) => {
+                                    relatedProducts && relatedProducts.map((product, index) => {
                                         
-                                        return (
+                                        if(index <= 3)
+                                            return (
 
-                                                <div className="col-xl-12 col-lg-6 col-md-6 col-sm-12 ">
-                                                    <ProjectCard key = {product.partID} hasSmallDescription={true} {...product}/> 
-                                                    {/*<ProjectCard 
-                                                        key = {product.partID} 
-                                                        hasSmallDescription={true}  
-                                                        projectColor = {product.color}
-                                                        onClick = {this.getCategoryID}
-                                                        {...product}
-                                                    />
-                                                    */}
-                                                </div>
-                                        )
+                                                    <div className="col-xl-12 col-lg-6 col-md-6 col-sm-12 ">
+                                                        <ProjectCard key = {product.partID} hasSmallDescription={true} {...product}/> 
+                                                        {/*<ProjectCard 
+                                                            key = {product.partID} 
+                                                            hasSmallDescription={true}  
+                                                            projectColor = {product.color}
+                                                            onClick = {this.getCategoryID}
+                                                            {...product}
+                                                        />
+                                                        */}
+                                                    </div>
+                                            )
+                                        else 
+                                            return null
                                     })
 
                                 }
