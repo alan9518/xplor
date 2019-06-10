@@ -71,6 +71,7 @@
     import IconItem from './IconPicker/IconItem';
 
     import CustomPicker from './SPPeoplePicker/CustomPicker';
+    import AlertManager from './AlertManager/AlertManager';
 
 // --------------------------------------
 // Forms
@@ -137,5 +138,6 @@
         FieldSelect,
         FieldRemovableList,
         DynamicPeoplePicker,
-        CustomPicker
+        CustomPicker,
+        AlertManager
     }

@@ -10,7 +10,10 @@
 // --------------------------------------
     import React , {Component, Fragment} from "react";
     import PropTypes from "prop-types";
-    import {  FieldPicker, FieldDate, AppLoader,  FieldItem,  EditableProjectCard, FieldSelect, FieldIcon, SingleButton, FieldRemovableList  } from "../../../components";
+    import {  FieldPicker, FieldDate, AppLoader,  FieldItem,  EditableProjectCard, FieldSelect, FieldIcon, SingleButton, FieldRemovableList, AlertManager  } from "../../../components";
+    import Alert from 'react-s-alert';
+    import 'react-s-alert/dist/s-alert-default.css';
+    import 'react-s-alert/dist/s-alert-css-effects/slide.css';
     import {Endpoints} from '../../../services/endpoints';
     import axios from 'axios';
     import moment from 'moment';
@@ -44,10 +47,10 @@
                     vendor : {},
                     subCapabilitesValues : [],
                     subCapability : {label : 'Select a SubCapability', value : ''},
-                    owner : this.props.productOverview.OwnerEmail.toLowerCase() || '', 
+                    owner : this.props.productOverview.OwnerEmail || '', 
                     createdDate : moment().format("MM/DD/YYYY") , 
                     lastUpdateDate : moment().format("MM/DD/YYYY"), 
-                    coOwner : this.props.productOverview.CoownerEmail.toLowerCase() || '', 
+                    coOwner : this.props.productOverview.CoownerEmail || '', 
                     shortDescription : this.props.productOverview.ShortDescription ||  '',
                     cardColor : this.props.productOverview.color || null,
                     cardIcon :  this.setCardIcon(this.props.productOverview.IconValue) || '',
@@ -57,7 +60,7 @@
                     proCategory : {label : 'Select a proCategory', value : ''},
                     keywords : [],
                     productKeyword : '',
-                    keywordsList : this.props.productOverview.SearchKeyword.split(',') || [], 
+                    keywordsList : this.props.productOverview.SearchKeyword || [], 
 
                 }
                 this.onChangeSelect =  this.onChangeSelect.bind(this);
@@ -103,7 +106,8 @@
                         softwareTopic : softwareTopicValue,
                         softwareTopicName : softwareTopicValue.label,
                         vendor : vendorValue,
-                        isLoaded : dataLoaded === true && true
+                        isLoaded : dataLoaded === true && true,
+                        // keywordsList : this.props.productOverview.SearchKeyword.split(',') || [], 
 
                     })
                 }
@@ -124,6 +128,8 @@
                   
                     
                 }, 0);
+
+                
             }
 
 
@@ -324,6 +330,7 @@
                         'productName' : this.state.projectName,  
                         'vendorMfdID' : this.state.vendor.value, 
                         'mpnDescription' : this.state.shortDescription,
+                        'cpnSearch' : this.formatSearchKeywords(),
                         'bussModel' : 'XPLOR',
                         'erpCompanyID' : this.state.softwareTopic.ERPCompanyID,
                         'customerID' : this.state.softwareTopic.CustomerID,
@@ -415,6 +422,31 @@
                     const createNewProjectPromise =  await this.saveProject();
                     const createNewProjectResponse =  await createNewProjectPromise.data;
                     console.log("TCL: createNewProject -> createNewProjectResponse", createNewProjectResponse)
+
+
+                    // Get New project ID from the reponse
+                    let responseArray = createNewProjectResponse.split('{"d":null}')[0];
+                    let jsonResponse = JSON.parse(responseArray)[0];
+                    console.log("TCL: createNewProject -> jsonResponse", jsonResponse)
+
+                    const { PartID } = jsonResponse;
+                    console.log("TCL: createNewProject -> PartID", PartID)
+                    
+
+
+                    // this.setState({
+                    //     isLoaded : true
+                    // })
+
+
+                    this.createAlert('info', 'The Project was Created Successfully');
+
+                    setTimeout(() => {
+                    
+                      window.location.href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
+                      
+                        
+                    }, 100);
                 }
                 catch(error) {
                     console.log("TCL: createNewProject -> error", error)
@@ -807,6 +839,19 @@
 
 
 
+            // --------------------------------------
+            // Render Alert Message
+            // --------------------------------------
+            createAlert = (alertType, alertMessage) =>{
+                // return <AlertManager  alertType = {alertType}  alertMessage = {alertMessage} />
+
+                Alert.info(alertMessage, {
+                    position: 'top',
+                    effect : 'slide',
+                    timeout : 2000
+                
+                });
+            }
 
             // --------------------------------------
             // Render Projects

@@ -19,6 +19,9 @@
     import {TransitionGroup,CSSTransition} from 'react-transition-group';
     import {Endpoints} from '../../services/endpoints';
     import {Config} from '../../Config';
+    import Alert from 'react-s-alert';
+    import 'react-s-alert/dist/s-alert-default.css';
+    import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 
 
     
@@ -357,6 +360,8 @@
                                                         </Switch>
                                                 </CSSTransition>
                                             </TransitionGroup>
+
+                                            <Alert stack={{limit: 1}}  timeout={2000} />
                                         
                                         </div>
                                     </div>
