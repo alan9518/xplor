@@ -36,7 +36,7 @@
                     formFields : [],
                     isLoaded : false
                 }
-                // this.parentTabHeight = document.getElementsByClassName('rc-tabs-tabpane-active')[0].clientHeight
+                
             }
 
             // --------------------------------------
@@ -67,11 +67,7 @@
                     event.preventDefault();
                     const { editControls } = this.state;
                     
-                    
                     this.setState({ editControls: !editControls })
-                    // window.initializePeoplePicker('peoplePickerBusiness', '175px', 19);
-                    // window.initializePeoplePicker('peoplePickerProductSponsor', '175px', 19);
-                    // peoplePickerProductSponsor
                     this.props.enableTabEdit(!editControls)
 
 
@@ -267,23 +263,16 @@
                 // ?--------------------------------------
             
                 onPeoplePickerResourceFocus = (event, index) => {
-                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> event", event)
                     const context = this;
                     const {target} = event;
                     const {id, name} = target;
-                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> name", name)
 
 
                     if (id.indexOf('peoplePicker') < 0)
                         return;
 
 
-
-                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> target", target)
-                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> id", id)
-
                     let pickerNameArray =  id.split('_TopSpan_');
-                    console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> pickerNameArray", pickerNameArray)
 
                     // target.querySelectorAll(`${id}_HiddenInput`);
 
@@ -298,35 +287,10 @@
 
                         // ? Get Current Field
                         let {formFields} = this.state;
-                        // const pickerContainer = document.getElementById(`${pickerNameArray[0]}_TopSpan_HiddenInput`).value;
                         let stateNameItemArray = pickerNameArray[0].split('peoplePicker')
-                        console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> stateNameItemArray", stateNameItemArray)
-                        // let currentField = formFields.filter((formItem) => {formItem.attrName.toLowerCase().replace(' ', '') === stateNameItemArray[0].toLowerCase()} )
-
-                        // let currentField =  formFields.filter((formItem, index) => {
-                            
-                        //     console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> formItem", formItem)
-
-                        //     console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> formItem.attrName.toLowerCase()", formItem.attrName.toLowerCase())
-                            
-                        //     if((formItem.attrName.toLowerCase()).replace(' ', '') === stateNameItemArray[1].toLowerCase()) {
-                        //         console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> index", index)
-                                
-                        //         return formItem
-                        //     }
-                              
-                        // })[0]
-
-
-
                         let newFormFields =  formFields.map((formItem, index) => {
                             
-                            console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> formItem", formItem)
-
-                            console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> formItem.attrName.toLowerCase()", formItem.attrName.toLowerCase())
-                            
                             if((formItem.attrName.toLowerCase()).replace(' ', '') === stateNameItemArray[1].toLowerCase()) {
-                                console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> index", index)
 
                                 formItem.attrValues = peoplePickerUserValue
 
@@ -336,43 +300,15 @@
                             return formItem
                               
                         })
-                        console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> newFormFields", newFormFields)
                         
                         
-                        // console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> currentField", currentField)
-
-
-                        // console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> peoplePickerUserValue", peoplePickerUserValue)
-                        // console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus -> pickerValue", pickerValue)
-
-
-                        // currentField.attrValues = peoplePickerUserValue;
-
-
+                     
 
                         this.setState({formFields : newFormFields})
                     }   
                         
 
-                    // if(this.getPeoplePickerData(`${id}_HiddenInput`))
-
-                    // if (target.className === 'ms-core-menu-sublabel ms-metadata' || target.className === 'ms-core-menu-label') {
-                        
-                        
-                    //     // let owner = context.getPeoplePickerData('peoplePickerOwner_TopSpan_HiddenInput');
-                    //     // let pickerInput =  target.querySelectorAll(`${id}_HiddenInput`);
-                    //     console.log("TCL: FieldsMaker -> onPeoplePickerResourceFocus ->  owner",  owner)
-                    //     // context.setState({
-                    //     //     owner: owner
-                    //     // })
-
-                    //     // console.log('owner', context.state.owner)
-
-                    // }
-
-                    // else
-                    //     return;
-
+                   
                 }
 
 
@@ -427,7 +363,6 @@
             // Or Label Text
             // --------------------------------------
             setDatePickerField(attrName, attrValues, divClass, editField, index) {
-                console.log("TCL: FieldsMaker -> setDatePickerField -> attrValues", attrValues)
                
 
                 return (
@@ -453,12 +388,7 @@
             // ?Or Label Text
             // ?--------------------------------------
             setTextPeoplePicker(attrName, attrValues, divClass, editField, index) {
-                console.log("TCL: FieldsMaker -> setTextPeoplePicker -> attrName", attrName)
 
-
-                
-
-                
                 return (
                     <FieldPicker
                         fieldName={attrName}
@@ -482,7 +412,6 @@
             // ? Create Picklist Control
             // ?--------------------------------------
             setListField(attrName , valuesArray, posibleValues , divClass, editField,valuesDataArray, index) {
-                console.log("TCL: FieldsMaker -> setListField -> divClass", divClass)
                 // Merge values names list and values names array
             
                     const selectedItems  = valuesArray.map((item, index) => {
@@ -606,24 +535,27 @@
             }
 
 
-            // --------------------------------------
-            // Render Component
-            // --------------------------------------        
+            // ?--------------------------------------
+            // ? Render Fields
+            // ? Check if the view is for Overview Tab
+            // ? And if is for update or New projecyt
+            // ?--------------------------------------        
             renderFields() {
                 const { isOverview,  tabTitle, newProject } = this.props;
                 const { editControls, formFields } = this.state;
 
                 if (isOverview) {
 
-                    // Set false if the editControls Val is undefined, eg => the fist time the page loads
+                    // ? Set false if the editControls Val is undefined, eg => the fist time the page loads
 
                     if (newProject)
-                        return <AddProjectForm productOverview={formFields || this.props.formFields} />;
+                        return <AddProjectForm productOverview={formFields || this.props.formFields} updateProject = {false} />;
                     else
                         return(<CardHeaderWide 
                                         productOverview={formFields || this.props.formFields} 
                                         editControls = {editControls || false} 
                                         toggleFields = {this.toggleFieldsEdit}
+                                        
                                 />);
 
                 }
@@ -646,11 +578,7 @@
                                                 onClick={this.toggleFieldsEdit}
                                             />
 
-                                            // <SingleButton
-                                            //     buttonText={"Save Content" }
-                                            //     buttonColor={"primary"}
-                                            //     onClick={this.saveFields}
-                                            // />
+                                        // ? Submit New Values And update DB
 
                                         :
 

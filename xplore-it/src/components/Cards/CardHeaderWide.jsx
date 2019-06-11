@@ -262,7 +262,14 @@
             // --------------------------------------
 
             renderEditableOverview(productOverview, editControls) {
-                return <AddProjectForm productOverview = {productOverview} editCard = {true} toggleFields = {this.props.toggleFields} editControls = {this.props.editControls}/>
+                console.log("TCL: CardHeaderWide -> renderEditableOverview -> editControls", editControls)
+                return (<AddProjectForm 
+                            productOverview = {productOverview} 
+                            editCard = {true} 
+                            toggleFields = {this.props.toggleFields} 
+                            editControls = {this.props.editControls} 
+                            updateProject = {this.props.editControls}/>
+                        )
             }
 
 

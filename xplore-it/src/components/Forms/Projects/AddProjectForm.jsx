@@ -61,11 +61,14 @@
                     keywords : [],
                     productKeyword : '',
                     keywordsList : this.props.productOverview.SearchKeyword || [], 
+                    
 
                 }
                 this.onChangeSelect =  this.onChangeSelect.bind(this);
                 this.onSoftTopicsSelectChage =  this.onSoftTopicsSelectChage.bind(this);
                 // this.masterUsers = [];
+
+                // console.log("TCL: constructor -> this.props", this.props)
             }
 
 
@@ -408,6 +411,18 @@
 
 
 
+            // ?--------------------------------------
+            // ? Update Product Overview
+            // ?--------------------------------------
+            updateProductOverviewFullTab = async (event) => {
+                console.log("TCL: updateProductOverview -> event", event)
+                // event.preventDefault();
+                
+            }
+
+
+
+
             // --------------------------------------
             // Format Search Keywords
             // --------------------------------------
@@ -495,11 +510,13 @@
 
                         setTimeout(() => {
                     
-                            //   window.location.href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
+                            
         
                               let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
                               
                               console.log("TCL: createNewProject -> href", href)
+
+                              window.location.href = href;
         
         
         
@@ -519,6 +536,23 @@
                 }
             }
 
+
+
+            // !--------------------------------------
+            // ! Update Curent Project Overview
+            // ! Save Project Data
+            // !--------------------------------------
+            updateCurrentProjectOverview = async (event) => {
+                console.log("TCL: updateCurrentProjectOverview -> event", event)
+                event.preventDefault();
+
+                const updateOverviewPromise = await this.updateProductOverviewFullTab();
+                const updateOverviewData =  await  updateOverviewPromise.data
+
+
+                console.log("TCL: updateCurrentProjectOverview -> updateOverviewData", updateOverviewData)
+
+            }
             
 
             // !--------------------------------------
@@ -860,7 +894,7 @@
                 if(iconNameArray.length >= 1)
                     return iconNameArray[1];
                 else    
-                    return ''
+                    return cardIconName
                 
 
             }
@@ -932,11 +966,14 @@
                         vendor,subCapabilitesValues, subCapability, 
                         proCategories, proCategory, productKeyword, keywordsList
                     } = this.state;
+                    console.log("TCL: renderAddProjectForm -> this.state", this.state)
                 // let capOptions = this.createOptions(subCapabilitesValues);
 				
         
                 let softwareTopicValue = this.setSelectedOption(this.props.productOverview.SoftwareTopic, this.state.softwareTopicValues)
                 let vendorValue = this.setSelectedOption(this.props.productOverview.Vendors, this.state.vendorValues)
+
+                console.log("TCL: renderAddProjectForm -> this.props.updateProject ", this.props.updateProject )
 
 
                 return (
@@ -953,7 +990,7 @@
                                            <EditableProjectCard 
                                                 cardHover = {false}  
                                                 projectColor = {cardColor}
-                                                iconValue = {cardIcon}
+                                                iconValue = {cardIcon !== '' ? cardIcon : this.props.productOverview.IconValue}
                                                 productName = {projectName}
                                                 softwareTopic = {softwareTopicName}
                                            />
@@ -1238,11 +1275,12 @@
                                 <div className="row">
                                    <div className="xpl-buttonCenterContainer">
                                         <SingleButton
-                                            buttonText={" Save "}
+                                            buttonText = {this.props.updateProject === true ? "Update" : "Save"}
                                             buttonColor={"primary"}
                                             wideButton = {true}
-                                            onClick={this.createNewProject}
+                                            onClick = {this.props.updateProject === true ? this.updateCurrentProjectOverview : this.createNewProject }
                                         />
+                                        
                                    </div>
                                 </div>
 
@@ -1268,7 +1306,12 @@
 // Define PropTypes 
 // -------------------------------------- 
     AddProjectForm.propTypes = {
-        props: PropTypes
+        updateProject: PropTypes.bool
+    };
+
+
+    AddProjectForm.defaultProps = {
+        updateProject: false
     };
 
 
