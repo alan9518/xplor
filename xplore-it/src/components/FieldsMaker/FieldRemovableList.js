@@ -32,9 +32,14 @@ const FieldRemovableList = (props) => {
                                 listValues && listValues.map((listItem)=> {
                                     return( 
                                             <li className = "xpl-keyWordListItem"> 
+                                                {
+                                                    !editField  && <i className="fas fa-caret-right"> </i>
+                                                }
+                                                <span> {listItem}   </span>
+                                                {
+                                                    editField && <i className="fas fa-times" onClick = { (event) => {onClick(listItem)}}> </i>
+                                                }
                                                 
-                                                     {listItem}  
-                                                <i className="fas fa-times" onClick = { (event) => {onClick(listItem)}}> </i>
                                             </li>
                                         )
                                 })

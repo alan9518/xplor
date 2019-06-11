@@ -9,7 +9,7 @@
 // --------------------------------------
     import React, { Component, Fragment } from 'react';
     import PropTypes from 'prop-types';
-    import { ProjectCard , FieldItem, SingleButton, AddProjectForm} from "../../components";
+    import { ProjectCard , FieldItem, SingleButton, AddProjectForm, FieldRemovableList, FieldList} from "../../components";
     import "./styles.css";
     // import ListItem from "./CardHeaderListItem";
     // import {  } from '../../components'
@@ -78,73 +78,181 @@
 
                 } = productOverview;
                 return (
+                   
+
                     <Fragment>
                         <div className="xpl-cardWideHeader ">
+    
+    
+                            <div className="container-fluid">
+    
+    
+                                <div className="row">
+    
+                                        <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12">
+                                            <ProjectCard 
+                                                key = {productOverview.partID}
+                                                cardHover = {false}  
+                                                projectColor = {productOverview.color}
+                                                {...productOverview}
+                                            />
+                                        </div>
+
+                                             
+    
+    
+                                        <div className="col-xl-7 col-lg-7 col-md-12">
+                                            <div className="row">
+
+                                            
+                                                <div className="xpl-editButtonContainer">
+
+                                                    <h2> Product Overview  </h2>
+
+                                                        {
+                                                            editControls === false ?
+                                                                <SingleButton
+                                                                    buttonText={"Edit Content"}
+                                                                    buttonColor={"primary"}
+                                                                    onClick={this.props.toggleFields}
+                                                                />
+
+                                                            :
+
+                                                            <input type="submit" value="Save Content" className = 'xpl-singleButton' name = {'saveContent'}/>
+                                                        }
+                                                </div>
+                                                
+                                                
+                                                <FieldItem 
+                                                    fieldName = {"Project Name"} 
+                                                    fieldValue = {productOverview.ProductName} 
+                                                    editField = {false} 
+                                                    // onChangeInput = {(event) => this.onInputChage(event)}
+                                                    // onChangeInput = {this.onInputChage}
+                                                    
+                                                />
 
 
-                            <div className="container">
+
+                                                <FieldItem 
+                                                    fieldName = {"Software Topic"} 
+                                                    fieldValue = {productOverview.SoftwareTopic} 
+                                                    editField = {false} 
+                                                    
+                                                    
+                                                />
+
+                                                
+                                                
+
+                                                <FieldItem 
+                                                    fieldName = {"Vendor"} 
+                                                    fieldValue = {productOverview.Vendors ||productOverview.Customers} 
+                                                    editField = {false} 
+                                                />
+
+
+
+                                                <FieldItem 
+                                                    fieldName = {"Product Categories"} 
+                                                    fieldValue = {productOverview.ProductType} 
+                                                    editField = {false} 
+                                                />
+
+                                            </div>
+
+                                        </div>
+                                        
+    
+                                </div>
+
+                            </div>
+    
+                        </div>
+    
+    
+                        <div className="xpl-cardOverviewContainer container-fluid">
+                            <h5 className = "xpl-boldText xpl-fieldSeparator" > Product Details </h5>
+
+
+                                <div className="row">
+                                        
+                                    <div className="col-md-6">
+
+                                        <FieldItem 
+                                            fieldName = {"Owner"} 
+                                            fieldValue = {this.formatOwners(`${OwnerFirstName} ${OwnerLastName}`)}  
+                                            colName = {'col-md-12 col-lg-12'} 
+                                        />
+                                     
+                                        </div>
+                                    
+                                      
+                                        <div className="col-md-6">
+
+
+                                            <FieldItem 
+                                                fieldName = {"Co-Owner"} 
+                                                fieldValue = {this.formatOwners(`${CoownerFirstName} ${CoownerLastName}`)}  
+                                                colName = {'col-md-12 col-lg-12'} 
+                                            />
+                                            
+                                        </div>
+
+                                    </div>
+                                    
+                                 
+
+
+                                <div className="row" style = {{marginTop : 25}}>
+                                    
+                                
+                                    <div className="col-md-12">
+                                        <FieldRemovableList
+                                            fieldName = {"Seach Keywords"} 
+                                            listValues = {productOverview.SearchKeyword.split(',')} 
+                                            colName = {'col-md-12 col-lg-12'} 
+                                            inputName = {'keywordsList'} 
+                                            editField = {false} 
+                                            
+                                        />
+
+                                     
+                                    </div>
+                            
+                                   
+                                </div>
+
 
 
                                 <div className="row">
 
-                                
-
-
-                                    <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12">
-                                        <ProjectCard 
-                                            key = {productOverview.partID}
-                                            cardHover = {false}  
-                                            projectColor = {productOverview.color}
-                                            {...productOverview}
+                                    <div className="col-md-12 col-lg-12">
+                                        <FieldItem 
+                                            fieldName = {"Description"} 
+                                            fieldValue = {ShortDescription}  
+                                            isTextArea = {true} 
+                                            editField = {false} 
+                                            colName = {'col-md-12 col-lg-12'}
+                                            
                                         />
                                     </div>
-
-
-                                    <div className="col-xl-7 col-lg-7 col-md-12">
-
-                                        <div className="xpl-editButtonContainer">
-
-                                            <h2> Product Overview  </h2>
-
-                                                {
-                                                    editControls === false ?
-                                                        <SingleButton
-                                                            buttonText={"Edit Content"}
-                                                            buttonColor={"primary"}
-                                                            onClick={this.props.toggleFields}
-                                                        />
-
-                                                    :
-
-                                                    <input type="submit" value="Save Content" className = 'xpl-singleButton' name = {'saveContent'}/>
-                                                }
-                                        </div>
-
-
-                                        <div className="row">
-                                            <FieldItem fieldName = {"Uploaded"} fieldValue = {this.formatDate(CreatedDate)}  />
-                                            <FieldItem fieldName = {"Owner"} fieldValue = {this.formatOwners(`${OwnerFirstName} ${OwnerLastName}`)}  />
-                                            <FieldItem fieldName = {"Last Update"} fieldValue = {this.formatDate(LastUpdateDate)}  />
-                                            <FieldItem fieldName = {"Co-Owner"} fieldValue = {this.formatOwners(`${CoownerFirstName} ${CoownerLastName}`)}  />
-                                            {/* <FieldItem fieldName = {"Product Type"} fieldValue = {ProductType}  /> */}
-                                        </div>
-                                    </div>
-
-
+                                    
+                                    
+                                    
                                 </div>
-                            </div>
 
-                        </div>
+                               
 
-                        <div className="xpl-cardOverviewContainer">
-                            <h5 className = "xpl-boldText xpl-fieldSeparator" > Description  </h5>
-                            <p className="xpl-cardProjectCardOverview" >
-                                {ShortDescription}
-                            </p>
                         </div> 
-
-
                     </Fragment>
+                    
+
+
+
+
+
                 )
             }
 

@@ -620,7 +620,11 @@
                     if (newProject)
                         return <AddProjectForm productOverview={formFields || this.props.formFields} />;
                     else
-                        return <CardHeaderWide productOverview={formFields || this.props.formFields} editControls = {editControls || false} toggleFields = {this.toggleFieldsEdit}/>;
+                        return(<CardHeaderWide 
+                                        productOverview={formFields || this.props.formFields} 
+                                        editControls = {editControls || false} 
+                                        toggleFields = {this.toggleFieldsEdit}
+                                />);
 
                 }
 

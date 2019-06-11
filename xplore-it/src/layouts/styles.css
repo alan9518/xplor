@@ -786,6 +786,14 @@
 
 
 
+
+    li.xpl-keyWordListItem span {
+        margin-right: auto;
+        margin-left: 5px;
+    }
+
+  
+
 /* ---------------------------------------------------
     7.0 RESPONSIVE STYLES	
         Hide The SideBar and Displace Body

@@ -36,7 +36,7 @@
                                 {
                                     listValues && listValues.map((listItem)=> {
                                         if(listItem.isChecked ===  true)
-                                            return( <li className = "xpl-detailsListItem"> <i className="fas fa-caret-right"></i> {listItem.name}  </li>)
+                                            return( <li className = "xpl-detailsListItem"> <i className="fas fa-caret-right"></i> {listItem.name || listItem}  </li>)
                                     })
                                 }
                             </ul>

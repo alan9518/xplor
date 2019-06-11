@@ -357,6 +357,57 @@
 
 
 
+            // ?--------------------------------------
+            // ? Update Project 
+            // ? to Add Icon
+            // ? And Vendors 
+            // ? PartRecordID []
+            // ?--------------------------------------
+            updateProductOverview = async (newPartID, PartRecordID) => {
+                console.log("TCL: updateProductOverview -> newPartID", newPartID)
+                
+                
+                const {vendorValue, cardIcon} = this.state;
+                const userDetails = window.getCurrentSPUser();
+
+                // ? Create Request Data
+                // ? Card Icon 
+                // [{"BussinessModelName":"XPLOR","ProductName":"update test 3","BusinessModelID":2217,"ManufacturedPartID":12001,"PartID":16360,"PartProjectID":11683,"ProjectLineID":17669,"PartRecordID":[94221,94222,94223,94224,94225]}]{"d":null}
+                // ? Categories
+                let data =  JSON.stringify({
+                    'attrvals':
+                        [
+                            {
+                                'partrecordid': PartRecordID[0],
+                                'attrdefid':6916,
+                                'IsMulti': 0,
+                                'updated_by': userDetails.user_email ,
+                                'value': [cardIcon],
+                                'valueid': ['0'],
+                                'seq': ['1']
+                            }
+                        ]
+                    })
+
+
+                console.log("TCL: updateProductOverview -> data", data)
+                    
+                // ? Send Promise Request
+
+                return axios({
+                    method : 'post',
+                    url : Endpoints.updateTabAttributes,
+                    headers: { "Content-Type": "application/json; charset=utf-8" ,  "Accept": "application/json"},
+                    data : data
+                    
+                });
+
+
+            }
+
+
+
+
             // --------------------------------------
             // Format Search Keywords
             // --------------------------------------
@@ -429,24 +480,38 @@
                     let jsonResponse = JSON.parse(responseArray)[0];
                     console.log("TCL: createNewProject -> jsonResponse", jsonResponse)
 
-                    const { PartID } = jsonResponse;
+                    const { PartID, PartRecordID } = jsonResponse;
+                    console.log("TCL: createNewProject -> PartRecordID", PartRecordID)
                     console.log("TCL: createNewProject -> PartID", PartID)
                     
 
-
-                    // this.setState({
-                    //     isLoaded : true
-                    // })
-
-
-                    this.createAlert('info', 'The Project was Created Successfully');
-
-                    setTimeout(() => {
-                    
-                      window.location.href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
-                      
+                      // ? Update Project to add the icon
+                      this.updateProductOverview(PartID, PartRecordID).then((data) => {
                         
-                    }, 100);
+                        this.createAlert('info', 'The Project was Created Successfully');
+
+                        this.setState({isLoaded : true})
+
+
+                        setTimeout(() => {
+                    
+                            //   window.location.href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
+        
+                              let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
+                              
+                              console.log("TCL: createNewProject -> href", href)
+        
+        
+        
+                              
+                                
+                            }, 100);
+                      }).catch((error) => {
+                        console.log("TCL: createNewProject -> error", error)
+                          
+                      })
+
+                  
                 }
                 catch(error) {
                     console.log("TCL: createNewProject -> error", error)

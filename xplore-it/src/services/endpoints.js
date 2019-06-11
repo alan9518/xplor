@@ -114,6 +114,13 @@
         // --------------------------------------*/
             createNewProject : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/insertNewProduct',
 
+
+        /** --------------------------------------
+        // Create New Product
+        // @param {busstypeid <String>}
+        // --------------------------------------*/
+            updateTabAttributes : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/updateTabAttr',
+
     /* ==========================================================================
      *  Sharepoint EndPoints
      ========================================================================== */
