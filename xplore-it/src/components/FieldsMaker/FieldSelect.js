@@ -53,6 +53,18 @@
         const selectClassPrefix = `react-select${controlWidthName}`;
         // console.log("TCL: FieldSelect -> this", this)
 
+
+
+        // --------------------------------------
+        // Define Default Value
+        // --------------------------------------
+        let defaultValue = {}
+        if(defaultComboValue && defaultComboValue !== '') {
+            defaultValue = optionsData.filter((option)=>{return option.label === defaultComboValue})[0]
+            console.log("TCL: FieldSelect -> defaultValue", defaultValue)
+        }
+
+
         return (
             <div className={colName}>
 
@@ -84,7 +96,7 @@
                                     name = {inputName} 
                                     className = {selectClassName} 
                                     classNamePrefix = {selectClassPrefix} 
-                                    defaultValue = {defaultComboValue}
+                                    defaultValue = {defaultValue}
                                     // onChange = {props.onChangeInput}
                                     onChange = {props.onChangeInput.bind(this,inputName)}
                                     value = {fieldValue}

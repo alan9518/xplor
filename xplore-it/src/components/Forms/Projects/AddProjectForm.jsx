@@ -100,15 +100,23 @@
                     console.log("TCL: componentDidMount -> this.state.softwareTopicValues", this.state.softwareTopicValues)
 
                     let softwareTopicValue = this.setSelectedOption(SoftwareTopic, this.state.softwareTopicValues)
-                    let vendorValue = this.setSelectedOption(Vendors, this.state.vendorValues)
+                    // let vendorValue = this.setSelectedOption(Vendors, this.state.vendorValues)
+
+
+                    // ? Get Vendors DataSource
+
+                    const getVendorsPromise =  await this.loadVendors(softwareTopicValue.ERPCompanyID);
+                    const getVendorsData =  await getVendorsPromise.data;
+                    console.log("TCL: componentDidMount -> getVendorsData", getVendorsData)
 
                     this.setState({
                         projectName : ProductName,
                         shortDescription : ShortDescription,
                         keywordsList : SearchKeyword.split(','),
-                        softwareTopic : softwareTopicValue,
-                        softwareTopicName : softwareTopicValue.label,
-                        vendor : vendorValue,
+                        vendorValues : this.createOptionsVendors(getVendorsData),
+                        // softwareTopic : softwareTopicValue,
+                        // softwareTopicName : softwareTopicValue.label,
+                        // vendor : vendorValue,
                         isLoaded : dataLoaded === true && true,
                         // keywordsList : this.props.productOverview.SearchKeyword.split(',') || [], 
 
@@ -417,6 +425,9 @@
             updateProductOverviewFullTab = async (event) => {
                 console.log("TCL: updateProductOverview -> event", event)
                 // event.preventDefault();
+
+
+                // Create Data Object 
                 
             }
 
@@ -551,6 +562,8 @@
 
 
                 console.log("TCL: updateCurrentProjectOverview -> updateOverviewData", updateOverviewData)
+
+
 
             }
             
@@ -871,14 +884,32 @@
 
                 let selectedOption = dataOptions.filter((option)=> {
                     // option.CustomerID => software Topic Values
-                    if(selOption === option.label || optionalFilter === option.CustomerID) 
-                        return option
+                    if(selOption === option.label || optionalFilter === option.CustomerID) {
+                        let opt = {'label' : option.label, value : option.value}
+
+                        return opt;
+                    }
+                        // return option
                 })[0];
                 console.log("TCL: setSelectedOption -> selectedOption", selectedOption)
 
 
                 return selectedOption;
              
+            }
+
+
+
+            /** --------------------------------------
+             * Set Select Option from Details View
+            // @param {Option comes from Props, current selected }
+            // @param {dataOptions data source }
+            // @returns {{label : , value :}}
+            // -------------------------------------- */
+            getVendorsDataSource(vendorValues, softwareTopic) {
+                console.log("TCL: getVendorsDataSource -> softwareTopic", softwareTopic)
+                console.log("TCL: getVendorsDataSource -> vendorValues", vendorValues)
+                // const {vendorValues} = this.state;
             }
 
 
@@ -962,6 +993,7 @@
                         projectName, owner, cardIcon, createdDate, 
                         lastUpdateDate, coOwner, cardColor  ,
                         softwareTopic,softwareTopicName,
+                        
                         softwareTopicValues,shortDescription, vendorValues,
                         vendor,subCapabilitesValues, subCapability, 
                         proCategories, proCategory, productKeyword, keywordsList
@@ -970,11 +1002,22 @@
                 // let capOptions = this.createOptions(subCapabilitesValues);
 				
         
-                let softwareTopicValue = this.setSelectedOption(this.props.productOverview.SoftwareTopic, this.state.softwareTopicValues)
-                let vendorValue = this.setSelectedOption(this.props.productOverview.Vendors, this.state.vendorValues)
+                // let softwareTopicValue = this.setSelectedOption(this.props.productOverview.SoftwareTopic, this.state.softwareTopicValues)
+                
+                // let vendorValue = this.setSelectedOption(this.props.productOverview.Vendors, this.state.vendorValues)
+
+
+                let vendorsDefaultValues = this.getVendorsDataSource(vendorValues, this.props.productOverview.SoftwareTopic);
+                
 
                 console.log("TCL: renderAddProjectForm -> this.props.updateProject ", this.props.updateProject )
 
+
+                console.log("TCL: renderAddProjectForm -> this.props.productOverview.SoftwareTopic", this.props.productOverview.SoftwareTopic)
+                console.log("TCL: renderAddProjectForm -> this.props.productOverview.Vendors", this.props.productOverview.Vendors)
+
+
+                console.log("TCL: renderAddProjectForm -> this.state -> softwareTopic", softwareTopic)
 
                 return (
                     <Fragment>
@@ -1036,7 +1079,8 @@
 
                                                 <FieldSelect
                                                     fieldName = {"Software Topic"} 
-                                                    fieldValue = {softwareTopicValue || softwareTopic} 
+                                                    fieldValue = {softwareTopic} 
+                                                    defaultComboValue = {this.props.productOverview.SoftwareTopic}
                                                     optionsData = {softwareTopicValues}
                                                     inputName = {'softwareTopic'} 
                                                     editField = {true} 
@@ -1047,11 +1091,18 @@
                                                 />
 
                                                 
-                                                
+                                                { 
+                                                    /* // TODO Replace for Vendors 
+                                                        ! Use productOverview.Customers instead of vendors   
+                                                       
+                                                    */ 
+                                                }
+                                            
 
                                                 <FieldSelect
                                                     fieldName = {"Vendor"} 
-                                                    fieldValue = {vendorValue || vendor} 
+                                                    fieldValue = {vendor} 
+                                                    defaultComboValue = {this.props.productOverview.Customers}
                                                     optionsData = {vendorValues}
                                                     inputName = {'vendor'} 
                                                     editField = {true} 
@@ -1062,9 +1113,16 @@
 
 
 
+                                                { 
+                                                    /* // TODO Replace for Product Categoruies 
+                                                        ! Use productOverview.ProductType instead of Categoruies   
+                                                       
+                                                    */ 
+                                                }
                                                 <FieldSelect
                                                     fieldName = {"Product Categories"} 
                                                     fieldValue = {proCategory} 
+                                                    defaultComboValue = {this.props.productOverview.ProductType}
                                                     optionsData = {proCategories}
                                                     inputName = {'proCategory'} 
                                                     editField = {true} 
