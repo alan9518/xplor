@@ -103,6 +103,12 @@
             getTabAttributes : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getTabAttributes',
 
         /** --------------------------------------
+        // Get Tab Values
+        // @param {partid <String>}
+        // --------------------------------------*/
+            getPartRecord : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getPartRecord',
+
+        /** --------------------------------------
         // Get Pro Categories
         // @param {busstypeid <String>}
         // --------------------------------------*/
@@ -113,6 +119,12 @@
         // @param {busstypeid <String>}
         // --------------------------------------*/
             createNewProject : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/insertNewProduct',
+
+        /** --------------------------------------
+        // Update Product
+        // @param {busstypeid <String>}
+        // --------------------------------------*/
+        updateProject : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/updatePartProject',
 
 
         /** --------------------------------------

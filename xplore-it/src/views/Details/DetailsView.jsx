@@ -10,8 +10,10 @@
     import React, { Component, Fragment } from "react";
     import { Breadcumbs, AppLoader,  CustomTabs, PanelContent, ProjectCard,WideCard,CardHeaderWide, FieldsMaker, NoData,     } from '../../components';
     import { Link } from 'react-router-dom'
+    import Alert from 'react-s-alert';
     import axios from 'axios';
     import {Endpoints} from '../../services/endpoints'
+    import moment from 'moment';
 
 // --------------------------------------
 // Create Component Class
@@ -272,11 +274,13 @@
                 
                 this.setState({
                     productOverview : newTabData,
+                    oldProductOverview : newTabData,
                     currentTabName : currentTab.BusinessTypeName,
-                    tabLoading : false
+                    tabLoading : false,
+                    currentTab: currentTab.BusinessTypeID
 
                 })
-
+                console.log("TCL: DetailsView -> changeTabData -> oldProductOverview", this.state.oldProductOverview)
             }
 
 
@@ -317,11 +321,10 @@
             // ? The User is Editing a Tab
             // ? true || false
             // ?--------------------------------------
-            enableTabEdit = (tabStatus) => {
+            enableTabEdit = async (tabStatus) => {
                 console.log("TCL: DetailsView -> enableTabEdit -> tabStatus", tabStatus)
                 this.setState({userIsEditingTab : tabStatus})
-
-
+                
                 tabStatus === true 
                 ? document.getElementsByClassName('rc-tabs-bar')[0].style.pointerEvents = "none"
                 : document.getElementsByClassName('rc-tabs-bar')[0].style.pointerEvents = "all"
@@ -329,8 +332,19 @@
 
             }
 
+            // --------------------------------------
+            // Render Alert Message
+            // --------------------------------------
+            createAlert = (alertType, alertMessage) =>{
+                // return <AlertManager  alertType = {alertType}  alertMessage = {alertMessage} />
 
-
+                Alert.info(alertMessage, {
+                    position: 'top',
+                    effect : 'slide',
+                    timeout : 2000
+                
+                });
+            }
 
 
             // ?--------------------------------------
@@ -346,9 +360,110 @@
                 this.setState({
                     productOverview : currentViewValues
                 })
+                this.setState({isLoaded : false})
+                const PartID = this.state.productDetails.partID;
+                this.updateProductTab(this.state.currentTab,this.state.productDetails).then((data) => {
+                        
+                    this.createAlert('info', 'The TAB attributes was updated Successfully');    
+                    // this.setState({isLoaded : true})
+
+                    setTimeout(() => {
+                
+                        
+    
+                          let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
+                          
+                          console.log("TCL: updateProjectIcon -> href", href)
+
+                          window.location.href = href;
+    
+    
+    
+                          
+                            
+                        }, 100);
+                  }).catch((error) => {
+                    console.log("TCL: createNewProject -> error", error)
+                      
+                  })
             }
 
+            //Update Tab Attrubutes
+            updateProductTab = async (currentTabID,proDetails) => {
+                console.log("TCL: DetailsView -> updateProductTab -> CurrentTabID", currentTabID)
+                console.log("TCL: DetailsView -> updateProductTab -> ProductDetails", proDetails)
+                console.log("TCL: DetailsView -> updateProductTab -> ProductAttributes", this.state.productOverview)
+                
+                const currentTab = this.state.currentTab
+                const ProductAttributes = this.state.productOverview
+                const userDetails = window.getCurrentSPUser();
 
+                const partRecordCall = await axios.get(Endpoints.getPartRecord, {params: {partid : proDetails.partID}});
+                const readPartRecord = await partRecordCall.data;
+                const attrJSON = readPartRecord.filter(i => i.BusinessTypeID == currentTab)[0];
+
+                console.log("TCL: DetailsView -> updateProductTab -> PartRecordID",attrJSON.PartRecordID);
+                let tabAttributes = [];
+                ProductAttributes.forEach(ProDetail => {
+                    if(ProDetail.attrValues.length != 0 && ProDetail.attrValues != "")
+                    {
+                    let tabValues = [];
+                    if(ProDetail.datatype.toString() != "date")
+                    {
+                        ProDetail.attrValues.indexOf("||")>=0? 
+                        tabValues=ProDetail.attrValues.split("||").filter(v=>v!='') : tabValues.push(ProDetail.attrValues)
+                    }
+                    else
+                    {
+                        tabValues.push(moment(ProDetail.attrValues).format("MM-DD-YYYY"));
+                    }
+                    let tabValueIDs = [];
+                    ProDetail.valueID.indexOf("||")>=0? 
+                    tabValueIDs=ProDetail.valueID.split("||").filter(v=>v!='') 
+                    : ProDetail.valueID != ""? tabValueIDs.push(ProDetail.valueID) : tabValueIDs.push("0")
+                    let valSequence = []
+                    for(let i=0;i<tabValues.length;i++)
+                    {
+                        valSequence.push((i+1).toString());
+                    }
+                
+                    while(tabValues.length>tabValueIDs.length)
+                    {
+                        tabValueIDs.push("0")
+                    }
+                    let tabdata=JSON.stringify(                   
+                    {
+                        'partrecordid': attrJSON.PartRecordID,
+                        'attrdefid':ProDetail.attrID,
+                        'IsMulti': ProDetail.IsMultiValues ? 1:0,
+                        'updated_by': userDetails.user_email ,
+                        'value': tabValues,
+                        'valueid': tabValueIDs,
+                        'seq': valSequence
+                    })
+                    tabAttributes.push(tabdata);
+                }
+                });
+                
+
+                // ? Create Request Data
+                // ? Tab Attributes
+                let data = "{attrvals:["+tabAttributes+"]}";
+                 
+                console.log("TCL: DetailsView -> updateProductTab -> ProductAttributes-Constructed",data)
+                    
+                // ? Send Promise Request
+
+                return axios({
+                    method : 'post',
+                    url : Endpoints.updateTabAttributes,
+                    headers: { "Content-Type": "application/json; charset=utf-8" ,  "Accept": "application/json"},
+                    data : data
+                    
+                });
+                
+
+            }
 
 
 
@@ -435,7 +550,9 @@
             // --------------------------------------            
             renderProductDetails() {
                 const {productTabs, productOverview, tabLoading, currentTabName} = this.state;
+                                
                 console.log("TCL: DetailsView -> renderProductDetails -> currentTabName", currentTabName)
+                console.log("TCL: DetailsView -> renderProductDetails -> currentTabID", productTabs.BusinessTypeID)
                 const {isOverview} = productOverview;
                 return (
                     <div className="xpl-appDescriptionContainer xpl-wideCard xpl-shadow">
@@ -451,7 +568,7 @@
                                     formName = {currentTabName}
                                     updateFormValues = {this.saveFormValues}
                                 /> 
-                    
+
                             </WideCard>
                         </CustomTabs>
                     </div>

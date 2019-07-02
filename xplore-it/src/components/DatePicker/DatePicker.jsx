@@ -98,7 +98,7 @@ class DatePicker extends Component {
                         small={true}
                         isOutsideRange={() => false}
                         numberOfMonths={1}
-                        date={this.state.date}
+                        date= {this.convertStringToMomentObject(this.state.date)}
                         onDateChange={date => this.handleChange(date, name, index)}
                         focused={this.state.focused}
                         onFocusChange={({ focused }) =>

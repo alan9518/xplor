@@ -394,6 +394,16 @@
         font-weight: 600;
     }
 
+    .xpl-subText {
+        font-size: 0.70rem !important;
+        font-weight: 300;
+        color: dimgray;
+    }
+
+    .s-alert-top {
+        top: 60px !important;
+    }
+
 /* ---------------------------------------------------
     4.0 CONTENT STYLES
 ----------------------------------------------------- */

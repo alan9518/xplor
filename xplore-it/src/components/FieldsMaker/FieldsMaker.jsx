@@ -34,9 +34,11 @@
                 this.state = {
                     editControls: this.props.editFields || false,
                     formFields : [],
+                    oldFormFields : this.props.formFields,
                     isLoaded : false
                 }
-                
+
+                console.log("TCL: FieldsMaker -> constructor -> props ",this.props)
             }
 
             // --------------------------------------
@@ -50,7 +52,6 @@
                     formFields : this.props.formFields,
                     isLoaded : true
                 });
-
             }
 
 
@@ -65,7 +66,9 @@
                 // --------------------------------------
                 toggleFieldsEdit = (event) => {
                     event.preventDefault();
+                    
                     const { editControls } = this.state;
+                    console.log("TCL: FieldsMaker -> toggleFieldsEdit -> editControls ",   editControls)
                     
                     this.setState({ editControls: !editControls })
                     this.props.enableTabEdit(!editControls)
@@ -99,7 +102,7 @@
 
                     // get form Data
                     
-
+                    
 
                     this.setState({ editControls: false })
                     this.props.enableTabEdit(false)
@@ -343,7 +346,11 @@
             // Choose Between Toggle Control
             // Or Label Text
             // --------------------------------------
-            setTextField(attrName, attrValues, divClass, editField, index) {
+            setTextField(attrName, attrValues, divClass, editField, index,maxlength) {
+                if(maxlength == "")
+                {
+                    maxlength="4000"
+                }
                 if (attrValues === "false" || attrValues === "true")
                     return <ToggleField fieldName={attrName} fieldValue={attrValues} colName={divClass} editField={editField}  />
                 else
@@ -353,6 +360,7 @@
                                     colName={divClass} 
                                     editField={editField} 
                                     isTextArea={true}  
+                                    maxLength = {maxlength}
                                     onChangeInput =  {this.onTextChange}
                                     index = {index} />
             }
@@ -476,14 +484,15 @@
             setFieldType(field, colClass, editField, index) {
 
                 try {
-                    let { attrName, attrValues, datatype, pickListValues, valueID } = field;
+                    let { attrName, attrValues, datatype, pickListValues, valueID,maxlength} = field;
+                    console.log("TCL: FieldsMaker -> setFieldType -> field ",field);
                     let divClass = `col-xl-${colClass} col-lg-${colClass} col-sm-12 col-xs-12`;
                     let formField = null;
                     switch ((datatype.toLowerCase())) {
 
                         //? Text Input Field
                         case "string":
-                            formField = this.setTextField(attrName, attrValues, divClass, editField, index);
+                            formField = this.setTextField(attrName, attrValues, divClass, editField, index,maxlength);
                             break;
 
                         //? CheckboxList
@@ -495,7 +504,7 @@
                             const valuesDataArray = valueID.split('||');
                             valuesArray.length > 0
                                 ? formField = this.setListField(attrName , valuesArray, posibleValues , divClass, editField, valuesDataArray, index)
-                                : formField = this.setTextField(attrName, attrValues, divClass, editField, index);
+                                : formField = this.setTextField(attrName, attrValues, divClass, editField, index,maxlength);
 
                             break;
 
@@ -521,7 +530,7 @@
 
                         //? Text Input Field
                         default:
-                            formField = this.setTextField(attrName, attrValues, divClass, editField, index);
+                            formField = this.setTextField(attrName, attrValues, divClass, editField, index,maxlength);
 
                     }
 
@@ -581,8 +590,12 @@
                                         // ? Submit New Values And update DB
 
                                         :
-
-                                           <input type="submit" value="Save Content" className = 'xpl-singleButton' name = {'saveContent'}/>
+                                            <SingleButton
+                                                buttonText={"Cancel"}
+                                                buttonColor={"primary"}
+                                                onClick={this.toggleFieldsEdit}
+                                            />
+                                        //    <input type="submit" value="Save Content" className = 'xpl-singleButton' name = {'saveContent'}/>
                                     }
                                     </div>
                                 </div>
@@ -591,6 +604,8 @@
                                     
                                         {
                                             formFields.map((tabItem, index) => {
+                                                if(tabItem.attrName.indexOf("Product Image Icon")<0)
+                                                {
                                                 let { attrValues, datatype } = tabItem;
                                                 let valuesLength = attrValues.length;
                                                 let colNum = valuesLength >= 200 ? 12 : 6;
@@ -600,12 +615,26 @@
                                                 return (
                                                     this.setFieldType(tabItem, colNum, editControls, index)
                                                 )
+                                                }
                                             })
                                         }
-                                
+                                        {
+                                        editControls === true ?  
+                                                                
+                                        <div className="xpl-buttonCenterContainer">
+                                            
+                                            <input type="submit" value="Save Content" className = 'xpl-singleButton' name = {'saveContent'}/>
+                                                
+                                        </div>
+                                        :
+                                        ''
+                                        }
+                                        
                                 </div>
 
                             </div>
+
+                            
                         </form>
                     )
                 }

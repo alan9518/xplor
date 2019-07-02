@@ -39,10 +39,13 @@
                 super(props);
                 this.state = {
                     isLoaded: false,
+                    partID : this.props.productOverview.partID || '',
+                    partProjectID : this.props.productOverview.partProjectID || '',
+                    MfrPartID : this.props.productOverview.MfrPartID || '',
                     projectName : this.props.productOverview.ProductName || '',
                     softwareTopic : {label : 'Select a Software Topic', value : ''},
                     softwareTopicName : '',
-                    softwareTopicValues : [],
+                    softwareTopicValues : this.props.productOverview.softwareTopic || [],
                     vendorValues : [],
                     vendor : {},
                     subCapabilitesValues : [],
@@ -61,7 +64,6 @@
                     keywords : [],
                     productKeyword : '',
                     keywordsList : this.props.productOverview.SearchKeyword || [], 
-                    
 
                 }
                 this.onChangeSelect =  this.onChangeSelect.bind(this);
@@ -90,9 +92,9 @@
                 if (this.props.editCard && this.props.productOverview) {
                     const { 
                         OwnerFirstName, OwnerLastName, ProductType, CreatedDate, 
-                        LastUpdateDate, CoownerFirstName,  CoownerLastName  ,ShortDescription, 
+                        LastUpdateDate, CoownerFirstName, Customers, CoownerLastName  ,ShortDescription, 
                         ProductName, ProductScope, SoftwareTopic, SoftwareTopicID, SearchKeyword,
-                        Vendors, partID, partProjectID
+                        Vendors, partID, partProjectID,MfrPartID
                     } = this.props.productOverview;
                     console.log("TCL: componentDidMount -> this.props.productOverview", this.props.productOverview)
                     // this.state.softwareTopicValues
@@ -100,34 +102,45 @@
                     console.log("TCL: componentDidMount -> this.state.softwareTopicValues", this.state.softwareTopicValues)
 
                     let softwareTopicValue = this.setSelectedOption(SoftwareTopic, this.state.softwareTopicValues)
-                    // let vendorValue = this.setSelectedOption(Vendors, this.state.vendorValues)
-
-
+                    
                     // ? Get Vendors DataSource
 
                     const getVendorsPromise =  await this.loadVendors(softwareTopicValue.ERPCompanyID);
                     const getVendorsData =  await getVendorsPromise.data;
                     console.log("TCL: componentDidMount -> getVendorsData", getVendorsData)
+                    const Vendor = this.createOptionsVendors(getVendorsData).filter(i=>i.label == Customers)
+                    console.log("TCL: componentDidMount -> getVendorsID",Vendor[0])
 
+                    //load product categories or type
+                    const getProCategoryPromise =  await this.loadProCategories();
+                    const getProCategoryData =  await getProCategoryPromise.data;
+                    console.log("TCL: componentDidMount -> getVendorsData", getProCategoryData)
+                    const ProCategory = this.createOptionsProCat(getProCategoryData).filter(i=>i.label == ProductType)
+                    console.log("TCL: componentDidMount -> getVendorsID",ProCategory[0])
+                    
                     this.setState({
                         projectName : ProductName,
                         shortDescription : ShortDescription,
                         keywordsList : SearchKeyword.split(','),
                         vendorValues : this.createOptionsVendors(getVendorsData),
-                        // softwareTopic : softwareTopicValue,
+                        softwareTopic : softwareTopicValue,
                         // softwareTopicName : softwareTopicValue.label,
-                        // vendor : vendorValue,
+                        vendor : Vendor[0],
+                        proCategory : ProCategory[0],
                         isLoaded : dataLoaded === true && true,
                         // keywordsList : this.props.productOverview.SearchKeyword.split(',') || [], 
 
                     })
+                    
                 }
-
+                
+                
                 else
                     dataLoaded === true && this.setState({isLoaded : true})
 
 
-
+                    console.log("TCL: componentDidMount -> ProductDetails",this.state)
+                    
                       // ? Init People Pickers
                 setTimeout(() => {
                     
@@ -334,7 +347,10 @@
             saveProject = async () => {
                 // const formData =  new FormData();
                 const userDetails = window.getCurrentSPUser();
+                const valid = await this.validateReq();
 
+                if(valid)
+                {
                 //? Create Request Data
                 const data = JSON.stringify({
                     'newPro' : {
@@ -351,10 +367,10 @@
                         'userID' : userDetails.user_email
                     }
                 })
-
+                
                 
                 // ? Send Promise Request
-
+                
                 return axios({
                     method : 'post',
                     url : Endpoints.createNewProject,
@@ -362,6 +378,146 @@
                     data : data
                     
                 });
+                }
+                else
+                {
+                    return "Not Valid";
+                }
+
+            }
+
+            validateReq = async() => {
+                let valid=false;
+                try{
+                    if(!this.validCondition(this.state.projectName))
+                    {
+                        valid=true;
+                    }
+                    else
+                    {
+                        valid=false;
+                    }
+                    if(valid && !this.validCondition(this.state.vendor.value))
+                    {
+                        valid=true;
+                    }
+                    else
+                    {
+                        valid=false;
+                    }
+                    if(valid && !this.validCondition(this.state.shortDescription))
+                    {
+                        valid=true;
+                    }
+                    else
+                    {
+                        valid=false;
+                    }
+                    if(valid && !this.validCondition(this.formatSearchKeywords()))
+                    {
+                        valid=true;
+                    }
+                    else
+                    {
+                        valid=false;
+                    }
+                    if(valid && !this.validCondition(this.state.softwareTopic.ERPCompanyID))
+                    {
+                        valid=true;
+                    }
+                    else
+                    {
+                        valid=false;
+                    }
+                    if(valid && !this.validCondition(this.state.softwareTopic.CustomerID))
+                    {
+                        valid=true;
+                    }
+                    else
+                    {
+                        valid=false;
+                    }
+                    if(valid && !this.validCondition(this.state.proCategory.value))
+                    {
+                        valid=true;
+                    }
+                    else
+                    {
+                        valid=false;
+                    }
+                    if(valid && !this.validCondition(this.getPeoplePickerData('Owner')))
+                    {
+                        valid=true;
+                    }
+                    else
+                    {
+                        valid=false;
+                    }
+                    if(valid && !this.validCondition(this.getPeoplePickerData('CoOwner')))
+                    {
+                        valid=true;
+                    }
+                    else
+                    {
+                        valid=false;
+                    }
+                    return valid
+                }
+                catch(error) {
+                    console.log("TCL: AddProjectForm -> validateReq -> return", false)
+                    return false;  
+                }
+            }
+
+            validCondition(proValue) {
+                if(proValue == "" || proValue == null || proValue == "null" || proValue == "undefined")
+                    return true
+                else
+                    return false
+            }
+
+            updateProject = async () => {
+                // const formData =  new FormData();
+                const userDetails = window.getCurrentSPUser();
+                const valid = await this.validateReq();
+
+                if(valid)
+                {
+                //? Create Request Data
+                const data = JSON.stringify({
+                    'updatePp' : {
+                        'partId' : this.state.partID,
+                        'partProjectId' : this.state.partProjectID,
+                        'productName' : this.state.projectName,  
+                        'vendorMfdID' : this.state.vendor.value, 
+                        'MfrPartID' : this.state.MfrPartID,
+                        'mpnDescription' : this.state.shortDescription,
+                        'cpnSearch' : this.formatSearchKeywords(),
+                        'bussModel' : 'XPLOR',
+                        'erpCompanyID' : this.state.softwareTopic.ERPCompanyID,
+                        'customerID' : this.state.softwareTopic.CustomerID,
+                        'proCategoryID' : this.state.proCategory.value,
+                        'ownerID' : this.getPeoplePickerData('Owner'),
+                        'delegateID' : this.getPeoplePickerData('CoOwner'),
+                        'userID' : userDetails.user_email
+                    }
+                })
+
+                console.log("TCL: updateProject -> Date",data)
+                // ? Send Promise Request
+
+                return axios({
+                    method : 'post',
+                    url : Endpoints.updateProject,
+                    headers: { "Content-Type": "application/json; charset=utf-8" ,  "Accept": "application/json"},
+                    data : data
+                    
+                });
+                }
+                else
+                {
+                    return "Not Valid";
+                }
 
             }
 
@@ -374,8 +530,9 @@
             // ? And Vendors 
             // ? PartRecordID []
             // ?--------------------------------------
-            updateProductOverview = async (newPartID, PartRecordID) => {
+            updateProductOverview = async (newPartID, PartRecordID, valueid) => {
                 console.log("TCL: updateProductOverview -> newPartID", newPartID)
+                console.log("TCL: updateProductOverview -> Value ID", valueid)
                 
                 
                 const {vendorValue, cardIcon} = this.state;
@@ -389,12 +546,12 @@
                     'attrvals':
                         [
                             {
-                                'partrecordid': PartRecordID[0],
+                                'partrecordid': PartRecordID,
                                 'attrdefid':6916,
                                 'IsMulti': 0,
                                 'updated_by': userDetails.user_email ,
                                 'value': [cardIcon],
-                                'valueid': ['0'],
+                                'valueid': [valueid],
                                 'seq': ['1']
                             }
                         ]
@@ -422,10 +579,81 @@
             // ?--------------------------------------
             // ? Update Product Overview
             // ?--------------------------------------
-            updateProductOverviewFullTab = async (event) => {
-                console.log("TCL: updateProductOverview -> event", event)
+            updateProductOverviewFullTab = async () => {
+                // console.log("TCL: updateProductOverview -> event", event)
                 // event.preventDefault();
+                
+                console.log("TCL: updateCurrentProjectOverview -> updateInputData", this.state.partID)
+                const PartID=this.state.partID;
 
+                //Update Product Overview
+
+                const updateProjectPromise =  await this.updateProject();
+                if(updateProjectPromise != "Not Valid")
+                {
+                this.setState({isLoaded : false})
+                const updateProjectResponse =  await updateProjectPromise.data;
+                console.log("TCL: createNewProject -> createNewProjectResponse", updateProjectResponse)
+                
+                if(updateProjectResponse == "Successfully updated the project")
+                {
+                    this.createAlert('info', 'The Project details was updated Successfully')
+                }                
+
+                //Update Project Icon Image as Attribute Value
+                const partRecordCall = await axios.get(Endpoints.getPartRecord, {params: {partid : this.state.partID}});
+                const readPartRecord = await partRecordCall.data;
+                const iconJSON = readPartRecord.filter(i => i.BusinessTypeID == 3095)[0];
+                let iconValudID = "0";
+                console.log("TCL: updateCurrentProjectOverview -> getPartRecordID", iconJSON.PartRecordID)
+                console.log("TCL: updateCurrentProjectOverview -> Latest Image Icon", this.state.cardIcon)
+
+                let tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params: {partid : PartID, busstypeid : 3095, Bussmodel: 'XPLOR'}});
+                let tabsAttrData = await tabsDataAttrPromise.data;
+                let tabsAttrDataIcon = tabsAttrData.filter(i=>i.attrName=="Product Image Icon Name")
+                let valueID = tabsAttrDataIcon[0].valueID;
+                if(valueID != "")
+                {
+                    console.log("TCL: updateCurrentProjectOverview -> Image Icon Exists", true)
+                    iconValudID = valueID;
+                }
+                else
+                {
+                    console.log("TCL: updateCurrentProjectOverview -> Image Icon Exists", false)
+                }
+                const passValID = iconValudID
+                console.log("TCL: updateCurrentProjectOverview -> Icon ValueID",passValID)
+                this.updateProductOverview(PartID, iconJSON.PartRecordID,passValID).then((data) => {
+                        
+                        this.createAlert('info', 'The Project icon was updated Successfully');    
+                        this.setState({isLoaded : true})
+    
+                        setTimeout(() => {
+                    
+                            
+        
+                              let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
+                              
+                              console.log("TCL: updateProjectIcon -> href", href)
+    
+                              window.location.href = href;
+        
+        
+        
+                              
+                                
+                            }, 100);
+                      }).catch((error) => {
+                        console.log("TCL: createNewProject -> error", error)
+                          
+                      })
+                    }
+                    else
+                    {
+                        this.createAlert('error', 'The Project was not Created Successfully and the form not filled since all fields are mandatory');
+                    }
+                // ? Update Project to add the icon
+                
 
                 // Create Data Object 
                 
@@ -493,10 +721,13 @@
             // !--------------------------------------
             createNewProject = async (event)=> {
                 event.preventDefault();
-                this.setState({isLoaded : false})
+                
                 console.log("TCL: AddProjectForm -> createNewProject -> this.state", this.state)
                 try {
                     const createNewProjectPromise =  await this.saveProject();
+                    if(createNewProjectPromise != "Not Valid")
+                    {
+                    this.setState({isLoaded : false})
                     const createNewProjectResponse =  await createNewProjectPromise.data;
                     console.log("TCL: createNewProject -> createNewProjectResponse", createNewProjectResponse)
 
@@ -507,13 +738,18 @@
                     console.log("TCL: createNewProject -> jsonResponse", jsonResponse)
 
                     const { PartID, PartRecordID } = jsonResponse;
-                    console.log("TCL: createNewProject -> PartRecordID", PartRecordID)
+
+                    const partRecordCall = await axios.get(Endpoints.getPartRecord, {params: {partid : PartID}});
+                    const readPartRecord = await partRecordCall.data;
+                    const iconJSON = readPartRecord.filter(i => i.BusinessTypeID == 3095)[0];
+
+                    console.log("TCL: createNewProject -> PartRecordID", iconJSON.PartRecordID)
                     console.log("TCL: createNewProject -> PartID", PartID)
                     
 
                       // ? Update Project to add the icon
-                      this.updateProductOverview(PartID, PartRecordID).then((data) => {
-                        
+                      this.updateProductOverview(PartID, iconJSON.PartRecordID,0).then((data) => {
+                       
                         this.createAlert('info', 'The Project was Created Successfully');
 
                         this.setState({isLoaded : true})
@@ -534,12 +770,18 @@
                               
                                 
                             }, 100);
+                        
+                        
                       }).catch((error) => {
                         console.log("TCL: createNewProject -> error", error)
                           
                       })
 
-                  
+                    }
+                    else
+                    {
+                        this.createAlert('error', 'The Project was not Created Successfully and the form not filled since all fields are mandatory');
+                    }
                 }
                 catch(error) {
                     console.log("TCL: createNewProject -> error", error)
@@ -556,15 +798,16 @@
             updateCurrentProjectOverview = async (event) => {
                 console.log("TCL: updateCurrentProjectOverview -> event", event)
                 event.preventDefault();
+                // let {valueid,valsequence,
+                this.updateProductOverviewFullTab();                
 
-                const updateOverviewPromise = await this.updateProductOverviewFullTab();
-                const updateOverviewData =  await  updateOverviewPromise.data
+            }
 
-
-                console.log("TCL: updateCurrentProjectOverview -> updateOverviewData", updateOverviewData)
-
-
-
+            // get partrecordID
+            getPartRecordRead = async(partID) => {
+                const tabsDataAttrPromise = await axios.get(Endpoints.getPartRecord, {params: {partid : this.partID}});
+                const tabsAttrData = await tabsDataAttrPromise.data;
+                return tabsAttrData;
             }
             
 
@@ -974,13 +1217,19 @@
             // --------------------------------------
             createAlert = (alertType, alertMessage) =>{
                 // return <AlertManager  alertType = {alertType}  alertMessage = {alertMessage} />
-
+                alertType == "info"?
                 Alert.info(alertMessage, {
                     position: 'top',
                     effect : 'slide',
-                    timeout : 2000
+                    timeout : 1000
                 
-                });
+                })
+                :Alert.error(alertMessage, {
+                    position: 'top',
+                    effect : 'slide',
+                    timeout : 20000
+                
+                })
             }
 
             // --------------------------------------
@@ -1072,7 +1321,7 @@
                                                     editField = {true} 
                                                     // onChangeInput = {(event) => this.onInputChage(event)}
                                                     onChangeInput = {this.onInputChage}
-                                                    
+                                                    maxLength = {"50"}
                                                 />
 
 
@@ -1293,6 +1542,7 @@
                                             onChangeInput = {this.onInputChage}
                                             onKeyPress ={ (event) => this.handleKeyPressAddProductKeyword(event)}
                                             useParentState = {true}
+                                            maxLength = {"100"}
                                         />
                                     </div>
 
@@ -1325,6 +1575,7 @@
                                             // inputName = {'shortDescription'} 
                                             colName = {'col-md-12 col-lg-12'}
                                             onChangeInput = {this.onInputChage}
+                                            maxLength = {"500"}
                                         />
                                     </div>
                                     

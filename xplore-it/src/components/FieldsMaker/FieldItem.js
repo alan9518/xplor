@@ -75,7 +75,7 @@
         // ?----------------------------------------
         // ? Choose Between Field Input or Text Area
         // ?----------------------------------------
-        setFieldInputOrTextArea = (fieldName, value, isTextArea, inputName,index) => {
+        setFieldInputOrTextArea = (fieldName, value, isTextArea, inputName,index,maxLength) => {
             if(value.length > 200 || isTextArea) 
                 return ( <textarea 
                                 value = {value} 
@@ -85,6 +85,7 @@
                                 cols="30" 
                                 rows="10"
                                 id = {`${inputName || fieldName}-${index}`}
+                                maxLength = {maxLength}
                                 onKeyPress = {this.props.onKeyPress}>
                         </textarea>)
             else
@@ -95,6 +96,7 @@
                                 onChange = {this.setInputValue} 
                                 name= {inputName || fieldName}
                                 id = {`${inputName || fieldName}-${index}`}
+                                maxLength = {maxLength}
                                 onKeyPress = {this.props.onKeyPress} />
                         )
 
@@ -107,7 +109,7 @@
         // --------------------------------------
         renderFieldItem() {
             
-            const { colName, fieldName, inputName, editField, isTextArea, useParentState, index  } = this.props;
+            const { colName, fieldName, inputName, editField, isTextArea, useParentState, index,maxLength,isTabAttr  } = this.props;
             // const {inputValue} = this.state;
             const inputValue = useParentState === true ? this.props.fieldValue : this.state.inputValue 
 
@@ -115,10 +117,14 @@
                 <div className={colName}>
 
                     <div className="xpl-fieldItem">
-
+                        {
+                        editField === false?
                         <h6 className="xpl-boldText xpl-fieldSeparator"> {fieldName} </h6>
+                        :<h6 className="xpl-boldText xpl-fieldSeparator"> {fieldName} <span className="xpl-subText">(Max Chars: {maxLength})</span> </h6>
+                        }
+                    
                         { editField === true 
-                            ? this.setFieldInputOrTextArea(fieldName, inputValue, isTextArea, inputName, index)
+                            ? this.setFieldInputOrTextArea(fieldName, inputValue, isTextArea, inputName, index,maxLength)
                             : this.renderFieldLinkOrText(inputValue)
                         
                         }
