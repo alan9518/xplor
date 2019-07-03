@@ -31,16 +31,25 @@
             // --------------------------------------
             constructor(props) {
                 super(props);
-                this.state = {
-                    editControls: this.props.editFields || false,
-                    formFields : [],
-                    oldFormFields : this.props.formFields,
+                // this.state = {
+                //     editControls: this.props.editFields || false,
+                //     formFields : this.props.formFields || [],
+                //     oldFormFields : this.props.formFields,
+                //     isLoaded : false
+                // }
+
+                 this.state = {
+                    editControls: false,
+                    formFields :  [],
+                    // oldFormFields : this.props.formFields,
                     isLoaded : false
                 }
 
+                this.originalValues = this.props.formFields
                 console.log("TCL: FieldsMaker -> constructor -> props ",this.props)
             }
 
+                
             // --------------------------------------
             // Get Props Fields and Set them as
             // Local State
@@ -48,11 +57,33 @@
 
             componentDidMount() {
 
+                console.log("TCL: FieldsMaker -> constructor -> this.originalValues", this.originalValues)
+
+                const fields =  this.props.formFields;
+
                 this.setState({
-                    formFields : this.props.formFields,
+                    editControls: this.props.editFields || false,
+                    formFields : fields || [],
+                    oldFormFields : this.props.formFields,
                     isLoaded : true
                 });
+
+                
             }
+
+
+            
+
+            // componentWillReceiveProps = (nextProps) => {
+                
+            //     console.log("TCL: FieldsMaker -> componentWillReceiveProps -> nextProps", nextProps)
+                
+                
+            //     console.log("TCL: FieldsMaker -> componentWillReceiveProps -> this.props", this.props)
+                
+            // }
+
+        
 
 
 
@@ -65,13 +96,34 @@
                 // Enable Edition of Fields
                 // --------------------------------------
                 toggleFieldsEdit = (event) => {
+                    console.log("TCL: FieldsMaker -> toggleFieldsEdit -> event", event)
                     event.preventDefault();
+                    let discardChanges = false;
+
+                    console.log("TCL: FieldsMaker -> toggleFieldsEdit -> this.props.formFields", this.props.formFields)
+                    if(event.target.name === 'cancelButton') {
+                        console.log("TCL: FieldsMaker -> toggleFieldsEdit -> event.target.name", event.target.name)
+
+                        // this.originalValues 
+                        console.log("TCL: FieldsMaker -> toggleFieldsEdit -> this.originalValues ", this.originalValues )
+                        // this.setState({formFields : this.originalValues });
+
+                        discardChanges =  true
+
+                        // this.componentDidMount()
+
+                        // this.setState({ editControls:false})
+
+                        // return
+                    }
+                        
+                    
                     
                     const { editControls } = this.state;
                     console.log("TCL: FieldsMaker -> toggleFieldsEdit -> editControls ",   editControls)
                     
                     this.setState({ editControls: !editControls })
-                    this.props.enableTabEdit(!editControls)
+                    this.props.enableTabEdit(!editControls, discardChanges)
 
 
                 }
@@ -146,16 +198,44 @@
                     let stateIndex = index.split('-')[1]
                     let currentField = this.state.formFields[stateIndex];
                     
+                    // let newField = Object.assign({}, currentField, {
+                    //     attrValues : value
+                    // })
+
+                    // let newFormFields = [];
 
                     currentField.attrValues =  value
-                    
+                    // currentField.mutable = true
 
                     formFields[stateIndex] = currentField
+
+
+                    // let newFormFields = Object.assign([], formFields, {stateIndex: newField});
+
+                    // let newFormFields = [...formFields.filter((field , index) => {return index !== parseInt(stateIndex)}), newField];
+
+                    // console.log("TCL: FieldsMaker -> newFormFields", newFormFields)
+                    // formFields[stateIndex] = newField
+
+                    // console.log("TCL: FieldsMaker -> newFormFields", newFormFields)
+
+
+
+
+                    const newDataSource = formFields.reduce((ds, item, idx) =>  stateIndex !== idx
+                                                    ? ds.concat(item)
+                                                    : ds.concat(Object.assign({}, item, { attrValues: value })), []);
+
                     
                     
-                    this.setState({formFields : formFields});
+
+                    console.log("TCL: FieldsMaker -> newDataSource", newDataSource)
+                    
+                    
+                    this.setState({formFields : newDataSource});
                 }
 
+                    
 
                 // ?--------------------------------------
                 // ? On Toggle Component Change
@@ -171,11 +251,13 @@
                     console.log("TCL: FieldsMaker -> onToggleChange -> currentField", currentField)
 
                     // ?Change Value
-                        if(event.target.checked ===  true)
+                        if(event.target.checked ===  true) 
                             currentField.attrValues = "Y"
                         else
                             currentField.attrValues = "N"    
 
+
+                            currentField.mutable = true
                     
                     // ? Udpate State
                         formFields[stateIndex] = currentField
@@ -219,13 +301,12 @@
                         }
                     }
 
-                   
-                        
+                
 
 
-
-                    // Convert the Array to string and update State
+                    //! Convert the Array to string and update State
                     currentField.attrValues = currrentValuesArray.join('||');
+                    currentField.mutable = true
                     console.log("TCL: FieldsMaker -> onListItemClick -> currentField.attrValues", currentField.attrValues)
                     formFields[stateIndex] = currentField;
                     this.setState({formFields : formFields});
@@ -584,6 +665,8 @@
                                             <SingleButton
                                                 buttonText={"Edit Content"}
                                                 buttonColor={"primary"}
+                                                Key = {'editButton'}
+                                                buttonName = {'editButton'}
                                                 onClick={this.toggleFieldsEdit}
                                             />
 
@@ -593,6 +676,8 @@
                                             <SingleButton
                                                 buttonText={"Cancel"}
                                                 buttonColor={"primary"}
+                                                Key = {'cancelButton'}
+                                                buttonName = {'cancelButton'}
                                                 onClick={this.toggleFieldsEdit}
                                             />
                                         //    <input type="submit" value="Save Content" className = 'xpl-singleButton' name = {'saveContent'}/>
@@ -619,15 +704,16 @@
                                             })
                                         }
                                         {
-                                        editControls === true ?  
+                                            editControls === true
+                                            ?  
                                                                 
-                                        <div className="xpl-buttonCenterContainer">
-                                            
-                                            <input type="submit" value="Save Content" className = 'xpl-singleButton' name = {'saveContent'}/>
-                                                
-                                        </div>
-                                        :
-                                        ''
+                                                <div className="xpl-buttonCenterContainer">
+
+                                                    <input type="submit" value="Save Content" className = 'xpl-singleButton' name = {'saveContent'}/>
+                                                    
+                                                </div>
+                                            :
+                                                null
                                         }
                                         
                                 </div>

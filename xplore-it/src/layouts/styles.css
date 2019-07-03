@@ -731,7 +731,7 @@
         background-color: transparent;
         border: none !important;
         width: 100% !important;
-        padding: 0 6px;
+        padding: 8px !important;
     }
 
     /* .sp-peoplepicker-initialHelpText {

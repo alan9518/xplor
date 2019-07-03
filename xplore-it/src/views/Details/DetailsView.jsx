@@ -43,6 +43,7 @@
                     userIsEditingTab : false
                 }
                 this.partID = props.match.params.partID;
+                this.originalValues = null;
             }
 
             // --------------------------------------
@@ -52,6 +53,14 @@
                 this.loadAPI();
             }
 
+
+
+            componentWillReceiveProps = (nextProps) => {
+                console.log("TCL: DetailsView -> componentWillReceiveProps -> nextProps", nextProps)
+                
+                console.log("TCL: DetailsView -> componentWillReceiveProps -> this.props", this.props)
+                
+            }
 
         
 
@@ -108,6 +117,8 @@
                         productOverview : {...productDetailsWithColor, isOverview: true},
                         isLoaded : true
                     });
+
+                    
                 }
                 catch (error) {
                     
@@ -258,6 +269,10 @@
             // --------------------------------------
             **/
             async changeTabData (businessID) {
+
+                if(parseInt(businessID) === this.state.currentTab)
+                    return;
+
                 const {productTabs} = this.state;
                 console.log("TCL: DetailsView -> changeTabData -> his.state.tabsData", this.state.productTabs)
                 const isProductOverview = businessID === 0 ? true: false;
@@ -265,12 +280,14 @@
                     return tabItem.BusinessTypeID === parseInt(businessID)
                 })[0];
                 
+                
 
 
                 console.log("TCL: DetailsView -> changeTabData -> currentTab", currentTab)
                 
                 const newTabData = await  this.loadTabAttributes(businessID, isProductOverview); 
 
+                this.originalValues = newTabData;
                 
                 this.setState({
                     productOverview : newTabData,
@@ -284,13 +301,6 @@
             }
 
 
-
-            /** --------------------------------------
-            // ? Update Tab Content
-            // @param {partid}
-            // @param {busstypeid}
-            // ?--------------------------------------
-            **/
 
 
         /* ==========================================================================
@@ -306,6 +316,7 @@
             // --------------------------------------
             onTabChange = (businessID) =>  {
                 const {currentTab} =  this.state;
+                console.log("TCL: DetailsView -> onTabChange -> currentTab", currentTab)
                 if(businessID === currentTab)
                     return 
                 // else if (this.state.userIsEditingTab === true)
@@ -317,12 +328,29 @@
             
             }   
 
+                
             // ?--------------------------------------
             // ? The User is Editing a Tab
             // ? true || false
             // ?--------------------------------------
-            enableTabEdit = async (tabStatus) => {
+            enableTabEdit = async (tabStatus , discardChanges) => {
+                console.log("TCL: DetailsView -> enableTabEdit -> discardChanges", discardChanges)
                 console.log("TCL: DetailsView -> enableTabEdit -> tabStatus", tabStatus)
+
+                // this.state
+                
+
+
+                if(discardChanges === true) {
+                    console.log("TCL: DetailsView -> enableTabEdit -> this.state", this.state)
+// 
+                    // this.originalValues
+                    console.log("TCL: DetailsView -> enableTabEdit -> this.originalValues", this.originalValues)
+
+                }
+                    // this.componentDidMount();
+
+
                 this.setState({userIsEditingTab : tabStatus})
                 
                 tabStatus === true 
@@ -357,38 +385,46 @@
 
                 // const {}
 
-                this.setState({
-                    productOverview : currentViewValues
-                })
-                this.setState({isLoaded : false})
+                // this.setState({
+                //     productOverview : currentViewValues
+                // })
+
+
+                // this.setState({isLoaded : false})
                 const PartID = this.state.productDetails.partID;
                 this.updateProductTab(this.state.currentTab,this.state.productDetails).then((data) => {
+                console.log("TCL: DetailsView -> saveFormValues -> this.state.currentTab", this.state.currentTab)
+                console.log("TCL: DetailsView -> saveFormValues -> this.state", this.state)
+                console.log("TCL: DetailsView -> saveFormValues -> data", data)
                         
                     this.createAlert('info', 'The TAB attributes was updated Successfully');    
                     // this.setState({isLoaded : true})
 
-                    setTimeout(() => {
+                    // this.changeTabData(this.state.currentTab).then(() => {this.createAlert('info', 'The TAB attributes was updated Successfully');    })
+                    // setTimeout(() => {
                 
                         
     
-                          let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
+                    //       let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
                           
-                          console.log("TCL: updateProjectIcon -> href", href)
+                    //       console.log("TCL: updateProjectIcon -> href", href)
 
-                          window.location.href = href;
+                    //       window.location.href = href;
     
     
     
                           
                             
-                        }, 100);
+                    //     }, 100);
                   }).catch((error) => {
                     console.log("TCL: createNewProject -> error", error)
                       
                   })
             }
 
-            //Update Tab Attrubutes
+            // ?--------------------------------------
+            // ? Update Product Overview on DB
+            // ?--------------------------------------
             updateProductTab = async (currentTabID,proDetails) => {
                 console.log("TCL: DetailsView -> updateProductTab -> CurrentTabID", currentTabID)
                 console.log("TCL: DetailsView -> updateProductTab -> ProductDetails", proDetails)
@@ -407,42 +443,46 @@
                 ProductAttributes.forEach(ProDetail => {
                     if(ProDetail.attrValues.length != 0 && ProDetail.attrValues != "")
                     {
-                    let tabValues = [];
-                    if(ProDetail.datatype.toString() != "date")
-                    {
-                        ProDetail.attrValues.indexOf("||")>=0? 
-                        tabValues=ProDetail.attrValues.split("||").filter(v=>v!='') : tabValues.push(ProDetail.attrValues)
+                        let tabValues = [];
+                        if(ProDetail.datatype.toString() != "date")
+                        {
+                            ProDetail.attrValues.indexOf("||")>=0? 
+                            tabValues=ProDetail.attrValues.split("||").filter(v=>v!='') : tabValues.push(ProDetail.attrValues)
+                        }
+                        else
+                        {
+                            tabValues.push(moment(ProDetail.attrValues).format("MM-DD-YYYY"));
+                        }
+                        let tabValueIDs = [];
+                        ProDetail.valueID.indexOf("||")>=0 
+                        ? tabValueIDs=ProDetail.valueID.split("||").filter(v=>v!='') 
+                        : ProDetail.valueID != "" 
+                            ? tabValueIDs.push(ProDetail.valueID) 
+                            : tabValueIDs.push("0")
+
+                        let valSequence = []
+                        for(let i=0;i<tabValues.length;i++)
+                        {
+                            valSequence.push((i+1).toString());
+                        }
+                    
+                        while(tabValues.length>tabValueIDs.length)
+                        {
+                            tabValueIDs.push("0")
+                        }
+
+                        let tabdata=JSON.stringify({
+                            'partrecordid': attrJSON.PartRecordID,
+                            'attrdefid':ProDetail.attrID,
+                            'IsMulti': ProDetail.IsMultiValues ? 1:0,
+                            'updated_by': userDetails.user_email ,
+                            'value': tabValues,
+                            'valueid': tabValueIDs,
+                            'seq': valSequence
+                        })
+
+                        tabAttributes.push(tabdata);
                     }
-                    else
-                    {
-                        tabValues.push(moment(ProDetail.attrValues).format("MM-DD-YYYY"));
-                    }
-                    let tabValueIDs = [];
-                    ProDetail.valueID.indexOf("||")>=0? 
-                    tabValueIDs=ProDetail.valueID.split("||").filter(v=>v!='') 
-                    : ProDetail.valueID != ""? tabValueIDs.push(ProDetail.valueID) : tabValueIDs.push("0")
-                    let valSequence = []
-                    for(let i=0;i<tabValues.length;i++)
-                    {
-                        valSequence.push((i+1).toString());
-                    }
-                
-                    while(tabValues.length>tabValueIDs.length)
-                    {
-                        tabValueIDs.push("0")
-                    }
-                    let tabdata=JSON.stringify(                   
-                    {
-                        'partrecordid': attrJSON.PartRecordID,
-                        'attrdefid':ProDetail.attrID,
-                        'IsMulti': ProDetail.IsMultiValues ? 1:0,
-                        'updated_by': userDetails.user_email ,
-                        'value': tabValues,
-                        'valueid': tabValueIDs,
-                        'seq': valSequence
-                    })
-                    tabAttributes.push(tabdata);
-                }
                 });
                 
 

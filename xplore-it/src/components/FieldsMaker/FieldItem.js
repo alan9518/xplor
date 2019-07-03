@@ -46,9 +46,9 @@
         setInputValue = (event)=> {
             const {target} = event;
             const {name, value, id} = target;
-            this.setState({
-                inputValue: value
-            })
+            // this.setState({
+            //     inputValue: value
+            // })
             this.props.onChangeInput(name ,value, id);
 
         }
@@ -111,16 +111,23 @@
             
             const { colName, fieldName, inputName, editField, isTextArea, useParentState, index,maxLength,isTabAttr  } = this.props;
             // const {inputValue} = this.state;
-            const inputValue = useParentState === true ? this.props.fieldValue : this.state.inputValue 
+            // const inputValue = useParentState === true ? this.props.fieldValue : this.state.inputValue 
+            // <span className="xpl-subText">(Max Chars: {maxLength})</span> 
+
+            let inputValue  = this.props.fieldValue  
 
             return (
                 <div className={colName}>
 
                     <div className="xpl-fieldItem">
                         {
-                        editField === false?
-                        <h6 className="xpl-boldText xpl-fieldSeparator"> {fieldName} </h6>
-                        :<h6 className="xpl-boldText xpl-fieldSeparator"> {fieldName} <span className="xpl-subText">(Max Chars: {maxLength})</span> </h6>
+                        editField === false
+                        ? <h6 className="xpl-boldText xpl-fieldSeparator"> {fieldName} </h6>
+                        : <h6 className="xpl-boldText xpl-fieldSeparator"> 
+                            {fieldName} 
+                            { inputValue && <span className = "xpl-subText"> {inputValue.length}  of {maxLength} Characters Available  </span> }
+                            
+                         </h6>
                         }
                     
                         { editField === true 
