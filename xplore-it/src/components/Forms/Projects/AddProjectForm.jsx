@@ -632,7 +632,7 @@
                     
                             
         
-                        //       let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
+                        //       let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/XplorIT/XplorIT.aspx/app/details/${PartID}`
                               
                         //       console.log("TCL: updateProjectIcon -> href", href)
     
@@ -759,7 +759,7 @@
                     
                             
         
-                        //       let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
+                        //       let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/XplorIT/XplorIT.aspx/app/details/${PartID}`
                               
                         //       console.log("TCL: createNewProject -> href", href)
 

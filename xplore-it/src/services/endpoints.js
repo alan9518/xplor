@@ -27,19 +27,19 @@
         // Get All Products
         // @param Bussmodel=XPLOR
         // --------------------------------------
-            getAllProducts : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getProducts',
+            getAllProducts : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getProducts',
             
         // --------------------------------------
         // Get Carrousel Products
         // --------------------------------------
-            getCarrouselProducts : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getCarouselPro',
+            getCarrouselProducts : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getCarouselPro',
         
         /** --------------------------------------
         // Get Products By Category
         // @param {customerid <String>}
         // @param {Bussmodel <String>}
         // --------------------------------------*/
-            getAllProductsByCategory: 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getProductsByCategory',
+            getAllProductsByCategory: 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getProductsByCategory',
         
         /** --------------------------------------
         // Get Products By Category
@@ -48,38 +48,38 @@
         // @param {Bussmodel <String>}
         // @returns {}
         // -------------------------------------- */
-            // getAllProductsBySubCategory : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getProductsBySubcap?customerid=1025&subcap=Analytics&Bussmodel=XPLOR'
-            getAllProductsBySubCategory : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getProductsBySubcap',
+            // getAllProductsBySubCategory : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getProductsBySubcap?customerid=1025&subcap=Analytics&Bussmodel=XPLOR'
+            getAllProductsBySubCategory : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getProductsBySubcap',
         
         /** --------------------------------------
         // Get All Categories
         // @param {Bussmodel <String>}
         // --------------------------------------**/
-            getAllCategories : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getCategories',
+            getAllCategories : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getCategories',
         
         // --------------------------------------
         // Get Sub Categories
         // --------------------------------------
-            getSubCapacities : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getSubCap',
+            getSubCapacities : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getSubCap',
 
         // --------------------------------------
         // Get Vendors (Manufacturer)
         // @param {erpid <string>}
         // --------------------------------------
-            getVendors : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getMaufacturer',
+            getVendors : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getMaufacturer',
         
         /** --------------------------------------
         // Get Product Details
         // @param {partid <String>}
         // --------------------------------------*/
-            getProduct : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getSingleProduct',
+            getProduct : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getSingleProduct',
         
         /** --------------------------------------
         // Get Related Products
         // @param {customerid <String>}
         // @param {keyword <String array>, split by coma}
         // --------------------------------------*/
-            getRelatedProducts : `https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getRelatedPro`,
+            getRelatedProducts : `https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getRelatedPro`,
 
             
         /** --------------------------------------
@@ -87,51 +87,51 @@
         // @param {customerid <String>}
         // @param {keyword <String array>, split by coma}
         // --------------------------------------*/
-            getRelatedProductsHard : `https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getRelatedPro?customerid=1014&keyword=MDM,Master%20Data,Reference%20Data,%20GDH`,
+            getRelatedProductsHard : `https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getRelatedPro?customerid=1014&keyword=MDM,Master%20Data,Reference%20Data,%20GDH`,
         
         /** --------------------------------------
         // Get Product Attributes Tabs
         // @param {partid <String> }
         // --------------------------------------*/
-            getProductTabs : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getTabs',
+            getProductTabs : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getTabs',
 
         /** --------------------------------------
         // Get Tab Values
         // @param {partid <String>}
         // @param {busstypeid <String>}
         // --------------------------------------*/
-            getTabAttributes : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getTabAttributes',
+            getTabAttributes : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getTabAttributes',
 
         /** --------------------------------------
         // Get Tab Values
         // @param {partid <String>}
         // --------------------------------------*/
-            getPartRecord : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getPartRecord',
+            getPartRecord : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getPartRecord',
 
         /** --------------------------------------
         // Get Pro Categories
         // @param {busstypeid <String>}
         // --------------------------------------*/
-            getProCategories : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/getProCategory',
+            getProCategories : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getProCategory',
 
         /** --------------------------------------
         // Create New Product
         // @param {busstypeid <String>}
         // --------------------------------------*/
-            createNewProject : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/insertNewProduct',
+            createNewProject : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/insertNewProduct',
 
         /** --------------------------------------
         // Update Product
         // @param {busstypeid <String>}
         // --------------------------------------*/
-        updateProject : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/updatePartProject',
+        updateProject : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/updatePartProject',
 
 
         /** --------------------------------------
         // Create New Product
         // @param {busstypeid <String>}
         // --------------------------------------*/
-            updateTabAttributes : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx/updateTabAttr',
+            updateTabAttributes : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/updateTabAttr',
 
     /* ==========================================================================
      *  Sharepoint EndPoints
