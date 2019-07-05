@@ -253,8 +253,8 @@
 
     .xpl-appSideBarLinksContainer {
         position: relative;
-        /* overflow-y: scroll; */
-        /* height: 790px; */
+        overflow-y: scroll;
+        height: 790px;
     }
 
     .xpl-appSideBarTitleContainer {
@@ -470,7 +470,9 @@
     .xpl-breadLinksContainer {
         display: flex;
         flex-direction: row;
-        width: 75%;
+        /* width: 75%; */
+        width: 100%;
+        align-items: center;
     }
 
 
@@ -481,7 +483,8 @@
         padding: 0 8px 8px;
         font-weight: 600;
         cursor: pointer;
-        line-height: 30px;
+        line-height: 20px;
+        font-size: 20px;
         justify-content: flex-start;
         width: auto;
 
@@ -809,6 +812,17 @@
         Hide The SideBar and Displace Body
 ----------------------------------------------------- */
 
+    @media only screen and (min-width : 1280 ) and (max-width :1920) {
+           /* Scroll */
+           .xpl-appSideBarLinksContainer {
+            position: relative;
+            overflow-y: scroll;
+            height: 400px;
+        }
+
+    }
+
+
     /* ==========================================================================
     *  1280 to 1440px
        ========================================================================== */
@@ -852,6 +866,15 @@
                 min-height: 90px;
                 max-height: 190px;
                 font-size: 16px;
+            }
+
+
+
+            /* Scroll */
+            .xpl-appSideBarLinksContainer {
+                position: relative;
+                overflow-y: scroll;
+                height: 400px;
             }
 
         }

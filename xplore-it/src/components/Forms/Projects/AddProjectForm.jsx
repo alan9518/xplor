@@ -755,21 +755,21 @@
                         this.setState({isLoaded : true})
 
 
-                        setTimeout(() => {
+                        // setTimeout(() => {
                     
                             
         
-                              let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
+                        //       let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
                               
-                              console.log("TCL: createNewProject -> href", href)
+                        //       console.log("TCL: createNewProject -> href", href)
 
-                              window.location.href = href;
+                        //       window.location.href = href;
         
         
         
                               
                                 
-                            }, 100);
+                        //     }, 100);
                         
                         
                       }).catch((error) => {

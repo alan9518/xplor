@@ -341,13 +341,17 @@
                 
 
 
-                if(discardChanges === true) {
-                    console.log("TCL: DetailsView -> enableTabEdit -> this.state", this.state)
-// 
-                    // this.originalValues
-                    console.log("TCL: DetailsView -> enableTabEdit -> this.originalValues", this.originalValues)
+//                 if(discardChanges === true) {
+//                     console.log("TCL: DetailsView -> enableTabEdit -> this.state", this.state)
+// // 
+//                     // this.originalValues
+//                     console.log("TCL: DetailsView -> enableTabEdit -> this.originalValues", this.originalValues)
 
-                }
+//                     this.setState({
+//                         productOverview : this.originalValues
+//                     })
+
+//                 }
                     // this.componentDidMount();
 
 
@@ -393,11 +397,11 @@
                 // this.setState({isLoaded : false})
                 const PartID = this.state.productDetails.partID;
                 this.updateProductTab(this.state.currentTab,this.state.productDetails).then((data) => {
-                console.log("TCL: DetailsView -> saveFormValues -> this.state.currentTab", this.state.currentTab)
-                console.log("TCL: DetailsView -> saveFormValues -> this.state", this.state)
-                console.log("TCL: DetailsView -> saveFormValues -> data", data)
-                        
-                    this.createAlert('info', 'The TAB attributes was updated Successfully');    
+                    console.log("TCL: DetailsView -> saveFormValues -> this.state.currentTab", this.state.currentTab)
+                    console.log("TCL: DetailsView -> saveFormValues -> this.state", this.state)
+                    console.log("TCL: DetailsView -> saveFormValues -> data", data)
+                            
+                    this.createAlert('info', 'the he data has been successfully saved');    
                     // this.setState({isLoaded : true})
 
                     // this.changeTabData(this.state.currentTab).then(() => {this.createAlert('info', 'The TAB attributes was updated Successfully');    })

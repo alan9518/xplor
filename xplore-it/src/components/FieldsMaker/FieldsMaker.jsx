@@ -108,13 +108,18 @@
                         console.log("TCL: FieldsMaker -> toggleFieldsEdit -> this.originalValues ", this.originalValues )
                         // this.setState({formFields : this.originalValues });
 
-                        discardChanges =  true
+                        // discardChanges =  true
 
                         // this.componentDidMount()
 
                         // this.setState({ editControls:false})
 
                         // return
+
+
+                        this.setState({
+                            formFields : this.originalValues
+                        })
                     }
                         
                     
@@ -196,43 +201,37 @@
                    
                     let {formFields} = this.state
                     let stateIndex = index.split('-')[1]
-                    let currentField = this.state.formFields[stateIndex];
+                   
+
+                    // Get State Index
+
+                    let currentField = formFields.filter((field , index) => {return index === parseInt(stateIndex)})[0]
                     
-                    // let newField = Object.assign({}, currentField, {
-                    //     attrValues : value
-                    // })
-
-                    // let newFormFields = [];
-
-                    currentField.attrValues =  value
-                    // currentField.mutable = true
-
-                    formFields[stateIndex] = currentField
-
-
-                    // let newFormFields = Object.assign([], formFields, {stateIndex: newField});
-
-                    // let newFormFields = [...formFields.filter((field , index) => {return index !== parseInt(stateIndex)}), newField];
-
-                    // console.log("TCL: FieldsMaker -> newFormFields", newFormFields)
-                    // formFields[stateIndex] = newField
-
-                    // console.log("TCL: FieldsMaker -> newFormFields", newFormFields)
-
-
-
-
-                    const newDataSource = formFields.reduce((ds, item, idx) =>  stateIndex !== idx
-                                                    ? ds.concat(item)
-                                                    : ds.concat(Object.assign({}, item, { attrValues: value })), []);
+                    let newField = Object.assign({}, currentField, {
+                        attrValues : value
+                    })
 
                     
-                    
+                    console.log("TCL: FieldsMaker -> onTextChange -> currentField", currentField)
+                   
 
-                    console.log("TCL: FieldsMaker -> newDataSource", newDataSource)
+                   
+                    console.log("TCL: FieldsMaker -> onTextChange -> newField", newField)
+
+                    let newFormFields = formFields.map((field, index) => {
+                        if(newField.attrID === field.attrID) {
+                            field = newField
+                        }
+
+                        return field
+                    })
+
+                    console.log("TCL: FieldsMaker -> newFormFields", newFormFields)
+
+                
                     
                     
-                    this.setState({formFields : newDataSource});
+                    this.setState({formFields : newFormFields});
                 }
 
                     
@@ -247,23 +246,48 @@
 
                     let {formFields} = this.state
                     let stateIndex = target.id.split('-')[1]
-                    let currentField = formFields[stateIndex];
+                    // let currentField = formFields[stateIndex];
                     console.log("TCL: FieldsMaker -> onToggleChange -> currentField", currentField)
+                    let currentField = formFields.filter((field , index) => {return index === parseInt(stateIndex)})[0]
+                    let boolValue = null;
+                  
 
                     // ?Change Value
+
                         if(event.target.checked ===  true) 
-                            currentField.attrValues = "Y"
+                            boolValue = "Y"
                         else
-                            currentField.attrValues = "N"    
+                            boolValue = "N"    
 
 
-                            currentField.mutable = true
+                            
+
+
+                      
+                        let newField = Object.assign({}, currentField, {
+                                attrValues : boolValue
+                        })
                     
                     // ? Udpate State
-                        formFields[stateIndex] = currentField
+                        // formFields[stateIndex] = currentField
+
+                        let newFormFields = formFields.map((field, index) => {
+                            if(newField.attrID === field.attrID) {
+                                field = newField
+                            }
+    
+                            return field
+                        })
+    
+                        console.log("TCL: FieldsMaker -> newFormFields", newFormFields)
+    
+                    
+                        
+                        
+                        this.setState({formFields : newFormFields});
                     
                     
-                        this.setState({formFields : formFields});
+                        // this.setState({formFields : formFields});
 
 
                 }   
@@ -283,14 +307,16 @@
                     let {formFields} = this.state
 
                     
-                    let currentField = formFields[stateIndex];
+                    // let currentField = formFields[stateIndex];
+
+                    let currentField = formFields.filter((field , index) => {return index === parseInt(stateIndex)})[0]
                    
 
-                    // Find selected Option on the Possible Values
-                    // Add the new value to attrValues
+                    // // Find selected Option on the Possible Values
+                    // // Add the new value to attrValues
                     let currrentValuesArray =  currentField.attrValues.split('||');
 
-                    // check if the action is add or remove items
+                    //? check if the action is add or remove items
                     if(checked === true) {
                         if(!currrentValuesArray.includes(optionName))
                             currrentValuesArray.push(optionName);
@@ -304,12 +330,27 @@
                 
 
 
-                    //! Convert the Array to string and update State
-                    currentField.attrValues = currrentValuesArray.join('||');
-                    currentField.mutable = true
-                    console.log("TCL: FieldsMaker -> onListItemClick -> currentField.attrValues", currentField.attrValues)
-                    formFields[stateIndex] = currentField;
-                    this.setState({formFields : formFields});
+                    // //! Convert the Array to string and update State
+                        // currentField.attrValues = currrentValuesArray.join('||');
+                        let newField = Object.assign({}, currentField, {
+                            attrValues : currrentValuesArray.join('||')
+                        })
+
+
+                        let newFormFields = formFields.map((field, index) => {
+                            if(newField.attrID === field.attrID) {
+                                field = newField
+                            }
+    
+                            return field
+                        })
+
+                        this.setState({formFields : newFormFields});
+
+                    
+                    // console.log("TCL: FieldsMaker -> onListItemClick -> currentField.attrValues", currentField.attrValues)
+                    // formFields[stateIndex] = currentField;
+                    // this.setState({formFields : formFields});
                     
                 }
 
@@ -317,21 +358,39 @@
                 // ?--------------------------------------
                 // ? Set DatePicker Value
                 // ?--------------------------------------
-                onDateChange = (date, name , index) => {
+                onDateChange = (date, name , stateIndex) => {
                  
 
                     // Get Item
                     // const {target} = event;
                     // const {checked} = target;
+                    // let stateIndex = selectedItemArray[1];
                     let {formFields} = this.state
-                    let currentField = formFields[index];
+                    // let currentField = formFields[index];
+                    let currentField = formFields.filter((field , index) => {return index === parseInt(stateIndex)})[0];
+
+
+                    let newField = Object.assign({}, currentField, {
+                        attrValues : date
+                    })
+
+
+                    let newFormFields = formFields.map((field, index) => {
+                        if(newField.attrID === field.attrID) {
+                            field = newField
+                        }
+
+                        return field
+                    })
+
+                    this.setState({formFields : newFormFields});
 
                     // currentField.attrValues = this.formatDate(date);
-                    currentField.attrValues =  date;
-                    formFields[index] = currentField
+                    // currentField.attrValues =  date;
+                    // formFields[index] = currentField
                     
                     
-                    this.setState({formFields : formFields});
+                    // this.setState({formFields : formFields});
                     
                     
                 }
@@ -376,7 +435,13 @@
                             
                             if((formItem.attrName.toLowerCase()).replace(' ', '') === stateNameItemArray[1].toLowerCase()) {
 
-                                formItem.attrValues = peoplePickerUserValue
+                                // formItem.attrValues = peoplePickerUserValue
+
+                                let newField = Object.assign({}, formItem, {
+                                    attrValues : peoplePickerUserValue
+                                })
+
+                                return newField
 
                                 // return formItem
                             }
