@@ -628,21 +628,21 @@
                         this.createAlert('info', 'The Project icon was updated Successfully');    
                         this.setState({isLoaded : true})
     
-                        setTimeout(() => {
+                        // setTimeout(() => {
                     
                             
         
-                              let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
+                        //       let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
                               
-                              console.log("TCL: updateProjectIcon -> href", href)
+                        //       console.log("TCL: updateProjectIcon -> href", href)
     
-                              window.location.href = href;
+                        //       window.location.href = href;
         
         
         
                               
                                 
-                            }, 100);
+                        //     }, 100);
                       }).catch((error) => {
                         console.log("TCL: createNewProject -> error", error)
                           
