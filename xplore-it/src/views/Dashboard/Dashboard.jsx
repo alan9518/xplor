@@ -244,14 +244,17 @@
                                 <div className="xpl-headerContainer">
 
                                         <h3 className="xpl-row xpl-allAppTitle" style = {{marginLeft:0}}> What's New? </h3>
-                                        <ProjectLink route = {'addProject/'} spRoute = {true}>
-                                            <AppButton 
-                                                buttonClass = {'xpl-addNewAppButton'} 
-                                                onClick =  {this.toggleModal}
-                                                buttonText = {'Add New Project'} 
-                                                iconClass = {'fas fa-plus-circle'} 
-                                            /> 
-                                        </ProjectLink>
+                                       {
+                                            localStorage.getItem('xplorITOwner') !== null &&
+                                                <ProjectLink route = {'addProject/'} spRoute = {true}>
+                                                    <AppButton 
+                                                        buttonClass = {'xpl-addNewAppButton'} 
+                                                        onClick =  {this.toggleModal}
+                                                        buttonText = {'Add New Project'} 
+                                                        iconClass = {'fas fa-plus-circle'} 
+                                                    /> 
+                                                </ProjectLink>
+                                        }
                                 </div>
                                 
                                 <Carrousel carrouselData = {carrouselproducts} itemsToShow = {itemsToShow} />

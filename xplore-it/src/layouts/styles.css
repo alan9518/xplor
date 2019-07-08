@@ -395,6 +395,9 @@
     }
 
     .xpl-subText {
+        position: absolute;
+        right: 0;
+        bottom: 0;
         font-size: 0.70rem !important;
         font-weight: 300;
         color: dimgray;
@@ -493,6 +496,7 @@
     .xpl-breadSeparator {
         font-size: 18px;
         line-height: 30px;
+        height: 38px;
     }
     
 
@@ -857,6 +861,10 @@
                 max-width: 165px;       
             }
 
+            .xpl-longCard .xpl-cardName {
+                max-width: 300px !important;
+            }
+
             .xpl-projectsContainer .xpl-cardName h5 {
                 margin-left: 0;
                 font-size: 17px;
@@ -874,7 +882,7 @@
             .xpl-appSideBarLinksContainer {
                 position: relative;
                 overflow-y: scroll;
-                height: 400px;
+                height: 645px;
             }
 
         }

@@ -121,18 +121,19 @@
 
                     <div className="xpl-fieldItem">
                         {
-                        editField === false
-                        ? <h6 className="xpl-boldText xpl-fieldSeparator"> {fieldName} </h6>
-                        : <h6 className="xpl-boldText xpl-fieldSeparator"> 
-                            {fieldName} 
-                            { inputValue && <span className = "xpl-subText"> {inputValue.length}  of {maxLength} Characters Available  </span> }
-                            
-                         </h6>
+                            editField === false
+                            ? <h6 className="xpl-boldText xpl-fieldSeparator"> {fieldName} </h6>
+                            : <h6 className="xpl-boldText xpl-fieldSeparator"> 
+                                {fieldName} 
+                                {( editField === true && inputValue )&& <span className = "xpl-subText"> {inputValue.length}  of {maxLength} Characters Available  </span> }
+                                
+                            </h6>
                         }
                     
-                        { editField === true 
-                            ? this.setFieldInputOrTextArea(fieldName, inputValue, isTextArea, inputName, index,maxLength)
-                            : this.renderFieldLinkOrText(inputValue)
+                        { 
+                            editField === true 
+                                ? this.setFieldInputOrTextArea(fieldName, inputValue, isTextArea, inputName, index,maxLength)
+                                : this.renderFieldLinkOrText(inputValue)
                         
                         }
 

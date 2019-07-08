@@ -30,6 +30,7 @@
             constructor(props) {
                 super(props);
                 this.state = {
+                    responsiveWidth : window.innerWidth,
                     productTabs: [],
                     currentTab : 0,
                     relatedProducts : [],
@@ -50,16 +51,22 @@
             // Load API and Set State
             // --------------------------------------
             componentDidMount() {
+                window.addEventListener("resize", this.updateContainerDimensions);
                 this.loadAPI();
             }
 
 
+            componentWillUnmount() {
+                window.removeEventListener("resize", this.updateContainerDimensions);
+            }
 
-            componentWillReceiveProps = (nextProps) => {
-                console.log("TCL: DetailsView -> componentWillReceiveProps -> nextProps", nextProps)
-                
-                console.log("TCL: DetailsView -> componentWillReceiveProps -> this.props", this.props)
-                
+
+            // --------------------------------------
+            // Window Resizing
+            // --------------------------------------
+            updateContainerDimensions = () => {
+                let newWidth = window.innerWidth;
+                this.setState({responsiveWidth : newWidth});
             }
 
         
@@ -387,16 +394,18 @@
                 console.log("TCL: DetailsView -> saveFormValues -> currentViewValues", currentViewValues)
                 console.log("TCL: DetailsView -> saveFormValues -> this.state", this.state)
 
-                // const {}
+                const {partID} = this.state.productDetails;
 
-                // this.setState({
-                //     productOverview : currentViewValues
-                // })
+                this.setState({
+                    productOverview : currentViewValues
+                })
 
 
                 // this.setState({isLoaded : false})
-                const PartID = this.state.productDetails.partID;
-                this.updateProductTab(this.state.currentTab,this.state.productDetails).then((data) => {
+                
+
+                // let formData = Object.assign({}, currentViewValues, {partID});
+                this.updateProductTab(this.state.currentTab,currentViewValues, partID).then((data) => {
                     console.log("TCL: DetailsView -> saveFormValues -> this.state.currentTab", this.state.currentTab)
                     console.log("TCL: DetailsView -> saveFormValues -> this.state", this.state)
                     console.log("TCL: DetailsView -> saveFormValues -> data", data)
@@ -409,7 +418,7 @@
                 
                         
     
-                    //       let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/XplorIT/XplorIT.aspx/app/details/${PartID}`
+                    //       let href = `https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/app/details/${PartID}`
                           
                     //       console.log("TCL: updateProjectIcon -> href", href)
 
@@ -429,26 +438,29 @@
             // ?--------------------------------------
             // ? Update Product Overview on DB
             // ?--------------------------------------
-            updateProductTab = async (currentTabID,proDetails) => {
+            updateProductTab = async (currentTabID, proDetails, partID) => {
                 console.log("TCL: DetailsView -> updateProductTab -> CurrentTabID", currentTabID)
                 console.log("TCL: DetailsView -> updateProductTab -> ProductDetails", proDetails)
                 console.log("TCL: DetailsView -> updateProductTab -> ProductAttributes", this.state.productOverview)
                 
                 const currentTab = this.state.currentTab
-                const ProductAttributes = this.state.productOverview
+                // const ProductAttributes = this.state.productOverview
+
+                const ProductAttributes = proDetails
+                console.log("TCL: DetailsView -> updateProductTab -> ProductAttributes", ProductAttributes)
                 const userDetails = window.getCurrentSPUser();
 
-                const partRecordCall = await axios.get(Endpoints.getPartRecord, {params: {partid : proDetails.partID}});
+                const partRecordCall = await axios.get(Endpoints.getPartRecord, {params: {partid : partID}});
                 const readPartRecord = await partRecordCall.data;
                 const attrJSON = readPartRecord.filter(i => i.BusinessTypeID == currentTab)[0];
 
                 console.log("TCL: DetailsView -> updateProductTab -> PartRecordID",attrJSON.PartRecordID);
                 let tabAttributes = [];
                 ProductAttributes.forEach(ProDetail => {
-                    if(ProDetail.attrValues.length != 0 && ProDetail.attrValues != "")
+                    if(ProDetail.attrValues.length !== 0 && ProDetail.attrValues != "")
                     {
                         let tabValues = [];
-                        if(ProDetail.datatype.toString() != "date")
+                        if(ProDetail.datatype.toString() !== "date")
                         {
                             ProDetail.attrValues.indexOf("||")>=0? 
                             tabValues=ProDetail.attrValues.split("||").filter(v=>v!='') : tabValues.push(ProDetail.attrValues)
@@ -460,7 +472,7 @@
                         let tabValueIDs = [];
                         ProDetail.valueID.indexOf("||")>=0 
                         ? tabValueIDs=ProDetail.valueID.split("||").filter(v=>v!='') 
-                        : ProDetail.valueID != "" 
+                        : ProDetail.valueID !== "" 
                             ? tabValueIDs.push(ProDetail.valueID) 
                             : tabValueIDs.push("0")
 

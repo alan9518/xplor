@@ -124,7 +124,7 @@
         // Update Product
         // @param {busstypeid <String>}
         // --------------------------------------*/
-        updateProject : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/updatePartProject',
+            updateProject : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/updatePartProject',
 
 
         /** --------------------------------------
@@ -153,4 +153,10 @@
         // @param {listName}
         // --------------------------------------*/
             getAllowedProductsIcons : `${path}/_api/web/lists/getbyTitle('xplorIT-icons-allowed')/items`,
+
+        /** --------------------------------------
+        // Get Owners 
+        // @param {listName} 89
+        // --------------------------------------*/
+            getXplorITOwners : 'https://flextronics365.sharepoint.com/sites/xplorit_portal/_api/web/sitegroups/getbyid(89)/users'
     }

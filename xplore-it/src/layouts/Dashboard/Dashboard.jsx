@@ -43,6 +43,7 @@
                 showError : false,
                 responsiveWidth : window.innerWidth,
                 filterRoutes : '',
+                isOwner : false
             }
             this.path = Config.spPath;
 
@@ -80,9 +81,11 @@
                 const apiRoutesPromise = this.loadAPICategories();
                 // Get SP Routes
                 const SPRoutesPromise =  this.loadSPCategories();
+                // Get XplorIT Owners
+                const getXplOwnsersPromise = this.loadxplorITOwners();
 
                 // Resolve Both Promises
-                const [apiRoutes, SPRoutes] = await Promise.all([apiRoutesPromise,SPRoutesPromise]);
+                const [apiRoutes, SPRoutes, ownsersData] = await Promise.all([apiRoutesPromise,SPRoutesPromise,getXplOwnsersPromise]);
                 
                 // Get Routes Values
                 const apiRoutesData =  apiRoutes.data;
@@ -90,14 +93,24 @@
                 // Prepare SP Routes
                 const SPRoutesData = this.createSPArray(SPRoutes.data.value);
 
+                let isOwner = this.setOwnersList(ownsersData.data.value);
+
                 // Merge SP And API Routes
-                const appRoutes = this.mergeRoutes(apiRoutesData, SPRoutesData);
+                const appRoutes = this.mergeRoutes(apiRoutesData, SPRoutesData, isOwner);
+
+                // const ownersList = ownsersData.data;
+
+
+                
+
 
                 this.setState({
                     categories : appRoutes || [],
+                    isOwner : isOwner,
                     isLoaded : true,
                     showError : false,
                 })
+                
             
 
             }
@@ -125,6 +138,13 @@
             return axios.get(Endpoints.getSideBarCategoriesSP);
         }
 
+        // --------------------------------------
+        // Load XplorIT Owners
+        // --------------------------------------
+        loadxplorITOwners() {
+            return axios.get(Endpoints.getXplorITOwners);
+        }
+
 
         // --------------------------------------
         // Create An Array with The SP Categories
@@ -144,6 +164,7 @@
         }
 
 
+       
 
         
         /** --------------------------------------
@@ -151,7 +172,7 @@
         // @param {APIRoutes <Array>}
         // @param {SPRoutes <Array>}
         // --------------------------------------*/
-        mergeRoutes(APIRoutes, SPRoutes) {
+        mergeRoutes(APIRoutes, SPRoutes, isOwner) {
 
             const homeRoute = {
                     path : `catalogue/all/all`,
@@ -165,7 +186,7 @@
 
             const addProjectRoute = {
                 path : `addProject`,
-                sidebarName : 'Add Product',
+                sidebarName : isOwner === true ? 'Add Product' : null,
                 exact: true,
                 key:`app-route-addProduct`,
                 color : '#1197D3',
@@ -205,6 +226,41 @@
                 return [...homeRoute];
             }
 
+        }
+
+
+        /** --------------------------------------
+        // Set Owners Data and Save it on 
+        // Session Storage
+        // @param {APIRoutes <Array>}
+        // --------------------------------------*/
+        setOwnersList(ownersData) {
+            const user = window.getCurrentSPUser();
+            // let ownerObject = {}
+
+
+            let xplorITOwner = ownersData.filter((owner)=> {return owner.Email === user.user_email })[0]
+
+            if(xplorITOwner) {
+                if(localStorage.getItem('xplorITOwner') === null) {
+                    window.localStorage.setItem('xplorITOwner', JSON.stringify(user))
+                }
+
+                return true
+            }
+          
+            else {
+                if(localStorage.getItem('xplorITOwner') !== null) {
+                    window.localStorage.removeItem('xplorITOwner')
+                }
+
+                return false
+
+            }
+                
+
+
+           
         }
 
 

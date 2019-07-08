@@ -21,18 +21,21 @@
         // --------------------------------------
         // Constructor
         // --------------------------------------
-            // constructor(props) {
-            //     super(props);
+            constructor(props) {
+                super(props);
+                this.state = {
+                    responsiveWidth : window.innerWidth,
+                }
                 
-            // }
+            }
 
         // --------------------------------------
         // Avoid Rerender of Cards each time 
         // a filter is activated
         // --------------------------------------
-            shouldComponentUpdate() {
-                return false; 
-            }
+            // shouldComponentUpdate() {
+            //     return false; 
+            // }
 
 
 
@@ -105,16 +108,18 @@
                 const {
                         partID, ProductName, hasSmallDescription,projectColor, 
                         SoftwareTopic, ProductScope, ShortDescription, 
-                        DetailedDescription, cardHover, IconValue, 
+                        DetailedDescription, cardHover, IconValue, longCard
                 } = this.props;
 				
                 // const bgColor = hasSmallDescription ? projectColor : '#238ECC';
                 const bgColor =  projectColor ||  '#238ECC';
                 const projectColorStyle = {backgroundColor : bgColor}
-                const iconName =  this.formatIconName(IconValue)
+                const iconName =  this.formatIconName(IconValue);
+                const classNames = longCard === true ? 'xpl-cardContainer xpl-longCard xpl-shadow' : 'xpl-cardContainer xpl-mediumCard xpl-shadow'
+
                 return (
                     
-                        <div className="xpl-cardContainer xpl-mediumCard xpl-shadow">
+                        <div className = {classNames}>
                             {/* <ProjectLink route = {`${projectPath}/${partID}`} > */}
                             <ProjectLink route = {partID} >
                                 <div className = {`xpl-cardHeader ${cardHover && 'cardHover'}`} style = {projectColorStyle}>

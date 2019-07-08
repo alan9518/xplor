@@ -260,3 +260,7 @@
         margin-right: auto;
         margin-left: 5px;
     }
+
+    .xpl-cardContainer .xpl-longCard .xpl-shadow {
+        margin-bottom: 20px;
+    }

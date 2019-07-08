@@ -33,9 +33,33 @@
             constructor(props) {
                 super(props);
                 this.state = {
+                    responsiveWidth : window.innerWidth,
                     isLoaded: false,
+                    blockEdit : false
                 }
             }
+
+            componentDidMount() {
+                window.addEventListener("resize", this.updateContainerDimensions);
+                let blockEdit = localStorage.getItem('xplorITOwner') !== null ? false : true
+                this.setState({
+                    blockEdit : blockEdit,
+                });
+            }
+
+            componentWillUnmount() {
+                window.removeEventListener("resize", this.updateContainerDimensions);
+            }
+
+
+            // --------------------------------------
+            // Window Resizing
+            // --------------------------------------
+            updateContainerDimensions = () => {
+                let newWidth = window.innerWidth;
+                this.setState({responsiveWidth : newWidth});
+            }
+
 
 
           
@@ -77,6 +101,16 @@
                     ShortDescription, 
 
                 } = productOverview;
+                const {responsiveWidth} = this.state;
+
+                let overViewColumnclassNames = responsiveWidth <= 1280 ? 'col-lg-12 col-md-12 col-sm-12' : 'col-lg-7 col-md-12 col-sm-12';
+                let productCardColumnClassNames = responsiveWidth <= 1280 ? 'col-lg-12 col-md-12 col-sm-12' : 'col-lg-5 col-md-12 col-sm-12';
+                let longCard = responsiveWidth <= 1280  ? true : false 
+
+                if(responsiveWidth <= 768)
+                    longCard = false;
+
+
                 return (
                    
 
@@ -89,11 +123,12 @@
     
                                 <div className="row">
     
-                                        <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12">
+                                        <div className =  {productCardColumnClassNames}>
                                             <ProjectCard 
                                                 key = {productOverview.partID}
                                                 cardHover = {false}  
                                                 projectColor = {productOverview.color}
+                                                longCard = {longCard}
                                                 {...productOverview}
                                             />
                                         </div>
@@ -101,7 +136,7 @@
                                              
     
     
-                                        <div className="col-xl-7 col-lg-7 col-md-12">
+                                        <div className = {overViewColumnclassNames} >
                                             <div className="row">
 
                                             
@@ -111,7 +146,8 @@
 
                                                         {
                                                             
-                                                            editControls === false ?
+                                                            // editControls === false ?
+                                                            (this.state.blockEdit === false && editControls === false ) ?
                                                                 <SingleButton
                                                                     buttonText={"Edit Content"}
                                                                     buttonColor={"primary"}
@@ -119,8 +155,13 @@
                                                                 />
 
                                                             :
-
-                                                            <input type="submit" value="Save Content" className = 'xpl-singleButton' name = {'saveContent'}/>
+                                                            (this.state.blockEdit === false && editControls === true ) &&
+                                                                <input 
+                                                                    type="submit" 
+                                                                    value="Save Content" 
+                                                                    className = 'xpl-singleButton' 
+                                                                    name = {'saveContent'}
+                                                                />
                                                         }
                                                 </div>
                                                 
@@ -256,6 +297,7 @@
 
                 )
             }
+
 
 
             // --------------------------------------

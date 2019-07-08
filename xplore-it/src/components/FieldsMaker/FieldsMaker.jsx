@@ -60,10 +60,12 @@
                 console.log("TCL: FieldsMaker -> constructor -> this.originalValues", this.originalValues)
 
                 const fields =  this.props.formFields;
+                let blockEdit = localStorage.getItem('xplorITOwner') !== null ? false : true
 
                 this.setState({
                     editControls: this.props.editFields || false,
                     formFields : fields || [],
+                    blockEdit : blockEdit,
                     oldFormFields : this.props.formFields,
                     isLoaded : true
                 });
@@ -726,7 +728,7 @@
                                         <h2> {tabTitle}  </h2>
 
                                     {
-                                        editControls === false ?
+                                        (this.state.blockEdit === false && editControls === false ) ?
                                             <SingleButton
                                                 buttonText={"Edit Content"}
                                                 buttonColor={"primary"}
@@ -738,13 +740,14 @@
                                         // ? Submit New Values And update DB
 
                                         :
-                                            <SingleButton
-                                                buttonText={"Cancel"}
-                                                buttonColor={"primary"}
-                                                Key = {'cancelButton'}
-                                                buttonName = {'cancelButton'}
-                                                onClick={this.toggleFieldsEdit}
-                                            />
+                                            (this.state.blockEdit === false && editControls === true ) &&
+                                                <SingleButton
+                                                    buttonText={"Cancel"}
+                                                    buttonColor={"primary"}
+                                                    Key = {'cancelButton'}
+                                                    buttonName = {'cancelButton'}
+                                                    onClick={this.toggleFieldsEdit}
+                                                />
                                         //    <input type="submit" value="Save Content" className = 'xpl-singleButton' name = {'saveContent'}/>
                                     }
                                     </div>
