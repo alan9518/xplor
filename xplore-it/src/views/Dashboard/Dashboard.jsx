@@ -15,7 +15,8 @@
         ProjectsHolder,
         AppLoader, 
         ProjectLink,
-        AppButton
+        AppButton,
+        ErrorBoundary
     } from "../../components";
 
     import {shuffle, startCase, replace} from "lodash";
@@ -114,9 +115,9 @@
             findSubFilterRoute() {
                 const url =  window.location.href;
                 if(url.indexOf('/sub') >= 0)
-                    return axios.get(Endpoints.getAllProductsBySubCategory,{params:{subcap : this.props.match.params.topic, Bussmodel : 'XPLOR', customerid : this.props.match.params.key}})
+                return axios.get(Endpoints.getAllProductsBySubCategory,{params:{subcap : this.props.match.params.key, Bussmodel : 'XPLOR', category : this.props.match.params.topic}})
                 else
-                    return axios.get(Endpoints.getAllProductsByCategory,{params:{Bussmodel : 'XPLOR', customerid : this.props.match.params.key}})
+                    return axios.get(Endpoints.getAllProductsByCategory,{params:{Bussmodel : 'XPLOR', category : this.props.match.params.topic}})
             }
 
 
@@ -149,13 +150,29 @@
             // @returns {A new Array With Category Colors}
             // --------------------------------------*/
             mergeProductsAndColors(productsData, SPColorsCategories) {
+                if(!productsData) return [];
+                let softValue = null
                 const productsWithColor = productsData.map((product)=> {
-                    for (let spColor of SPColorsCategories) {
-                        if(product.SoftwareTopic === spColor.name) {
-                            product.color = spColor.color
+                    try {
+                        for (let spColor of SPColorsCategories) {
+                            if(product.SoftwareTopic && product.SoftwareTopic.indexOf(',') >= 0)
+                                softValue = product.SoftwareTopic.split(',')[0];
+                            else if (!product.SoftwareTopic)
+                                softValue = ''
+                            else
+                                softValue = product.SoftwareTopic
+                            if(softValue === spColor.name) {
+                                product.color = spColor.color
+                            }
                         }
+                        return product;
                     }
-                    return product;
+                    catch(error) {
+                        console.log("TCL: Dashboard -> mergeProductsAndColors -> error", error)
+                        console.log("TCL: Dashboard -> mergeProductsAndColors -> product", product)
+
+                        
+                    }
                 })
 
                 return productsWithColor;
@@ -213,8 +230,10 @@
             renderDashboard() {        
                 return (
                     <Fragment>
+                        <ErrorBoundary>
                             { this.props.location.pathname.indexOf('/catalogue/all/all') >= 0 && this.renderCarrousel()}
                             {this.renderFlipperBody()}
+                        </ErrorBoundary>
                     </Fragment>
                 )
 
@@ -250,7 +269,7 @@
                                                     <AppButton 
                                                         buttonClass = {'xpl-addNewAppButton'} 
                                                         onClick =  {this.toggleModal}
-                                                        buttonText = {'Add New Project'} 
+                                                        buttonText = {'Add New Product'} 
                                                         iconClass = {'fas fa-plus-circle'} 
                                                     /> 
                                                 </ProjectLink>

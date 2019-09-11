@@ -12,7 +12,7 @@
 // --------------------------------------
 // Path Route
 // --------------------------------------
-    const {path} = Config
+    const {path, prodEnpoints} = Config
 
 
 // --------------------------------------
@@ -27,19 +27,19 @@
         // Get All Products
         // @param Bussmodel=XPLOR
         // --------------------------------------
-            getAllProducts : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getProducts',
+            getAllProducts : `${prodEnpoints}/getProducts`,
             
         // --------------------------------------
         // Get Carrousel Products
         // --------------------------------------
-            getCarrouselProducts : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getCarouselPro',
+            getCarrouselProducts : `${prodEnpoints}/getCarouselPro`,
         
         /** --------------------------------------
         // Get Products By Category
         // @param {customerid <String>}
         // @param {Bussmodel <String>}
         // --------------------------------------*/
-            getAllProductsByCategory: 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getProductsByCategory',
+            getAllProductsByCategory: `${prodEnpoints}/getProductsByCategory`,
         
         /** --------------------------------------
         // Get Products By Category
@@ -48,38 +48,38 @@
         // @param {Bussmodel <String>}
         // @returns {}
         // -------------------------------------- */
-            // getAllProductsBySubCategory : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getProductsBySubcap?customerid=1025&subcap=Analytics&Bussmodel=XPLOR'
-            getAllProductsBySubCategory : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getProductsBySubcap',
+            // getAllProductsBySubCategory : `${prodEnpoints}/getProductsBySubcap?customerid=1025&subcap=Analytics&Bussmodel=XPLO`'
+            getAllProductsBySubCategory : `${prodEnpoints}/getProductsBySubcap`,
         
         /** --------------------------------------
         // Get All Categories
         // @param {Bussmodel <String>}
         // --------------------------------------**/
-            getAllCategories : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getCategories',
+            getAllCategories : `${prodEnpoints}/getCategories`,
         
         // --------------------------------------
         // Get Sub Categories
         // --------------------------------------
-            getSubCapacities : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getSubCap',
+            getSubCapacities : `${prodEnpoints}/getSubCap`,
 
         // --------------------------------------
         // Get Vendors (Manufacturer)
         // @param {erpid <string>}
         // --------------------------------------
-            getVendors : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getMaufacturer',
+            getVendors : `${prodEnpoints}/getManufacturer`,
         
         /** --------------------------------------
         // Get Product Details
         // @param {partid <String>}
         // --------------------------------------*/
-            getProduct : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getSingleProduct',
+            getProduct : `${prodEnpoints}/getSingleProduct`,
         
         /** --------------------------------------
         // Get Related Products
         // @param {customerid <String>}
         // @param {keyword <String array>, split by coma}
         // --------------------------------------*/
-            getRelatedProducts : `https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getRelatedPro`,
+            getRelatedProducts : `${prodEnpoints}/getRelatedPro`,
 
             
         /** --------------------------------------
@@ -87,51 +87,68 @@
         // @param {customerid <String>}
         // @param {keyword <String array>, split by coma}
         // --------------------------------------*/
-            getRelatedProductsHard : `https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getRelatedPro?customerid=1014&keyword=MDM,Master%20Data,Reference%20Data,%20GDH`,
+            getRelatedProductsHard : `${prodEnpoints}/getRelatedPro?customerid=1014&keyword=MDM,Master%20Data,Reference%20Data,%20GDH`,
         
         /** --------------------------------------
         // Get Product Attributes Tabs
         // @param {partid <String> }
         // --------------------------------------*/
-            getProductTabs : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getTabs',
+            getProductTabs : `${prodEnpoints}/getTabs`,
 
         /** --------------------------------------
         // Get Tab Values
         // @param {partid <String>}
         // @param {busstypeid <String>}
         // --------------------------------------*/
-            getTabAttributes : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getTabAttributes',
+            getTabAttributes : `${prodEnpoints}/getTabAttributes`,
 
         /** --------------------------------------
         // Get Tab Values
         // @param {partid <String>}
         // --------------------------------------*/
-            getPartRecord : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getPartRecord',
+            getPartRecord : `${prodEnpoints}/getPartRecord`,
 
         /** --------------------------------------
         // Get Pro Categories
         // @param {busstypeid <String>}
         // --------------------------------------*/
-            getProCategories : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/getProCategory',
+            getProCategories : `${prodEnpoints}/getProCategory`,
+
+
+        /** --------------------------------------
+         * Check if Prjoject Name Already Exists
+        // @param Bussmodel=XPLOR
+        // @param productName=PCN
+        // @returns {}
+        // -------------------------------------- */
+            checkRepeatedProjectName : `${prodEnpoints}/doesProductNameExist`,
+
+
+        /** --------------------------------------
+        // Get Products Search
+        // @param {Bussmodel=XPLOR <String>}
+        // --------------------------------------*/
+            getProductSearch : `${prodEnpoints}/getProductSearch`,
+
 
         /** --------------------------------------
         // Create New Product
         // @param {busstypeid <String>}
         // --------------------------------------*/
-            createNewProject : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/insertNewProduct',
+            createNewProject : `${prodEnpoints}/insertNewProduct`,
 
         /** --------------------------------------
         // Update Product
         // @param {busstypeid <String>}
         // --------------------------------------*/
-            updateProject : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/updatePartProject',
+            updateProject : `${prodEnpoints}/updatePartProject`,
 
 
         /** --------------------------------------
-        // Create New Product
+        // Create/update New Product Attributes
         // @param {busstypeid <String>}
         // --------------------------------------*/
-            updateTabAttributes : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx/updateTabAttr',
+            updateTabAttributes : `${prodEnpoints}/updateTabAttr`,
 
     /* ==========================================================================
      *  Sharepoint EndPoints
@@ -152,11 +169,11 @@
         // Get Products Icons
         // @param {listName}
         // --------------------------------------*/
-            getAllowedProductsIcons : `${path}/_api/web/lists/getbyTitle('xplorIT-icons-allowed')/items`,
+            getAllowedProductsIcons : `${path}/_api/web/lists/getbyTitle('xplorIT-icons-allowed')/items?$top=1000`,
 
         /** --------------------------------------
         // Get Owners 
         // @param {listName} 89
         // --------------------------------------*/
-            getXplorITOwners : 'https://flextronics365.sharepoint.com/sites/xplorit_portal/_api/web/sitegroups/getbyid(89)/users'
+            getXplorITOwners : `${path}/_api/web/sitegroups/getbyid(89)/users`
     }

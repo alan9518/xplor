@@ -9,6 +9,9 @@
     padding: 10px 0 0 10px;
     z-index: 2000;
     position: relative;
+    overflow-y: scroll;
+    max-height: 450px;
+    background-color: #ffffff;
 }
 
 .xpl-resultsContainer.xpl-shadow ul {
@@ -18,4 +21,17 @@
 
 .xpl-resultsContainer.xpl-shadow li {
     padding-left: 5px;
+}
+
+input#xpl-searchInput {
+    font-size: 13px;
+}
+
+
+.int-loading {    
+    background-color: #ffffff;
+    background-image: url('../../images/loader.gif');
+    background-size: 25px 25px;
+    background-position: right center;
+    background-repeat: no-repeat;
 }

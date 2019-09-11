@@ -58,10 +58,7 @@
         // Render OverView Details 
         // --------------------------------------
 
-        renderOverviewDetails() {
-            
-        }
-
+      
 
         // --------------------------------------
         // Render Overview Editable

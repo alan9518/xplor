@@ -8,9 +8,9 @@
  // --------------------------------------
 // Import Dependences
 // --------------------------------------
-    import React, { Component } from "react";
-    import PropTypes from "prop-types";
-    import { SideBarLink } from "../../components";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { SideBarLink } from "../../components";
 
 
 // --------------------------------------
@@ -56,7 +56,9 @@
             const {currentMenu, onClick, currentCategory, currentCategoryColor} = this.props;
             const borderStyle = {
                 borderLeft: `26px solid ${currentCategoryColor}`,
-                height:'600px'
+                minHeight:'600px',
+                height:'100%'
+                
             }
 
 
@@ -68,7 +70,7 @@
                             <i className="fas fa-chevron-left"></i>  
                         </button>
                             <h4 className="xpl-appCategory">{currentCategory}</h4>
-                            <span> Recommended for your business department </span>
+                            <span> Narrow down search by product capability </span>
                         </div>
 
                         <div className="xpl-appSideBarSubCat">
@@ -91,7 +93,7 @@
         
             return (
                 currentMenu.map((menuItem)=> {
-                    console.log('TCL: DetailsList -> renderList -> menuItem', menuItem)
+                    
                     if (menuItem.sidebarName !== "")
                         return ( 
                             <SideBarLink 
@@ -121,14 +123,14 @@
 // --------------------------------------
 // Define PropTypes
 // --------------------------------------
-    DetailsList.propTypes = {
-        currentCategory : PropTypes.string,
-        currentMenu: PropTypes.array,
-        onClick: PropTypes.func,
-        currentCategoryColor : PropTypes.string,
-    };
+DetailsList.propTypes = {
+    currentCategory : PropTypes.string,
+    currentMenu: PropTypes.array,
+    onClick: PropTypes.func,
+    currentCategoryColor : PropTypes.string,
+};
 
 // --------------------------------------
 // Export Component
 // --------------------------------------
-    export default DetailsList;
+export default DetailsList;

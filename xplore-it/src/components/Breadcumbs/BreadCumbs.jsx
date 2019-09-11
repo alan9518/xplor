@@ -36,7 +36,7 @@
                     </h4>
 
 
-                    <ProjectLink route={`catalogue/${softwareTopic}/${softwareTopicID}`} spRoute={true}>
+                    <ProjectLink route={`catalogue/${softwareTopic}/all`} spRoute={true}>
 
 
 

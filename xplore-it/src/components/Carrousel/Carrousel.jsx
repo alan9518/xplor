@@ -30,7 +30,8 @@
                 dots: true,
                 infinite: true,
                 arrows: true,
-                speed: 500,
+                autoplay: true,
+                speed: 6000,
                 // slidesToShow: this.props.itemsToShow - 1,
                 slidesToShow: 3,
                 slidesToScroll: 1,
@@ -81,6 +82,7 @@
                     <ProjectCard                     
                         projectColor = {carrouselItem.color}
                         fullCard = {true}
+                        isCarrousel = {true}
                         {...carrouselItem}/>
                 </div>
             )

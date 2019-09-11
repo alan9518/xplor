@@ -17,250 +17,334 @@
 ----------------------------------------------------- */
 
 
-    .xpl-cardContainer {
-        width: 100%;
-        display: block;
-        border-radius: 20px;
-    }
+.xpl-cardContainer {
+    width: 100%;
+    display: block;
+    border-radius: 20px;
+}
 
-    .xpl-mediumCard {
-        max-width: 350px;
-        margin-bottom: 24px;
-    }
+.xpl-mediumCard {
+    max-width: 350px;
+    margin-bottom: 24px;
+}
 
-    .slick-slider .xpl-cardHeader {
-        height: 160px;
-    }
+.slick-slider .xpl-cardHeader {
+    height: 160px;
+}
 
-    .slick-slider .xpl-mediumCard {
-        width: 100% !important;
-        max-width: none;
-    }
+.slick-slider .xpl-mediumCard {
+    width: 100% !important;
+    max-width: none;
+}
 
 
-    .xpl-cardHeader {
-        /* background-color: #238ECC; */
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 16px;
-        color: #fff;
-        border-radius: 3px 3px 0 0;
-        flex-wrap: wrap;
-    }
+.xpl-cardHeader {
+    /* background-color: #238ECC; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 16px;
+    color: #fff;
+    border-radius: 3px 3px 0 0;
+    flex-wrap: wrap;
+}
 
-    .xpl-cardImage {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        align-content: center;
-    }
+.xpl-cardImage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
 
-    .xpl-cardHeader i {
-        font-size: 60px;
-        padding-top: 16px;
-        opacity: .5;
-        line-height: 60px;
-        padding-bottom: 16px;
-    }
+.xpl-cardHeader i {
+    font-size: 60px;
+    padding-top: 16px;
+    opacity: .5;
+    line-height: 60px;
+    padding-bottom: 16px;
+}
 
-    .xpl-cardDescription {
-        background-color: #fff;
-        padding: 12px 8px;
-        border-radius: 3px;
-        /* min-height: 80px;
-        max-height: 80px; */
-        min-height: 112px;
-        max-height: 185px;
-    }
-
+/* .xpl-cardDescription {
+    background-color: #fff;
+    padding: 12px 8px;
+    border-radius: 3px;
     
+    min-height: 112px;
+    max-height: 185px;
+} */
+
+
+.xpl-cardDescription{
+    background-color: #fff;
     
-    .xpl-cardName {
-        /* width: 100px; */
-        max-width: 240px;
-        line-break: normal;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: start;
-    }
+    padding: 12px 8px;
+    border-radius: 3px;
+    min-height: 130px;
+    max-height: 130px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    width: auto;
+    height: auto;
 
-    .xpl-cardName > h5 {
-        font-weight: 600;
-    }
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* transition: max 500ms ease */
+}
 
 
-    .xpl-cardName h5 {
-        margin-left: 0;
-        word-break: break-word;
-    }
 
-    h5.xpl-productScopeCard {
-        font-size: 17px !important;
-        margin-top: 5px;
+
+
+
+
+
+/* ToolTip Styles */
+
+    .xpl-tooltip {
+        display:inline-block;
+        
+        /* border-bottom:1px dotted #666; */
+        text-align:left;
     }
     
-
-
-    .xpl-cardDescription p {
-        text-align: center;
+    .xpl-tooltip .top {
+        min-width:260px; 
+        top: 190px;
+        left: 60%;
+        transform:translate(-50%, -100%);
+        padding:10px 20px;
+        /* color:#444444; */
+        background-color:rgba(0,0,0,0.9);
+        font-weight:normal;
+        font-size:13px;
+        border-radius:8px;
+        position:absolute;
+        z-index:99999999;
+        box-sizing:border-box;
+        box-shadow:0 1px 8px rgba(0,0,0,0.5);
+        display:none;
     }
 
-    .xpl-cardContainer:hover a{
-        text-decoration: none;       
+    .top p {
+        color: #fff !important;
+    }
+    
+    .xpl-tooltip:hover .top {
+        display:block;
+    }
+    
+    .xpl-tooltip .top i {
+        position:absolute;
+        top:100%;
+        left:50%;
+        margin-left:-12px;
+        width:24px;
+        height:12px;
+        overflow:hidden;
+    }
+    
+    .xpl-tooltip .top i::after {
+        content:'';
+        position:absolute;
+        width:12px;
+        height:12px;
+        left:50%;
+        transform:translate(-50%,-50%) rotate(45deg);
+        background-color:#EEEEEE;
+        box-shadow:0 1px 8px rgba(0,0,0,0.5);
     }
 
-    .xpl-cardHeader.cardHover:hover {
-        box-shadow: 0 0 30px 3px rgba(33,33,33,.2);
-        transition: all 0.4s ease;
-    }
+/*  */
 
 
-    .xpl-cardHeader.cardHover:hover i {
-        text-decoration: none;
-        animation: bounce 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
+.xpl-cardName {
+    /* width: 100px; */
+    max-width: 240px;
+    line-break: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: start;
+}
+
+.xpl-cardName > h5 {
+    font-weight: 600;
+}
+
+
+.xpl-cardName h5 {
+    margin-left: 0;
+    word-break: break-word;
+}
+
+h5.xpl-productScopeCard {
+    font-size: 17px !important;
+    margin-top: 5px;
+}
 
 
 
-    @keyframes bounce {
-        from {transform: translate3d(0,0,0);}
-        to {transform: translate3d(0,-20px,0);}
-    }
+.xpl-cardDescription p {
+    text-align: center;
+}
+
+.xpl-cardContainer:hover a{
+    text-decoration: none;       
+}
+
+.xpl-cardHeader.cardHover:hover {
+    box-shadow: 0 0 30px 3px rgba(33,33,33,.2);
+    transition: all 0.4s ease;
+}
+
+
+.xpl-cardHeader.cardHover:hover i {
+    text-decoration: none;
+    animation: bounce 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+
+
+@keyframes bounce {
+    from {transform: translate3d(0,0,0);}
+    to {transform: translate3d(0,-20px,0);}
+}
 
 
 /* ---------------------------------------------------
-    2.0 Wide Card For Details View
+2.0 Wide Card For Details View
 ----------------------------------------------------- */
-    .xpl-wideCard {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        padding: 16px;
-        background-color: #fff;
-        border-radius: 3px 3px 0 0;
-        min-height: 760px;
-    }
+.xpl-wideCard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 3px 3px 0 0;
+    min-height: 760px;
+}
 
-    .xpl-cardWideHeader {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        width: 100%;
-    }
+.xpl-cardWideHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+}
 
-    .xpl-cardWideHeader .xpl-cardHeader {
-        min-width: 280px;
-        height: auto;
-        padding:  16px 0;
-    }
+.xpl-cardWideHeader .xpl-cardHeader {
+    min-width: 280px;
+    height: auto;
+    padding:  16px 0;
+}
 
-    .xpl-cardWideHeader .xpl-cardHeader .xpl-cardName {
-        padding: 16px;
-    }
+.xpl-cardWideHeader .xpl-cardHeader .xpl-cardName {
+    padding: 16px;
+}
 
-    .xpl-cardWideHeader .xpl-cardHeader .xpl-cardImage {
-        padding: 0 8px;
-    }
-
-
-
-    .xpl-cardProjectInfo {
-        display: flex;
-        flex-direction: column;
-        margin-left: 16px;
-        align-items: baseline;
-        padding: 8px 25px;
-        width: 100%;
-        max-width: 280px;
-    }
-
-    
-    .xpl-cardProjectInfo ul {
-        list-style: none;
-    }
-
-
-    .xpl-cardProjectInfo ul li {
-        display: flex;
-        flex-direction: column;
-        padding: 15px 0;
-        text-align: justify;
-        color: #6c757d;
-        font-size: 18px;
-    }
-
-    .xpl-cardProjectInfo p {
-        font-size: 1.2em;
-    }
-
-    .xpl-cardOverviewContainer {
-        margin-top: 16px;
-    }
+.xpl-cardWideHeader .xpl-cardHeader .xpl-cardImage {
+    padding: 0 8px;
+}
 
 
 
-    p.xpl-cardProjectCardOverview {
-        text-align: justify;
-        color: #6c757d;
-        padding-left: 16px;
-    }
-
-    .xpl-relatedListApps {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .xpl-relatedListApps > h5 {
-        font-weight: 600;
-    }
+.xpl-cardProjectInfo {
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    align-items: baseline;
+    padding: 8px 25px;
+    width: 100%;
+    max-width: 280px;
+}
 
 
-    .xpl-relatedListApps .xpl-cardContainer.xpl-mediumCard.xpl-shadow {
-        margin-bottom: 16px;
-    }
+.xpl-cardProjectInfo ul {
+    list-style: none;
+}
 
 
-    .xpl-relatedContainer {
-        margin-top: 32px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 672px;
-        max-height: 680px;
-    }
-    
-    span.xpl-boldText {
-        font-weight: 500;
-    }
+.xpl-cardProjectInfo ul li {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0;
+    text-align: justify;
+    color: #6c757d;
+    font-size: 18px;
+}
+
+.xpl-cardProjectInfo p {
+    font-size: 1.2em;
+}
+
+.xpl-cardOverviewContainer {
+    margin-top: 16px;
+}
 
 
-    .xpl-cardStyleCenter {
-        display: flex !important;
-        justify-content: center !important;
-    }
-    
-    .xpl-cardStyleCenter .xpl-mediumCard {
-        max-width: 450px !important;
-    }
 
-    .xpl-cardStyleCenter .xpl-mediumCard .xpl-cardImage > i {
-        font-size: 85px;
-        padding-top: 40px;
-    }
+p.xpl-cardProjectCardOverview {
+    text-align: justify;
+    color: #6c757d;
+    padding-left: 16px;
+}
 
-    .xpl-cardStyleCenter .xpl-mediumCard .xpl-cardHeader.cardHover {
-        height: 180px;
-    }
+.xpl-relatedListApps {
+    display: flex;
+    flex-direction: column;
+}
+
+.xpl-relatedListApps > h5 {
+    font-weight: 600;
+}
 
 
-    li.xpl-keyWordListItem span {
-        margin-right: auto;
-        margin-left: 5px;
-    }
+.xpl-relatedListApps .xpl-cardContainer.xpl-mediumCard.xpl-shadow {
+    margin-bottom: 16px;
+}
 
-    .xpl-cardContainer .xpl-longCard .xpl-shadow {
-        margin-bottom: 20px;
-    }
+
+.xpl-relatedContainer {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 672px;
+    max-height: 680px;
+}
+
+span.xpl-boldText {
+    font-weight: 500;
+}
+
+
+.xpl-cardStyleCenter {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.xpl-cardStyleCenter .xpl-mediumCard {
+    max-width: 450px !important;
+}
+
+.xpl-cardStyleCenter .xpl-mediumCard .xpl-cardImage > i {
+    font-size: 85px;
+    padding-top: 40px;
+}
+
+.xpl-cardStyleCenter .xpl-mediumCard .xpl-cardHeader.cardHover {
+    height: 180px;
+}
+
+
+li.xpl-keyWordListItem span {
+    margin-right: auto;
+    margin-left: 5px;
+}
+
+
+.xpl-cardContainer .xpl-longCard .xpl-shadow {
+    margin-bottom: 20px;
+}

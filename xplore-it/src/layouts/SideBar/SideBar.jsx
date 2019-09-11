@@ -12,6 +12,9 @@
 
     import { SingleList, DetailsList, Search, AppButton } from "../../components";
     import {withRouter, Redirect} from 'react-router-dom';
+    import {Config} from '../../Config';
+
+    const {spPath, fullPath} = Config // ? Host Path
 
 // --------------------------------------
 // Create Component Class
@@ -32,7 +35,9 @@
                 currentCategory : null,
                 currentCategoryColor : null,
                 redirectUser : false,
-                redirectPath : ''
+                redirectPath : '',
+                singleMenuClick : false,
+                // resetMenu : props.resetMenu || false
                 // isLoaded : false
             }
         }
@@ -52,8 +57,8 @@
 
         
         /* ==========================================================================
-         * Handle State
-         ========================================================================== */
+        * Handle State
+        ========================================================================== */
 
             // --------------------------------------
             // Show/Hide Mobile Menu
@@ -77,7 +82,8 @@
                     currentMenu : previousMenu,
                     menuComponent : 'singleList',
                     redirectUser : false,
-                    redirectPath : ''
+                    redirectPath : '',
+                    singleMenuClick : false
                 })
             }
 
@@ -86,35 +92,48 @@
             // Open SubMenu
             // --------------------------------------
             onListItemClick = (menu) =>  {
-				console.log('TCL: SideBar -> onListItemClick -> menu', menu)
+                console.log('TCL: SideBar -> onListItemClick -> menu', menu)
                 const {currentMenu} =  this.state;
-                const {SubCap, sidebarName, color } = menu;
+                const {SubCap, sidebarName, color, CustomerName } = menu;
 
-                // Create New Menu Based on the SubCap
-                const subMenu = SubCap.map((subCapValue) => {
+                //? Create New Menu Based on the SubCap
+                const subMenu = SubCap.map((subCapValue,index) => {
                     return {
                         id : subCapValue.CustomerID,
                         // path :  `${this.path}/catalogue/${subCapValue.SubCapabilities}/${subCapValue.CustomerID}`,
                         // path :  `$catalogue/${subCapValue.SubCapabilities}/${subCapValue.CustomerID}`,
-                        path :  `catalogue/${subCapValue.SubCapabilities}/${subCapValue.CustomerID}/sub`,
+                        path :  `catalogue/${CustomerName}/${subCapValue.SubCapabilities}/sub`,
+                        // path :  `catalogue/${subCapValue.CustomerName}/${subCapValue.SubCapabilities}/sub`,
                         exact: true,
                         sidebarName : subCapValue.SubCapabilities,
-                        key : `${subCapValue.Capabilities}-${subCapValue.SubCapabilities}`,
+                        key : `${subCapValue.CustomerName}-${subCapValue.SubCapabilities}`,
                     }
                 })
 
+                // `${spPath}/catalogue/all/all`
 
-                // Set New Menu on the State and Save the Previous One
+
+                //? Set New Menu on the State and Save the Previous One
+                const { resetMenu } = this.props;
+                let resetSidebarMenu = resetMenu
+                if(this.props.location.pathname === `${spPath}/catalogue/all/all` && resetMenu === false)
+                    resetSidebarMenu = true
+                else
+                    resetSidebarMenu = false
+
                 this.setState((prevState) => {
+                    console.log("TCL: SideBar -> onListItemClick -> prevState", prevState)
                     return {
                         currentCategory: sidebarName,
                         menuComponent : 'detailsList',
                         currentCategoryColor : color,
                         currentMenu: subMenu,
-                        previousMenu : currentMenu  ,
+                        previousMenu : resetSidebarMenu === true ? this.props.categories : currentMenu   ,
                         redirectUser : true,
-                        redirectPath : `sites/xplorit_portal/XplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/${menu.CustomerID}`,
-                        // redirectPath : `sites/xplorit_portal/XplorIT/XplorIT.aspx/catalogue/Productivity(ITTools)/1014`
+                        // redirectPath : `sites/xplorit_portal/XplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/${menu.CustomerID}`,
+                        redirectPath : `sites/xplorit_portal/XplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/all`,
+                        // redirectPath : `sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/catalogue/${menu.CustomerName}/all`,
+                        singleMenuClick : true
                     };
                 });
                 
@@ -125,14 +144,14 @@
             // Filter Routes By Category
             // --------------------------------------
             filterRoutesByParentCategory = (menuFromDetailsList) => {
-				// 
+                // 
                 this.props.onFilterRoutesClick(menuFromDetailsList);
             }
 
         
         /* ==========================================================================
-         * Render Methods
-         ========================================================================== */
+        * Render Methods
+        ========================================================================== */
 
 
         
@@ -146,6 +165,31 @@
                 const responsiveSideBarStyle = {
                     maxWidth : `${responsiveWidth}px`
                 }
+
+                const {resetMenu} = this.props;
+                let resetMenuToShow = resetMenu
+
+                console.log("TCL: SideBar -> renderSideBar -> this.props.location.pathname", this.props.location.pathname)
+
+                if(this.props.location.pathname === `${spPath}/catalogue/all/all` || this.props.location.pathname === "/catalogue/all/all")
+                    resetMenuToShow = true
+                
+                else
+                    resetMenuToShow = false
+
+
+                console.log("TCL: SideBar -> renderSideBar -> resetMenuToShow", resetMenuToShow)
+                
+                let menuToShow = resetMenuToShow === true ? 'singleList' : menuComponent
+                
+                console.log("TCL: SideBar -> renderSideBar -> resetMenu", resetMenu)
+
+              
+                console.log("TCL: SideBar -> renderSideBar -> this.props", this.props)
+                
+                //  menuComponent = resetMenu === true ?   'singleList' : menuComponent 
+                                    
+                // resetMenu === true 
                 
                 return (
                     <Fragment>
@@ -163,16 +207,23 @@
                                 </div>
                                 
                                 <div className="xpl-appSideBarLinksContainer" >
+
+                                
                                     { 
-                                        menuComponent === 'singleList' && 
-                                        <SingleList currentMenu = {currentMenu} 
+
+                                    
+                                        // ? Check if the user clicked the Home Link
+                                        //? Render Normal Menu
+                                        menuToShow === 'singleList' && 
+                                        <SingleList currentMenu = {resetMenuToShow === true ? this.props.categories : currentMenu   } 
                                                     onClick = {this.onListItemClick}
                                                     key = {'Single-List'}
                                                     hideMobileMenu = {(e) => showMobileMenu === true && this.props.onClick(e)}
                                         /> 
                                     }
                                     { 
-                                        menuComponent === 'detailsList' && 
+                                        // ? Sub Menu
+                                        menuToShow === 'detailsList' && 
                                                     <DetailsList  
                                                         currentMenu = {currentMenu} 
                                                         currentCategory = {currentCategory} 

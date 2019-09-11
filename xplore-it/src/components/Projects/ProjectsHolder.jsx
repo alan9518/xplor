@@ -81,7 +81,7 @@
                                 <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                     <LazyLoadComponent>
                                         <ProjectCard 
-                                                key = {product.partID} 
+                                                key = { `card-${product.partID}`} 
                                                 hasSmallDescription={true}  
                                                 projectColor = {product.color}
                                                 onClick = {this.getCategoryID}

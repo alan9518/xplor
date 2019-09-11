@@ -15,7 +15,7 @@
 // Create Functional Component
 // --------------------------------------
     const SingleButton = (props) => {
-        const {buttonText, value, onClick,  wideButton, buttonName} = props;
+        const {buttonText, value, onClick,  wideButton, buttonName, blockButton} = props;
         // const disabledClass = !disbaledButton && '.xpl-disabledLink';
 
         const classNames = wideButton ? 'xpl-singleButton xpl-wideButton' : 'xpl-singleButton'
@@ -26,6 +26,7 @@
                 className = {classNames}
                 value = {value}
                 name = {buttonName}
+                disabled = {blockButton}
             >
                 {buttonText}
             </button>

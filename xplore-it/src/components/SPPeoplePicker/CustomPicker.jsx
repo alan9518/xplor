@@ -8,7 +8,7 @@
 // --------------------------------------
 // Get Dependences
 // --------------------------------------
-    import React, { Component, Fragment } from 'react';
+    import React, { Component } from 'react';
     import axios from 'axios'
     import PropTypes from 'prop-types';
 // --------------------------------------
@@ -47,11 +47,7 @@
 
 
 
-            handleKeyPress = (event) => {
-                console.log("TCL: CustomPicker -> handleKeyPress -> event", event)
-                // const {tar}
-            }
-
+        
 
 
         /* ==========================================================================

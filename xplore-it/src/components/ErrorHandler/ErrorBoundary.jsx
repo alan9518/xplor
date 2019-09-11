@@ -13,6 +13,7 @@
     import React, { Component } from 'react';
     import {MaterialButton} from '../../components';
     import { Config } from '../../Config';
+ 
 
 // --------------------------------------
 // Create Component
@@ -25,7 +26,8 @@
         constructor(props) {
             super(props);
             this.state = {
-                hasError: false
+                hasError: false,
+                messageError : props.messageError || ''
             };
         }
 
@@ -35,7 +37,9 @@
         // log the error to an error reporting service
         // --------------------------------------
         componentDidCatch(error, info) {
-            this.setState({ hasError: true });
+            console.log("TCL: ErrorBoundary -> componentDidCatch -> info", info)
+            console.log("TCL: ErrorBoundary -> componentDidCatch -> error", error)
+            this.setState({ hasError: true , messageError : error || info });
         }
 
         // --------------------------------------
@@ -59,6 +63,7 @@
                     <div className="pti-errorContainer">
                         <div className="pti-errorImageContain">
                             <img src="https://flextronics365.sharepoint.com/sites/project_intake/ProjectIntake/assets/oops.png" alt="Error" className="pti-erroImage"/>
+                            {}
                         </div>
 
                         <div className="pti-buttonContainer">

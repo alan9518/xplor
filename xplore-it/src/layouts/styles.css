@@ -22,1196 +22,1585 @@
     1.0 GENERAL STYLES	
 ----------------------------------------------------- */
 
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    html, body, .App {
-        width: 100%;
-        height: 100%;
-        min-height: 100vh;
-        background-color: #F2F3F8;
-        /* font-family: 'Lato', sans-serif; */
-    }
+html, body, .App {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    background-color: #F2F3F8;
+    /* font-family: 'Lato', sans-serif; */
+}
 
-    .App {
-        display: -ms-flexbox;
-        display: flex;
-        flex-direction: row;
-    }
+.App {
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+}
 
-    .column {
-        display: -ms-flexbox;
-        display: flex;
-        -moz-box-direction: column;
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
-    }
+.column {
+    display: -ms-flexbox;
+    display: flex;
+    -moz-box-direction: column;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
 
-    .xpl-content {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        box-sizing: border-box;
-        transition: all .3s ease-out;
-    }
-
-
-    .xpl-content .xpl-fullWidth {
-        margin-left: -270px;
-    }
+.xpl-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: all .3s ease-out;
+}
 
 
+.xpl-content .xpl-fullWidth {
+    margin-left: -270px;
+}
 
-    .xpl-shadow {
-        box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);
-    }
 
 
-    .xpl-appCategory {
-        /* font-family: 'ITC Avant Garde'; */
-        font-family: 'tex_gyre_adventorregular';
+.xpl-shadow {
+    box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);
+}
 
-    }
 
-    p {
-        font-family: 'Arimo', sans-serif;
-        color: #6c757d;
-    }
+.xpl-appCategory {
+    /* font-family: 'ITC Avant Garde'; */
+    font-family: 'tex_gyre_adventorregular';
 
-    h2, h3, h4, h5 {
-        /* font-family: 'ITC Avant Garde'; */
-        font-family: 'tex_gyre_adventorregular'
-    }
+}
 
-    .display-block {
-        display: block;
-    }
+p {
+    font-family: 'Arimo', sans-serif;
+    color: #6c757d;
+}
+
+h2, h3, h4, h5 {
+    /* font-family: 'ITC Avant Garde'; */
+    font-family: 'tex_gyre_adventorregular'
+}
+
+.display-block {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}
+
+.xpl-fieldItem {
+    text-align: justify;
+    white-space: pre-line;      /* Webkit */    
+    white-space: -moz-pre-line; /* Firefox */     
+    white-space: -pre-line;     /* Opera <7 */    
+    white-space: -o-pre-line;   /* Opera 7 */     
+    word-wrap: break-word;      /* IE */ 
+    margin-bottom: 25px;
+}
+
+.xpl-blueToggle {
+    background-color: #1197D3;
+}
+
+.xpl-headerContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 0 10px 10px 0;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.xpl-buttonCenterContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
     
-    .display-none {
-        display: none;
-    }
-
-    .xpl-fieldItem {
-        text-align: justify;
-        white-space: pre-line;      /* Webkit */    
-        white-space: -moz-pre-line; /* Firefox */     
-        white-space: -pre-line;     /* Opera <7 */    
-        white-space: -o-pre-line;   /* Opera 7 */     
-        word-wrap: break-word;      /* IE */ 
-        margin-bottom: 25px;
-    }
-
-    .xpl-blueToggle {
-        background-color: #1197D3;
-    }
-
-    .xpl-headerContainer {
-        display: flex;
-        flex-direction: row;
-        padding: 0 10px 10px 0;
-        width: 100%;
-        align-items: center;
-        justify-content: space-around;
-    }
-
-    .xpl-buttonCenterContainer {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        width: 100%;
-    }
+}
 
 
-    .xpl-controlDisabled {
-        pointer-events: none;
-    }
-      
-      
-    .xpl-controlEnabled {
-        pointer-events: all;
-    }
+.xpl-controlDisabled {
+    pointer-events: none;
+}
+  
+  
+.xpl-controlEnabled {
+    pointer-events: all;
+}
 
 
 
 /* ---------------------------------------------------
-    2.0 NAVBAR STYLES
+2.0 NAVBAR STYLES
 ----------------------------------------------------- */
 
 
-    .xpl-appHeader {
-        background-color: #000;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-    }
+.xpl-appHeader {
+    background-color: #000;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
 
-    .xpl-appLogo {
-        /* width: 80px; */
-        width: 140px;
-        height: auto;
-    }
+.xpl-appLogo {
+    /* width: 80px; */
+    width: 140px;
+    height: auto;
+}
 
-    li.nav-item.active.xpl-userProfileLink {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
+li.nav-item.active.xpl-userProfileLink {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
-    .xpl-userName {
-        font-size: 1.1em;
-        font-weight: 100;
-        /* font-family: 'ITC Avant Garde'; */
-        font-family: 'tex_gyre_adventorregular';
-    }   
+.xpl-userName {
+    font-size: 1.1em;
+    font-weight: 100;
+    /* font-family: 'ITC Avant Garde'; */
+    font-family: 'tex_gyre_adventorregular';
+}   
 
 
-    .xpl-userImageMin {
-        width: 45px;
-        height: auto;
-        border: .25rem solid transparent;
-    }
+.xpl-userImageMin {
+    width: 45px;
+    height: auto;
+    border: .25rem solid transparent;
+}
 
-    .xpl-rounded {
-        border-radius: 50%!important;
-    }
-    
+.xpl-rounded {
+    border-radius: 50%!important;
+}
 
-      
-    span.xpl-subTitle {
-        font-size: 16px;
-        position: absolute;
-        bottom: 14px;
-        left: 130px;
-        color: hsla(0,0%,100%,.5);
-    }
+
+  
+span.xpl-subTitle {
+    font-size: 16px;
+    position: absolute;
+    bottom: 14px;
+    left: 130px;
+    color: hsla(0,0%,100%,.5);
+}
 
 
 
 /* ---------------------------------------------------
-    3.0 SIDEBAR STYLES
+3.0 SIDEBAR STYLES
 ----------------------------------------------------- */
-    .xpl-appSideBar {
-        flex: 1 0 300px;
-        flex-shrink: 0;
-        overflow-x: hidden;
-        background-color: #fff;
-        box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
-        transition: all .3s ease-out;
-        min-height: 100vh;
-    }
+.xpl-appSideBar {
+    flex: 1 0 300px;
+    flex-shrink: 0;
+    overflow-x: hidden;
+    background-color: #fff;
+    box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+    transition: all .3s ease-out;
+    min-height: 100vh;
+}
 
-    .xpl-appSideBarHeader {
-        display: flex;
-        flex-direction: column;
-        padding: 0px 10px 5px 0;
-    }
+.xpl-appSideBarHeader {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px 5px 0;
+    /* height: 9%; */
+}
 
-    .xpl-buttonCloseContainer {
+.xpl-buttonCloseContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+
+.xpl-toggleButton {
+    display: none;
+    transition: all .3s ease-out; 
+}
+
+.xpl-toggleButton i {
+    font-size: 1.2em;
+}
+
+.xpl-appSideBar .xpl-isCollapsed {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+}
+
+.xpl-appSideBarBody {
+    padding: 30px 10px 10px 10px;
+    position: fixed;
+    width: 310px;
+    height: 100%;
+}
+
+.xpl-searchContainer {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+button.xpl-button.xpl-closeButton {
+    padding: 10px;
+    padding-right: 12px;
+    font-size: 1.3em;
+    display: none;
+}
+
+.xpl-appSideBarLinksContainer {
+    position: relative;
+    overflow-y: auto;
+    height: 790px;
+}
+
+.xpl-appSideBarTitleContainer {
+    width: 100%;
+    display: block;
+}
+
+.xpl-appSideBarTitle {
+    color: #686868;
+    line-height: 30px;
+    font-size: 28px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 12px;
+}
+
+.xpl-appSideBar .xpl-linksList li {
+    list-style: none;
+    text-align: justify;
+    display: flex;
+    flex-direction: row;
+    font-weight: 200;
+    /* font-family: 'ITC Avant Garde'; */
+    font-family: 'tex_gyre_adventorregular';
+    cursor: pointer;
+}
+
+/* span.xpl-linkText {
+    color: #000;
+    padding: 0 6px;
+    font-weight: 400;
+    text-transform: capitalize;
+    font-family: "ITC Avant Garde Gothic Medium","Segoe UI Light","Segoe UI","Segoe",Tahoma,Helvetica,Arial,sans-serif;
+} */
+
+.xpl-sidebarLinksContainer {
+    padding-left: 0px;
+    margin-bottom: 0;
+    margin-top: 0;   
+}
+
+.xpl-sidebarLink a {
+    width: 100%;
+}
+
+
+/* Links Animation */
+.xpl-sidebarLink:hover {
+    text-decoration : none;
+    background-color: #f2f2f2;
+}
+
+.xpl-sidebarLink a:hover {
+    text-decoration: none;
+}
+
+.xpl-iconContainer {
+    width: 100%;
+    display: flex;
+    padding: 10px 10px 10px 0;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.xpl-iconHolder {
+    display: block;
+    /* width: 30px; */
+    height: auto;
+    /* padding: 7px 5px; */
+    margin-right: 5px;
+}
+
+.xpl-iconHolder i {
+    color: #fff;
+    text-align: center;
+    display: block;
+}
+
+span.xpl-linkText {
+    color: #000;
+    padding: 0px 6px;
+    text-decoration: none;
+    text-transform : capitalize;
+}
+
+span .xpl-linksList:hover {
+    text-decoration: none;
+}
+
+/* Details List */
+.xpl-appSidebarTitleContainer, .xpl-appSideBarSubCat  {
+    padding: 8px 12px;
+}
+
+button.xpl-button.xpl-backButton {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    vertical-align: middle;
+    align-items: baseline;
+}
+
+button.xpl-button.xpl-backButton i{
+    font-size: 24px;
+    color: #fff;
+    position: absolute;
+    left: 5px;
+    top: 15px;
+}
+
+
+.xpl-appSidebarTitleContainer span {
+    color: #6c757d;
+    font-size: 13px;
+}
+
+.xpl-breadcumbsContainer a {
+    text-decoration: none;
+    color: #2f323e;
+}
+
+.xpl-errorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 22px;
+}
+
+.xpl-buttonContainer {
+    padding-top: 10px;
+}
+
+.xpl-boldText {
+    font-weight: 600;
+}
+
+.xpl-subText {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 0.70rem !important;
+    font-weight: 300;
+    color: dimgray;
+
+}
+
+.s-alert-top {
+    top: 60px !important;
+}
+
+/* ---------------------------------------------------
+4.0 CONTENT STYLES
+----------------------------------------------------- */
+
+/* ==========================================================================
+ *  HOME STYLES
+ ========================================================================== */
+
+.xpl-carrouselRow {
+    margin-bottom: 24px;
+}
+
+.xpl-buttonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 0px;
+}
+
+
+
+.xpl-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+
+i.xpl-iconLeft {
+    margin-right: 8px;
+}
+
+.xpl-addNewAppButton, .xpl-toggleButton {
+    padding: 20px 7px;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.xpl-button.xpl-addNewAppButton i {
+    margin-left: 8px;
+}
+
+
+.xpl-row {
+    padding-left: 16px;
+    padding-right:16px; 
+}
+
+
+.xpl-allAppTitle {
+    margin-bottom: 16px;
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.xpl-breadcumbsContainer {
+    padding-left: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.xpl-breadLinksContainer {
+    display: flex;
+    flex-direction: row;
+    /* width: 75%; */
+    width: 100%;
+    align-items: center;
+}
+
+
+h4.xpl-breadChild {
+
+    display: flex;
+    flex-direction: row;
+    padding: 0 8px 8px;
+    font-weight: 600;
+    cursor: pointer;
+    line-height: 20px;
+    font-size: 20px;
+    justify-content: flex-start;
+    width: auto;
+
+}
+
+.xpl-breadSeparator {
+    font-size: 18px;
+    line-height: 30px;
+    height: 38px;
+}
+
+
+
+
+/* ==========================================================================
+ *  FORM STYLES
+ ========================================================================== */
+
+    .xpl-formSubmitContainer {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
+        margin-top: 20px;
     }
 
-
-    .xpl-toggleButton {
-        display: none;
-        transition: all .3s ease-out; 
-    }
-
-    .xpl-toggleButton i {
-        font-size: 1.2em;
-    }
-
-    .xpl-appSideBar .xpl-isCollapsed {
-        -webkit-transform: translateX(-100%);
-                transform: translateX(-100%);
-    }
-
-    .xpl-appSideBarBody {
-        padding: 30px 10px 10px 10px;
-        position: fixed;
-        width: 310px;
-    }
-
-    .xpl-searchContainer {
-        width: 100%;
-        margin-bottom: 15px;
-    }
-
-    button.xpl-button.xpl-closeButton {
-        padding: 10px;
-        padding-right: 12px;
-        font-size: 1.3em;
-        display: none;
-    }
-
-    .xpl-appSideBarLinksContainer {
-        position: relative;
-        overflow-y: scroll;
-        height: 790px;
-    }
-
-    .xpl-appSideBarTitleContainer {
-        width: 100%;
-        display: block;
-    }
-
-    .xpl-appSideBarTitle {
-        color: #686868;
-        line-height: 30px;
-        font-size: 28px;
-        text-align: center;
-        margin-top: 10px;
-        margin-bottom: 12px;
-    }
-
-    .xpl-appSideBar .xpl-linksList li {
-        list-style: none;
-        text-align: justify;
+    .col-md-7.xpl-newCatButton .xpl-sidebarButton {
         display: flex;
-        flex-direction: row;
-        font-weight: 200;
-        /* font-family: 'ITC Avant Garde'; */
-        font-family: 'tex_gyre_adventorregular';
-        cursor: pointer;
-    }
-
-    /* span.xpl-linkText {
-        color: #000;
-        padding: 0 6px;
-        font-weight: 400;
-        text-transform: capitalize;
-        font-family: "ITC Avant Garde Gothic Medium","Segoe UI Light","Segoe UI","Segoe",Tahoma,Helvetica,Arial,sans-serif;
-    } */
-
-    .xpl-sidebarLinksContainer {
-        padding-left: 0px;
-        margin-bottom: 0;
-        margin-top: 0;   
-    }
-
-    .xpl-sidebarLink a {
-        width: 100%;
-    }
-
-
-    /* Links Animation */
-    .xpl-sidebarLink:hover {
-        text-decoration : none;
-        background-color: #f2f2f2;
-    }
-
-    .xpl-sidebarLink a:hover {
-        text-decoration: none;
-    }
-
-    .xpl-iconContainer {
-        width: 100%;
-        display: flex;
-        padding: 10px 10px 10px 0;
         flex-direction: row;
         justify-content: flex-start;
-        align-items: center;
     }
 
-    .xpl-iconHolder {
-        display: block;
-        /* width: 30px; */
-        height: auto;
-        /* padding: 7px 5px; */
-        margin-right: 5px;
+
+    .xpl-formSubmitContainer .xpl-materialButton {
+        margin: 9px 0px 9px 9px;
     }
 
-    .xpl-iconHolder i {
-        color: #fff;
-        text-align: center;
-        display: block;
+
+    .xpl-fieldSeparator {
+        position: relative;
+        font-size: 1.05rem !important;
+        padding-bottom : 10px;
+        margin-top: 15px;
+        border-bottom: 2px solid #f3f3f3 !important;
     }
 
-    span.xpl-linkText {
-        color: #000;
-        padding: 0px 6px;
-        text-decoration: none;
-        text-transform : capitalize;
-    }
 
-    span .xpl-linksList:hover {
-        text-decoration: none;
-    }
-
-    /* Details List */
-    .xpl-appSidebarTitleContainer, .xpl-appSideBarSubCat  {
-        padding: 8px 12px;
-    }
-
-    button.xpl-button.xpl-backButton {
-        width: 100%;
-        text-align: left;
+    .xpl-editButtonContainer {
         display: flex;
         flex-direction: row;
-        justify-content: start;
-        vertical-align: middle;
-        align-items: baseline;
-    }
-
-    button.xpl-button.xpl-backButton i{
-        font-size: 24px;
-        color: #fff;
-        position: absolute;
-        left: 5px;
-        top: 15px;
-    }
-
-
-    .xpl-appSidebarTitleContainer span {
-        color: #6c757d;
-        font-size: 13px;
-    }
-
-    .xpl-breadcumbsContainer a {
-        text-decoration: none;
-        color: #2f323e;
-    }
-
-    .xpl-errorContainer {
-        display: flex;
-        flex-direction: column;
+        width: 100%;
+        justify-content: flex-start;
+        padding: 10px;
         align-items: center;
-        padding-top: 22px;
     }
 
-    .xpl-buttonContainer {
-        padding-top: 10px;
+
+    .xpl-editButtonContainerEnd {
+        justify-content: flex-end !important;
     }
 
-    .xpl-boldText {
-        font-weight: 600;
+    .xpl-editButtonContainer h2 {
+        margin-left: 0;
+        margin-right: auto;
     }
 
-    .xpl-subText {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        font-size: 0.70rem !important;
-        font-weight: 300;
-        color: dimgray;
+    li.xpl-detailsListItem {
+        padding: 5px;
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        /* justify-content: space-between; */
+        width: 100%;
+        word-break: break-all;
+        align-items: center;
     }
 
-    .s-alert-top {
-        top: 60px !important;
+    li.xpl-detailsListItem  i {
+        margin-right: 10px;
     }
 
-/* ---------------------------------------------------
-    4.0 CONTENT STYLES
------------------------------------------------------ */
 
-    /* ==========================================================================
-     *  HOME STYLES
-     ========================================================================== */
-
-    .xpl-carrouselRow {
-        margin-bottom: 24px;
-    }
-
-    .xpl-buttonContainer {
+    .xpl-keyWordListItem {
+        padding: 5px;
+        list-style: none;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 20px 0px;
-    }
-
-
-
-    .xpl-button {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-    }
-
-
-    i.xpl-iconLeft {
-        margin-right: 8px;
-    }
-
-    .xpl-addNewAppButton, .xpl-toggleButton {
-        padding: 20px 7px;
-        font-size: 1.2em;
-        font-weight: 600;
-    }
-
-    .xpl-button.xpl-addNewAppButton i {
-        margin-left: 8px;
-    }
-
-
-    .xpl-row {
-        padding-left: 16px;
-        padding-right:16px; 
-    }
-
-
-    .xpl-allAppTitle {
-        margin-bottom: 16px;
-        margin-top: 16px;
-        font-weight: 600;
-    }
-
-    .xpl-breadcumbsContainer {
-        padding-left: 8px;
-        margin-bottom: 20px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-    }
-
-    .xpl-breadLinksContainer {
-        display: flex;
-        flex-direction: row;
-        /* width: 75%; */
         width: 100%;
+        word-break: break-all;
         align-items: center;
     }
 
-
-    h4.xpl-breadChild {
-
-        display: flex;
-        flex-direction: row;
-        padding: 0 8px 8px;
-        font-weight: 600;
-        cursor: pointer;
-        line-height: 20px;
-        font-size: 20px;
-        justify-content: flex-start;
-        width: auto;
-
+    li.xpl-keyWordListItem i {
+        /* cursor: pointer; */
     }
 
-    .xpl-breadSeparator {
-        font-size: 18px;
-        line-height: 30px;
-        height: 38px;
+
+    a:visited {
+        color: #0099dd;
+    }
+
+    input.xpl-fieldEditInput, textarea.xpl-fieldEditInput, button.xpl-fieldEditInput {
+        width: 100%;
+        padding: 7px 5px;
+        background: #F6F7F9;
+        border: none;
+        outline: none;
+        border-radius: 2px;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+
+
+    textarea.xpl-fieldEditInput {
+        padding: 5px 10px;
+    }
+
+    input.xpl-fieldEditInput {
+        padding: 5px 10px;
+    }
+
+
+    .product-brand {
+        margin-top: 10px;
     }
     
+    .product-brand .search-content {
+        display: block;
+        margin-bottom: 0px;
+        padding: 10px 0;
+    }
+    
+    .product-brand .search-content .search-content-area {
+        margin-bottom: 0px;
+    }
+    
+    .product-brand .search-content:last-child {
+        display: block;
+        margin-bottom: 0px;
+    }
+
+
+    .xpl-checkListContainer {
+        margin-top: 10px;
+        width: 100%;
+        background: #f6f7f9;
+        height: 400px;
+        overflow-y: scroll;
+        padding: 10px 20px;
+    }
 
 
 
-    /* ==========================================================================
-     *  FORM STYLES
-     ========================================================================== */
 
-        .xpl-formSubmitContainer {
+/* ==========================================================================
+** Custom DatePicker
+** ========================================================================== */
+
+.DateInput__small {
+    width: 130px;
+}
+
+.DayPicker {
+    background: #fff;
+    position: relative;
+    text-align: left;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.SingleDatePickerInput {
+    background-color: transparent;
+    border: none;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: row ;
+    align-items: center !important;
+    padding: 0 0px 0 20px !important;
+    justify-content: space-between !important;
+    line-height: 3 !important;
+}
+
+
+.DateInput {
+    background-color: transparent !important;
+}
+
+
+.SingleDatePicker {
+    background: #F6F7F9 !important;
+    width: 100% !important;
+}
+
+.SingleDatePicker.SingleDatePicker_1 {
+    width: 100%;
+}
+
+.DateInput_input, .DateInput_input__focused {
+    width: 100% !important;
+    padding: 5px !important;
+    background: #F6F7F9 !important;
+    border: none !important;
+    outline: none !important;
+    border-radius: 2px !important;
+    font-weight: 400 !important;
+    margin-bottom: 10px !important;
+    
+    
+    
+}
+
+/* .DateInput_input__focused {
+    background-color: #f3f3f3 !important;
+} */
+
+.SingleDatePickerInput_calendarIcon_svg {
+    fill: #0099dd !important;
+}
+
+.DateInput_input__focused {
+    border-bottom: 2px solid #0099dd;
+}
+
+.CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover {
+    background: #0099dd;
+    border: 1px double #0099dd;
+    color: #fff;
+}
+
+
+/* ==========================================================================
+** Custom React Select
+** ========================================================================== */
+
+.react-select__control {
+    width: 100%;
+    background: #f6f7f9;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    margin-bottom: 10px;
+}
+
+
+/* ==========================================================================
+** Custom People Picker
+** ========================================================================== */
+    
+.xpl-peoplePicker.form-control.int-textInput {
+    background-color: #f6f7f9 !important;
+    border: none !important;
+}
+
+div.sp-peoplepicker-topLevel {
+    background-color: transparent;
+    border: none !important;
+    width: 100% !important;
+    padding: 8px !important;
+}
+
+/* .sp-peoplepicker-initialHelpText {
+    top: 9px !important;
+    left: 16px !important;
+    font-size: 16px !important;
+} */
+
+.sp-peoplepicker-initialHelpText {
+    top: 0px!important;
+    left: 16px!important;
+    font-size: 16px!important;
+}
+
+div.sp-peoplepicker-topLevel {
+
+    text-align: center;
+    font-size: 16px;
+}
+
+.sp-peoplepicker-autoFillContainer {
+    z-index: 2;
+    max-width: 100% !important;
+    min-width: 100% !important;
+
+}
+
+
+.xpl-peoplePicker {
+    background: #f6f7f9;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+
+    
+/* ---------------------------------------------------
+5.0 ANIMATIONS STYLES	
+----------------------------------------------------- */
+
+.xpl-appSideBar.showMobileMenu {
+    -webkit-transform: translateX(0%);
+                transform: translateX(0%);
+    z-index: 10000;
+    flex: 1 0 100%;
+}
+
+
+/* ---------------------------------------------------
+6.0 USER PROFILE STYLES	
+----------------------------------------------------- */
+.xpl-profileContainer {
+    margin-top: 60px;
+}
+
+.container-fluid.xpl-profileContainer h2 {
+    margin-bottom: 32px;
+}
+
+
+
+
+li.xpl-keyWordListItem span {
+    margin-right: auto;
+    margin-left: 5px;
+}
+
+
+
+/* ---------------------------------------------------
+7.0 RESPONSIVE STYLES	
+    Hide The SideBar and Displace Body
+----------------------------------------------------- */
+
+@media only screen and (min-width : 1280 ) and (max-width :1920) {
+       /* Scroll */
+       .xpl-appSideBarLinksContainer {
+        position: relative;
+        overflow-y: auto;
+        /* height: 400px; */
+        height: 83%;
+    }
+
+}
+
+
+/* ==========================================================================
+*  1280 to 1440px
+   ========================================================================== */
+    @media only screen and (min-width:1025px) and (max-width : 1440px) {
+
+        /* .xpl-cardContainer .xpl-mediumCard .xpl-shadow.xpl-cardContainer.xpl-mediumCard.xpl-shadow {
             display: flex;
-            flex-direction: row;
-            justify-content: flex-end;
+            flex-direction: column;
+        } */
+
+        .xpl-projectsContainer .xpl-cardHeader {
+            padding: 12px;
+            max-height: 110px;
+            min-height: 110px;
+        }
+
+        h5.xpl-productScopeCard {
+            font-size: 12px!important;
+            margin-top: 5px;
+        }
+
+        .xpl-cardHeader i {
+            font-size: 40px;
+            padding-top: 16px;
+            opacity: .5;
+            line-height: 40px;
+            padding-bottom: 16px;
+        }
+        
+
+        .xpl-cardName {
+            max-width: 165px;       
+        }
+
+
+        .xpl-longCard .xpl-cardName {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
+
+        .xpl-projectsContainer .xpl-cardName h5 {
+            margin-left: 0;
+            font-size: 17px;
+        }
+
+        .xpl-projectsContainer  .xpl-cardDescription {
+            min-height: 90px;
+            max-height: 190px;
+            font-size: 16px;
+        }
+
+
+
+        /* Scroll */
+        .xpl-appSideBarLinksContainer {
+            position: relative;
+            overflow-y: auto;
+            /* height: 645px; */
+            height: 83%;
+        }
+
+    }
+
+
+/* ==========================================================================
+*  Mobile 
+   ========================================================================== */
+    @media only screen and (max-width:768px) {
+
+        .App.xpl-mainContainer {
+            /* margin-top: 32px; */
+            margin-top: 60px;
+        }
+
+        .xpl-content.main .container-fluid {
+            padding: 0 7px;
+            margin: 0;
+        }
+
+        .xpl-buttonContainer {
+            padding: 20px 4px;
+        }
+
+        .xpl-appSideBar {
+            -webkit-transform: translateX(-100%);
+                    transform: translateX(-100%);
+        }
+
+        .xpl-appSideBarBody {
+            padding: 5px;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
+        
+        button.xpl-button.xpl-closeButton {
+            display: block;
+            text-align: end;
+        }
+
+        .xpl-appSideBarLinksContainer {
+            padding: 10px 0px 0 5px;
+        }
+
+        .xpl-content  {
+            margin-left: -300px;
+        }
+
+        .xpl-toggleButton {
+            display: block;
+            transition: all .3s ease-out;
+            text-align: left;
+        }
+
+        .xpl-cardContainer {
+            margin-bottom: 24px;
+        }
+
+        
+        .xpl-mediumCard {
+            max-width: 480px;
+            width: 100%;
+        } 
+
+
+        button.xpl-button.xpl-backButton i {
+            left: 24px;
+            top: 132px;
+        }
+
+        .xpl-cardWideHeader {
+            justify-content: flex-start;
+            width: 100%;
+            flex-flow: column wrap;
+        }
+
+        
+
+        .xpl-cardWideHeader .xpl-cardHeader {
+            min-width: 280px;
+            height: auto;
+            padding: 16px 0 !important;
+        }
+
+    
+
+        .xpl-cardProjectInfo {
+            /* margin-top: 12px; */
+            margin-left: 0px;
+            align-items: flex-start;
+            padding: 0;
+        }
+
+        .xpl-cardProjectInfo ul li {
+            padding: 7px 2px;
+        }
+
+        .xpl-relatedListApps {
             margin-top: 20px;
         }
 
-        .col-md-7.xpl-newCatButton .xpl-sidebarButton {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
+        .xpl-relatedListApps > h5{
+            font-weight: 600;
         }
 
 
-        .xpl-formSubmitContainer .xpl-materialButton {
-            margin: 9px 0px 9px 9px;
+
+        p.xpl-cardProjectCardOverview {
+            padding-left: 0;
+        }
+
+        .xpl-relatedContainer {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .xpl-allAppTitle {
+            text-align: center;
+        }
+
+        .xpl-loaderContainer {
+            justify-content: flex-start;
+            margin-top: 12px;
+        }
+
+        .xpl-wideCard {
+            padding: 8px;
+        }
+
+        .xpl
+
+        h4.xpl-erroMessage {
+            font-size: 30px;
+        }
+
+        span.xpl-subTitle {
+            font-size: 14px;
+            bottom: 56px;
+            color: hsla(0,0%,100%,.5);
+        }
+        
+
+
+        /*  ==========================================================================
+         *  Responsive Modal
+            ========================================================================== */
+
+        section.xpl-appModal-main{
+            width: 90%;
+            max-width: 100%;
+            height: 90%;
+            max-height: 100%;
+        }
+
+        .xpl-modalBodyScroll {
+            padding: 10px;
+        }
+
+        .xpl-formSubmitContainer {
+            justify-content: center;
+        }
+
+        .xpl-tabLeftArrow {
+            top: 30px;
+            left: 20px;
+        }
+
+        .xpl-tabRightArrow {
+            top: 30px;
+            right: 15px;
+        }
+    
+        .xpl-tabArrow {
+            position: absolute;
+            font-size: 27px;
+            z-index: 1000;
+        }
+
+
+        /*  ==========================================================================
+         *   Responsive Carrousel
+            ========================================================================== */
+
+
+            button.slick-arrow {
+                z-index: 2000;
+                width: 30px;
+            }
+
+            .slick-next {
+                right: 0px;
+                z-index: 2000;
+            }
+
+            .slick-prev, .slick-next {
+                top: 43%;
+            }
+
+
+        /*  ==========================================================================
+        *  Responsive Tabs
+            ========================================================================== */
+        
+        
+        .react-tabs__tab {
+            max-width: 70px;
+            padding: 20px;
+        }
+
+
+        /* ==========================================================================
+        *  Responsive Breadcumbs
+        ========================================================================== */
+        .xpl-breadcumbsContainer {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .xpl-breadLinksContainer {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
+    
+
+        .xpl-breadcumbsContainer a {
+            text-decoration: none;
+            color: #2f323e;
+        }
+
+        h4.xpl-breadChild {
+            font-size: 17px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .xpl-cardOverviewContainer {
+            margin-top: 16px;
+            padding: 15px;
+        }
+    
+    }
+
+/* ==========================================================================
+*  Ipad 
+========================================================================== */
+
+    @media only screen and (min-width:768px) and (max-width : 1024px) {
+        .xpl-relatedListApps {
+            margin-top: 20px;
+        }
+
+        .xpl-mediumCard {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .xpl-cardImage {
+            padding: 8px 12px;
+        }
+
+        .react-tabs__tab {
+            position: relative;
+            display: inline-flex;
+            flex: 0 0 auto;
+            max-width: 100px;
+            padding: 20px;
+        }
+
+
+        /* ---------------------------------------------------
+            BreadCumbs Fix
+        ----------------------------------------------------- */
+
+            .xpl-breadLinksContainer {
+                width: 100%;
+            }
+
+            h4.xpl-breadChild {
+                font-size: 22px;
+                line-height: 22px;
+            }
+
+
+        /* ---------------------------------------------------
+            Related Products Fix
+        ----------------------------------------------------- */
+            .xpl-relatedContainer {
+                justify-content: flex-start;
+            }
+
+
+    }   
+
+
+
+
+/* ==========================================================================
+*  Device Pixel Ratio of  1.25 === 125%
+========================================================================== */
+
+    @media only screen and  (-Webkit-min-device-pixel-ratio: 1.25)        
+    {
+
+        .xpl-appSideBar {
+            flex: 1 0 250px;
+            flex-shrink: 0;
+            overflow-x: hidden;
+            background-color: #fff;
+            box-shadow: 1px 0 20px rgba(0,0,0,.08);
+            -webkit-transition: all .3s ease-out;
+            transition: all .3s ease-out;
+            min-height: 100vh;
+        }
+
+        .xpl-appSideBarBody {
+            padding: 30px 10px 10px;
+            position: fixed;
+            width: 260px;
+            height: 100%;
+        }
+
+        span.nav-link.xpl-userName {
+            font-size: 16px;
+        }
+
+        .xpl-appLogo {
+            width: 110px;
+            height: auto;
+        }
+
+        span.xpl-subTitle {
+            font-size: 14px;
+            bottom: 17px;
+            left: 105px;
+            
+        }
+
+        .xpl-appSideBarLinksContainer {
+            position: relative;
+            overflow-y: auto;
+            height: 83%;
+        }
+
+        .xpl-appSideBar .xpl-linksList li {
+            font-size: 14px;
+            text-align: left;
+        }
+
+
+        .xpl-allAppTitle {
+            font-size: 22px;
+        }
+
+        button.xpl-button {
+            font-size: 15px;
+        }
+
+        .xpl-cardName h5 {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        h5.xpl-productScopeCard {
+            font-size: 14px!important;
+        }
+
+        .slick-slider .xpl-cardHeader {
+            height: 130px;
+        }
+
+        .xpl-cardHeader i {
+            font-size: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        .xpl-cardHeader.cardHover.xpl-squareCard {
+            min-height: 160px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        
+        }
+
+        .xpl-projectsContainer .xpl-cardHeader {
+            padding: 8px;
+            max-height: 110px;
+            min-height: 110px;
+        }
+
+
+        .xpl-projectsContainer .xpl-cardName h5 {
+            margin-left: 0;
+            font-size: 14px;
+        }
+
+
+        .xpl-longCard .xpl-cardName h5 {
+            font-size: 21px;
+            text-align: center;
+        }
+
+        .xpl-mediumCard .xpl-cardName {
+            max-width: 100%;
+            width: auto;
+        }
+
+        .xpl-longCard h5.xpl-productScopeCard {
+            width: 100%;
+            text-align: center;
+            font-size: 16px!important;
+        }
+
+        h5.xpl-productScopeCard {
+            width: 100%;
+            text-align: center;
+        }
+
+        h5.xpl-productScopeCard {
+            font-size: 11px !important;
+        }
+
+        
+        .xpl-projectsContainer .xpl-cardDescription {
+            min-height: 110px;
+            max-height: 150px;
+            font-size: 12px;
+        }
+
+
+
+        .xpl-cardDescription {
+            background-color: #fff;
+            padding: 8px 4px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            width: auto;
+            /* height: auto; */
+        }
+
+        .xpl-cardDescription p {
+            text-align: center;
+            font-size: 12px !important;
+        }
+
+        .xpl-cardDescription p.xpl-tooltip{
+            text-align: center;
+        }
+
+        .xpl-tooltip {
+            text-align: center;
         }
 
 
         .xpl-fieldSeparator {
-            font-size: 1.05rem !important;
-            padding-bottom : 10px;
-            margin-top: 15px;
-            border-bottom: 2px solid #f3f3f3 !important;
+            font-size: 14px !important;
+            padding-bottom: 10px;
         }
 
-
-        .xpl-editButtonContainer {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-            justify-content: flex-start;
-            padding: 10px;
-            align-items: center;
+        li.xpl-keyWordListItem span {
+            font-size: 14px;
         }
 
+        .xpl-wideButton {
+            font-size: 16px!important;
+        }
 
-        .xpl-editButtonContainerEnd {
-            justify-content: flex-end !important;
+        .xpl-separatorTitle {
+            font-size: 18px;
+        }
+
+        h4.xpl-breadChild {
+            line-height: 17px;
+            font-size: 17px;
+        }
+
+        .rc-tabs-top .rc-tabs-tab {
+            font-size: 12px;
         }
 
         .xpl-editButtonContainer h2 {
-            margin-left: 0;
-            margin-right: auto;
+            font-size: 30px;
         }
-
-        li.xpl-detailsListItem {
-            padding: 5px;
-            list-style: none;
-            display: flex;
-            flex-direction: row;
-            /* justify-content: space-between; */
-            width: 100%;
-            word-break: break-all;
-            align-items: center;
-        }
-
-        li.xpl-detailsListItem  i {
-            margin-right: 10px;
-        }
-
-
-        .xpl-keyWordListItem {
-            padding: 5px;
-            list-style: none;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 100%;
-            word-break: break-all;
-            align-items: center;
-        }
-
-        li.xpl-keyWordListItem i {
-            cursor: pointer;
-        }
-
-        input.xpl-fieldEditInput, textarea.xpl-fieldEditInput, button.xpl-fieldEditInput {
-            width: 100%;
-            padding: 7px 5px;
-            background: #F6F7F9;
-            border: none;
-            outline: none;
-            border-radius: 2px;
-            font-weight: 400;
-            margin-bottom: 10px;
-        }
-
-
-        textarea.xpl-fieldEditInput {
-            padding: 5px 10px;
-        }
-
-        input.xpl-fieldEditInput {
-            padding: 5px 10px;
-        }
-
-
-        .product-brand {
-            margin-top: 10px;
-        }
-        
-        .product-brand .search-content {
-            display: block;
-            margin-bottom: 0px;
-            padding: 10px 0;
-        }
-        
-        .product-brand .search-content .search-content-area {
-            margin-bottom: 0px;
-        }
-        
-        .product-brand .search-content:last-child {
-            display: block;
-            margin-bottom: 0px;
-        }
-
-
-        .xpl-checkListContainer {
-            margin-top: 10px;
-            width: 100%;
-            background: #f6f7f9;
-            height: 400px;
-            overflow-y: scroll;
-            padding: 10px 20px;
-        }
-
-
-
-
-    /* ==========================================================================
-    ** Custom DatePicker
-    ** ========================================================================== */
-
-    .DateInput__small {
-        width: 130px;
-    }
-
-    .DayPicker {
-        background: #fff;
-        position: relative;
-        text-align: left;
-        font-family: 'Roboto Mono', monospace;
-    }
-
-    .SingleDatePickerInput {
-        background-color: transparent;
-        border: none;
-        width: 100% !important;
-        display: flex !important;
-        flex-direction: row ;
-        align-items: center !important;
-        padding: 0 0px 0 20px !important;
-        justify-content: space-between !important;
-        line-height: 3 !important;
-    }
-
-  
-    .DateInput {
-        background-color: transparent !important;
-    }
-
-
-    .SingleDatePicker {
-        background: #F6F7F9 !important;
-        width: 100% !important;
-    }
-
-    .SingleDatePicker.SingleDatePicker_1 {
-        width: 100%;
-    }
-
-    .DateInput_input, .DateInput_input__focused {
-        width: 100% !important;
-        padding: 5px !important;
-        background: #F6F7F9 !important;
-        border: none !important;
-        outline: none !important;
-        border-radius: 2px !important;
-        font-weight: 400 !important;
-        margin-bottom: 10px !important;
-        
-        
-        
-    }
-
-    /* .DateInput_input__focused {
-        background-color: #f3f3f3 !important;
-    } */
-
-    .SingleDatePickerInput_calendarIcon_svg {
-        fill: #0099dd !important;
-    }
-
-    .DateInput_input__focused {
-        border-bottom: 2px solid #0099dd;
-    }
-
-    .CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover {
-        background: #0099dd;
-        border: 1px double #0099dd;
-        color: #fff;
-    }
-
-
-    /* ==========================================================================
-    ** Custom React Select
-    ** ========================================================================== */
-
-    .react-select__control {
-        width: 100%;
-        background: #f6f7f9;
-        border: none;
-        outline: none;
-        border-radius: 2px;
-        margin-bottom: 10px;
-    }
-
     
-    /* ==========================================================================
-    ** Custom People Picker
-    ** ========================================================================== */
+
+        /* button.xpl-singleButton {
+            font-size: 10px !important;
+        } */
+
+
+        .form-control {
+            font-size: 14px;
+        }
         
-    .xpl-peoplePicker.form-control.int-textInput {
-        background-color: #f6f7f9 !important;
-        border: none !important;
-    }
-    
-    div.sp-peoplepicker-topLevel {
-        background-color: transparent;
-        border: none !important;
-        width: 100% !important;
-        padding: 8px !important;
-    }
 
-    /* .sp-peoplepicker-initialHelpText {
-        top: 9px !important;
-        left: 16px !important;
-        font-size: 16px !important;
-    } */
+        .xpl-cardWideHeader .xpl-cardHeader .xpl-cardImage {
+            padding: 0 8px;
+            width: 100%;
+        }
 
-    .sp-peoplepicker-initialHelpText {
-        top: 0px!important;
-        left: 16px!important;
-        font-size: 16px!important;
-    }
+        .xpl-cardName {
+            max-width: 100%;
+            width: 100%;
+        }
 
-    div.sp-peoplepicker-topLevel {
-
-        text-align: center;
-        font-size: 16px;
-    }
-
-    .sp-peoplepicker-autoFillContainer {
-        z-index: 2;
-        max-width: 100% !important;
-        min-width: 100% !important;
-
-    }
-
-
-    .xpl-peoplePicker {
-        background: #f6f7f9;
-        border: none;
-        outline: none;
-        border-radius: 2px;
-        font-weight: 400;
-        margin-bottom: 10px;
-    }
-   
-
-        
-/* ---------------------------------------------------
-    5.0 ANIMATIONS STYLES	
------------------------------------------------------ */
-
-    .xpl-appSideBar.showMobileMenu {
-        -webkit-transform: translateX(0%);
-                    transform: translateX(0%);
-        z-index: 10000;
-        flex: 1 0 100%;
-    }
-
-
-/* ---------------------------------------------------
-    6.0 USER PROFILE STYLES	
------------------------------------------------------ */
-    .xpl-profileContainer {
-        margin-top: 60px;
-    }
-    
-    .container-fluid.xpl-profileContainer h2 {
-        margin-bottom: 32px;
-    }
-
-
-
-
-    li.xpl-keyWordListItem span {
-        margin-right: auto;
-        margin-left: 5px;
-    }
-
-  
-
-/* ---------------------------------------------------
-    7.0 RESPONSIVE STYLES	
-        Hide The SideBar and Displace Body
------------------------------------------------------ */
-
-    @media only screen and (min-width : 1280 ) and (max-width :1920) {
-           /* Scroll */
-           .xpl-appSideBarLinksContainer {
+        .xpl-resultsContainer {
+            padding: 10px 0 0 10px;
+            z-index: 2000;
             position: relative;
             overflow-y: scroll;
-            height: 400px;
+            max-height: 400px;
+            background-color: #fff;
         }
 
     }
 
 
-    /* ==========================================================================
-    *  1280 to 1440px
-       ========================================================================== */
-        @media only screen and (min-width:1025px) and (max-width : 1440px) {
 
-            /* .xpl-cardContainer .xpl-mediumCard .xpl-shadow.xpl-cardContainer.xpl-mediumCard.xpl-shadow {
-                display: flex;
-                flex-direction: column;
-            } */
+    /* @media only screen and  ( min-width: 568px) and (-webkit-min-device-pixel-ratio: 1.25),
+     only screen and ( min-width: 568px) and ( min-device-pixel-ratio: 1.25)
+    {
+            body{
+                background-color: #000;               
+            }               
+    } */
 
-            .xpl-projectsContainer .xpl-cardHeader {
-                padding: 12px;
-                max-height: 110px;
-                min-height: 110px;
-            }
+    @media all and  (-Webkit-min-device-pixel-ratio: 1.25) and (max-width: 1280px) 
+    {
 
-            h5.xpl-productScopeCard {
-                font-size: 12px!important;
-                margin-top: 5px;
-            }
 
-            .xpl-cardHeader i {
-                font-size: 40px;
-                padding-top: 16px;
-                opacity: .5;
-                line-height: 40px;
-                padding-bottom: 16px;
-            }
-            
-
-            .xpl-cardName {
-                max-width: 165px;       
-            }
-
-            .xpl-longCard .xpl-cardName {
-                max-width: 300px !important;
-            }
-
-            .xpl-projectsContainer .xpl-cardName h5 {
-                margin-left: 0;
-                font-size: 17px;
-            }
-
-            .xpl-projectsContainer  .xpl-cardDescription {
-                min-height: 90px;
-                max-height: 190px;
-                font-size: 16px;
-            }
-
-
-
-            /* Scroll */
-            .xpl-appSideBarLinksContainer {
-                position: relative;
-                overflow-y: scroll;
-                height: 645px;
-            }
-
-        }
-    
-
-    /* ==========================================================================
-    *  Mobile 
-       ========================================================================== */
-        @media only screen and (max-width:768px) {
-
-            .App.xpl-mainContainer {
-                /* margin-top: 32px; */
-                margin-top: 60px;
-            }
-
-            .xpl-content.main .container-fluid {
-                padding: 0 7px;
-                margin: 0;
-            }
-
-            .xpl-buttonContainer {
-                padding: 20px 4px;
-            }
-
-            .xpl-appSideBar {
-                -webkit-transform: translateX(-100%);
-                        transform: translateX(-100%);
-            }
-
-            .xpl-appSideBarBody {
-                padding: 5px;
-                position: fixed;
-                width: 100%;
-            }
-
-            
-            button.xpl-button.xpl-closeButton {
-                display: block;
-                text-align: end;
-            }
-
-            .xpl-appSideBarLinksContainer {
-                padding: 10px 0px 0 5px;
-            }
-
-            .xpl-content  {
-                margin-left: -300px;
-            }
-
-            .xpl-toggleButton {
-                display: block;
-                transition: all .3s ease-out;
-                text-align: left;
-            }
-
-            .xpl-cardContainer {
-                margin-bottom: 24px;
-            }
-
-            
-            .xpl-mediumCard {
-                max-width: 480px;
-                width: 100%;
-            } 
-
-
-            button.xpl-button.xpl-backButton i {
-                left: 24px;
-                top: 132px;
-            }
-
-            .xpl-cardWideHeader {
-                justify-content: flex-start;
-                width: 100%;
-                flex-flow: column wrap;
-            }
-
-            
-
-            .xpl-cardWideHeader .xpl-cardHeader {
-                min-width: 280px;
-                height: auto;
-                padding: 16px 0 !important;
-            }
-
-        
-
-            .xpl-cardProjectInfo {
-                /* margin-top: 12px; */
-                margin-left: 0px;
-                align-items: flex-start;
-                padding: 0;
-            }
-
-            .xpl-cardProjectInfo ul li {
-                padding: 7px 2px;
-            }
-
-            .xpl-relatedListApps {
-                margin-top: 20px;
-            }
-
-            .xpl-relatedListApps > h5{
-                font-weight: 600;
-            }
-
-
-
-            p.xpl-cardProjectCardOverview {
-                padding-left: 0;
-            }
-
-            .xpl-relatedContainer {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                flex-wrap: wrap;
-            }
-
-            .xpl-allAppTitle {
-                text-align: center;
-            }
-
-            .xpl-loaderContainer {
-                justify-content: flex-start;
-                margin-top: 12px;
-            }
-
-            .xpl-wideCard {
-                padding: 8px;
-            }
-
-            .xpl
-
-            h4.xpl-erroMessage {
-                font-size: 30px;
-            }
-
-            span.xpl-subTitle {
-                font-size: 14px;
-                bottom: 56px;
-                color: hsla(0,0%,100%,.5);
-            }
-            
-
-
-            /*  ==========================================================================
-             *  Responsive Modal
-                ========================================================================== */
-
-            section.xpl-appModal-main{
-                width: 90%;
-                max-width: 100%;
-                height: 90%;
-                max-height: 100%;
-            }
-
-            .xpl-modalBodyScroll {
-                padding: 10px;
-            }
-
-            .xpl-formSubmitContainer {
-                justify-content: center;
-            }
-
-            .xpl-tabLeftArrow {
-                top: 30px;
-                left: 20px;
-            }
-
-            .xpl-tabRightArrow {
-                top: 30px;
-                right: 15px;
-            }
-        
-            .xpl-tabArrow {
-                position: absolute;
-                font-size: 27px;
-                z-index: 1000;
-            }
-
-
-            /*  ==========================================================================
-             *   Responsive Carrousel
-                ========================================================================== */
-
-
-                button.slick-arrow {
-                    z-index: 2000;
-                    width: 30px;
-                }
-
-                .slick-next {
-                    right: 0px;
-                    z-index: 2000;
-                }
-
-                .slick-prev, .slick-next {
-                    top: 43%;
-                }
-
-
-            /*  ==========================================================================
-            *  Responsive Tabs
-                ========================================================================== */
-            
-            
-            .react-tabs__tab {
-                max-width: 70px;
-                padding: 20px;
-            }
-
-
-            /* ==========================================================================
-            *  Responsive Breadcumbs
-            ========================================================================== */
-            .xpl-breadcumbsContainer {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .xpl-breadLinksContainer {
-                display: flex;
-                flex-direction: row;
-                width: 100%;
-            }
-        
-
-            .xpl-breadcumbsContainer a {
-                text-decoration: none;
-                color: #2f323e;
-            }
-
-            h4.xpl-breadChild {
-                font-size: 17px;
-                font-weight: 600;
-                text-align: center;
-            }
-
-            .xpl-cardOverviewContainer {
-                margin-top: 16px;
-                padding: 15px;
-            }
-        
+        .slick-slider .xpl-mediumCard h5 {
+            font-size: 13px !important;
+            text-align: left;
         }
 
-    /* ==========================================================================
-    *  Ipad 
-    ========================================================================== */
+        .slick-slider .xpl-mediumCard .xpl-cardHeader {
+            padding: 16px 10px;
+        }
 
-        @media only screen and (min-width:768px) and (max-width : 1024px) {
-            .xpl-relatedListApps {
-                margin-top: 20px;
-            }
+        .slick-slider .xpl-mediumCard .xpl-cardHeader i {
+            font-size: 32px;
+            line-height: 32px;
+        }
 
-            .xpl-mediumCard {
-                max-width: 100%;
-                width: 100%;
-            }
+        
 
-            .xpl-cardImage {
-                padding: 8px 12px;
-            }
-
-            .react-tabs__tab {
-                position: relative;
-                display: inline-flex;
-                flex: 0 0 auto;
-                max-width: 100px;
-                padding: 20px;
-            }
+    }
 
 
-            /* ---------------------------------------------------
-                BreadCumbs Fix
-            ----------------------------------------------------- */
-
-                .xpl-breadLinksContainer {
-                    width: 100%;
-                }
-
-                h4.xpl-breadChild {
-                    font-size: 22px;
-                    line-height: 22px;
-                }
+    @media all and  (-Webkit-min-device-pixel-ratio: 1.50) and (-Webkit-min-device-pixel-ratio: 2.00)
+    {
 
 
-            /* ---------------------------------------------------
-                Related Products Fix
-            ----------------------------------------------------- */
-                .xpl-relatedContainer {
-                    justify-content: flex-start;
-                }
+        .xpl-appSideBar {
+            flex: 1 0 250px;
+            flex-shrink: 0;
+            overflow-x: hidden;
+            background-color: #fff;
+            box-shadow: 1px 0 20px rgba(0,0,0,.08);
+            -webkit-transition: all .3s ease-out;
+            transition: all .3s ease-out;
+            min-height: 100vh;
+        }
+
+        .xpl-appSideBarBody {
+            padding: 30px 10px 10px;
+            position: fixed;
+            width: 260px;
+            height: 100%;
+        }
 
 
-        }   
+        .xpl-appSideBarLinksContainer {
+            position: relative;
+            overflow-y: auto;
+            /* height: 430px; */
+            height: 84%;
+        }
+
+        .xpl-cardHeader.cardHover.xpl-squareCard {
+            min-height: 160px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .xpl-projectsContainer .xpl-cardName h5 {
+            margin-left: 0;
+            font-size: 14px;
+        }
+
+        .xpl-longCard .xpl-cardName h5 {
+            font-size: 21px;
+            text-align: center;
+        }
 
 
+        .xpl-mediumCard .xpl-cardName {
+            max-width: 100%;
+            width: auto;
+        }
 
+        .xpl-longCard h5.xpl-productScopeCard {
+            width: 100%;
+            text-align: center;
+            font-size: 16px!important;
+        }
+
+        .xpl-projectsContainer .xpl-cardHeader {
+            padding: 8px;
+            max-height: 110px;
+            min-height: 110px;
+        }
+
+        h5.xpl-productScopeCard {
+            font-size: 11px !important;
+        }
+
+
+        .xpl-projectsContainer .xpl-cardDescription {
+            min-height: 110px;
+            max-height: 150px;
+            font-size: 12px;
+        }
+
+        .xpl-cardDescription p.xpl-tooltip{
+            text-align: center;
+        }
+
+        
+        .xpl-tooltip {
+            text-align: center;
+        }
+
+
+        .xpl-cardDescription {
+            background-color: #fff;
+            padding: 8px 4px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            width: auto;
+            /* height: auto; */
+        }
+
+
+        .xpl-cardHeader i {
+            font-size: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+
+
+        .xpl-longCard .xpl-cardName {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
+        .xpl-resultsContainer {
+            padding: 10px 0 0 10px;
+            z-index: 2000;
+            position: relative;
+            overflow-y: scroll;
+            max-height: 400px;
+        }
+
+    }
 
 
 
 
 
 /* ---------------------------------------------------
-    IE Hacks
+IE Hacks
 ----------------------------------------------------- */
-    .xpl-contentIE {
-        background-color: #edf1f5;
-        width: 87% !important;
-        overflow: auto !important;
-    }
+.xpl-contentIE {
+    background-color: #edf1f5;
+    width: 87% !important;
+    overflow: auto !important;
+}
 
 
-    /* .xpl-appSideBar {
-        height: 100vh;
-    } */
+/* .xpl-appSideBar {
+    height: 100vh;
+} */
 
 
-    /* .xpl-appHeaderContainer {
-        display: -ms-flexbox;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        height: 60px;
-        background-color:transparent;
-    } */
+/* .xpl-appHeaderContainer {
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 60px;
+    background-color:transparent;
+} */
 
-  
+
 
 

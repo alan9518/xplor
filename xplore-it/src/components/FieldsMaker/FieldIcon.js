@@ -12,7 +12,7 @@
     import React from 'react';
     import PropTypes from 'prop-types';
     import {IconPicker} from '../../components'
-// import ColorPicker from '../ColorPicker/ColorPicker';
+    // import ColorPicker from '../ColorPicker/ColorPicker';
 
 
 
@@ -20,7 +20,8 @@
 // Create Functional Component
 // --------------------------------------
     const FieldColor = (props) => {
-        const { colName, fieldName,  editField,} = props;
+        const { colName, fieldName,  editField, selectedIcon} = props;
+        console.log("TCL: FieldColor -> selectedIcon", selectedIcon)
         return (
             <div className={colName}>
 
@@ -28,7 +29,7 @@
 
                     <h6 className="xpl-boldText xpl-fieldSeparator"> {fieldName} </h6>
 
-                    <IconPicker onIconChange = {props.onIconChange}/>
+                    <IconPicker onIconChange = {props.onIconChange} selectedIcon = {selectedIcon}/>
 
                 </div>
             </div>
@@ -48,9 +49,9 @@
 // --------------------------------------
 // Default Props
 // --------------------------------------
-FieldColor.defaultProps = {
-    colName:  'col-xl-6 col-lg-6 col-sm-12 col-xs-12'
-};
+    FieldColor.defaultProps = {
+        colName:  'col-xl-6 col-lg-6 col-sm-12 col-xs-12'
+    };
 
 
 // --------------------------------------

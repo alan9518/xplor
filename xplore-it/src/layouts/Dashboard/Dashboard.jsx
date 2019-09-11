@@ -23,8 +23,11 @@
     import 'react-s-alert/dist/s-alert-default.css';
     import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 
+ 
+    const {spPath, redirectSpPath} = Config // ? Host Path
 
-    
+
+
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
@@ -43,9 +46,11 @@
                 showError : false,
                 responsiveWidth : window.innerWidth,
                 filterRoutes : '',
-                isOwner : false
+                isOwner : false,
+                resetMenu : false
             }
             this.path = Config.spPath;
+            // this.state.resetMenu =  false
 
         }
 
@@ -63,384 +68,462 @@
         // Unregister Window Listener Event
         // --------------------------------------
         componentWillUnmount() {
+            
             window.removeEventListener("resize", this.updateContainerDimensions);
         }
 
 
-    /* ==========================================================================
-     *  API Connection
-     ========================================================================== */
-
-        // --------------------------------------
-        // Handle all Requests
-        // --------------------------------------
-
-        async loadAPI() {
-            try {
-                // Get API Routes
-                const apiRoutesPromise = this.loadAPICategories();
-                // Get SP Routes
-                const SPRoutesPromise =  this.loadSPCategories();
-                // Get XplorIT Owners
-                const getXplOwnsersPromise = this.loadxplorITOwners();
-
-                // Resolve Both Promises
-                const [apiRoutes, SPRoutes, ownsersData] = await Promise.all([apiRoutesPromise,SPRoutesPromise,getXplOwnsersPromise]);
-                
-                // Get Routes Values
-                const apiRoutesData =  apiRoutes.data;
-
-                // Prepare SP Routes
-                const SPRoutesData = this.createSPArray(SPRoutes.data.value);
-
-                let isOwner = this.setOwnersList(ownsersData.data.value);
-
-                // Merge SP And API Routes
-                const appRoutes = this.mergeRoutes(apiRoutesData, SPRoutesData, isOwner);
-
-                // const ownersList = ownsersData.data;
-
-
-                
-
-
-                this.setState({
-                    categories : appRoutes || [],
-                    isOwner : isOwner,
-                    isLoaded : true,
-                    showError : false,
-                })
-                
+        componentWillReceiveProps(nextProps) {
+            console.log("TCL: Dashboard -> componentWillReceiveProps -> nextProps", nextProps)
             
-
-            }
-            catch(error) {
-				console.log('​Dashboard -> catch -> error', error)
-                this.setState({isLoaded : true, showError : true})
-            }
         }
 
+    
+        // --------------------------------------
+        // Reset menu after click on logo
+        // --------------------------------------
+        componentDidUpdate(updatedProps) {
+            console.log("TCL: Dashboard -> componentDidUpdate -> updatedProps", updatedProps)
 
 
-        // --------------------------------------
-        // Load WebService Categories
-        // --------------------------------------
-        loadAPICategories() {
-            const params = {Bussmodel: 'XPLOR'}
-            return axios.get(Endpoints.getAllCategories, {params});
-        }   
 
-
-        // --------------------------------------
-        // Load SP Categories
-        // --------------------------------------
-        loadSPCategories() {
-            return axios.get(Endpoints.getSideBarCategoriesSP);
+            // if(this.state.resetMenu === true && updatedProps.location.pathname === `${spPath}/catalogue/all/all`) {
+            //     this.setState({resetMenu : false})
+            //     // this.state.resetMenu =  false
+            // }
+        
+            
         }
-
-        // --------------------------------------
-        // Load XplorIT Owners
-        // --------------------------------------
-        loadxplorITOwners() {
-            return axios.get(Endpoints.getXplorITOwners);
-        }
-
-
-        // --------------------------------------
-        // Create An Array with The SP Categories
-        // --------------------------------------
-        createSPArray(SPCategories) {
-            const SPCatsArray = (SPCategories.map((SpCat)=> {
-                return {
-                    color : SpCat.Color,
-                    name : SpCat.Title,
-                    order: SpCat.Order1
-                }
-            }));
 
 
     
-            return (SPCatsArray);
-        }
 
 
-       
 
-        
-        /** --------------------------------------
-        // Combine Routes Arrays
-        // @param {APIRoutes <Array>}
-        // @param {SPRoutes <Array>}
-        // --------------------------------------*/
-        mergeRoutes(APIRoutes, SPRoutes, isOwner) {
+        /* ==========================================================================
+        *  API Connection
+        ========================================================================== */
 
-            const homeRoute = {
-                    path : `catalogue/all/all`,
-                    exact: false,
-                    sidebarName : 'Home',
-                    key:'home-route',
-                    color : '#1197D3',
-                    homeIcon : 'fas fa-home',
-                    order : 0
-            }
+            // --------------------------------------
+            // Handle all Requests
+            // --------------------------------------
 
-            const addProjectRoute = {
-                path : `addProject`,
-                sidebarName : isOwner === true ? 'Add Product' : null,
-                exact: true,
-                key:`app-route-addProduct`,
-                color : '#1197D3',
-                addProjectIcon : 'fas fa-folder-plus'
-        }
-            try {
-                const appRoutes = APIRoutes.map((apiRoute) => {
+            async loadAPI() {
+                try {
+                    // Get API Routes
+                    const apiRoutesPromise = this.loadAPICategories();
+                    // Get SP Routes
+                    const SPRoutesPromise =  this.loadSPCategories();
+                    // Get XplorIT Owners
+                    const getXplOwnsersPromise = this.loadxplorITOwners();
 
-                    // Add React Routes Keys
-                    apiRoute.path =  `catalogue/${apiRoute.CustomerName}/${apiRoute.CustomerID}`;
-                    apiRoute.exact = false;
-                    apiRoute.sidebarName = apiRoute.CustomerName
+                    let ownersList = [];
 
-                    // Add Color and Order if the Routes have the same name from both arrays
+                    // Resolve Both Promises
+                    const [apiRoutes, SPRoutes, ownsersData] = await Promise.all([apiRoutesPromise,SPRoutesPromise,getXplOwnsersPromise]).catch((error) => {
+                        console.log("TCL: Dashboard -> loadAPI -> error", error)
 
-                    for(let SPRoute of SPRoutes) {
-                        if(apiRoute.CustomerName === SPRoute.name) {
-                            apiRoute.color = SPRoute.color;
-                            apiRoute.order = SPRoute.order
-                        }
-                    }
+                        ownersList = [];
+                        
+                    });
+                    
+                    // Get Routes Values
+                    const apiRoutesData =  apiRoutes.data;
 
-                    return apiRoute;
+                    // Prepare SP Routes
+                    
+                    const SPRoutesData = this.createSPArray(SPRoutes.data.value);
 
-                });
+                    ownersList = ownsersData.data.value || [];
 
-                // Return All Routes, On an Array Merging The HomeRoute
-                const sideBarRoutes = [homeRoute, addProjectRoute, ...appRoutes ];
-                return sideBarRoutes;
+                    let isOwner = this.setOwnersList(ownersList);
 
-            }
-            catch(error) {
-                // const appRoutes = [];
-                this.setState({isLoaded : true, showError : true})
+                    // Merge SP And API Routes
+                    const appRoutes = this.mergeRoutes(apiRoutesData, SPRoutesData, isOwner);
 
-                // Return The Array with Only the HomeRoute
-                return [...homeRoute];
-            }
-
-        }
+                    // const ownersList = ownsersData.data;
 
 
-        /** --------------------------------------
-        // Set Owners Data and Save it on 
-        // Session Storage
-        // @param {APIRoutes <Array>}
-        // --------------------------------------*/
-        setOwnersList(ownersData) {
-            const user = window.getCurrentSPUser();
-            // let ownerObject = {}
+                    // ? Check if page is reloaded from a sub if yes. Filter to Sub Routes
+                    // this.props.location
 
 
-            let xplorITOwner = ownersData.filter((owner)=> {return owner.Email === user.user_email })[0]
 
-            if(xplorITOwner) {
-                if(localStorage.getItem('xplorITOwner') === null) {
-                    window.localStorage.setItem('xplorITOwner', JSON.stringify(user))
-                }
-
-                return true
-            }
-          
-            else {
-                if(localStorage.getItem('xplorITOwner') !== null) {
-                    window.localStorage.removeItem('xplorITOwner')
-                }
-
-                return false
-
-            }
+                    this.setState({
+                        categories : appRoutes || [],
+                        isOwner : isOwner,
+                        isLoaded : true,
+                        showError : false,
+                    })
+                    
                 
 
-
-           
-        }
-
-
-
-
-
-    /* ==========================================================================
-     *  Handle State
-    ========================================================================== */
-
-
-        // --------------------------------------
-        // Show/Hide Mobile Menu
-        // --------------------------------------
-        toggleMobileMenu = (e) => {
-
-            const {showMobileMenu} = this.state;
-            try {
-                this.setState({showMobileMenu : !showMobileMenu})
-                e.preventDefault();
+                }
+                catch(error) {
+                    console.log('​Dashboard -> catch -> error', error)
+                    this.setState({isLoaded : true, showError : true})
+                }
             }
-        
-            catch(error) {
-                return null;
+
+
+
+            // --------------------------------------
+            // Load WebService Categories
+            // --------------------------------------
+            loadAPICategories() {
+                const params = {Bussmodel: 'XPLOR'}
+                return axios.get(Endpoints.getAllCategories, {params});
+            }   
+
+
+            // --------------------------------------
+            // Load SP Categories
+            // --------------------------------------
+            loadSPCategories() {
+                return axios.get(Endpoints.getSideBarCategoriesSP);
             }
-        }
-
-        // --------------------------------------
-        // Show Modal
-        // --------------------------------------
-        toggleModal = (e) => {
-            const { showModal } = this.state;
-            this.setState({
-                showModal : !showModal
-            })
-        }
-
-        // --------------------------------------
-        // Window Resizing
-        // --------------------------------------
-        updateContainerDimensions = () => {
-            let newWidth = window.innerWidth;
-            this.setState({responsiveWidth : newWidth});
-        }
-        
-
-        // --------------------------------------
-        // Filter Routes Based on Parent Category
-        // --------------------------------------
-        filterRoutesByCategory = (event) => (categoriesFromSidebar) => {
-            console.log('TCL: Dashboard -> filterRoutesByCategory -> categoriesFromSidebar', categoriesFromSidebar)
-            console.log('TCL: Dashboard -> filterRoutesByCategory -> this.state', this.state)
-
-            this.setState({filterRoutes : categoriesFromSidebar});
-            // const filteredCategories = categoriesFromSidebar.filter((category) => {
-            //     return 
-            // })
-
-            // const {categories} =  this.state;
-			
-			// console.log('TCL: Dashboard -> filterRoutesByCategory -> categories', categories)
-        }
 
 
-    /* ==========================================================================
-     *  Render Methods
-     ========================================================================== */
+            // --------------------------------------
+            // Load XplorIT Owners
+            // --------------------------------------
+            loadxplorITOwners() {
+                return axios.get(Endpoints.getXplorITOwners);
+            }
 
-        // --------------------------------------
-        // Render Routes
-        // --------------------------------------
 
-        renderRoutes(dashboardRoutes) {
-            return (
-                dashboardRoutes.map((prop,key)=> 
-                    prop.redirect 
-                    ? <Redirect from={prop.path} to={prop.to} key={key} /> 
-                    : <Route  exact={prop.exact} path={prop.path} component={prop.component} key={prop.key}/>                  
+            // --------------------------------------
+            // Create An Array with The SP Categories
+            // --------------------------------------
+            createSPArray(SPCategories) {
+                const SPCatsArray = (SPCategories.map((SpCat)=> {
+                    return {
+                        color : SpCat.Color,
+                        name : SpCat.Title,
+                        order: SpCat.Order1
+                    }
+                }));
+
+
+
+                return (SPCatsArray);
+            }
+
+
+
+            
+            /** --------------------------------------
+            // Combine Routes Arrays
+            // @param {APIRoutes <Array>}
+            // @param {SPRoutes <Array>}
+            // --------------------------------------*/
+            mergeRoutes(APIRoutes, SPRoutes, isOwner) {
+
+                
+
+                const homeRoute = {
+                        path : `catalogue/all/all`,
+                        exact: false,
+                        sidebarName : 'Home',
+                        key:'home-route',
+                        color : '#1197D3',
+                        homeIcon : 'fas fa-home',
+                        order : 0
+                }
+
+                const addProjectRoute = {
+                    path :  `addProject`,
+                    sidebarName : isOwner === true ? 'Add Product' : null,
+                    exact: true,
+                    key:`app-route-addProduct`,
+                    color : '#1197D3',
+                    addProjectIcon : 'fas fa-folder-plus'
+                }
+                
+                try {
+                    const appRoutes = APIRoutes.map((apiRoute) => {
+
+                        //? Add React Routes Keys
+                        apiRoute.path =  `catalogue/${apiRoute.CustomerName}/${apiRoute.CustomerID}`;
+                        apiRoute.exact = false;
+                        apiRoute.sidebarName = apiRoute.CustomerName
+
+                        
+
+                        // Add Color and Order if the Routes have the same name from both arrays
+
+                        for(let SPRoute of SPRoutes) {
+                            if(apiRoute.CustomerName === SPRoute.name) {
+                                apiRoute.color = SPRoute.color;
+                                apiRoute.order = SPRoute.order
+                            }
+                        }
+
+                        return apiRoute;
+
+                    });
+
+                    // Return All Routes, On an Array Merging The HomeRoute
+
+                    const sideBarRoutes = [homeRoute, addProjectRoute, ...appRoutes ];
+                    return sideBarRoutes;
+
+                }
+                catch(error) {
+                    // const appRoutes = [];
+                    this.setState({isLoaded : true, showError : true})
+
+                    // Return The Array with Only the HomeRoute
+                    return [...homeRoute];
+                }
+
+            }
+
+
+            
+            /** --------------------------------------
+            // Set Owners Data and Save it on 
+            // Session Storage
+            // @param {APIRoutes <Array>}
+            // --------------------------------------*/
+            setOwnersList(ownersData) {
+
+                if(ownersData.length <= 0)
+                    return false;
+
+                const user = window.getCurrentSPUser();
+                // let ownerObject = {}
+
+
+                let xplorITOwner = ownersData.filter((owner)=> {return owner.Email === user.user_email })[0]
+
+                if(xplorITOwner) {
+                    if(localStorage.getItem('xplorITOwner') === null) {
+                        window.localStorage.setItem('xplorITOwner', JSON.stringify(user))
+                    }
+
+                    return true
+                }
+            
+                else {
+                    if(localStorage.getItem('xplorITOwner') !== null) {
+                        window.localStorage.removeItem('xplorITOwner')
+                    }
+
+                    return false
+
+                }
+                    
+
+
+            
+            }
+
+
+
+
+        /* ==========================================================================
+        *  Handle State
+        ========================================================================== */
+
+
+            // --------------------------------------
+            // Show/Hide Mobile Menu
+            // --------------------------------------
+            toggleMobileMenu = (e) => {
+
+                const {showMobileMenu} = this.state;
+                try {
+                    this.setState({showMobileMenu : !showMobileMenu})
+                    e.preventDefault();
+                }
+            
+                catch(error) {
+                    return null;
+                }
+            }
+
+            // --------------------------------------
+            // Show Modal
+            // --------------------------------------
+            toggleModal = (e) => {
+                const { showModal } = this.state;
+                this.setState({
+                    showModal : !showModal
+                })
+            }
+
+            // --------------------------------------
+            // Window Resizing
+            // --------------------------------------
+            updateContainerDimensions = () => {
+                let newWidth = window.innerWidth;
+                this.setState({responsiveWidth : newWidth});
+            }
+            
+
+            // --------------------------------------
+            // Filter Routes Based on Parent Category
+            // --------------------------------------
+            filterRoutesByCategory = (event) => (categoriesFromSidebar) => {
+
+                this.setState({filterRoutes : categoriesFromSidebar});
+                // const filteredCategories = categoriesFromSidebar.filter((category) => {
+                //     return 
+                // })
+
+                // const {categories} =  this.state;
+                
+            }
+
+
+            resetSidebarMenu = (event) => {
+                console.log("TCL: Dashboard -> resetSidebarMenu -> event", event)
+                const {history} = this.props;
+                // this.setState({resetMenu :  true})
+                    
+                history.push(`/catalogue/all/all`);
+
+
+                
+                
+            }
+
+
+        /* ==========================================================================
+        *  Render Methods
+        ========================================================================== */
+
+            // --------------------------------------
+            // Render Routes
+            // --------------------------------------
+
+            renderRoutes(dashboardRoutes) {
+                return (
+                    dashboardRoutes.map((prop,key)=> 
+                        prop.redirect 
+                        ? <Redirect from={prop.path} to={prop.to} key={key} /> 
+                        : <Route  exact={prop.exact} path={prop.path} component={prop.component} key={prop.key}/>                  
+                    )
                 )
-            )
-        }
+            }
+
+            // renderRoutes(dashboardRoutes) {
+            //     return (
+
+            //         dashboardRoutes.map((routeItem, key) => {
+            //             if(routeItem.redirect)
+            //                return <Redirect from={routeItem.path} to={routeItem.to} key={key} /> 
+            //             else if(routeItem.key === 'app-route-addProduct')
+            //                 return <Route  exact={routeItem.exact} path={routeItem.path} key={routeItem.key} render = {(props) => <NewProjectView   /> }  />                  
+            //             else
+            //                 return <Route  exact={routeItem.exact} path={routeItem.path} component={routeItem.component} key={routeItem.key}/>                  
+            //         })  
+                    
+            //     )
+            // }
 
 
-        // --------------------------------------
-        // Render Error Page
-        // --------------------------------------
-        renderErrorPage(responsiveWidth) {
-            return(
-                <div  style = {{maxWidth:responsiveWidth}}>
-                    <NoData message = {"We Can't Connect to the Server."} />
-                </div>
-            )
-        }
+            // --------------------------------------
+            // Render Error Page
+            // --------------------------------------
+            renderErrorPage(responsiveWidth) {
+                return(
+                    <div  style = {{maxWidth:responsiveWidth}}>
+                        <NoData message = {"We Can't Connect to the Server."} />
+                    </div>
+                )
+            }
 
 
-        // --------------------------------------
-        // Render App
-        // Render the DashBoard Routes from routes.js
-        // --------------------------------------    
-            renderApp() {
-                const {showMobileMenu, categories,  showError, responsiveWidth} =  this.state;
-                const {location} = this.props;
-                const currentNavigator = window.navigator.appName;
-                const bodyClasses = currentNavigator === "Microsoft Internet Explorer" 
-                                                        ? "xpl-content main xpl-contentIE" 
-                                                        : "xpl-content main";
-                if(showError)
-                    return this.renderErrorPage(responsiveWidth);
-                else
-                    return (
-                        <Fragment>
-                                <header>
-                                    <NavBar logo = {logo}/>
-                                </header>
+            // --------------------------------------
+            // Render App
+            // Render the DashBoard Routes from routes.js
+            // --------------------------------------    
+                renderApp() {
+                    const {showMobileMenu, categories,  showError, responsiveWidth} =  this.state;
+                    const {location} = this.props;
+                    const currentNavigator = window.navigator.appName;
+                    const bodyClasses = currentNavigator === "Microsoft Internet Explorer" 
+                                                            ? "xpl-content main xpl-contentIE" 
+                                                            : "xpl-content main";
 
-                                <div className="App xpl-mainContainer" >
+                    // const resetMenuContext = React.createContext();
+                    if(showError)
+                        return this.renderErrorPage(responsiveWidth);
+                    else
+                        return (
+                            <Fragment>
+                                    <header>
+                                        <NavBar logo = {logo} resetSidebarMenu = {this.resetSidebarMenu}/>
+                                    </header>
 
-
-                                    <SideBar 
-                                        routes = { dashboardRoutes }  
-                                        showMobileMenu = {showMobileMenu} 
-                                        categories = {categories}
-                                        onClick = {this.toggleMobileMenu }
-                                        responsiveWidth = {responsiveWidth}
-                                        onFilterRoutesClick = {this.filterRoutesByCategory}
-                                    />
+                                    <div className="App xpl-mainContainer" >
 
 
-                                    {/* Iterate Routes to set the Body Content */}
-                                    <div className={bodyClasses}>
-                                        <div className="container-fluid" style = {{maxWidth:responsiveWidth}}>
-                                            <div className="xpl-buttonContainer">
-                                                <AppButton 
-                                                        buttonClass = {'xpl-toggleButton'} 
-                                                        onClick = {this.toggleMobileMenu } 
-                                                        iconClass = {'fas fa-bars'} 
-                                                />
+                                        <SideBar 
+                                            routes = { dashboardRoutes }  
+                                            showMobileMenu = {showMobileMenu} 
+                                            categories = {categories}
+                                            onClick = {this.toggleMobileMenu }
+                                            responsiveWidth = {responsiveWidth}
+                                            onFilterRoutesClick = {this.filterRoutesByCategory}
+                                            resetMenu = {this.state.resetMenu}
+                                        />
 
-                                              
 
-                                            </div>
+                                        {/* Iterate Routes to set the Body Content */}
+                                        <div className={bodyClasses}>
+                                            <div className="container-fluid" style = {{maxWidth:responsiveWidth}}>
+                                                <div className="xpl-buttonContainer">
+                                                    <AppButton 
+                                                            buttonClass = {'xpl-toggleButton'} 
+                                                            onClick = {this.toggleMobileMenu } 
+                                                            iconClass = {'fas fa-bars'} 
+                                                    />
+
                                                 
+
+                                                </div>
+                                                    
+                                                    
                                                 
+                                                <TransitionGroup className="transition-group">
+                                                    <CSSTransition 
+                                                                key={location.key} 
+                                                                timeout={{ enter: 300, exit: 300 }} 
+                                                                classNames="fade">
+                                                    
+                                                            <Switch location = {location} >
+                                                                {this.renderRoutes(dashboardRoutes)}
+                                                            </Switch>
+                                                    </CSSTransition>
+                                                </TransitionGroup>
+
+                                                <Alert stack={{limit: 1}}  timeout={2000} />
                                             
-                                            <TransitionGroup className="transition-group">
-                                                <CSSTransition 
-                                                            key={location.key} 
-                                                            timeout={{ enter: 300, exit: 300 }} 
-                                                            classNames="fade">
-                                                
-                                                        <Switch location = {location} >
-                                                            {this.renderRoutes(dashboardRoutes)}
-                                                        </Switch>
-                                                </CSSTransition>
-                                            </TransitionGroup>
-
-                                            <Alert stack={{limit: 1}}  timeout={2000} />
-                                        
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                        </Fragment>
-                    )
+                            </Fragment>
+                        )
+                }
+
+
+            // --------------------------------------
+            // Render Loader
+            // --------------------------------------
+            renderLoader () {
+                return <div> <AppLoader customHeight = {800}/> </div>
             }
 
-
-        // --------------------------------------
-        // Render Loader
-        // --------------------------------------
-        renderLoader () {
-            return <div> <AppLoader customHeight = {800}/> </div>
-        }
-
-        // --------------------------------------
-        // Render Component
-        // -------------------------------------- 
-            render() {
-                const {isLoaded} = this.state;
-                return isLoaded === true ? this.renderApp() : this.renderLoader();
-            }
+            // --------------------------------------
+            // Render Component
+            // -------------------------------------- 
+                render() {
+                    const {isLoaded} = this.state;
+                    return isLoaded === true ? this.renderApp() : this.renderLoader();
+                }
     }
 
 

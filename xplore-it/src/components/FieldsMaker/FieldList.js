@@ -19,7 +19,7 @@
     const FieldList = (props) => {
 
         const {colName, fieldName, listValues, editField, posibleValues, index} = props;
-		console.log("TCL: FieldList -> posibleValues", posibleValues)
+		
 
         return (
             <div className = {colName}>

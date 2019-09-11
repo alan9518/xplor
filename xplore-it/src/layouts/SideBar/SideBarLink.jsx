@@ -28,7 +28,7 @@
     
             const iconHolderStyleBig = {backgroundColor: color || '#238ECC', width : 30, padding : '7px 5px'}
 
-            const iconHolderStyleSmall = {backgroundColor: color || '#238ECC', width: 25, padding : 5}
+            const iconHolderStyleSmall = {backgroundColor: color || '#238ECC', width: 30, padding : '6px 5px'}
 
 
             if(link !== null) 

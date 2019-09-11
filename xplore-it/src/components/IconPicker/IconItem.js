@@ -16,10 +16,12 @@
 // Create Functional Component
 // --------------------------------------
     const IconItem = (props) => {
-        const {iconName} = props;
+        const {iconName, isSelected} = props;
+        
+        const iconClass = isSelected === true ? 'xpl-iconButton xpl-activeIcon' : 'xpl-iconButton'
         return (
             <div className = "xpl-iconGridItem" >
-                <button value = {iconName}  onClick = {props.onIconClick} name = {iconName} className = "xpl-iconButton">  
+                <button value = {iconName}  onClick = {props.onIconClick} name = {iconName} className = {iconClass} >  
                     <i className = {iconName}  id = {iconName}>  </i>   
                 </button>
             </div>
