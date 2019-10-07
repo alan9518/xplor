@@ -157,7 +157,7 @@ class DetailsView extends Component {
         // @returns {A Promise Object}
         // --------------------------------------*/
         async loadProductOverview() {
-            const loadProjectOverviewPromise = await axios.get(Endpoints.getProduct, {params:{partid : this.partID, Bussmodel : 'XPLOR'}});
+            const loadProjectOverviewPromise = await axios.get(Endpoints.getProduct, {params:{partid : this.partID, Bussmodel : Bussmodel}});
             const projectOverviewData = await loadProjectOverviewPromise.data[0];
             return projectOverviewData;
         }

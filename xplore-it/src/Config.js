@@ -9,7 +9,7 @@ export const Config = {
         // path: 'https://flextronics365.sharepoint.com/sites/xplorit_portal',
         // debugEndPoints : 'https://spapps.flex.com/wsxplorit/xploreitservices.asmx',
         // prodEnpoints : 'https://spapps.flex.com/xploreitpro/xploreitservices.asmx',
-        // Bussmodel : 'XPLOR'
+        // Bussmodel : Bussmodel
         // xplortItSPGroup : '89'
 
     // ! Remove this Comments to Change to Production Mode (XplortIT)

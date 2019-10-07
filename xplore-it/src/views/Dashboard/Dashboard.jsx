@@ -65,7 +65,7 @@
             // --------------------------------------
             async loadProjects() {
                 const topicName = this.splitRouteName();
-                // const params = {Bussmodel : 'XPLOR', customerid : this.props.match.params.key}
+                // const params = {Bussmodel : Bussmodel, customerid : this.props.match.params.key}
                 // const globalParams = {Bussmodel: Bussmodel};
                 try {
                     // Get Carrousel Products. Create Promise
@@ -77,7 +77,7 @@
                                 ? axios.get(Endpoints.getAllProducts,{params: {Bussmodel: Bussmodel}})
                                 : this.findSubFilterRoute();
     
-                                // axios.get(Endpoints.getAllProductsByCategory,{params:{Bussmodel : 'XPLOR', customerid : this.props.match.params.key}})
+                                // axios.get(Endpoints.getAllProductsByCategory,{params:{Bussmodel : Bussmodel, customerid : this.props.match.params.key}})
                         // Resolve all Promises
                             const [carrouselProductsData, homeProductsData ] = await Promise.all([getCarrouselProductsPromise, getProductsPromise]);
 
@@ -115,9 +115,9 @@
             findSubFilterRoute() {
                 const url =  window.location.href;
                 if(url.indexOf('/sub') >= 0)
-                return axios.get(Endpoints.getAllProductsBySubCategory,{params:{subcap : this.props.match.params.key, Bussmodel : 'XPLOR', category : this.props.match.params.topic}})
+                return axios.get(Endpoints.getAllProductsBySubCategory,{params:{subcap : this.props.match.params.key, Bussmodel : Bussmodel, category : this.props.match.params.topic}})
                 else
-                    return axios.get(Endpoints.getAllProductsByCategory,{params:{Bussmodel : 'XPLOR', category : this.props.match.params.topic}})
+                    return axios.get(Endpoints.getAllProductsByCategory,{params:{Bussmodel : Bussmodel, category : this.props.match.params.topic}})
             }
 
 
