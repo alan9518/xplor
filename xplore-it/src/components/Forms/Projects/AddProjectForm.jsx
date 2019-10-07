@@ -20,7 +20,7 @@
     import moment from 'moment';
     import {orderBy} from 'lodash';
     import {Config} from '../../../Config'
-    const {spPath} = Config // ? Host Path
+    const {spPath, Bussmodel} = Config // ? Host Path
  
 
 
@@ -261,7 +261,7 @@ class AddProjectForm extends Component {
         // Load WebService Categories
         // --------------------------------------
         async loadAPICategories() {
-            const params = {Bussmodel: 'XPLOR'}
+            const params = {Bussmodel: Bussmodel}
             return axios.get(Endpoints.getAllCategories, {params});
         }   
 
@@ -293,7 +293,7 @@ class AddProjectForm extends Component {
         // Load WebService Categories
         // --------------------------------------
         async loadProCategories() {
-            const params = {Bussmodel: 'XPLOR'}
+            const params = {Bussmodel: Bussmodel}
             return axios.get(Endpoints.getProCategories, {params});
         }
 
@@ -302,7 +302,7 @@ class AddProjectForm extends Component {
         // Check IF Name is Repeated
         // --------------------------------------
         async checkRepeatedName (currentProjectName){
-            const params = { productName : currentProjectName, Bussmodel: 'XPLOR'}
+            const params = { productName : currentProjectName, Bussmodel: Bussmodel}
             return axios.get(Endpoints.checkRepeatedProjectName, {params});
         }
 
@@ -701,7 +701,7 @@ class AddProjectForm extends Component {
                 console.log("TCL: updateCurrentProjectOverview -> getPartRecordID", iconJSON.PartRecordID)
                 console.log("TCL: updateCurrentProjectOverview -> Latest Image Icon", this.state.cardIcon)
 
-                let tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params: {partid : PartID, busstypeid : 3095, Bussmodel: 'XPLOR'}});
+                let tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params: {partid : PartID, busstypeid : 3095, Bussmodel: Bussmodel}});
                 let tabsAttrData = await tabsDataAttrPromise.data;
                 let tabsAttrDataIcon = tabsAttrData.filter(i=>i.attrName==="Product Image Icon Name")
                 let valueID = tabsAttrDataIcon[0].valueID;

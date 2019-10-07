@@ -12,8 +12,10 @@
 // --------------------------------------
 // Path Route
 // --------------------------------------
-    const {path, prodEnpoints} = Config
+    const {path, prodEnpoints, debugEndPoints, xplortItSPGroup, labsOwnersGroup} = Config
 
+    // const apiPath = prodEnpoints;
+    const apiPath = debugEndPoints;
 
 // --------------------------------------
 // Create Endpoints Object
@@ -27,19 +29,19 @@
         // Get All Products
         // @param Bussmodel=XPLOR
         // --------------------------------------
-            getAllProducts : `${prodEnpoints}/getProducts`,
+            getAllProducts : `${apiPath}/getProducts`,
             
         // --------------------------------------
         // Get Carrousel Products
         // --------------------------------------
-            getCarrouselProducts : `${prodEnpoints}/getCarouselPro`,
+            getCarrouselProducts : `${apiPath}/getCarouselPro`,
         
         /** --------------------------------------
         // Get Products By Category
         // @param {customerid <String>}
         // @param {Bussmodel <String>}
         // --------------------------------------*/
-            getAllProductsByCategory: `${prodEnpoints}/getProductsByCategory`,
+            getAllProductsByCategory: `${apiPath}/getProductsByCategory`,
         
         /** --------------------------------------
         // Get Products By Category
@@ -48,38 +50,38 @@
         // @param {Bussmodel <String>}
         // @returns {}
         // -------------------------------------- */
-            // getAllProductsBySubCategory : `${prodEnpoints}/getProductsBySubcap?customerid=1025&subcap=Analytics&Bussmodel=XPLO`'
-            getAllProductsBySubCategory : `${prodEnpoints}/getProductsBySubcap`,
+            // getAllProductsBySubCategory : `${apiPath}/getProductsBySubcap?customerid=1025&subcap=Analytics&Bussmodel=XPLO`'
+            getAllProductsBySubCategory : `${apiPath}/getProductsBySubcap`,
         
         /** --------------------------------------
         // Get All Categories
         // @param {Bussmodel <String>}
         // --------------------------------------**/
-            getAllCategories : `${prodEnpoints}/getCategories`,
+            getAllCategories : `${apiPath}/getCategories`,
         
         // --------------------------------------
         // Get Sub Categories
         // --------------------------------------
-            getSubCapacities : `${prodEnpoints}/getSubCap`,
+            getSubCapacities : `${apiPath}/getSubCap`,
 
         // --------------------------------------
         // Get Vendors (Manufacturer)
         // @param {erpid <string>}
         // --------------------------------------
-            getVendors : `${prodEnpoints}/getManufacturer`,
+            getVendors : `${apiPath}/getManufacturer`,
         
         /** --------------------------------------
         // Get Product Details
         // @param {partid <String>}
         // --------------------------------------*/
-            getProduct : `${prodEnpoints}/getSingleProduct`,
+            getProduct : `${apiPath}/getSingleProduct`,
         
         /** --------------------------------------
         // Get Related Products
         // @param {customerid <String>}
         // @param {keyword <String array>, split by coma}
         // --------------------------------------*/
-            getRelatedProducts : `${prodEnpoints}/getRelatedPro`,
+            getRelatedProducts : `${apiPath}/getRelatedPro`,
 
             
         /** --------------------------------------
@@ -87,32 +89,32 @@
         // @param {customerid <String>}
         // @param {keyword <String array>, split by coma}
         // --------------------------------------*/
-            getRelatedProductsHard : `${prodEnpoints}/getRelatedPro?customerid=1014&keyword=MDM,Master%20Data,Reference%20Data,%20GDH`,
+            getRelatedProductsHard : `${apiPath}/getRelatedPro?customerid=1014&keyword=MDM,Master%20Data,Reference%20Data,%20GDH`,
         
         /** --------------------------------------
         // Get Product Attributes Tabs
         // @param {partid <String> }
         // --------------------------------------*/
-            getProductTabs : `${prodEnpoints}/getTabs`,
+            getProductTabs : `${apiPath}/getTabs`,
 
         /** --------------------------------------
         // Get Tab Values
         // @param {partid <String>}
         // @param {busstypeid <String>}
         // --------------------------------------*/
-            getTabAttributes : `${prodEnpoints}/getTabAttributes`,
+            getTabAttributes : `${apiPath}/getTabAttributes`,
 
         /** --------------------------------------
         // Get Tab Values
         // @param {partid <String>}
         // --------------------------------------*/
-            getPartRecord : `${prodEnpoints}/getPartRecord`,
+            getPartRecord : `${apiPath}/getPartRecord`,
 
         /** --------------------------------------
         // Get Pro Categories
         // @param {busstypeid <String>}
         // --------------------------------------*/
-            getProCategories : `${prodEnpoints}/getProCategory`,
+            getProCategories : `${apiPath}/getProCategory`,
 
 
         /** --------------------------------------
@@ -121,34 +123,34 @@
         // @param productName=PCN
         // @returns {}
         // -------------------------------------- */
-            checkRepeatedProjectName : `${prodEnpoints}/doesProductNameExist`,
+            checkRepeatedProjectName : `${apiPath}/doesProductNameExist`,
 
 
         /** --------------------------------------
         // Get Products Search
         // @param {Bussmodel=XPLOR <String>}
         // --------------------------------------*/
-            getProductSearch : `${prodEnpoints}/getProductSearch`,
+            getProductSearch : `${apiPath}/getProductSearch`,
 
 
         /** --------------------------------------
         // Create New Product
         // @param {busstypeid <String>}
         // --------------------------------------*/
-            createNewProject : `${prodEnpoints}/insertNewProduct`,
+            createNewProject : `${apiPath}/insertNewProduct`,
 
         /** --------------------------------------
         // Update Product
         // @param {busstypeid <String>}
         // --------------------------------------*/
-            updateProject : `${prodEnpoints}/updatePartProject`,
+            updateProject : `${apiPath}/updatePartProject`,
 
 
         /** --------------------------------------
         // Create/update New Product Attributes
         // @param {busstypeid <String>}
         // --------------------------------------*/
-            updateTabAttributes : `${prodEnpoints}/updateTabAttr`,
+            updateTabAttributes : `${apiPath}/updateTabAttr`,
 
     /* ==========================================================================
      *  Sharepoint EndPoints
@@ -175,5 +177,5 @@
         // Get Owners 
         // @param {listName} 89
         // --------------------------------------*/
-            getXplorITOwners : `${path}/_api/web/sitegroups/getbyid(89)/users`
+            getXplorITOwners : `${path}/_api/web/sitegroups/getbyid(${labsOwnersGroup})/users`
     }

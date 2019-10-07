@@ -14,7 +14,7 @@
     import {withRouter, Redirect} from 'react-router-dom';
     import {Config} from '../../Config';
 
-    const {spPath, fullPath} = Config // ? Host Path
+    const {spPath, fullPath, Bussmodel} = Config // ? Host Path
 
 // --------------------------------------
 // Create Component Class
@@ -90,6 +90,7 @@
 
             // --------------------------------------
             // Open SubMenu
+            // redirectPath : `sites/xplorit_portal/XplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/${menu.CustomerID}`,
             // --------------------------------------
             onListItemClick = (menu) =>  {
                 console.log('TCL: SideBar -> onListItemClick -> menu', menu)
@@ -130,9 +131,8 @@
                         currentMenu: subMenu,
                         previousMenu : resetSidebarMenu === true ? this.props.categories : currentMenu   ,
                         redirectUser : true,
-                        // redirectPath : `sites/xplorit_portal/XplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/${menu.CustomerID}`,
-                        redirectPath : `sites/xplorit_portal/XplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/all`,
-                        // redirectPath : `sites/xplorit_portal/xplorIT_v2/XplorIT.aspx/catalogue/${menu.CustomerName}/all`,
+                        // redirectPath : `sites/xplorit_portal/XplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/all`,
+                        redirectPath : `sites/innovationlabs/xplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/all`,
                         singleMenuClick : true
                     };
                 });

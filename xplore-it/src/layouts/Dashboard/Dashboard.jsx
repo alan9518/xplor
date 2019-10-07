@@ -24,7 +24,7 @@
     import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 
  
-    const {spPath, redirectSpPath} = Config // ? Host Path
+    const {spPath, redirectSpPath, Bussmodel} = Config // ? Host Path
 
 
 
@@ -171,7 +171,7 @@
             // Load WebService Categories
             // --------------------------------------
             loadAPICategories() {
-                const params = {Bussmodel: 'XPLOR'}
+                const params = {Bussmodel: Bussmodel}
                 return axios.get(Endpoints.getAllCategories, {params});
             }   
 

@@ -62,7 +62,6 @@
 
         {
             path : `${path}/edit/`,
-            
             exact: false,
             key:`app-route-addProduct`,
             color : communication,

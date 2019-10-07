@@ -14,7 +14,8 @@ import Alert from 'react-s-alert';
 import axios from 'axios';
 import {Endpoints} from '../../services/endpoints'
 import moment from 'moment';
-
+import {Config} from '../../Config';
+const {Bussmodel} = Config // ? Host Path
 // --------------------------------------
 // Create Component Class
 // --------------------------------------
@@ -169,8 +170,8 @@ class DetailsView extends Component {
         // @returns {A Promise Object}
         // --------------------------------------*/
         async loadRelatedProducts(productKeywords, customerName) {
-            // return axios.get(Endpoints.getRelatedProducts,{params: { customerid : customerid ,partid: this.partID , keyword : productKeywords, Bussmodel: 'XPLOR'}})
-            return axios.get(Endpoints.getRelatedProducts,{params: { category : customerName ,partid: this.partID , keyword : productKeywords, Bussmodel: 'XPLOR'}})
+            // return axios.get(Endpoints.getRelatedProducts,{params: { customerid : customerid ,partid: this.partID , keyword : productKeywords, Bussmodel: Bussmodel}})
+            return axios.get(Endpoints.getRelatedProducts,{params: { category : customerName ,partid: this.partID , keyword : productKeywords, Bussmodel: Bussmodel}})
         }
 
 
@@ -281,7 +282,7 @@ class DetailsView extends Component {
         // Get Product Tabs
         // --------------------------------------
         async loadProductTabs() {
-            return axios.get(Endpoints.getProductTabs,{params: {Bussmodel: 'XPLOR'}});
+            return axios.get(Endpoints.getProductTabs,{params: {Bussmodel: Bussmodel}});
         }
     
 
@@ -298,7 +299,7 @@ class DetailsView extends Component {
                 return {...productDetails, isOverview: true};
             }
             else {           
-                const tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params: {partid : this.partID, busstypeid : busstypeid, Bussmodel: 'XPLOR'}});
+                const tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params: {partid : this.partID, busstypeid : busstypeid, Bussmodel: Bussmodel}});
                 const tabsAttrData = await tabsDataAttrPromise.data;
                 return tabsAttrData;
             }

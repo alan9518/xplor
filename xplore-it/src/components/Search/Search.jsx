@@ -16,7 +16,7 @@
     import axios from 'axios';
     import './styles.css';
     import {Config} from '../../Config'
-    const {spPath} = Config // ? Host Path
+    const {spPath, Bussmodel} = Config // ? Host Path
  
 
 
@@ -59,7 +59,7 @@ class Search extends Component {
     // Load Products
     // --------------------------------------
     async loadProducts() {
-        const params = {Bussmodel: 'XPLOR'}
+        const params = {Bussmodel: Bussmodel}
         //Create Promises
         const allProductsPromise = axios.get(Endpoints.getProductSearch,  {params});
         const SPColorsPromise = axios.get(Endpoints.getSideBarCategoriesSP);

@@ -22,8 +22,8 @@
     import {shuffle, startCase, replace} from "lodash";
     import {Endpoints} from '../../services/endpoints';
     import axios from 'axios';
-
-
+    import {Config} from '../../Config';
+    const {Bussmodel} = Config // ? Host Path
 
 // --------------------------------------
 // Create Component Class
@@ -66,15 +66,15 @@
             async loadProjects() {
                 const topicName = this.splitRouteName();
                 // const params = {Bussmodel : 'XPLOR', customerid : this.props.match.params.key}
-                // const globalParams = {Bussmodel: 'XPLOR'};
+                // const globalParams = {Bussmodel: Bussmodel};
                 try {
                     // Get Carrousel Products. Create Promise
-                        const getCarrouselProductsPromise =  axios.get(Endpoints.getCarrouselProducts,{params: {Bussmodel: 'XPLOR'}});
+                        const getCarrouselProductsPromise =  axios.get(Endpoints.getCarrouselProducts,{params: {Bussmodel: Bussmodel}});
 
                         // Get All Products. Createn Promise 
                         // Lok for /sub on URL if true then query subCategories
                             const getProductsPromise = topicName === 'all' 
-                                ? axios.get(Endpoints.getAllProducts,{params: {Bussmodel: 'XPLOR'}})
+                                ? axios.get(Endpoints.getAllProducts,{params: {Bussmodel: Bussmodel}})
                                 : this.findSubFilterRoute();
     
                                 // axios.get(Endpoints.getAllProductsByCategory,{params:{Bussmodel : 'XPLOR', customerid : this.props.match.params.key}})
