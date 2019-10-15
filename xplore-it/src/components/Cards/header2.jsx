@@ -34,7 +34,6 @@
                 
             } = productOverview;
 
-            // console.log("TCL: CardHeaderWide -> editControls", editControls)
 
         // --------------------------------------
         // Format Values

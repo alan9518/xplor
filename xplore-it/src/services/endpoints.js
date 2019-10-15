@@ -12,10 +12,10 @@
 // --------------------------------------
 // Path Route
 // --------------------------------------
-    const {path, prodEnpoints, debugEndPoints, xplortItSPGroup, labsOwnersGroup} = Config
+    const {path, prodEnpoints, debugEndPoints, ownersSPGroup} = Config
 
-    // const apiPath = prodEnpoints;
-    const apiPath = debugEndPoints;
+    const apiPath = prodEnpoints;
+    // const apiPath = debugEndPoints;
 
 // --------------------------------------
 // Create Endpoints Object
@@ -177,5 +177,5 @@
         // Get Owners 
         // @param {listName} 89
         // --------------------------------------*/
-            getXplorITOwners : `${path}/_api/web/sitegroups/getbyid(${labsOwnersGroup})/users`
+            getXplorITOwners : `${path}/_api/web/sitegroups/getbyid(${ownersSPGroup})/users`
     }

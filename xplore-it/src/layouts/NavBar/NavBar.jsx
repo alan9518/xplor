@@ -11,6 +11,9 @@
     import React, { Component, Fragment }  from 'react'
     import PropTypes from 'prop-types';
     import {ProfileImage, ProjectLink, AppButton} from '../../components';
+    import {Config} from '../../Config';
+    const {Bussmodel} = Config 
+
 
 // --------------------------------------
 // Create Component Class
@@ -81,13 +84,14 @@
             renderNavBar(logo) {
                 const SP_user = window.getCurrentSPUser();
                 const {user_email, user_name} = SP_user;
+                const subTitle = Bussmodel === 'XPLOR' ? 'Product Explorer' :  'Innovation Labs'
                 return (
                     <div className="xpl-appHeaderContainer">
                         <nav className="navbar navbar-expand-md navbar-dark fixed-top xpl-appHeader">
                             <div className="navbar-brand" onClick = {this.onHomeLinkClick}>
                                 <div onClick = {this.props.resetSidebarMenu} style = {{cursor:'pointer'}}>
                                     <img src={logo}  className="xpl-appLogo d-inline-block align-top" alt=""/>
-                                    <span className = "xpl-subTitle"> Product Explorer  </span>
+                                    <span className = "xpl-subTitle"> {subTitle} </span>
                                 </div>
                             </div>
                     
@@ -95,19 +99,18 @@
                             <div className ={`navbar-collapse collapse show`} id="xpl-appNavBar" >
                                 <ul className="navbar-nav ml-auto">
 
-                                <a href  = "https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorit_collaboration_forum/SitePages/Community%20Home.aspx" target = "_blank" rel="noopener noreferrer">
+                                   { 
+                                        Bussmodel === 'XPLOR' && 
+
+                                       <a href  = "https://flextronics365.sharepoint.com/sites/xplorit_portal/xplorit_collaboration_forum/SitePages/Community%20Home.aspx" target = "_blank" rel="noopener noreferrer">
                                 
-                                        <li className="nav-item active xpl-userProfileLink">
-
-                                                    <span className="nav-link xpl-userName" style ={{color : '#FFFFFF'}}>
-                                                        Collaboration Forum 
-                                                    </span>
-
-                                            
-                                        </li>
-
-                                    </a>
-                                
+                                            <li className="nav-item active xpl-userProfileLink">
+                                                <span className="nav-link xpl-userName" style ={{color : '#FFFFFF'}}>
+                                                    Collaboration Forum 
+                                                </span>
+                                            </li>
+                                        </a>
+                                }
 
                                 
 

@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content="#000000">
   <!--
       manifest.json provides metadata used when your web app is added to the
@@ -106,12 +107,13 @@
     // Get SP User
     // --------------------------------------
     function getCurrentSPUser() {
-      return SPUser = {
+      var SPUser = {
         user_ID: _spPageContextInfo.userId,
         user_email: _spPageContextInfo.userEmail,
         user_name: _spPageContextInfo.userDisplayName
       }
 
+      return SPUser;
     }
 
 
@@ -164,7 +166,7 @@
     function fillPeoplePicker($user, $peoplePicker) {
       
       // //console.log('user owner', user)justify-content: flex-start;
-      var pickerName = `peoplePicker${$peoplePicker}_TopSpan`
+      var pickerName = 'peoplePicker'+$peoplePicker+'_TopSpan';
       // cleanPeoplePicker('peoplePickerOwner_TopSpan');
       
       // cleanPeoplePicker(pickerName);

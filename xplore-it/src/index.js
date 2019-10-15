@@ -7,10 +7,6 @@
  // --------------------------------------
  // Internet Explorer Compatibility
  // --------------------------------------
-    // import 'core-js/es6/map';
-    // import 'core-js/es6/set';
-    // import 'raf/polyfill';
-    // import 'es6-promise'
     
     import "babel-polyfill";
     import 'core-js/es6/map';
@@ -26,6 +22,14 @@
     import './index.css';
     import App from './App';
     import * as serviceWorker from './serviceWorker';
+
+
+// --------------------------------------
+// Deactivate Console.log on Production
+// --------------------------------------
+if (process.env.NODE_ENV !== 'development') {
+    console.log = () => {}
+  }
 
 
 // --------------------------------------

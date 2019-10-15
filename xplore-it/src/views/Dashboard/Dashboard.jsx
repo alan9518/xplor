@@ -257,28 +257,26 @@
                 const itemsToShow = carrouselproducts.length;
                 return (
                     <div className="row xpl-carrouselRow">
-                      {
-                        itemsToShow > 0 && 
-                            <div className="col-lg-12">
-                                <div className="xpl-headerContainer">
+                        <div className="col-lg-12">
+                            <div className="xpl-headerContainer">
 
-                                        <h3 className="xpl-row xpl-allAppTitle" style = {{marginLeft:0}}> What's New? </h3>
-                                       {
-                                            localStorage.getItem('xplorITOwner') !== null &&
-                                                <ProjectLink route = {'addProject/'} spRoute = {true}>
-                                                    <AppButton 
-                                                        buttonClass = {'xpl-addNewAppButton'} 
-                                                        onClick =  {this.toggleModal}
-                                                        buttonText = {'Add New Product'} 
-                                                        iconClass = {'fas fa-plus-circle'} 
-                                                    /> 
-                                                </ProjectLink>
-                                        }
-                                </div>
-                                
-                                <Carrousel carrouselData = {carrouselproducts} itemsToShow = {itemsToShow} />
+                            {itemsToShow > 0 &&   <h3 className="xpl-row xpl-allAppTitle" style = {{marginLeft:0}}> What's New? </h3>}
+                                {
+                                    localStorage.getItem('xplorITOwner') !== null &&
+                                        <ProjectLink route = {'addProject/'} spRoute = {true}>
+                                            <AppButton 
+                                                buttonClass = {'xpl-addNewAppButton'} 
+                                                onClick =  {this.toggleModal}
+                                                buttonText = {'Add New Product'} 
+                                                iconClass = {'fas fa-plus-circle'} 
+                                            /> 
+                                        </ProjectLink>
+                                }
                             </div>
-                      }
+                                
+                            {itemsToShow > 0 && <Carrousel carrouselData = {carrouselproducts} itemsToShow = {itemsToShow} />}
+                        </div>
+                      
                     </div>
                 )
             }

@@ -449,6 +449,10 @@ i.xpl-iconLeft {
     font-weight: 600;
 }
 
+.xpl-addNewAppButton {
+    background-color: transparent;
+}
+
 .xpl-button.xpl-addNewAppButton i {
     margin-left: 8px;
 }

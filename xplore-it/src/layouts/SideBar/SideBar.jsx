@@ -37,8 +37,6 @@
                 redirectUser : false,
                 redirectPath : '',
                 singleMenuClick : false,
-                // resetMenu : props.resetMenu || false
-                // isLoaded : false
             }
         }
 
@@ -46,11 +44,9 @@
         // Call API
         // --------------------------------------
         componentDidMount() {
-            // this.getSideBarRoutes();
             const {categories} = this.props;
             this.setState({
                 currentMenu : categories,
-                // isLoaded : true
             })
         }
 
@@ -93,7 +89,6 @@
             // redirectPath : `sites/xplorit_portal/XplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/${menu.CustomerID}`,
             // --------------------------------------
             onListItemClick = (menu) =>  {
-                console.log('TCL: SideBar -> onListItemClick -> menu', menu)
                 const {currentMenu} =  this.state;
                 const {SubCap, sidebarName, color, CustomerName } = menu;
 
@@ -101,17 +96,13 @@
                 const subMenu = SubCap.map((subCapValue,index) => {
                     return {
                         id : subCapValue.CustomerID,
-                        // path :  `${this.path}/catalogue/${subCapValue.SubCapabilities}/${subCapValue.CustomerID}`,
-                        // path :  `$catalogue/${subCapValue.SubCapabilities}/${subCapValue.CustomerID}`,
                         path :  `catalogue/${CustomerName}/${subCapValue.SubCapabilities}/sub`,
-                        // path :  `catalogue/${subCapValue.CustomerName}/${subCapValue.SubCapabilities}/sub`,
                         exact: true,
                         sidebarName : subCapValue.SubCapabilities,
                         key : `${subCapValue.CustomerName}-${subCapValue.SubCapabilities}`,
                     }
                 })
 
-                // `${spPath}/catalogue/all/all`
 
 
                 //? Set New Menu on the State and Save the Previous One
@@ -123,7 +114,6 @@
                     resetSidebarMenu = false
 
                 this.setState((prevState) => {
-                    console.log("TCL: SideBar -> onListItemClick -> prevState", prevState)
                     return {
                         currentCategory: sidebarName,
                         menuComponent : 'detailsList',
@@ -131,8 +121,8 @@
                         currentMenu: subMenu,
                         previousMenu : resetSidebarMenu === true ? this.props.categories : currentMenu   ,
                         redirectUser : true,
-                        // redirectPath : `sites/xplorit_portal/XplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/all`,
-                        redirectPath : `sites/innovationlabs/xplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/all`,
+                        redirectPath : `sites/xplorit_portal/XplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/all`,
+                        // redirectPath : `sites/innovationlabs/xplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/all`,
                         singleMenuClick : true
                     };
                 });
@@ -169,28 +159,16 @@
                 const {resetMenu} = this.props;
                 let resetMenuToShow = resetMenu
 
-                console.log("TCL: SideBar -> renderSideBar -> this.props.location.pathname", this.props.location.pathname)
 
                 if(this.props.location.pathname === `${spPath}/catalogue/all/all` || this.props.location.pathname === "/catalogue/all/all")
                     resetMenuToShow = true
-                
                 else
                     resetMenuToShow = false
 
 
-                console.log("TCL: SideBar -> renderSideBar -> resetMenuToShow", resetMenuToShow)
-                
                 let menuToShow = resetMenuToShow === true ? 'singleList' : menuComponent
                 
-                console.log("TCL: SideBar -> renderSideBar -> resetMenu", resetMenu)
 
-              
-                console.log("TCL: SideBar -> renderSideBar -> this.props", this.props)
-                
-                //  menuComponent = resetMenu === true ?   'singleList' : menuComponent 
-                                    
-                // resetMenu === true 
-                
                 return (
                     <Fragment>
 
@@ -253,7 +231,6 @@
             render() {
                 return ( 
                     this.renderSideBar()
-                    // isLoaded ? this.renderSideBar() : null
                 );
             }
     }
