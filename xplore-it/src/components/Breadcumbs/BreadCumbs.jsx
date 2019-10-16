@@ -18,7 +18,7 @@
     const BreadCumbs = (props) => {
 
 
-        const { productName, softwareTopic, softwareTopicID } = props;
+        const { productName, softwareTopic } = props;
 
 
         return (

@@ -10,7 +10,7 @@
 // --------------------------------------
     import React, { Component, Fragment } from 'react'
     
-    import { SideBarLink, AppLoader } from '../../components'
+    import { SideBarLink } from '../../components'
     import { Endpoints } from '../../services/endpoints';
     import {withRouter} from 'react-router-dom';
     import axios from 'axios';
@@ -60,24 +60,23 @@ class Search extends Component {
     // --------------------------------------
     async loadProducts() {
         const params = {Bussmodel: Bussmodel}
-        //Create Promises
+        //? Create Promises
         const allProductsPromise = axios.get(Endpoints.getProductSearch,  {params});
         const SPColorsPromise = axios.get(Endpoints.getSideBarCategoriesSP);
 
-        // Resolve Promises
+        //? Resolve Promises
         const [allProductsData, SpColorsData] = await Promise.all([allProductsPromise, SPColorsPromise])
 
-        // Extract Data
+        //? Extract Data
         const productsArray = allProductsData.data;
-        // console.log("​Search -> loadProducts -> productsArray", productsArray)
         const colorsArray = await this.loadSPCategoriesColors(SpColorsData.data.value);
-        // console.log("​Search -> loadProducts -> colorsArray", colorsArray);
 
-        // Merge Products and Colors
+
+        //? Merge Products and Colors
         const productsWithColor = this.mergeProductsAndColors(productsArray, colorsArray);
         console.log("​Search -> loadProducts -> productsWithColor", productsWithColor);
 
-        // Set State
+        //? Set State
         this.setState({
             productsOptions: productsWithColor,
             isLoaded: true,
@@ -126,6 +125,7 @@ class Search extends Component {
                 console.log("TCL: Dashboard -> mergeProductsAndColors -> error", error)
                 console.log("TCL: Dashboard -> mergeProductsAndColors -> product", product)
 
+                return null
                 
             }
         })
@@ -347,7 +347,6 @@ class Search extends Component {
     // {isLoaded && this.renderSearchContainer(productsOptions)}
     // --------------------------------------
     render() {
-        const { productsOptions, isLoaded } = this.state;
         return (
             <Fragment>
             {this.renderSearchContainer()}

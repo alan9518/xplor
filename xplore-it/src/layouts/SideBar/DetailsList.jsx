@@ -108,6 +108,8 @@ import { SideBarLink } from "../../components";
                                 hideMobileMenu = {this.hideMobileMenu}
                             />
                         )
+                    else
+                        return null
                 })
             )
         }

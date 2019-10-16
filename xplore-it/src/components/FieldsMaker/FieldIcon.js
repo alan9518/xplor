@@ -12,7 +12,6 @@
     import React from 'react';
     import PropTypes from 'prop-types';
     import {IconPicker} from '../../components'
-    // import ColorPicker from '../ColorPicker/ColorPicker';
 
 
 
@@ -20,8 +19,7 @@
 // Create Functional Component
 // --------------------------------------
     const FieldColor = (props) => {
-        const { colName, fieldName,  editField, selectedIcon} = props;
-        console.log("TCL: FieldColor -> selectedIcon", selectedIcon)
+        const { colName, fieldName,  selectedIcon} = props;
         return (
             <div className={colName}>
 

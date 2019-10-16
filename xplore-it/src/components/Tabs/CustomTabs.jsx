@@ -9,12 +9,11 @@
 // --------------------------------------
 // Import Dependences
 // --------------------------------------
-import 'rc-tabs/assets/index.css';
-import React , {Component, Fragment} from 'react';
-import ReactDOM from 'react-dom';
-import Tabs, { TabPane } from 'rc-tabs';
-import TabContent from 'rc-tabs/lib/TabContent';
-import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
+    import 'rc-tabs/assets/index.css';
+    import React , {Component, Fragment} from 'react';
+    import Tabs, { TabPane } from 'rc-tabs';
+    import TabContent from 'rc-tabs/lib/TabContent';
+    import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
 
 
 
@@ -35,10 +34,10 @@ class CustomTabs extends Component {
         this.props.onTabChange(key)
     }
 
-    onTabChange = (event) => {
-        console.log("TCL: CustomTabs -> onTabChange -> event", event)
+    // onTabChange = (event) => {
+    //     console.log("TCL: CustomTabs -> onTabChange -> event", event)
         
-    }
+    // }
     
 
 

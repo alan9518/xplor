@@ -12,7 +12,7 @@
 // --------------------------------------
 // Path Route
 // --------------------------------------
-    const {path, prodEnpoints, debugEndPoints, ownersSPGroup} = Config
+    const {path, prodEnpoints, debugEndPoints, ownersSPGroup, splistPath} = Config
 
     const apiPath = prodEnpoints;
     // const apiPath = debugEndPoints;
@@ -171,7 +171,7 @@
         // Get Products Icons
         // @param {listName}
         // --------------------------------------*/
-            getAllowedProductsIcons : `${path}/_api/web/lists/getbyTitle('xplorIT-icons-allowed')/items?$top=1000`,
+            getAllowedProductsIcons : `${splistPath}/_api/web/lists/getbyTitle('xplorIT-icons-allowed')/items?$top=1000`,
 
         /** --------------------------------------
         // Get Owners 

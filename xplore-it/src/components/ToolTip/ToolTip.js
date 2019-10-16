@@ -10,21 +10,18 @@
 // Get Dependences
 // --------------------------------------
     import React from 'react';
-    // import ReactTooltip from 'react-tooltip'
-    // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-    // import { faQuestionCircle, faPlus } from '@fortawesome/free-solid-svg-icons'
     import PropTypes from 'prop-types';
 
 // --------------------------------------
 // Create Functional Component
 // --------------------------------------
     const ToolTip = (props) => {
-        const {tipText, isButton} = props;
+        const {tipText} = props;
         return (
             
                 <span data-tip = {tipText}  >
                     ...
-                    {/*isButton  === true ? <FontAwesomeIcon icon={faPlus}  /> : <FontAwesomeIcon icon={faQuestionCircle} />*/}
+                    
                 </span>
         )
     }

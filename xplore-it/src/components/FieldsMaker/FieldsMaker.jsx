@@ -199,22 +199,9 @@ class FieldsMaker extends Component {
             // ?--------------------------------------
             saveFields = (event)=> {
                 event.preventDefault();
-                console.log("TCL: FieldsMaker -> saveFields -> event", event)
-                
-
-                const {target} = event;
                 const {formFields} = this.state;
-                console.log("TCL: FieldsMaker -> saveFields -> formFields", formFields)
-                
-
-                // get form Data
-                
-                
-
                 this.setState({ editControls: false })
                 this.props.enableTabEdit(false)
-
-
                 this.props.updateFormValues(formFields)
             }
 
@@ -262,11 +249,7 @@ class FieldsMaker extends Component {
                 })
 
                 
-                console.log("TCL: FieldsMaker -> onTextChange -> currentField", currentField)
-               
-
-               
-                console.log("TCL: FieldsMaker -> onTextChange -> newField", newField)
+          
 
                 let newFormFields = formFields.map((field, index) => {
                     if(newField.attrID === field.attrID) {
@@ -296,9 +279,10 @@ class FieldsMaker extends Component {
 
                 let {formFields} = this.state
                 let stateIndex = target.id.split('-')[1]
-                // let currentField = formFields[stateIndex];
-                console.log("TCL: FieldsMaker -> onToggleChange -> currentField", currentField)
-                let currentField = formFields.filter((field , index) => {return index === parseInt(stateIndex)})[0]
+                // let currentField = formFields.filter((field , index) => {return index === parseInt(stateIndex)})[0]
+
+                let currentField = formFields.find((field, index) => {return index === parseInt(stateIndex)});
+
                 let boolValue = null;
               
 
@@ -435,12 +419,6 @@ class FieldsMaker extends Component {
 
                 this.setState({formFields : newFormFields});
 
-                // currentField.attrValues = this.formatDate(date);
-                // currentField.attrValues =  date;
-                // formFields[index] = currentField
-                
-                
-                // this.setState({formFields : formFields});
                 
                 
             }
@@ -456,9 +434,9 @@ class FieldsMaker extends Component {
             // ?--------------------------------------
         
             onPeoplePickerResourceFocus = (event, index) => {
-                const context = this;
+                
                 const {target} = event;
-                const {id, name} = target;
+                const {id} = target;
 
 
                 if (id.indexOf('peoplePicker') < 0)
@@ -467,7 +445,6 @@ class FieldsMaker extends Component {
 
                 let pickerNameArray =  id.split('_TopSpan_');
 
-                // target.querySelectorAll(`${id}_HiddenInput`);
 
                 const pickerValue = document.getElementById(`${pickerNameArray[0]}_TopSpan_HiddenInput`).value;
                 
@@ -485,7 +462,6 @@ class FieldsMaker extends Component {
                         
                         if((formItem.attrName.toLowerCase()).replace(' ', '') === stateNameItemArray[1].toLowerCase()) {
 
-                            // formItem.attrValues = peoplePickerUserValue
 
                             let newField = Object.assign({}, formItem, {
                                 attrValues : peoplePickerUserValue
@@ -525,7 +501,6 @@ class FieldsMaker extends Component {
                 const picker = JSON.parse(pickerValue) || {};
                 return picker[0].Description;
             }
-            // return picker[0];   
         }
 
 
@@ -543,9 +518,9 @@ class FieldsMaker extends Component {
         // Or Label Text
         // --------------------------------------
         setTextField(attrName, attrValues, divClass, editField, index,maxlength) {
-            if(maxlength == "")
+            if(maxlength === "")
             {
-                maxlength="4000"
+                maxlength ="4000"
             }
             if (attrValues === "false" || attrValues === "true")
                 return <ToggleField fieldName={attrName} fieldValue={attrValues} colName={divClass} editField={editField}   />
@@ -567,8 +542,6 @@ class FieldsMaker extends Component {
         // Or Label Text
         // --------------------------------------
         setDatePickerField(attrName, attrValues, divClass, editField, index) {
-           
-
             return (
                 <FieldDate
                     name={attrName}
@@ -578,7 +551,6 @@ class FieldsMaker extends Component {
                     inputValue = {attrValues}
                     editField={editField}
                     index = {index}
-                    // tabIndex = {Sequence}
                 />
             )
 
@@ -728,7 +700,7 @@ class FieldsMaker extends Component {
 
                         //? Split The Values to Create a List
                         const valuesArray = attrValues.split('||');
-                        const posibleValues = pickListValues.split('|');
+                        const posibleValues = (pickListValues.split('|')).filter( posValue => posValue !== "" );
                         const valuesDataArray = valueID.split('||');
                         valuesArray.length > 0
                             ? formField = this.setListField(attrName , valuesArray, posibleValues , divClass, editField, valuesDataArray, index)
@@ -868,14 +840,14 @@ class FieldsMaker extends Component {
                                         formFields.map((tabItem, index) => {
                                             if(tabItem.attrName.indexOf("Product Image Icon")<0)
                                             {
-                                            let { attrValues, datatype } = tabItem;
-                                            let valuesLength = attrValues.length;
-                                            let colNum = valuesLength >= 200 ? 12 : 6;
+                                                let { attrValues, datatype } = tabItem;
+                                                let valuesLength = attrValues.length;
+                                                let colNum = valuesLength >= 200 ? 12 : 6;
 
-                                            if(datatype.toLowerCase() === 'picklist')
-                                                colNum = 6
-                                            return (
-                                                this.setFieldType(tabItem, colNum, editControls, index)
+                                                if(datatype.toLowerCase() === 'picklist')
+                                                    colNum = 6
+                                                return (
+                                                    this.setFieldType(tabItem, colNum, editControls, index)
                                                 )
                                             }
                                         })

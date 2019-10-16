@@ -7,13 +7,11 @@
 // --------------------------------------
 // Get Dependences
 // --------------------------------------
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { ProjectCard , FieldItem, SingleButton, AddProjectForm, FieldRemovableList,FieldPicker, FieldList} from "../../components";
-import "./styles.css";
-// import ListItem from "./CardHeaderListItem";
-// import {  } from '../../components'
-import { startCase } from "lodash";
+    import React, { Component, Fragment } from 'react';
+    import PropTypes from 'prop-types';
+    import { ProjectCard , FieldItem, SingleButton, AddProjectForm, FieldRemovableList,FieldPicker} from "../../components";
+    import "./styles.css";
+    import { startCase } from "lodash";
 
 
 // --------------------------------------
@@ -94,20 +92,7 @@ class CardHeaderWide extends Component {
     ** ========================================================================== */
 
 
-        // --------------------------------------
-        // Format Array of Values
-        // --------------------------------------
-        // formatMultipleValues(dataArray) {
-        //     if(!dataArray || dataArray.length <= 0)
-        //         return ""
-
-        //     if(typeof dataArray ===  String)
-
-        //     // ? Convert array into string
-        //     const formattedValues =  dataArray.join()
-        //     return formattedValues || ""
-        // }
-
+     
 
         // --------------------------------------
         // Format Values
@@ -134,8 +119,7 @@ class CardHeaderWide extends Component {
         renderOverviewDetails(productOverview, editControls) {
             const { 
                 OwnerFirstName, OwnerLastName, 
-                ProductType, CreatedDate, 
-                LastUpdateDate, CoownerFirstName, 
+                CoownerFirstName, 
                 CoownerLastName  ,
                 ShortDescription, 
                 CoownerEmail, OwnerEmail

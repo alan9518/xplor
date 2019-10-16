@@ -14,7 +14,7 @@
     import {withRouter, Redirect} from 'react-router-dom';
     import {Config} from '../../Config';
 
-    const {spPath, fullPath, Bussmodel} = Config // ? Host Path
+    const {spPath, redirectSpPath, } = Config // ? Host Path
 
 // --------------------------------------
 // Create Component Class
@@ -121,7 +121,8 @@
                         currentMenu: subMenu,
                         previousMenu : resetSidebarMenu === true ? this.props.categories : currentMenu   ,
                         redirectUser : true,
-                        redirectPath : `sites/xplorit_portal/XplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/all`,
+                        redirectPath : `${redirectSpPath}/${menu.CustomerName}/all`,
+                        // redirectPath : `sites/xplorit_portal/XplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/all`,
                         // redirectPath : `sites/innovationlabs/xplorIT/XplorIT.aspx/catalogue/${menu.CustomerName}/all`,
                         singleMenuClick : true
                     };

@@ -15,7 +15,7 @@
 // --------------------------------------
     const FieldRemovableList = (props) => {
 
-        const {colName, fieldName, listValues, editField, posibleValues, onClick } = props;
+        const {colName, fieldName, listValues, editField,  onClick } = props;
         
         return (
             <div className = {colName}>

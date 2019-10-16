@@ -10,7 +10,7 @@
 // --------------------------------------
     import React , {Component, Fragment} from "react";
     import PropTypes from "prop-types";
-    import {  FieldPicker, AppLoader,  FieldItem,  EditableProjectCard, FieldSelect, FieldIcon, SingleButton, FieldRemovableList, AlertManager  } from "../../../components";
+    import {  FieldPicker, AppLoader,  FieldItem,  EditableProjectCard, FieldSelect, FieldIcon, SingleButton, FieldRemovableList} from "../../../components";
     import Alert from 'react-s-alert';
     import 'react-s-alert/dist/s-alert-default.css';
     import 'react-s-alert/dist/s-alert-css-effects/slide.css';
@@ -40,7 +40,6 @@ class AddProjectForm extends Component {
         // --------------------------------------
         constructor(props) {
             super(props);
-            console.log("TCL: constructor -> props", props)
             this.state = {
                 isLoaded: false,
                 partID : this.props.productOverview.partID || '',
@@ -74,9 +73,7 @@ class AddProjectForm extends Component {
             }
             this.onChangeSelect =  this.onChangeSelect.bind(this);
             this.onSoftTopicsSelectChage =  this.onSoftTopicsSelectChage.bind(this);
-            // this.masterUsers = [];
-
-            // console.log("TCL: constructor -> this.props", this.props)
+        
         }
 
 
@@ -96,21 +93,17 @@ class AddProjectForm extends Component {
             
           
 
-            // dataLoaded === true && this.setState({isLoaded : true})
 
             //? Preload Data from Details View
             if (this.props.editCard && this.props.productOverview) {
                 const { 
-                    OwnerFirstName, OwnerLastName, ProductType, CreatedDate, 
-                    LastUpdateDate, CoownerFirstName, Customers, CoownerLastName  ,ShortDescription, 
-                    ProductName, ProductScope, SoftwareTopic, SoftwareTopicID, SearchKeyword,
-                    Vendors, partID, partProjectID,MfrPartID
+                    ProductType,  
+                    ShortDescription, 
+                    ProductName, SearchKeyword,
+                    Vendors,
                 } = this.props.productOverview;
 
-                console.log("TCL: componentDidMount -> this.props.productOverview", this.props.productOverview)
-                // this.state.softwareTopicValues
-                console.log("TCL: componentDidMount -> this.state", this.state)
-                console.log("TCL: componentDidMount -> this.state.softwareTopicValues", this.state.softwareTopicValues)
+              
 
                 let softwareTopicValue = this.setSelectedOptionMultiple(this.state.softwareTopic, this.state.softwareTopicValues)
                 
@@ -118,16 +111,13 @@ class AddProjectForm extends Component {
 
                 const getVendorsPromise =  await this.loadVendors(softwareTopicValue.ERPCompanyID);
                 const getVendorsData =  await getVendorsPromise.data;
-                console.log("TCL: componentDidMount -> getVendorsData", getVendorsData)
                 const Vendor = this.createOptionsVendors(getVendorsData).filter(i=>i.label === Vendors)
-                console.log("TCL: componentDidMount -> getVendorsID",Vendor[0])
 
-                //load product categories or type
+                // ? load product categories or type
                 const getProCategoryPromise =  await this.loadProCategories();
                 const getProCategoryData =  await getProCategoryPromise.data;
-                console.log("TCL: componentDidMount -> getVendorsData", getProCategoryData)
-                const ProCategory = this.createOptionsProCat(getProCategoryData).filter(i=>i.label == ProductType)
-                console.log("TCL: componentDidMount -> getVendorsID",ProCategory[0])
+
+                const ProCategory = this.createOptionsProCat(getProCategoryData).filter(i=>i.label === ProductType)
                 
                 this.setState({
                     projectName : ProductName,
@@ -135,12 +125,9 @@ class AddProjectForm extends Component {
                     keywordsList : SearchKeyword.split(','),
                     vendorValues : this.createOptionsVendors(getVendorsData),
                     softwareTopic : softwareTopicValue,
-                    // softwareTopicName : softwareTopicValue.label,
                     vendor : Vendor[0],
-                    // vendor : this.props.productOverview.Vendors,
                     proCategory : ProCategory[0],
                     isLoaded : dataLoaded === true && true,
-                    // keywordsList : this.props.productOverview.SearchKeyword.split(',') || [], 
 
                 })
                 
@@ -203,11 +190,9 @@ class AddProjectForm extends Component {
                 
 
                 this.setState({
-                    // categories : appRoutes || [],
-                    // isLoaded : true,
+                  
                     softwareTopicValues : softwareTopicValues,
                     proCategories : this.createOptionsProCat(proCategoriesData.data),
-                    // vendorValues : this.createOptionsVendors(vendorsData.data),
                     showError : false,
                 })
 
@@ -864,19 +849,16 @@ class AddProjectForm extends Component {
                     let jsonResponse = JSON.parse(responseArray)[0];
                     console.log("TCL: createNewProject -> jsonResponse", jsonResponse)
 
-                    const { PartID, PartRecordID } = jsonResponse;
+                    const { PartID  } = jsonResponse;
 
                     const partRecordCall = await axios.get(Endpoints.getPartRecord, {params: {partid : PartID}});
                     const readPartRecord = await partRecordCall.data;
                     const iconJSON = readPartRecord.filter(i => i.BusinessTypeID === 3095)[0];
 
-                    console.log("TCL: createNewProject -> PartRecordID", iconJSON.PartRecordID)
-                    console.log("TCL: createNewProject -> PartID", PartID)
-                    
+                 
 
                     // ? Update Project to add the icon
                     this.updateProductOverview(PartID, iconJSON.PartRecordID,0).then((data) => {
-                    console.log("TCL: createNewProject -> data", data)
                     
                         this.createAlert('info', 'The Project was Created Successfully');
 
@@ -1043,16 +1025,13 @@ class AddProjectForm extends Component {
         // ? On Software Topic Change
         // ?--------------------------------------
         onSoftTopicsSelectChage = (event, selectedOption)=> {
-            console.log("TCL: AddProjectForm -> onSoftTopicsSelectChage -> selectedOption", selectedOption)
-            console.log("TCL: AddProjectForm -> onSoftTopicsSelectChage -> event", event)
-            const {label, value, subCap, color, ERPCompanyID}  = selectedOption[0];
+           
+            const {label,  subCap, color, ERPCompanyID}  = selectedOption[0];
             // Get Category Name
-            let valueArray =  value.split('-');
-            let colorValue =  valueArray[0];
-            let softValue = valueArray[1];
+            // let valueArray =  value.split('-');
+         
 
-
-            // Set SubCap and ID for Vendors Request
+            // ? Set SubCap and ID for Vendors Request
             if(subCap.length > 0) {
                 this.setState({
                     softwareTopic: selectedOption,
@@ -1061,7 +1040,6 @@ class AddProjectForm extends Component {
                     subCapabilitesValues : subCap,
                     subCapability : {},
                     ERPCompanyID : ERPCompanyID
-                    // selectedSoftwareTopic
                 })
             }
             else 
@@ -1072,7 +1050,6 @@ class AddProjectForm extends Component {
                     subCapabilitesValues : [],
                     subCapability : {},
                     ERPCompanyID : ERPCompanyID
-                    // selectedSoftwareTopic
                 })
 
 
@@ -1818,14 +1795,14 @@ class AddProjectForm extends Component {
 // -------------------------------------- 
 // Define PropTypes 
 // -------------------------------------- 
-AddProjectForm.propTypes = {
-    updateProject: PropTypes.bool
-};
+    AddProjectForm.propTypes = {
+        updateProject: PropTypes.bool
+    };
 
 
-AddProjectForm.defaultProps = {
-    updateProject: false
-};
+    AddProjectForm.defaultProps = {
+        updateProject: false
+    };
 
 
 // --------------------------------------

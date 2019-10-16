@@ -10,7 +10,7 @@
 // --------------------------------------
     import React, { Component, Fragment }  from 'react'
     import PropTypes from 'prop-types';
-    import {ProfileImage, ProjectLink, AppButton} from '../../components';
+    import {ProfileImage} from '../../components';
     import {Config} from '../../Config';
     const {Bussmodel} = Config 
 
@@ -62,7 +62,6 @@
         onHomeLinkClick = (event) => {
 
             event.preventDefault()
-            console.log("TCL: NavBar -> onHomeLinkClick -> event", event);
 
             this.props.resetSidebarMenu()
             

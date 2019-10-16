@@ -55,7 +55,12 @@
 // Define PropTypes 
 // -------------------------------------- 
     FieldList.propTypes = {
-        props: PropTypes
+        colName : PropTypes.string,
+        fieldName : PropTypes.string,
+        listValues : PropTypes.array,
+        editField : PropTypes.bool,
+        posibleValues : PropTypes.array,
+        index : PropTypes.number
     };
 // --------------------------------------
 // Export Component

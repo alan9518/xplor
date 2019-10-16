@@ -10,7 +10,6 @@
     import React, { Fragment } from "react";
     import PropTypes from "prop-types";
     import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-    import {AppButton} from '../../components'
     import "./styles.css";
 
 // --------------------------------------
@@ -21,8 +20,8 @@
     const TabsLayout = (props) => {
         const tabsData = props.tabsData;
         const currentIndex = props.currentTab
-        const changePrevTab =  props.changePrevTab;
-        const changeNextTab =  props.changeNextTab;
+        // const changePrevTab =  props.changePrevTab;
+        // const changeNextTab =  props.changeNextTab;
         return (
             <Fragment>           
 

@@ -19,7 +19,7 @@
 // Create Functional Component
 // --------------------------------------
     const FieldColor = (props) => {
-        const { colName, fieldName,  editField,} = props;
+        const { colName, fieldName  } = props;
         return (
             <div className={colName}>
 
