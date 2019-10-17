@@ -21,6 +21,9 @@
     import {orderBy} from 'lodash';
     import {Config} from '../../../Config'
     const {spPath, Bussmodel} = Config // ? Host Path
+
+
+    const bussTypeID = Bussmodel === 'XPLOR' ? 3095 : 4095;
  
 
 
@@ -681,15 +684,16 @@ class AddProjectForm extends Component {
                 //Update Project Icon Image as Attribute Value
                 const partRecordCall = await axios.get(Endpoints.getPartRecord, {params: {partid : this.state.partID}});
                 const readPartRecord = await partRecordCall.data;
-                const iconJSON = readPartRecord.filter(i => i.BusinessTypeID === 3095)[0];
+                const iconJSON = readPartRecord.find(i => i.BusinessTypeID === bussTypeID);
+
                 let iconValudID = "0";
                 console.log("TCL: updateCurrentProjectOverview -> getPartRecordID", iconJSON.PartRecordID)
                 console.log("TCL: updateCurrentProjectOverview -> Latest Image Icon", this.state.cardIcon)
 
-                let tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params: {partid : PartID, busstypeid : 3095, Bussmodel: Bussmodel}});
+                let tabsDataAttrPromise = await axios.get(Endpoints.getTabAttributes, {params: {partid : PartID, busstypeid : bussTypeID, Bussmodel: Bussmodel}});
                 let tabsAttrData = await tabsDataAttrPromise.data;
                 let tabsAttrDataIcon = tabsAttrData.filter(i=>i.attrName==="Product Image Icon Name")
-                let valueID = tabsAttrDataIcon[0].valueID;
+                let valueID = tabsAttrDataIcon.length > 0 ? tabsAttrDataIcon[0].valueID : "";
                 if(valueID !== "")
                 {
                     console.log("TCL: updateCurrentProjectOverview -> Image Icon Exists", true)
@@ -853,7 +857,7 @@ class AddProjectForm extends Component {
 
                     const partRecordCall = await axios.get(Endpoints.getPartRecord, {params: {partid : PartID}});
                     const readPartRecord = await partRecordCall.data;
-                    const iconJSON = readPartRecord.filter(i => i.BusinessTypeID === 3095)[0];
+                    const iconJSON = readPartRecord.find(i => i.BusinessTypeID === bussTypeID);
 
                  
 

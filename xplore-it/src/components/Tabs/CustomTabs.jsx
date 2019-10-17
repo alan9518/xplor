@@ -42,9 +42,7 @@ class CustomTabs extends Component {
 
 
 
-    // TCL: CustomTabs -> onTabClick -> key 3095
-    // TCL: CustomTabs -> onTabClick -> key 0
-
+ 
 /* ==========================================================================
  * Render Methods
    ========================================================================== */
