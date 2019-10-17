@@ -47,7 +47,7 @@ export const Config = {
         // redirectSpPath : 'sites/innovationlabs/xplorIT/XplorIT.aspx/catalogue',
 
 
-    // TODO : Change Path Property on Sidebar Component
+    
     // TODO : Change URL on Endpoints
     // TODO : Change Package.json home route 
     //? "homepage": "https://flextronics365.sharepoint.com/sites/xplorit_portal/XplorIT",

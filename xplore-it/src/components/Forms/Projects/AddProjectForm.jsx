@@ -264,7 +264,7 @@ class AddProjectForm extends Component {
             // const {ERPCompanyID} = this.state;
             console.log("TCL: loadVendors -> ERPCompanyID", ERPCompanyID)
             // const params = {erpid: ERPCompanyID.toString()}
-            const params = {Bussmodel:'XPLOR'}
+            const params = {Bussmodel: Bussmodel }
             return axios.get(Endpoints.getVendors, {params});
         }   
 
@@ -394,7 +394,7 @@ class AddProjectForm extends Component {
                         'vendorMfdID' : this.state.vendor.value, 
                         'mpnDescription' : this.state.shortDescription,
                         'cpnSearch' : this.formatSearchKeywords(),
-                        'bussModel' : 'XPLOR',
+                        'bussModel' : Bussmodel,
                         // 'erpCompanyID' : this.state.softwareTopic.ERPCompanyID,
                         // 'customerID' : this.state.softwareTopic.CustomerID,
                         'proCategoryID' : this.state.proCategory.value,
@@ -556,7 +556,7 @@ class AddProjectForm extends Component {
                         'MfrPartID' : this.state.MfrPartID,
                         'mpnDescription' : this.state.shortDescription,
                         'cpnSearch' : this.formatSearchKeywords(),
-                        'bussModel' : 'XPLOR',
+                        'bussModel' : Bussmodel,
                         'erpCompanyID' : this.state.softwareTopic.ERPCompanyID,
                         // 'customerID' : this.state.softwareTopic.CustomerID,
                         // 'customerID' : this.formatFunctionalCategoryValues(this.state.softwareTopic),
@@ -818,7 +818,6 @@ class AddProjectForm extends Component {
 
             
             
-            console.log("TCL: AddProjectForm -> createNewProject -> this.state", this.state)
             try {
 
 
@@ -1011,9 +1010,7 @@ class AddProjectForm extends Component {
         // ? On SelectChange
         // ?--------------------------------------
             onChangeSelect(control, selectedOption) {
-                console.log("TCL: AddProjectForm -> onChangeSelect -> selectedOption", selectedOption)
-                console.log("TCL: AddProjectForm -> onChangeSelect -> control", control);
-
+               
                 this.setState({
                   [control] : selectedOption
                 })   
@@ -1411,25 +1408,7 @@ class AddProjectForm extends Component {
                 console.log("TCL: renderAddProjectForm -> this.state", this.state)
 
                 console.log("TCL: renderAddProjectForm -> owner", owner)
-            // let capOptions = this.createOptions(subCapabilitesValues);
-            
-    
-            // let softwareTopicValue = this.setSelectedOption(this.props.productOverview.SoftwareTopic, this.state.softwareTopicValues)
-            
-            // let vendorValue = this.setSelectedOption(this.props.productOverview.Vendors, this.state.vendorValues)
-
-
-            // let vendorsDefaultValues = this.getVendorsDataSource(vendorValues, this.props.productOverview.SoftwareTopic);
-            
-
-            console.log("TCL: renderAddProjectForm -> this.props.updateProject ", this.props.updateProject )
-
-
-            console.log("TCL: renderAddProjectForm -> this.props.productOverview.SoftwareTopic", this.props.productOverview.SoftwareTopic)
-            console.log("TCL: renderAddProjectForm -> this.props.productOverview.Vendors", this.props.productOverview.Vendors)
-
-
-            console.log("TCL: renderAddProjectForm -> this.state -> softwareTopic", softwareTopic)
+         
 
 
 
